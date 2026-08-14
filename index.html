@@ -307,8 +307,28 @@ iframe[src*="telegram.org"]{background:transparent!important;color-scheme:light!
   .game-cta:after{content:"";position:absolute;inset:2px 3px auto;height:1px;border-radius:50%;background:rgba(255,255,255,.28)}
   .game-progress{height:14px!important;padding:2px;border:2px solid var(--line);background:var(--card2)!important;box-shadow:inset 0 1px 2px rgba(0,0,0,.08)}
   .game-progress>div{position:relative;min-width:4px;box-shadow:inset 0 2px 0 rgba(255,255,255,.28),0 1px 2px rgba(0,0,0,.1)}
-  .game-train{background:radial-gradient(110% 48% at 50% 0%,var(--redsoft),transparent 60%),var(--bg)!important}
+  .game-train{overflow-x:hidden;background:radial-gradient(110% 48% at 50% 0%,var(--redsoft),transparent 60%),var(--bg)!important}
+  .game-term,.game-match,.game-test{overflow-y:auto}
   .game-train>div:first-child{position:relative;z-index:2}
+  .game-session-top{display:flex;align-items:center;gap:11px}
+  .game-session-close{width:40px;height:40px;flex:0 0 40px;border:1.5px solid var(--line);border-radius:13px;display:grid;place-items:center;background:var(--card);color:var(--ink);box-shadow:0 3px 0 var(--game-depth);cursor:pointer;transition:transform .1s ease,box-shadow .1s ease}
+  .game-session-close:active{transform:translateY(2px);box-shadow:0 1px 0 var(--game-depth)}
+  .game-session-close .ui-icon{width:18px;height:18px}
+  .game-session-count{min-width:38px;color:var(--mut);font:900 12px Nunito;text-align:right;font-variant-numeric:tabular-nums}
+  .game-session-status{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:14px;padding:10px 12px;border:1.5px solid var(--line);border-radius:15px;background:color-mix(in srgb,var(--card) 88%,transparent);box-shadow:0 3px 0 var(--game-depth)}
+  .game-session-status__text{min-width:0}
+  .game-session-status__mode{color:var(--red);font:900 9px Nunito;letter-spacing:.08em;text-transform:uppercase}
+  .game-session-status__topic{margin-top:2px;color:var(--ink);font:800 11.5px/1.3 Nunito;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .game-session-score{flex:0 0 auto;display:flex;align-items:center;gap:6px}
+  .game-session-score__item{padding:6px 9px;border-radius:10px;background:var(--card2);color:var(--mut);font:900 10px Nunito;white-space:nowrap}
+  .game-session-score__item.is-combo{background:var(--goldsoft);color:color-mix(in srgb,var(--gold) 80%,var(--ink))}
+  .game-flash-card{appearance:none;-webkit-appearance:none;width:100%;min-height:260px;flex:1;margin:14px 0 0;padding:0;border:0;border-radius:26px;background:transparent;color:inherit;text-align:inherit;perspective:1200px;overflow:hidden;cursor:pointer}
+  .game-flash-card:focus-visible,.game-session-close:focus-visible{outline:3px solid color-mix(in srgb,var(--red) 34%,transparent);outline-offset:3px}
+  .game-feedback{border:2px solid color-mix(in srgb,currentColor 36%,var(--line));box-shadow:0 3px 0 color-mix(in srgb,currentColor 18%,var(--line))}
+  .game-feedback-mark{width:42px;height:42px;flex:0 0 42px;border-radius:13px;display:grid;place-items:center;background:currentColor;color:#fff;font:900 16px Nunito;box-shadow:0 3px 0 color-mix(in srgb,currentColor 62%,#241114)}
+  .game-feedback-mark>span{color:#fff}
+  .game-feedback-answer{margin-top:3px;color:var(--mut);font:650 11.5px/1.4 Manrope}
+  .game-match-hint{margin-top:7px;min-height:17px;color:var(--mut);font:700 11px/1.4 Manrope}
   .game-question{border-radius:26px!important;background:linear-gradient(155deg,var(--card),color-mix(in srgb,var(--card) 86%,var(--card2)))!important}
   .game-question-mark{min-width:54px;height:54px;margin:0 auto 16px;padding:0 10px;border-radius:17px;display:inline-flex;align-items:center;justify-content:center;background:var(--redsoft);color:var(--red);font:900 19px Nunito;box-shadow:0 4px 0 color-mix(in srgb,var(--red) 24%,var(--line))}
   .game-answer{min-height:56px!important;border-bottom-width:4px!important;font-size:14px!important;box-shadow:0 2px 0 color-mix(in srgb,currentColor 18%,var(--line))}
@@ -367,7 +387,8 @@ iframe[src*="telegram.org"]{background:transparent!important;color-scheme:light!
   .game-nav-item.is-active .atlas-nav-icon{transform:scale(1.08)}
   @media (hover:hover){.game-card[style*="cursor:pointer"]:hover{transform:translateY(-2px);border-color:color-mix(in srgb,var(--red) 32%,var(--line))!important;filter:saturate(1.03)}.game-screen button:not(:disabled):hover{filter:brightness(1.025)}}
   @media (min-width:520px){.game-lesson-terms{grid-template-columns:repeat(2,minmax(0,1fr))}.game-lesson-hero__body{padding:22px}.game-lesson-copy{padding:20px}}
-  @media (max-width:360px){.game-tabbar{padding-left:6px!important;padding-right:6px!important}.game-nav-item{border-radius:15px!important}.game-choice-mark--lg{width:48px;height:48px;flex-basis:48px}.game-screen input,.game-screen textarea{font-size:16px!important}.game-home-hero{padding-left:16px!important;padding-right:16px!important}.game-home-head{gap:7px!important}.game-home-user{gap:8px!important;flex:1}.game-home-user>div:first-child{width:42px!important;height:42px!important}.game-home-greeting{display:none}.game-home-name{font-size:19px!important}.game-home-stats{gap:5px!important}.game-home-stats>div{padding:7px 10px 7px 7px!important}.game-missions{padding:14px 12px}.game-missions__grid{gap:5px}.game-mission{padding:9px 7px 8px}.game-mission__label{font-size:10px}.game-week__days{gap:3px}.game-week__dot{width:27px;height:27px}.game-learning-route__body{padding:13px 11px}.game-learning-route__visual{height:98px}.game-learning-route__steps{gap:4px}.game-learning-step{padding-left:4px;padding-right:4px}.game-learning-step__label{font-size:9px}.game-lesson{padding-left:12px;padding-right:12px}.game-lesson-hero,.game-lesson-hero__body{min-height:168px}.game-lesson-hero__title{font-size:20px}.game-lesson-stat{padding-left:4px;padding-right:4px}.game-lesson-route,.game-lesson-section,.game-lesson-copy,.game-lesson-notes,.game-lesson-next{padding-left:12px;padding-right:12px}.game-result__content{padding:26px 18px}.game-result__seal{width:68px;height:68px;border-radius:22px}.game-result__seal .ui-icon{width:36px;height:36px}.game-rank-road{padding:0 12px}.game-rank-road__panel{padding:13px 11px}.game-rank-road__steps{gap:5px}.game-rank-step{padding:9px 5px}.game-rank-step__title{font-size:9.5px}}
+  @media (max-width:360px){.game-tabbar{padding-left:6px!important;padding-right:6px!important}.game-nav-item{border-radius:15px!important}.game-choice-mark--lg{width:48px;height:48px;flex-basis:48px}.game-screen input,.game-screen textarea{font-size:16px!important}.game-home-hero{padding-left:16px!important;padding-right:16px!important}.game-home-head{gap:7px!important}.game-home-user{gap:8px!important;flex:1}.game-home-user>div:first-child{width:42px!important;height:42px!important}.game-home-greeting{display:none}.game-home-name{font-size:19px!important}.game-home-stats{gap:5px!important}.game-home-stats>div{padding:7px 10px 7px 7px!important}.game-missions{padding:14px 12px}.game-missions__grid{gap:5px}.game-mission{padding:9px 7px 8px}.game-mission__label{font-size:10px}.game-week__days{gap:3px}.game-week__dot{width:27px;height:27px}.game-learning-route__body{padding:13px 11px}.game-learning-route__visual{height:98px}.game-learning-route__steps{gap:4px}.game-learning-step{padding-left:4px;padding-right:4px}.game-learning-step__label{font-size:9px}.game-lesson{padding-left:12px;padding-right:12px}.game-lesson-hero,.game-lesson-hero__body{min-height:168px}.game-lesson-hero__title{font-size:20px}.game-lesson-stat{padding-left:4px;padding-right:4px}.game-lesson-route,.game-lesson-section,.game-lesson-copy,.game-lesson-notes,.game-lesson-next{padding-left:12px;padding-right:12px}.game-result__content{padding:26px 18px}.game-result__seal{width:68px;height:68px;border-radius:22px}.game-result__seal .ui-icon{width:36px;height:36px}.game-rank-road{padding:0 12px}.game-rank-road__panel{padding:13px 11px}.game-rank-road__steps{gap:5px}.game-rank-step{padding:9px 5px}.game-rank-step__title{font-size:9.5px}.game-session-status{padding:9px 10px}.game-session-score__item{padding:5px 7px}.game-session-status__topic{max-width:150px}}
+  @media (max-height:560px) and (orientation:landscape){.game-train{padding-top:14px!important;padding-bottom:14px!important;overflow-y:auto}.game-session-status{margin-top:8px;padding-top:7px;padding-bottom:7px}.game-flash-card{min-height:230px}.game-term .game-question{margin-top:10px!important;padding:18px!important}.game-test .game-session-status{display:none}.game-test>div[style*="margin-top:22px"]{margin-top:10px!important}}
   @media (prefers-reduced-motion:reduce){.game-screen,.game-screen *,.game-screen *:before,.game-screen *:after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
 
   .admin-hero>div,.admin-tools,.admin-list{max-width:920px;margin-left:auto;margin-right:auto}
@@ -878,7 +899,7 @@ iframe[src*="telegram.org"]{background:transparent!important;color-scheme:light!
             <div style="font-size:13px;color:var(--mut);line-height:1.5;margin-bottom:14px">Выбери режим. Ответы подсвечиваются сразу: <b style="color:var(--green)">зелёным</b> — верно, <b style="color:var(--red)">красным</b> — ошибка.</div>
             <div style="display:flex;flex-direction:column;gap:12px">
               <sc-for list="{{ modeCards }}" as="mc" hint-placeholder-count="4">
-                <div class="game-card game-mode-card" onClick="{{ mc.onClick }}" style-active="transform:translateY(3px)" style="display:flex;align-items:center;gap:14px;background:var(--card);border:1px solid var(--line);border-radius:20px;padding:15px;cursor:pointer;transition:transform .12s;box-shadow:0 6px 16px -14px rgba(60,20,15,.5)">
+                <button class="game-card game-mode-card" onClick="{{ mc.onClick }}" aria-label="{{ mc.aria }}" style-active="transform:translateY(3px)" style="appearance:none;width:100%;display:flex;align-items:center;gap:14px;background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:20px;padding:15px;cursor:pointer;text-align:left;transition:transform .12s;box-shadow:0 6px 16px -14px rgba(60,20,15,.5)">
                   <div class="game-choice-mark game-choice-mark--lg" style="background:{{ mc.iconBg }}" aria-hidden="true">{{ mc.code }}</div>
                   <div style="flex:1"><div style="font:800 15px Nunito;color:var(--ink)">{{ mc.title }}</div><div style="font-size:12px;color:var(--mut);margin-top:2px;line-height:1.4">{{ mc.desc }}</div></div>
                   <div style="font:800 12px Nunito;color:var(--red);background:var(--redsoft);padding:3px 9px;border-radius:9px">{{ mc.count }}</div>
@@ -893,13 +914,13 @@ iframe[src*="telegram.org"]{background:transparent!important;color-scheme:light!
     <!-- ===================== TRAIN: FLASHCARDS ===================== -->
     <sc-if value="{{ isFlash }}" hint-placeholder-val="">
       <div class="game-screen game-train game-flash" style="position:absolute;inset:0;background:var(--bg);display:flex;flex-direction:column;padding:50px 18px 24px">
-        <div style="display:flex;align-items:center;gap:12px">
-          <button onClick="{{ exitTrain }}" aria-label="Закрыть тренировку" style="width:34px;height:34px;border-radius:11px;border:1px solid var(--line);background:var(--card);color:var(--ink);font-size:17px;cursor:pointer">✕</button>
-          <div class="game-progress" style="flex:1;height:12px;border-radius:8px;background:var(--card2);overflow:hidden"><div style="width:{{ progPct }}%;height:100%;background:var(--red);border-radius:8px;transition:width .3s"></div></div>
-          <div style="font:800 13px Nunito;color:var(--mut)">{{ idx1 }}/{{ sessTotal }}</div>
+        <div class="game-session-top">
+          <button class="game-session-close" onClick="{{ exitTrain }}" aria-label="Закрыть тренировку"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button>
+          <div class="game-progress" role="progressbar" aria-label="{{ trainProgressAria }}" aria-valuemin="0" aria-valuemax="100" aria-valuenow="{{ progPct }}" style="flex:1;height:12px;border-radius:8px;background:var(--card2);overflow:hidden"><div style="width:{{ progPct }}%;height:100%;background:var(--red);border-radius:8px;transition:width .3s"></div></div>
+          <div class="game-session-count">{{ idx1 }}/{{ sessTotal }}</div>
         </div>
-        <div style="text-align:center;margin:18px 0 8px;font:800 13px Nunito;color:var(--red)">ФЛЭШ-КАРТА</div>
-        <div onClick="{{ flip }}" style="flex:1;perspective:1200px;cursor:pointer">
+        <div class="game-session-status"><div class="game-session-status__text"><div class="game-session-status__mode">Флэш-карты</div><div class="game-session-status__topic">{{ trainTopicLabel }}</div></div><div class="game-session-score"><span class="game-session-score__item">{{ sessionCorrectLabel }}</span></div></div>
+        <button class="game-flash-card" onClick="{{ flip }}" aria-label="{{ cardFlipLabel }}" aria-pressed="{{ flippedPressed }}">
           <div style="position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d;transform:{{ flipT }}">
             <div class="game-question" style="position:absolute;inset:0;backface-visibility:hidden;background:var(--card);border:1.5px solid var(--line);border-radius:26px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:30px;box-shadow:0 14px 34px -20px rgba(60,20,15,.5)">
               <div class="game-question-mark" aria-hidden="true">?</div>
@@ -911,11 +932,11 @@ iframe[src*="telegram.org"]{background:transparent!important;color-scheme:light!
               <div style="font-size:15.5px;text-align:center;line-height:1.55">{{ cardBack }}</div>
             </div>
           </div>
-        </div>
+        </button>
         <sc-if value="{{ flipped }}" hint-placeholder-val="">
           <div style="display:flex;gap:10px;margin-top:16px;animation:rise .3s ease">
             <button onClick="{{ cardHard }}" style="flex:1;padding:15px;border:2px solid var(--red);border-radius:16px;background:var(--redsoft);color:var(--red);font:800 15px Nunito;cursor:pointer">Ещё учить</button>
-            <button onClick="{{ cardKnow }}" style="flex:1;padding:15px;border:none;border-radius:16px;background:var(--green);color:#fff;font:800 15px Nunito;box-shadow:0 4px 0 var(--greendk);cursor:pointer;transition:transform .08s,box-shadow .08s" style-active="transform:translateY(4px);box-shadow:0 0 0 var(--greendk)">Знаю ✓</button>
+            <button onClick="{{ cardKnow }}" style="flex:1;padding:15px;border:none;border-radius:16px;background:var(--green);color:#fff;font:800 15px Nunito;box-shadow:0 4px 0 var(--greendk);cursor:pointer;transition:transform .08s,box-shadow .08s" style-active="transform:translateY(4px);box-shadow:0 0 0 var(--greendk)">Знаю</button>
           </div>
         </sc-if>
         <sc-if value="{{ notFlipped }}" hint-placeholder-val="{{ true }}">
@@ -927,21 +948,22 @@ iframe[src*="telegram.org"]{background:transparent!important;color-scheme:light!
     <!-- ===================== TRAIN: TERM INPUT ===================== -->
     <sc-if value="{{ isTerm }}" hint-placeholder-val="">
       <div class="game-screen game-train game-term" style="position:absolute;inset:0;background:var(--bg);display:flex;flex-direction:column;padding:50px 18px 24px">
-        <div style="display:flex;align-items:center;gap:12px">
-          <button onClick="{{ exitTrain }}" aria-label="Закрыть тренировку" style="width:34px;height:34px;border-radius:11px;border:1px solid var(--line);background:var(--card);color:var(--ink);font-size:17px;cursor:pointer">✕</button>
-          <div class="game-progress" style="flex:1;height:12px;border-radius:8px;background:var(--card2);overflow:hidden"><div style="width:{{ progPct }}%;height:100%;background:var(--red);border-radius:8px;transition:width .3s"></div></div>
-          <div style="font:800 13px Nunito;color:var(--mut)">{{ idx1 }}/{{ sessTotal }}</div>
+        <div class="game-session-top">
+          <button class="game-session-close" onClick="{{ exitTrain }}" aria-label="Закрыть тренировку"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button>
+          <div class="game-progress" role="progressbar" aria-label="{{ trainProgressAria }}" aria-valuemin="0" aria-valuemax="100" aria-valuenow="{{ progPct }}" style="flex:1;height:12px;border-radius:8px;background:var(--card2);overflow:hidden"><div style="width:{{ progPct }}%;height:100%;background:var(--red);border-radius:8px;transition:width .3s"></div></div>
+          <div class="game-session-count">{{ idx1 }}/{{ sessTotal }}</div>
         </div>
-        <div style="margin-top:26px;font:800 13px Nunito;color:var(--red)">ВВЕДИ ЛАТИНСКИЙ ТЕРМИН</div>
+        <div class="game-session-status"><div class="game-session-status__text"><div class="game-session-status__mode">Латинский термин</div><div class="game-session-status__topic">{{ trainTopicLabel }}</div></div><div class="game-session-score"><span class="game-session-score__item">{{ sessionCorrectLabel }}</span></div></div>
+        <div style="margin-top:18px;font:800 13px Nunito;color:var(--red)">ВВЕДИ ЛАТИНСКИЙ ТЕРМИН</div>
         <div style="margin-top:8px;font-size:12.5px;color:var(--mut)">Напиши латинское название по-русскому:</div>
         <div class="game-question" style="margin-top:20px;background:var(--card);border:1.5px solid var(--line);border-radius:22px;padding:30px 22px;text-align:center;box-shadow:0 10px 26px -20px rgba(60,20,15,.5)">
           <div class="game-question-mark" aria-hidden="true">Aa</div>
           <div style="font:800 22px Nunito;color:var(--ink);line-height:1.3">{{ termRu }}</div>
         </div>
-        <input ref="{{ termInputRef }}" value="{{ termVal }}" onInput="{{ onTermInput }}" placeholder="напиши на латыни…" style="margin-top:18px;width:100%;padding:16px 18px;border:2px solid {{ termBd }};border-radius:16px;background:var(--card);color:var(--ink);font:700 18px Lora,serif;font-style:italic;outline:none;text-align:center">
+        <input ref="{{ termInputRef }}" value="{{ termVal }}" onInput="{{ onTermInput }}" aria-label="Латинский термин" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="напиши на латыни…" style="margin-top:18px;width:100%;padding:16px 18px;border:2px solid {{ termBd }};border-radius:16px;background:var(--card);color:var(--ink);font:700 18px Lora,serif;font-style:italic;outline:none;text-align:center">
         <sc-if value="{{ termChecked }}" hint-placeholder-val="">
-          <div style="margin-top:14px;padding:14px 16px;border-radius:15px;background:{{ termFbBg }};display:flex;align-items:center;gap:10px;animation:rise .25s ease">
-            <div style="font-size:22px">{{ termFbIcon }}</div>
+          <div class="game-feedback" role="status" style="margin-top:14px;padding:14px 16px;border-radius:15px;background:{{ termFbBg }};color:{{ termFbFg }};display:flex;align-items:center;gap:10px;animation:rise .25s ease">
+            <div class="game-feedback-mark" aria-hidden="true"><span>{{ termFbMark }}</span></div>
             <div><div style="font:800 14px Nunito;color:{{ termFbFg }}">{{ termFbTitle }}</div><div style="font-size:12.5px;color:var(--mut);margin-top:1px">Верно: <i style="font-family:Lora;color:var(--ink)">{{ termAnswer }}</i></div></div>
           </div>
         </sc-if>
@@ -950,7 +972,7 @@ iframe[src*="telegram.org"]{background:transparent!important;color-scheme:light!
           <button onClick="{{ termCheck }}" style="width:100%;padding:16px;border:none;border-radius:16px;background:var(--red);color:#fff;font:800 16px Nunito;box-shadow:0 4px 0 var(--reddk);cursor:pointer;transition:transform .08s,box-shadow .08s" style-active="transform:translateY(4px);box-shadow:0 0 0 var(--reddk)">Проверить</button>
         </sc-if>
         <sc-if value="{{ termChecked }}" hint-placeholder-val="">
-          <button onClick="{{ termNext }}" style="width:100%;padding:16px;border:none;border-radius:16px;background:{{ termNextBg }};color:#fff;font:800 16px Nunito;box-shadow:0 4px 0 {{ termNextSh }};cursor:pointer">Далее →</button>
+          <button onClick="{{ termNext }}" style="width:100%;padding:16px;border:none;border-radius:16px;background:{{ termNextBg }};color:#fff;font:800 16px Nunito;box-shadow:0 4px 0 {{ termNextSh }};cursor:pointer">Далее</button>
         </sc-if>
       </div>
     </sc-if>
@@ -958,27 +980,28 @@ iframe[src*="telegram.org"]{background:transparent!important;color-scheme:light!
     <!-- ===================== TRAIN: MATCHING ===================== -->
     <sc-if value="{{ isMatch }}" hint-placeholder-val="">
       <div class="game-screen game-train game-match" style="position:absolute;inset:0;background:var(--bg);display:flex;flex-direction:column;padding:50px 18px 24px">
-        <div style="display:flex;align-items:center;gap:12px">
-          <button onClick="{{ exitTrain }}" aria-label="Закрыть тренировку" style="width:34px;height:34px;border-radius:11px;border:1px solid var(--line);background:var(--card);color:var(--ink);font-size:17px;cursor:pointer">✕</button>
-          <div class="game-progress" style="flex:1;height:12px;border-radius:8px;background:var(--card2);overflow:hidden"><div style="width:{{ matchPct }}%;height:100%;background:var(--green);border-radius:8px;transition:width .3s"></div></div>
-          <div style="font:800 13px Nunito;color:var(--mut)">{{ matchDone }}/{{ matchTotal }}</div>
+        <div class="game-session-top">
+          <button class="game-session-close" onClick="{{ exitTrain }}" aria-label="Закрыть тренировку"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button>
+          <div class="game-progress" role="progressbar" aria-label="{{ matchProgressAria }}" aria-valuemin="0" aria-valuemax="100" aria-valuenow="{{ matchPct }}" style="flex:1;height:12px;border-radius:8px;background:var(--card2);overflow:hidden"><div style="width:{{ matchPct }}%;height:100%;background:var(--green);border-radius:8px;transition:width .3s"></div></div>
+          <div class="game-session-count">{{ matchDone }}/{{ matchTotal }}</div>
         </div>
-        <div style="margin-top:20px;font:800 13px Nunito;color:var(--red)">СОПОСТАВЬ ПАРЫ</div>
-        <div style="margin-top:5px;font-size:12.5px;color:var(--mut)">Латинский термин ↔ русское значение</div>
-        <div style="display:flex;gap:11px;margin-top:18px;flex:1">
+        <div class="game-session-status"><div class="game-session-status__text"><div class="game-session-status__mode">Сопоставление</div><div class="game-session-status__topic">{{ trainTopicLabel }}</div></div><div class="game-session-score"><span class="game-session-score__item">{{ matchDoneLabel }}</span></div></div>
+        <div style="margin-top:14px;font:800 13px Nunito;color:var(--red)">СОПОСТАВЬ ПАРЫ</div>
+        <div class="game-match-hint" role="status">{{ matchHint }}</div>
+        <div style="display:flex;gap:11px;margin-top:12px;flex:1">
           <div style="flex:1;display:flex;flex-direction:column;gap:10px">
             <sc-for list="{{ matchLeft }}" as="l" hint-placeholder-count="4">
-              <button class="game-answer" onClick="{{ l.onClick }}" style="padding:13px 11px;border:2px solid {{ l.bd }};border-radius:15px;background:{{ l.bg }};color:{{ l.fg }};font:700 13px Lora;font-style:italic;cursor:pointer;text-align:left;line-height:1.3;flex:1;transition:.15s;animation:{{ l.anim }}">{{ l.label }}</button>
+              <button class="game-answer" onClick="{{ l.onClick }}" aria-pressed="{{ l.pressed }}" aria-label="{{ l.aria }}" style="padding:13px 11px;border:2px solid {{ l.bd }};border-radius:15px;background:{{ l.bg }};color:{{ l.fg }};font:700 13px Lora;font-style:italic;cursor:pointer;text-align:left;line-height:1.3;flex:1;transition:.15s;animation:{{ l.anim }}">{{ l.label }}</button>
             </sc-for>
           </div>
           <div style="flex:1;display:flex;flex-direction:column;gap:10px">
             <sc-for list="{{ matchRight }}" as="r" hint-placeholder-count="4">
-              <button class="game-answer" onClick="{{ r.onClick }}" style="padding:13px 11px;border:2px solid {{ r.bd }};border-radius:15px;background:{{ r.bg }};color:{{ r.fg }};font:600 12.5px Manrope;cursor:pointer;text-align:left;line-height:1.35;flex:1;transition:.15s;animation:{{ r.anim }}">{{ r.label }}</button>
+              <button class="game-answer" onClick="{{ r.onClick }}" aria-pressed="{{ r.pressed }}" aria-label="{{ r.aria }}" style="padding:13px 11px;border:2px solid {{ r.bd }};border-radius:15px;background:{{ r.bg }};color:{{ r.fg }};font:600 12.5px Manrope;cursor:pointer;text-align:left;line-height:1.35;flex:1;transition:.15s;animation:{{ r.anim }}">{{ r.label }}</button>
             </sc-for>
           </div>
         </div>
         <sc-if value="{{ matchComplete }}" hint-placeholder-val="">
-          <button onClick="{{ matchFinish }}" style="width:100%;padding:16px;border:none;border-radius:16px;background:var(--green);color:#fff;font:800 16px Nunito;box-shadow:0 4px 0 var(--greendk);cursor:pointer;animation:rise .3s ease">Готово ✓</button>
+          <button onClick="{{ matchFinish }}" style="width:100%;padding:16px;border:none;border-radius:16px;background:var(--green);color:#fff;font:800 16px Nunito;box-shadow:0 4px 0 var(--greendk);cursor:pointer;animation:rise .3s ease">Завершить</button>
         </sc-if>
       </div>
     </sc-if>
@@ -986,11 +1009,12 @@ iframe[src*="telegram.org"]{background:transparent!important;color-scheme:light!
     <!-- ===================== TRAIN: TEST (MCQ) ===================== -->
     <sc-if value="{{ isTest }}" hint-placeholder-val="">
       <div class="game-screen game-train game-test" style="position:absolute;inset:0;background:var(--bg);display:flex;flex-direction:column;padding:50px 18px 24px">
-        <div style="display:flex;align-items:center;gap:12px">
-          <button onClick="{{ exitTrain }}" aria-label="Закрыть тренировку" style="width:34px;height:34px;border-radius:11px;border:1px solid var(--line);background:var(--card);color:var(--ink);font-size:17px;cursor:pointer">✕</button>
-          <div class="game-progress" style="flex:1;height:12px;border-radius:8px;background:var(--card2);overflow:hidden"><div style="width:{{ progPct }}%;height:100%;background:var(--red);border-radius:8px;transition:width .3s"></div></div>
-          <div style="font:800 13px Nunito;color:var(--mut)">{{ idx1 }}/{{ sessTotal }}</div>
+        <div class="game-session-top">
+          <button class="game-session-close" onClick="{{ exitTrain }}" aria-label="Закрыть тренировку"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button>
+          <div class="game-progress" role="progressbar" aria-label="{{ trainProgressAria }}" aria-valuemin="0" aria-valuemax="100" aria-valuenow="{{ progPct }}" style="flex:1;height:12px;border-radius:8px;background:var(--card2);overflow:hidden"><div style="width:{{ progPct }}%;height:100%;background:var(--red);border-radius:8px;transition:width .3s"></div></div>
+          <div class="game-session-count">{{ idx1 }}/{{ sessTotal }}</div>
         </div>
+        <div class="game-session-status"><div class="game-session-status__text"><div class="game-session-status__mode">{{ testModeLabel }}</div><div class="game-session-status__topic">{{ trainTopicLabel }}</div></div><div class="game-session-score"><span class="game-session-score__item">{{ sessionCorrectLabel }}</span><sc-if value="{{ showSessionCombo }}" hint-placeholder-val=""><span class="game-session-score__item is-combo">{{ sessionComboLabel }}</span></sc-if></div></div>
         <sc-if value="{{ showExamTimer }}" hint-placeholder-val="">
           <div style="margin-top:12px;display:flex;align-items:center;justify-content:center;gap:8px;background:{{ examBg }};border:1.5px solid {{ examBd }};border-radius:12px;padding:9px;font:800 16px Nunito;color:{{ examFg }}"><svg class="ui-icon ui-icon--sm" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.7 1.7M9 2h6m-3 0v3"/></svg>{{ examMMSS }}</div>
         </sc-if>
@@ -998,7 +1022,7 @@ iframe[src*="telegram.org"]{background:transparent!important;color-scheme:light!
         <div style="margin-top:10px;font:800 18px Nunito;color:var(--ink);line-height:1.4;min-height:76px">{{ testQ }}</div>
         <div style="display:flex;flex-direction:column;gap:10px;margin-top:6px;flex:1">
           <sc-for list="{{ testOptions }}" as="o" hint-placeholder-count="4">
-            <button class="game-answer" onClick="{{ o.onClick }}" style="display:flex;align-items:center;gap:12px;padding:14px 15px;border:2px solid {{ o.bd }};border-radius:16px;background:{{ o.bg }};color:{{ o.fg }};font:600 13.5px Manrope;cursor:{{ o.cursor }};text-align:left;line-height:1.35;transition:.12s">
+            <button class="game-answer" onClick="{{ o.onClick }}" aria-label="{{ o.aria }}" aria-disabled="{{ o.disabled }}" style="display:flex;align-items:center;gap:12px;padding:14px 15px;border:2px solid {{ o.bd }};border-radius:16px;background:{{ o.bg }};color:{{ o.fg }};font:600 13.5px Manrope;cursor:{{ o.cursor }};text-align:left;line-height:1.35;transition:.12s">
               <span style="width:26px;height:26px;flex-shrink:0;border-radius:8px;background:{{ o.tagBg }};color:{{ o.tagFg }};display:flex;align-items:center;justify-content:center;font:800 13px Nunito">{{ o.letter }}</span>
               <span style="flex:1">{{ o.text }}</span>
               <span style="font-size:15px">{{ o.mark }}</span>
@@ -1006,10 +1030,10 @@ iframe[src*="telegram.org"]{background:transparent!important;color-scheme:light!
           </sc-for>
         </div>
         <sc-if value="{{ testAnswered }}" hint-placeholder-val="">
-          <div style="margin:0 -18px -24px;padding:18px 18px 24px;background:{{ fbBannerBg }};border-top:2px solid {{ fbBannerBd }};border-radius:22px 22px 0 0;animation:rise .3s cubic-bezier(.2,.8,.3,1.2)">
+          <div role="status" style="margin:0 -18px -24px;padding:18px 18px 24px;background:{{ fbBannerBg }};border-top:2px solid {{ fbBannerBd }};border-radius:22px 22px 0 0;animation:rise .3s cubic-bezier(.2,.8,.3,1.2)">
             <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
-              <div style="width:44px;height:44px;border-radius:50%;background:{{ fbBannerBd }};display:flex;align-items:center;justify-content:center;font-size:24px;animation:pop .35s ease">{{ fbBannerIcon }}</div>
-              <div><div style="font:900 17px Nunito;color:{{ fbBannerFg }}">{{ fbBannerTitle }}</div><div style="font-size:12px;color:var(--mut);margin-top:1px">{{ fbBannerSub }}</div></div>
+              <div class="game-feedback-mark" aria-hidden="true" style="color:{{ fbBannerBd }};animation:pop .35s ease"><span>{{ fbBannerMark }}</span></div>
+              <div><div style="font:900 17px Nunito;color:{{ fbBannerFg }}">{{ fbBannerTitle }}</div><div style="font-size:12px;color:var(--mut);margin-top:1px">{{ fbBannerSub }}</div><div class="game-feedback-answer">{{ fbBannerAnswer }}</div></div>
             </div>
             <button onClick="{{ testNext }}" style="width:100%;padding:15px;border:none;border-radius:16px;background:{{ testNextBg }};color:#fff;font:800 16px Nunito;box-shadow:0 4px 0 {{ testNextSh }};cursor:pointer;transition:transform .08s,box-shadow .08s" style-active="transform:translateY(4px);box-shadow:0 0 0 {{ testNextSh }}">{{ testNextLabel }}</button>
           </div>
@@ -1124,7 +1148,7 @@ iframe[src*="telegram.org"]{background:transparent!important;color-scheme:light!
                 <div class="rating-section__head">
                   <div><div class="rating-section__kicker">Общий зачёт</div><h2 id="rating-table-title" class="rating-section__title">Участники</h2></div>
                   <div class="rating-section__note">ещё {{ remainingPlayers }}</div>
-                </div>
+                </button>
                 <div class="rating-table">
                   <sc-for list="{{ leaders }}" as="u" hint-placeholder-count="5">
                     <article class="rating-row" style="background:{{ u.bg }};border-color:{{ u.bd }}">
@@ -2467,22 +2491,30 @@ async logout(){
     });
     // mode picker
     R.modeCards=[
-      { code:'К', title:'Флэш-карты', desc:'Вопрос — ответ по теме, самопроверка', iconBg:'var(--redsoft)', count:(topic&&topic.cards?topic.cards.length:0)+' карт', onClick:()=>this.startMode('flash') },
-      { code:'Aa', title:'Ввод термина', desc:'Пишешь латинское название по русскому', iconBg:'var(--goldsoft)', count:(topic&&topic.pairs?topic.pairs.length:0)+' терм.', onClick:()=>this.startMode('term') },
-      { code:'↔', title:'Сопоставление', desc:'Латинский ↔ русский термин', iconBg:'var(--greensoft)', count:'по 4', onClick:()=>this.startMode('match') },
-      { code:'✓', title:'Тест-зачёт', desc:'10 вопросов · ≥75% = тема засчитана', iconBg:'var(--card2)', count:'10 вопр.', onClick:()=>this.startMode('test') }
+      { code:'01', title:'Флэш-карты', desc:'Вопрос — ответ по теме, самопроверка', iconBg:'var(--redsoft)', count:(topic&&topic.cards?topic.cards.length:0)+' карт', onClick:()=>this.startMode('flash') },
+      { code:'02', title:'Ввод термина', desc:'Пишешь латинское название по русскому', iconBg:'var(--goldsoft)', count:(topic&&topic.pairs?topic.pairs.length:0)+' терм.', onClick:()=>this.startMode('term') },
+      { code:'03', title:'Сопоставление', desc:'Латинский и русский термин', iconBg:'var(--greensoft)', count:'по 4', onClick:()=>this.startMode('match') },
+      { code:'04', title:'Тест-зачёт', desc:'10 вопросов · ≥75% = тема засчитана', iconBg:'var(--card2)', count:'10 вопр.', onClick:()=>this.startMode('test') }
     ];
+    R.modeCards.forEach(mc=>{mc.aria='Открыть режим «'+mc.title+'». '+mc.count;});
     R.backToModule=()=>this.setState({screen:'module'});
 
     // training common
     R.exitTrain=()=>{ this.clearExam(); this.setState({screen: s.mode==='exam'?'module':((s.mode==='mistakes'||s.isReview)?'home':'topic'), tab:'train'}); };
     R.progPct=Math.round(s.idx/(s.sessTotal||1)*100)||0;
     R.idx1=Math.min(s.idx+1,s.sessTotal); R.sessTotal=s.sessTotal;
+    R.trainProgressAria='Прогресс тренировки: '+s.idx+' из '+s.sessTotal+' завершено';
+    R.trainTopicLabel=s.mode==='mistakes'?'Повторение сложных вопросов':(s.mode==='exam'?'Итоговый экзамен':((topic&&topic.name)||'Текущая тема'));
+    R.sessionCorrectLabel=s.sessCorrect+' верно';
+    R.showSessionCombo=(s.combo||0)>=2;
+    R.sessionComboLabel='комбо ×'+(s.combo||0);
 
     // flashcards
     const fc=s.sessItems[s.idx]||{front:'',back:''};
     R.cardFront=fc.front; R.cardBack=fc.back;
     R.flipped=s.flipped; R.notFlipped=!s.flipped;
+    R.flippedPressed=s.flipped?'true':'false';
+    R.cardFlipLabel=s.flipped?'Ответ открыт. Нажмите, чтобы вернуться к вопросу':'Показать ответ';
     R.flipT=s.flipped?'rotateY(180deg)':'rotateY(0)';
     R.flip=()=>this.setState({flipped:!s.flipped});
     R.cardKnow=()=>this.advance(true); R.cardHard=()=>this.advance(false);
@@ -2494,10 +2526,10 @@ async logout(){
     R.termBd=!s.termChecked?'var(--line)':(s.termCorrect?'var(--green)':'var(--red)');
     R.termInputRef=el=>{this._term=el;};
     R.onTermInput=e=>this.setState({termVal:e.target.value});
-    R.termCheck=()=>{ const ok=this.norm(s.termVal)===this.norm(tm.term); if(ok)(this._sessKeys=this._sessKeys||[]).push('t:'+tm.term); this.setState({termChecked:true,termCorrect:ok,sessCorrect:s.sessCorrect+(ok?1:0)}); this.ping(ok?'Верно! +10 XP':'Ошибка — запомни термин'); };
+    R.termCheck=()=>{ if(!String(s.termVal||'').trim()){ this.ping('Введите термин перед проверкой'); if(this._term)this._term.focus(); return; } const ok=this.norm(s.termVal)===this.norm(tm.term); if(ok)(this._sessKeys=this._sessKeys||[]).push('t:'+tm.term); this.setState({termChecked:true,termCorrect:ok,sessCorrect:s.sessCorrect+(ok?1:0)}); this.ping(ok?'Верно! +10 XP':'Ошибка — запомни термин'); };
     R.termFbBg=s.termCorrect?'var(--greensoft)':'var(--redsoft)';
     R.termFbFg=s.termCorrect?'var(--greendk)':'var(--red)';
-    R.termFbIcon=s.termCorrect?'✅':'❌'; R.termFbTitle=s.termCorrect?'Правильно!':'Не совсем';
+    R.termFbMark=s.termCorrect?'✓':'×'; R.termFbTitle=s.termCorrect?'Правильно!':'Не совсем';
     R.termNextBg=s.termCorrect?'var(--green)':'var(--red)'; R.termNextSh=s.termCorrect?'var(--greendk)':'var(--reddk)';
     R.termNext=()=>{ const nx=s.idx+1; if(nx>=s.sessTotal){this.finish();} else this.setState({idx:nx,termVal:'',termChecked:false,termCorrect:false}); };
 
@@ -2505,16 +2537,19 @@ async logout(){
     const mp=s.matchPairs;
     R.matchTotal=mp.length; R.matchDone=s.matched.length;
     R.matchPct=Math.round(s.matched.length/(mp.length||1)*100);
+    R.matchProgressAria='Собрано пар: '+s.matched.length+' из '+mp.length;
+    R.matchDoneLabel=s.matched.length+' из '+mp.length+' пар';
     R.matchComplete=mp.length>0&&s.matched.length===mp.length;
+    R.matchHint=R.matchComplete?'Все пары собраны. Отличная работа!':(s.selTerm===null?'Сначала выбери латинский термин':'Теперь найди его русское значение');
     R.matchLeft=mp.map((p,i)=>{ const done=s.matched.includes(i); const seld=s.selTerm===i; const wrong=s.wrongPair&&s.wrongPair[0]===i;
       return { label:p.term, onClick:()=>this.pickTerm(i),
         bg:done?'var(--greensoft)':(seld?'var(--redsoft)':'var(--card)'),
         fg:done?'var(--greendk)':'var(--ink)', bd:done?'var(--green)':(seld?'var(--red)':'var(--line)'),
-        anim:wrong?'shake .4s':'none' }; });
+        pressed:(done||seld)?'true':'false', aria:'Термин '+p.term+(done?', пара собрана':(seld?', выбран':'')), anim:wrong?'shake .4s':'none' }; });
     R.matchRight=s.defOrder.map(di=>{ const p=mp[di]; const done=s.matched.includes(di); const wrong=s.wrongPair&&s.wrongPair[1]===di;
       return { label:p?p.def:'', onClick:()=>this.pickDef(di),
         bg:done?'var(--greensoft)':'var(--card)', fg:done?'var(--greendk)':'var(--ink)',
-        bd:done?'var(--green)':'var(--line)', anim:wrong?'shake .4s':'none' }; });
+        bd:done?'var(--green)':'var(--line)', pressed:done?'true':'false', aria:'Значение '+(p?p.def:'')+(done?', пара собрана':''), anim:wrong?'shake .4s':'none' }; });
     R.matchFinish=()=>this.finish();
 
     // test MCQ
@@ -2530,16 +2565,19 @@ async logout(){
       let bg='var(--card)',bd='var(--line)',fg='var(--ink)',tagBg='var(--card2)',tagFg='var(--mut)',mark='';
       if(ans){ if(isCorrect){bg='var(--greensoft)';bd='var(--green)';fg='var(--greendk)';tagBg='var(--green)';tagFg='#fff';mark='✓';}
         else if(isSel){bg='var(--redsoft)';bd='var(--red)';fg='var(--red)';tagBg='var(--red)';tagFg='#fff';mark='✕';} }
-      return { text:opt, letter:letters[i], bg,bd,fg,tagBg,tagFg,mark, cursor:ans?'default':'pointer', onClick:()=>this.pickTest(i) };
+      const result=ans?(isCorrect?', правильный ответ':(isSel?', выбран неверно':'')):'';
+      return { text:opt, letter:letters[i], bg,bd,fg,tagBg,tagFg,mark, cursor:ans?'default':'pointer', disabled:ans?'true':'false', aria:'Вариант '+letters[i]+'. '+opt+result, onClick:()=>this.pickTest(i) };
     });
-    R.testNextLabel = s.idx+1>=s.sessTotal?'Завершить тест':'Следующий вопрос →';
+    R.testNextLabel = s.idx+1>=s.sessTotal?'Завершить тест':'Следующий вопрос';
+    R.testModeLabel=s.mode==='mistakes'?'Работа над ошибками':(s.mode==='exam'?'Экзамен':'Тест-зачёт');
     { const okk=s.testSel===tq.correct;
       R.fbBannerBg=okk?'var(--greensoft)':'var(--redsoft)';
       R.fbBannerBd=okk?'var(--green)':'var(--red)';
       R.fbBannerFg=okk?'var(--greendk)':'var(--red)';
-      R.fbBannerIcon=okk?((s.combo||0)>=3?'🔥':'🦴'):'❌';
+      R.fbBannerMark=okk?((s.combo||0)>=3?('×'+s.combo):'✓'):'×';
       R.fbBannerTitle=okk?((s.combo||0)>=3?('Комбо ×'+s.combo+'!'):'Верно!'):'Не совсем';
-      R.fbBannerSub=okk?'+10 XP · так держать':('Правильный: '+(['А','Б','В','Г'][tq.correct]||'')); }
+      R.fbBannerSub=okk?'+10 XP · так держать':('Правильный: '+(['А','Б','В','Г'][tq.correct]||''));
+      R.fbBannerAnswer=okk?'Ответ закреплён в прогрессе темы.':('Запомни: '+((tq.options||[])[tq.correct]||'')); }
     R.testNextBg=(s.testSel===tq.correct)?'var(--green)':'var(--red)';
     R.testNextSh=(s.testSel===tq.correct)?'var(--greendk)':'var(--reddk)';
     R.testNext=()=>{ const nx=s.idx+1; if(nx>=s.sessTotal){this.finish();} else this.setState({idx:nx,testSel:null,testAnswered:false}); };
@@ -2743,7 +2781,7 @@ async logout(){
     else if(mode==='term'){ items=this.shuffle((topic.pairs||[]).slice()); }
     else if(mode==='match'){ matchPairs=this.shuffle((topic.pairs||[]).slice()).slice(0,4); defOrder=this.shuffle(matchPairs.map((_,i)=>i)); }
     else if(mode==='test'){ items=this.shuffle((topic.tests||[]).slice()).slice(0,10); }
-    else if(mode==='mistakes'){ items=this.shuffle((this.state.mistakes||[]).slice()).slice(0,15); if(!items.length){this.ping('Ошибок нет — отлично! 🎉');return;} }
+    else if(mode==='mistakes'){ items=this.shuffle((this.state.mistakes||[]).slice()).slice(0,15); if(!items.length){this.ping('Ошибок нет — отличный результат');return;} }
     const total = mode==='match'?matchPairs.length:items.length;
     this.setState({ screen:'train', mode, idx:0, flipped:false, sessCorrect:0, sessTotal:total, sessItems:items, isReview:false,
       termVal:'', termChecked:false, termCorrect:false, selTerm:null, matched:[], wrongPair:null, matchPairs, defOrder,
@@ -2770,7 +2808,7 @@ async logout(){
     const sessRight=ok?[...s.sessRight,tq.q]:s.sessRight;
     const combo=ok?(s.combo||0)+1:0;
     this.setState({testSel:i,testAnswered:true,sessCorrect:s.sessCorrect+(ok?1:0),sessWrong,sessRight,combo});
-    this.ping(ok?(combo>=3?('Комбо x'+combo+'! +10 XP 🔥'):'Верно! +10 XP'):'Неверно');
+    this.ping(ok?(combo>=3?('Комбо x'+combo+'! +10 XP'):'Верно! +10 XP'):'Неверно');
   }
   finish(){
     this.clearExam();
