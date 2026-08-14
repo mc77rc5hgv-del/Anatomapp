@@ -30,6 +30,7 @@ iframe[src*="telegram.org"]{background:transparent!important;color-scheme:light!
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,600;0,700;0,800;0,900;1,700&family=Manrope:wght@400;500;600;700;800&family=Lora:ital@1&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="assets/anatomy-muscle-hero.webp" type="image/webp">
 <style>
   *{box-sizing:border-box}
   body{margin:0;background:#eeeae5;font-family:Manrope,system-ui,sans-serif;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
@@ -53,20 +54,23 @@ iframe[src*="telegram.org"]{background:transparent!important;color-scheme:light!
   .premium-login>div:first-child{filter:drop-shadow(0 8px 14px rgba(122,24,34,.14))}
   .ui-icon{width:22px;height:22px;display:block;fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
   .ui-icon--sm{width:17px;height:17px}.ui-icon--lg{width:27px;height:27px}
-  .atlas-figure{position:absolute;right:-12px;bottom:-20px;width:168px;height:214px;color:#fff;opacity:.12;pointer-events:none;filter:drop-shadow(0 8px 20px rgba(0,0,0,.18))}
-  .atlas-caption{position:relative;margin-top:16px;padding-top:11px;border-top:1px solid rgba(255,255,255,.18);display:flex;justify-content:space-between;gap:12px;color:rgba(255,255,255,.64);font:700 9px Manrope;letter-spacing:.16em;text-transform:uppercase}
-  .atlas-caption span:last-child{color:rgba(232,195,133,.86)}
+  .splash-anatomy{position:relative;width:min(100%,300px);aspect-ratio:1.55;margin:0 auto 22px;border-radius:26px;overflow:hidden;background:#351518;border:1px solid rgba(255,255,255,.18);box-shadow:0 24px 48px -24px rgba(0,0,0,.72)}
+  .splash-anatomy:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(75,20,27,.28),transparent 44%),linear-gradient(180deg,transparent 58%,rgba(46,12,17,.34));pointer-events:none}
+  .splash-anatomy img{display:block;width:100%;height:100%;object-fit:cover;object-position:66% 46%}
+  .splash-brand{position:relative;z-index:1;animation:rise .6s ease}
+  .splash-brand-mark{width:84px !important;height:84px !important;margin:0 auto 18px !important}
+  .home-anatomy-image{position:absolute;right:0;top:0;width:62%;height:100%;display:block;object-fit:cover;object-position:68% 44%;opacity:.66;pointer-events:none;-webkit-mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.58) 28%,#000 62%);mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.58) 28%,#000 62%)}
+  .home-hero-note{position:relative;margin-top:16px;display:flex;justify-content:space-between;gap:12px;color:rgba(255,255,255,.68);font:700 10px Manrope;letter-spacing:.04em}
+  .home-hero-note span:last-child{color:rgba(244,211,156,.9)}
   .atlas-search{position:relative}
   .atlas-search>.ui-icon{position:absolute;left:15px;top:50%;transform:translateY(-50%);z-index:1;color:var(--red);pointer-events:none}
   .atlas-search input{padding-left:44px !important}
   .atlas-module-card{position:relative;isolation:isolate}
   .atlas-module-card:before{content:"";position:absolute;left:0;top:16px;bottom:16px;width:2px;border-radius:2px;background:linear-gradient(180deg,var(--gold),var(--red));opacity:.82}
-  .atlas-module-card:after{content:"TABULA";position:absolute;right:34px;bottom:9px;color:var(--mut);font:700 7px Manrope;letter-spacing:.16em;opacity:.48}
   .atlas-section-title{display:flex;align-items:center;gap:8px;font:800 12px Nunito;color:var(--mut);letter-spacing:.08em;text-transform:uppercase}
   .atlas-section-title:before{content:"";width:18px;height:1px;background:var(--gold);box-shadow:5px -3px 0 -0.25px var(--red)}
   .atlas-specimen{display:inline-flex;align-items:center;justify-content:center;min-width:30px;height:30px;padding:0 8px;border:1px solid color-mix(in srgb,var(--red) 36%,var(--line));border-radius:10px;background:color-mix(in srgb,var(--redsoft) 78%,transparent);font:800 10px Manrope;color:var(--red);letter-spacing:.08em}
   .atlas-badge{display:inline-flex;align-items:center;justify-content:center;color:inherit}
-  .atlas-splash-plate{position:absolute;inset:0;pointer-events:none;opacity:.12;color:#fff}
   .atlas-nav-icon{color:var(--mut);transition:color .18s ease,transform .18s ease}
   #tabbar button:active .atlas-nav-icon{transform:scale(.94)}
   @media (hover:hover){#app button:hover{transform:translateY(-1px)}#app [style*="cursor:pointer"][style*="background:var(--card)"]:hover{border-color:rgba(157,35,48,.22) !important}}
@@ -99,14 +103,25 @@ iframe[src*="telegram.org"]{background:transparent!important;color-scheme:light!
     #app>.scr{border-radius:0 !important;width:100% !important;height:100vh !important}
   }
   @media (orientation:landscape) and (max-height:520px){
-    .premium-splash{display:grid !important;grid-template-columns:minmax(260px,1fr) minmax(240px,1fr);grid-template-rows:1fr 1fr;column-gap:54px;padding:20px 64px !important;overflow:hidden}
-    .premium-splash>svg+div{grid-column:1;grid-row:1 / 3;align-self:center}
-    .premium-splash>svg+div>div:first-child{width:78px !important;height:78px !important;margin:0 auto 14px !important}
-    .premium-splash>svg+div>div:first-child>div:nth-child(2){font-size:38px !important}
-    .premium-splash>svg+div>div:nth-child(2){font-size:28px !important}
-    .premium-splash>svg+div>div:last-child{margin-top:4px !important}
-    .premium-splash>button{grid-column:2;grid-row:1;align-self:end;margin:0 !important}
-    .premium-splash>button+div{grid-column:2;grid-row:2;align-self:start;margin-top:12px !important}
+    .premium-splash{display:grid !important;grid-template-columns:minmax(260px,1.1fr) minmax(240px,.9fr);grid-template-rows:1fr auto auto 1fr;column-gap:48px;padding:18px 54px !important;overflow:hidden}
+    .splash-anatomy{grid-column:1;grid-row:1 / 5;align-self:center;width:100%;max-width:390px;margin:0;aspect-ratio:1.52}
+    .splash-brand{grid-column:2;grid-row:2;align-self:end}
+    .splash-brand-mark{width:64px !important;height:64px !important;margin-bottom:10px !important}
+    .splash-brand-mark>div:nth-child(2){font-size:36px !important}
+    .splash-brand>div:nth-child(2){font-size:27px !important}
+    .splash-brand>div:last-child{display:none}
+    .premium-splash>button{grid-column:2;grid-row:3;margin:16px 0 0 !important}
+    .premium-splash>button+div{grid-column:2;grid-row:4;align-self:start;margin-top:10px !important}
+  }
+  @media (orientation:portrait) and (max-height:620px){
+    .premium-splash{justify-content:flex-start !important;padding:24px 34px 18px !important}
+    .splash-anatomy{width:min(100%,252px);aspect-ratio:1.8;margin-bottom:14px}
+    .splash-brand-mark{width:72px !important;height:72px !important;margin-bottom:12px !important}
+    .splash-brand-mark>div:nth-child(2){font-size:42px !important}
+    .splash-brand>div:nth-child(2){font-size:30px !important}
+    .splash-brand>div:last-child{font-size:11.5px !important;line-height:1.35 !important;margin-top:6px !important}
+    .premium-splash>button{margin-top:24px !important}
+    .premium-splash>button+div{margin-top:10px !important}
   }
   @keyframes wordcycle{0%{opacity:0;transform:translateY(14px) rotateX(-40deg)}12%,84%{opacity:1;transform:none}100%{opacity:0;transform:translateY(-14px) rotateX(40deg)}}
 
@@ -167,15 +182,11 @@ iframe[src*="telegram.org"]{background:transparent!important;color-scheme:light!
     <!-- ===================== SPLASH ===================== -->
     <sc-if value="{{ isSplash }}" hint-placeholder-val="{{ true }}">
       <div class="premium-splash" style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 34px;background:radial-gradient(120% 76% at 50% 0%,#c74c58 0%,#a72636 45%,#681923 100%);color:#fff;text-align:center">
-        <svg class="atlas-splash-plate" viewBox="0 0 390 844" aria-hidden="true">
-          <g fill="none" stroke="currentColor" stroke-width="1.25">
-            <circle cx="328" cy="170" r="30"/><path d="M328 200c-4 42-5 88 0 136m-41-105c12-13 26-20 41-20s29 7 41 20M289 247c14 11 26 16 39 16s26-5 39-16M292 265c12 12 24 18 36 18s25-6 37-18M296 285c10 11 21 16 32 16s22-5 32-16M304 335l-18 64m42-63v70m0-70 42 65m-42 5-28 100m28-100 29 100"/>
-            <circle cx="78" cy="640" r="56"/><path d="M37 640h82M78 599v82" opacity=".5"/>
-            <path d="M0 106h95m-95 632h126" opacity=".45"/>
-          </g>
-        </svg>
-        <div style="animation:rise .6s ease">
-          <div style="width:112px;height:112px;margin:0 auto 26px;position:relative">
+        <figure class="splash-anatomy">
+          <img src="assets/anatomy-muscle-hero.webp" width="1535" height="1024" alt="Иллюстрация поверхностных мышц человеческого тела" fetchpriority="high" decoding="async">
+        </figure>
+        <div class="splash-brand">
+          <div class="splash-brand-mark" style="width:112px;height:112px;margin:0 auto 26px;position:relative">
             <div style="position:absolute;inset:0;background:#fff;border-radius:30px;transform:rotate(45deg);box-shadow:0 18px 40px -12px rgba(0,0,0,.5)"></div>
             <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font:900 52px Nunito;color:var(--red)">А</div>
             <div style="position:absolute;bottom:-6px;right:-6px;width:34px;height:34px;background:var(--gold);border-radius:11px;display:flex;align-items:center;justify-content:center;transform:rotate(8deg);box-shadow:0 6px 14px -4px rgba(0,0,0,.4)"><svg class="ui-icon ui-icon--sm" viewBox="0 0 24 24" aria-hidden="true" style="color:#fff"><path d="M7.2 8.5 15.5 17m-8.7-3.5 9-8.8M5.6 6.1a2.7 2.7 0 1 1 3.2-3.2l8.3 8.3a2.7 2.7 0 1 1 3.2 3.2 2.7 2.7 0 1 1-3.2 3.2L8.8 9.3a2.7 2.7 0 1 1-3.2-3.2Z"/></svg></div>
@@ -274,14 +285,7 @@ iframe[src*="telegram.org"]{background:transparent!important;color-scheme:light!
     <sc-if value="{{ isHome }}" hint-placeholder-val="">
       <div class="scr" style="position:absolute;inset:0;overflow:auto;background:var(--bg);padding-bottom:92px;animation:screenIn .34s ease">
         <div style="padding:54px 20px 26px;background:linear-gradient(145deg,#33171c 0%,#711f2b 56%,#a62a39 100%);position:relative;overflow:hidden;border-bottom:1px solid rgba(255,255,255,.08);box-shadow:0 18px 34px -28px rgba(67,15,23,.9)">
-          <div style="position:absolute;inset:0;opacity:.13;user-select:none;pointer-events:none;background-image:linear-gradient(rgba(255,255,255,.18) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.18) 1px,transparent 1px);background-size:34px 34px;mask-image:linear-gradient(to bottom,black,transparent 88%)"></div>
-          <svg class="atlas-figure" viewBox="0 0 168 214" aria-hidden="true">
-            <g fill="none" stroke="currentColor" stroke-width="1.35">
-              <circle cx="93" cy="29" r="18"/><path d="M93 47v87m-28-70c8-8 17-12 28-12 10 0 20 4 28 12M68 77c9 7 17 10 25 10s17-3 25-10M71 91c8 7 15 10 22 10 8 0 15-3 23-10M76 106c6 6 12 9 17 9 6 0 12-3 18-9M93 134l-22 24m22-24 22 24m-22-24v63m-22-39-9 39m53-39 9 39"/>
-              <path d="M65 64 45 111m76-47 20 47M76 120c5 8 11 12 17 12 7 0 13-4 18-12"/>
-              <circle cx="45" cy="111" r="2.5"/><circle cx="141" cy="111" r="2.5"/>
-            </g>
-          </svg>
+          <img class="home-anatomy-image" src="assets/anatomy-muscle-hero.webp" width="1535" height="1024" alt="" aria-hidden="true" decoding="async">
           <div style="position:absolute;top:-40px;right:-30px;width:180px;height:180px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.14),transparent 68%)"></div>
           <div style="position:absolute;left:0;right:0;bottom:0;height:1px;background:linear-gradient(90deg,transparent,rgba(224,166,75,.6),transparent)"></div>
           <div style="position:relative;display:flex;align-items:center;justify-content:space-between;gap:12px">
@@ -297,7 +301,7 @@ iframe[src*="telegram.org"]{background:transparent!important;color-scheme:light!
               <div style="display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.95);padding:8px 13px 8px 9px;border-radius:22px;box-shadow:0 4px 12px -4px rgba(0,0,0,.35)"><span style="display:inline-flex;width:24px;height:24px;border-radius:50%;background:#f4ead7;align-items:center;justify-content:center;color:#9f6b22"><svg class="ui-icon ui-icon--sm" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 2.6 5.3 5.9.9-4.3 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8-4.3-4.1 5.9-.9L12 3Z"/></svg></span><b style="font:900 15px Nunito;color:#8f5d1d">{{ xp }}</b></div>
             </div>
           </div>
-          <div class="atlas-caption"><span>Atlas anatomicus · studium</span><span>ВМедА · 2026</span></div>
+          <div class="home-hero-note"><span>Курс нормальной анатомии</span><span>ВМедА · 2026</span></div>
         </div>
 
         <div style="width:100%;max-width:900px;margin:0 auto">
