@@ -323,6 +323,8 @@ iframe[src*="telegram.org"]{background:transparent!important;color-scheme:light!
   .game-stat:after{content:"";position:absolute;left:10px;right:10px;bottom:5px;height:2px;border-radius:2px;background:linear-gradient(90deg,transparent,var(--redsoft),transparent)}
   .game-daily{background:radial-gradient(120% 140% at 100% 0%,rgba(237,185,98,.34),transparent 42%),linear-gradient(145deg,var(--reddk),var(--red))!important;color:#fff!important;border:2px solid color-mix(in srgb,var(--red) 74%,#fff)!important;box-shadow:0 5px 0 color-mix(in srgb,var(--reddk) 84%,#16080b)!important}
   .game-daily:after{content:"+XP";position:absolute;right:13px;top:10px;padding:3px 7px;border-radius:8px;background:rgba(255,255,255,.13);font:900 9px Nunito;letter-spacing:.06em;color:rgba(255,255,255,.8)}
+  .game-daily__head{display:flex;align-items:center;gap:7px;padding-right:42px}
+  .game-goal-mode{padding:3px 7px;border:1px solid rgba(255,255,255,.2);border-radius:8px;background:rgba(255,255,255,.12);font:900 8.5px Nunito;letter-spacing:.04em;text-transform:uppercase;white-space:nowrap}
   .game-daily__value{background:var(--reddk)!important;color:#fff!important;border:1px solid rgba(255,255,255,.16)}
   .game-missions{margin:14px 16px 0;padding:16px;border:2px solid var(--line);border-radius:22px;background:var(--card);box-shadow:0 4px 0 var(--game-depth)}
   .game-missions__head,.game-week__head{display:flex;align-items:center;justify-content:space-between;gap:12px}
@@ -490,6 +492,8 @@ iframe[src*="telegram.org"]{background:transparent!important;color-scheme:light!
   .game-result-bonus__xp{margin-left:auto;color:color-mix(in srgb,var(--gold) 78%,var(--ink));font:900 11px Nunito}
   .game-rank-unlock{margin-top:10px;padding:6px 11px;border:1.5px solid color-mix(in srgb,var(--gold) 58%,var(--line));border-radius:11px;background:var(--goldsoft);color:color-mix(in srgb,var(--gold) 76%,var(--ink));font:900 11px Nunito;letter-spacing:.02em;box-shadow:0 2px 0 color-mix(in srgb,var(--gold) 26%,var(--line))}
   .game-profile-hero{background:radial-gradient(90% 120% at 100% 0%,color-mix(in srgb,var(--gold) 22%,transparent),transparent 50%),linear-gradient(180deg,var(--redsoft),transparent)!important}
+  .game-profile-goal{display:inline-flex;align-items:center;gap:6px;margin-top:9px;padding:6px 10px;border:1.5px solid color-mix(in srgb,var(--red) 24%,var(--line));border-radius:13px;background:color-mix(in srgb,var(--card) 88%,transparent);color:var(--ink);font:800 11px Nunito}
+  .game-profile-goal .ui-icon{width:14px;height:14px;color:var(--red)}
   .game-rank-badge{display:inline-flex;align-items:center;gap:6px;margin-top:10px;padding:7px 12px;border:1.5px solid color-mix(in srgb,var(--gold) 34%,var(--line));border-radius:20px;background:var(--card);color:color-mix(in srgb,var(--gold) 72%,var(--ink));font:900 12px Nunito;box-shadow:0 3px 0 color-mix(in srgb,var(--gold) 20%,var(--line))}
   .game-rank-meter{max-width:270px;margin:12px auto 0;padding:11px 12px;border:1.5px solid var(--line);border-radius:15px;background:color-mix(in srgb,var(--card) 88%,transparent);text-align:left}
   .game-rank-meter__head{display:flex;align-items:center;justify-content:space-between;gap:10px;color:var(--mut);font:800 9.5px Nunito}
@@ -763,8 +767,8 @@ iframe[src*="telegram.org"]{background:transparent!important;color-scheme:light!
             <div class="game-daily__value" style="position:absolute;inset:7px;border-radius:50%;background:var(--ink);display:flex;align-items:center;justify-content:center;font:900 15px Nunito">{{ dayPct }}%</div>
           </div>
           <div style="flex:1">
-            <div style="font:800 15px Nunito">Цель дня</div>
-            <div style="font-size:12.5px;opacity:.7;margin-top:2px">{{ dayDone }} / {{ dayGoal }} заданий · перед парой по анатомии</div>
+            <div class="game-daily__head"><div style="font:800 15px Nunito">Цель дня</div><span class="game-goal-mode">{{ goalShort }}</span></div>
+            <div style="font-size:12.5px;opacity:.7;margin-top:2px">{{ dayDone }} / {{ dayGoal }} заданий · {{ dayContext }}</div>
           </div>
         </div>
 
@@ -1320,6 +1324,7 @@ iframe[src*="telegram.org"]{background:transparent!important;color-scheme:light!
           <div style="width:82px;height:82px;margin:0 auto;border-radius:26px;background:var(--red);display:flex;align-items:center;justify-content:center;font:900 34px Nunito;color:#fff;box-shadow:0 10px 24px -12px rgba(150,30,35,.7)">{{ userIni }}</div>
           <div style="font:900 20px Nunito;color:var(--ink);margin-top:12px">{{ userName }}</div>
           <div style="font-size:12.5px;color:var(--mut);margin-top:2px">{{ userMeta }}</div>
+          <div class="game-profile-goal"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/><path d="M12 2v3m0 14v3M2 12h3m14 0h3"/></svg>{{ userGoal }}</div>
           <div class="game-rank-badge"><svg class="ui-icon ui-icon--sm" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="9" r="5"/><path d="m8.5 13-1 8 4.5-2.5 4.5 2.5-1-8"/></svg>Уровень {{ level }} · {{ rankTitle }}</div>
           <div class="game-rank-meter">
             <div class="game-rank-meter__head"><span>{{ rankMinXp }} XP</span><strong>{{ xp }} XP</strong><span>{{ rankEndLabel }}</span></div>
@@ -1427,7 +1432,7 @@ iframe[src*="telegram.org"]{background:transparent!important;color-scheme:light!
           <div style="font:900 20px Nunito;color:var(--ink)">Редактировать профиль</div>
         </div>
         <div style="margin:24px 0 8px;font:800 12px Nunito;color:var(--mut);letter-spacing:.08em">ФИО</div>
-        <input value="{{ fullName }}" onInput="{{ onFullName }}" placeholder="Фамилия Имя Отчество" style="width:100%;padding:14px 16px;border:1.5px solid var(--line);border-radius:14px;background:var(--card);color:var(--ink);font:600 14px Manrope;outline:none">
+        <input value="{{ fullName }}" onInput="{{ onFullName }}" placeholder="Фамилия Имя Отчество" style="width:100%;padding:14px 16px;border:1.5px solid var(--line);border-radius:14px;background:var(--card);color:var(--ink);font:600 16px Manrope;outline:none">
         <div style="margin:18px 0 8px;font:800 12px Nunito;color:var(--mut);letter-spacing:.08em">КУРС</div>
         <div style="display:flex;gap:8px">
           <sc-for list="{{ courseChips }}" as="c" hint-placeholder-count="2">
@@ -1435,7 +1440,11 @@ iframe[src*="telegram.org"]{background:transparent!important;color-scheme:light!
           </sc-for>
         </div>
         <div style="margin:18px 0 8px;font:800 12px Nunito;color:var(--mut);letter-spacing:.08em">ФАКУЛЬТЕТ</div>
-        <input value="{{ facultyVal }}" onInput="{{ onFaculty }}" placeholder="Факультет" style="width:100%;padding:14px 16px;border:1.5px solid var(--line);border-radius:14px;background:var(--card);color:var(--ink);font:600 14px Manrope;outline:none">
+        <input value="{{ facultyVal }}" onInput="{{ onFaculty }}" placeholder="Факультет" style="width:100%;padding:14px 16px;border:1.5px solid var(--line);border-radius:14px;background:var(--card);color:var(--ink);font:600 16px Manrope;outline:none">
+        <div style="margin:18px 0 8px;font:800 12px Nunito;color:var(--mut);letter-spacing:.08em">ЦЕЛЬ ОБУЧЕНИЯ</div>
+        <div class="onboard-choice-grid">
+          <sc-for list="{{ goalChips }}" as="g" hint-placeholder-count="3"><button type="button" class="onboard-choice" onClick="{{ g.onClick }}" aria-pressed="{{ g.pressed }}"><span class="onboard-choice__mark" aria-hidden="true">{{ g.code }}</span><span>{{ g.label }}</span></button></sc-for>
+        </div>
         <button onClick="{{ resetPasswordProfile }}" style="margin-top:18px;width:100%;padding:14px;border:1.5px solid var(--line);border-radius:16px;background:var(--card);color:var(--ink);font:800 14px Nunito;cursor:pointer">Отправить ссылку сброса пароля</button>
         <button onClick="{{ saveEditProfile }}" style="margin-top:26px;width:100%;padding:16px;border:none;border-radius:16px;background:var(--red);color:#fff;font:800 16px Nunito;box-shadow:0 4px 0 var(--reddk);cursor:pointer;transition:transform .08s,box-shadow .08s" style-active="transform:translateY(4px);box-shadow:0 0 0 var(--reddk)">Сохранить</button>
       </div>
@@ -1949,10 +1958,11 @@ persist(){
       var ls = cloud ? self.mergeState(local, cloud) : local;
       var today=new Date().toDateString();
       var sameDay=ls.dayKey===today;
+      var plan=self.goalPlan(user&&user.goal);
       self.setState({
         progress:ls.progress||{}, mistakes:ls.mistakes||[], favorites:ls.favorites||[], notes:ls.notes||{},
-        lastActive:ls.lastActive||'', dayDone:sameDay?(ls.dayDone||0):0, dayKey:today,
-        dayGoal:ls.dayGoal||20, lastTopic:ls.lastTopic||null,
+        lastActive:ls.lastActive||'', dayDone:sameDay?Math.min(ls.dayDone||0,plan.dayGoal):0, dayKey:today,
+        dayGoal:plan.dayGoal, lastTopic:ls.lastTopic||null,
         termLang:ls.termLang||"ru", reminders:(typeof ls.reminders==="boolean"?ls.reminders:true),
         examDone:!!ls.examDone, history:ls.history||[], rewarded:ls.rewarded||{},
         xp:(typeof ls.xp==="number"?ls.xp:0), streak:(typeof ls.streak==="number"?ls.streak:0),
@@ -2006,16 +2016,19 @@ persist(){
     };
   }
 
-  goEditProfile(){ const u=this.state.user||{}; this._course=u.course||1; this.setState({fullName:u.name||'',faculty:u.faculty||'Лечебный факультет',screen:'editprofile'}); }
+  goEditProfile(){ const u=this.state.user||{}, goals=this.learningGoals(); this._course=u.course||1; const idx=goals.findIndex(g=>g.label===u.goal); this._goal=idx>=0?idx:1; this.setState({fullName:u.name||'',faculty:u.faculty||'Лечебный факультет',screen:'editprofile'}); }
   saveEditProfile(){
     var s=this.state;
+    var goals=this.learningGoals(), selected=goals[this._goal]||goals[1];
     var u=Object.assign({}, s.user||{}, {
       name:(s.fullName||"").trim()||"Студент ВМедА",
       course:this._course||1,
-      faculty:(s.faculty||"").trim()||"Лечебный факультет"
+      faculty:(s.faculty||"").trim()||"Лечебный факультет",
+      goal:selected.label
     });
+    var plan=this.goalPlan(u.goal);
     this.saveUser(u);
-    this.setState({ user:u, screen:"profileTab" });
+    this.setState({ user:u, screen:"profileTab", dayGoal:plan.dayGoal, dayDone:Math.min(s.dayDone,plan.dayGoal) },()=>this.persist());
     this.ping("Профиль обновлён");
     var db=this.db();
     if(db && u.id){
@@ -2114,17 +2127,32 @@ async sendBroadcast(){
   }
   clearExam(){ if(this._exam){ clearInterval(this._exam); this._exam=null; } }
   touchStreak(){ const key=new Date().toDateString(), last=this.activityDay(this.state.lastActive); if(last===key) return {streak:Math.max(1,this.state.streak||0),lastActive:key}; const y=new Date(Date.now()-864e5).toDateString(); const streak=last===y?Math.max(1,(this.state.streak||0)+1):1; return {streak,lastActive:key}; }
+  learningGoals(){ return [
+    {label:'К экзамену по анатомии',short:'Экзамен',dayGoal:30,accuracyGoal:80,dayContext:'экзаменационный темп',focus:'Глубокое понимание и тестовый контроль',preferred:'test'},
+    {label:'К зачёту',short:'Зачёт',dayGoal:20,accuracyGoal:75,dayContext:'уверенно закрываем зачёт',focus:'Баланс теории и закрепления',preferred:'flash'},
+    {label:'К практическим занятиям',short:'Практика',dayGoal:15,accuracyGoal:70,dayContext:'готовность к практическому занятию',focus:'Быстрое воспроизведение терминов',preferred:'term'}
+  ]; }
+  goalPlan(value){
+    const goals=this.learningGoals(), normalized=String(value||'').trim();
+    return goals.find(goal=>goal.label===normalized)||{label:'Сбалансированная подготовка',short:'Базовый режим',dayGoal:20,accuracyGoal:75,dayContext:'системный прогресс каждый день',focus:'Баланс теории и практики',preferred:'flash'};
+  }
   dailyMissionRewards(){ return { cards:30, session:15, accuracy:25 }; }
   dailyMissionKey(day,id){ return 'daily:'+String(day||new Date().toDateString())+':'+id; }
   startDailyMission(id){
     const s=this.state;
+    const plan=this.goalPlan(s.user&&s.user.goal);
     const candidates=this.MODULES.filter(m=>m.ready).flatMap(m=>this.topicsOf(m.id).map((topic,idx)=>({mid:m.id,topic,idx,key:this.pk(topic.num,m.id)})));
     const supports=item=>id==='accuracy'?(item.topic.tests||[]).length>0:((item.topic.cards||[]).length>0||(item.topic.pairs||[]).length>0||(item.topic.tests||[]).length>0);
     const unfinished=item=>((s.progress[item.key]||{}).bestPct||0)<75;
     const last=s.lastTopic&&candidates.find(item=>item.mid===s.lastTopic.moduleId&&item.idx===s.lastTopic.topicIdx&&supports(item));
     const target=(last&&unfinished(last)?last:null)||candidates.find(item=>supports(item)&&unfinished(item))||candidates.find(supports);
     if(!target){ this.ping('Учебные задания ещё загружаются'); return; }
-    const mode=id==='accuracy'?'test':((target.topic.cards||[]).length?'flash':((target.topic.pairs||[]).length?'term':'test'));
+    let mode='test';
+    if(id==='accuracy') mode='test';
+    else if(plan.preferred==='term'&&(target.topic.pairs||[]).length) mode='term';
+    else if(plan.preferred==='test'&&(target.topic.tests||[]).length) mode='test';
+    else if((target.topic.cards||[]).length) mode='flash';
+    else if((target.topic.pairs||[]).length) mode='term';
     this.setState({moduleId:target.mid,topicIdx:target.idx,subKey:null,lastTopic:{moduleId:target.mid,topicIdx:target.idx}},()=>{ this.persist(); this.startMode(mode); });
   }
   rankLadder(){ return [
@@ -2259,13 +2287,13 @@ async logout(){
   async finishProfile(){
     if(this._authLock || this.state.authBusy) return;
     var s=this.state;
-    var goals=["К экзамену по анатомии","К зачёту","К практическим занятиям"];
+    var goals=this.learningGoals();
     var email=(s.email||"").trim().toLowerCase();
     var pass=s.pass||"";
     var name=(s.fullName||"").trim();
     var course=this._course||1;
     var faculty=(s.faculty||"").trim();
-    var goal=goals[this._goal||0];
+    var goal=(goals[this._goal||0]||goals[0]).label;
     var nameErr=name.length<2?"Укажите имя, которое будет видно в рейтинге":"";
     var facultyErr=faculty.length<2?"Укажите факультет или учебную группу":"";
     if(nameErr||facultyErr){ this.setState({profileNameErr:nameErr,profileFacultyErr:facultyErr}); setTimeout(()=>{ var el=nameErr?this._profileNameInput:this._facultyInput; if(el&&el.focus) el.focus(); },0); return; }
@@ -2409,6 +2437,7 @@ async logout(){
 
   renderVals(){
     const s=this.state, E=this.EXTRA;
+    const learningPlan=this.goalPlan(s.user&&s.user.goal);
     const go=scr=>()=>this.setState({screen:scr});
     const scr=s.screen;
     const R={};
@@ -2424,8 +2453,9 @@ async logout(){
     R.loaderText=s.tgLoading?'Безопасно подтверждаем профиль':(s.authBusy?'Это займёт несколько секунд':'Загружаем учебный прогресс');
     R.appRef=el=>{ this._app=el; if(el) this.applyTheme(this.state.dark); };
 
-    R.streak=s.streak; R.xp=s.xp; R.level=s.level; R.dayDone=s.dayDone; R.dayGoal=s.dayGoal;
-    R.dayPct=Math.round(s.dayDone/s.dayGoal*100); R.dayDeg=Math.round(s.dayDone/s.dayGoal*360);
+    R.streak=s.streak; R.xp=s.xp; R.level=s.level; R.dayGoal=learningPlan.dayGoal; R.dayDone=Math.min(s.dayDone,learningPlan.dayGoal);
+    R.dayPct=Math.min(100,Math.round(R.dayDone/Math.max(1,R.dayGoal)*100)); R.dayDeg=Math.min(360,Math.round(R.dayDone/Math.max(1,R.dayGoal)*360));
+    R.goalShort=learningPlan.short; R.dayContext=learningPlan.dayContext; R.userGoal=learningPlan.label; R.goalFocus=learningPlan.focus;
     {
       const now=new Date(), todayKey=now.toDateString();
       const todayHistory=(s.history||[]).filter(h=>new Date(h.ts).toDateString()===todayKey);
@@ -2433,9 +2463,9 @@ async logout(){
       const bestToday=todayHistory.reduce((best,h)=>Math.max(best,Number(h.pct)||0),0);
       const rewards=this.dailyMissionRewards(), missionDay=s.dayKey||todayKey;
       const missionData=[
-        {id:'cards',label:'Тренировочные задания',value:Math.min(s.dayDone,s.dayGoal)+' / '+s.dayGoal,pct:Math.min(100,Math.round(s.dayDone/Math.max(1,s.dayGoal)*100)),done:s.dayDone>=s.dayGoal,reward:rewards.cards},
+        {id:'cards',label:'Тренировочные задания',value:Math.min(s.dayDone,learningPlan.dayGoal)+' / '+learningPlan.dayGoal,pct:Math.min(100,Math.round(s.dayDone/Math.max(1,learningPlan.dayGoal)*100)),done:s.dayDone>=learningPlan.dayGoal,reward:rewards.cards},
         {id:'session',label:'Одна сессия',value:sessionsToday?'1 / 1':'0 / 1',pct:sessionsToday?100:0,done:sessionsToday>0,reward:rewards.session},
-        {id:'accuracy',label:'Точность 75%',value:bestToday?bestToday+'%':'0%',pct:Math.min(100,Math.round(bestToday/75*100)),done:bestToday>=75,reward:rewards.accuracy}
+        {id:'accuracy',label:'Точность '+learningPlan.accuracyGoal+'%',value:bestToday?bestToday+'%':'0%',pct:Math.min(100,Math.round(bestToday/learningPlan.accuracyGoal*100)),done:bestToday>=learningPlan.accuracyGoal,reward:rewards.accuracy}
       ];
       R.dailyMissions=missionData.map((m,i)=>{ const claimed=!!(s.rewarded||{})[this.dailyMissionKey(missionDay,m.id)], action=m.done?'Повторить':(m.id==='accuracy'?'Пройти тест':'Начать'); return {id:m.id,label:m.label,value:claimed?'Получено':('+'+m.reward+' XP'),progressText:m.value,pct:m.pct,code:'0'+(i+1),done:m.done,pending:!m.done,stateClass:m.done?'is-done':'',actionLabel:action,progressAria:m.label+': выполнено на '+m.pct+'%',aria:(m.done?'Повторить задание. ':'Начать задание. ')+m.label+': '+m.value+', награда '+m.reward+' XP'+(claimed?', получена':''),onClick:()=>this.startDailyMission(m.id)}; });
       R.dailyDone=missionData.filter(m=>m.done).length; R.dailyTotal=missionData.length;
@@ -2510,8 +2540,8 @@ async logout(){
     R.userMeta=(u.course||1)+' курс · '+(u.faculty||'Лечебный факультет')+' · ВМедА';
     R.logout=()=>this.logout();
     R.courseChips=[1,2].map(n=>{const on=(this._course||1)===n;return{label:n+' курс',pressed:on?'true':'false',onClick:()=>{this._course=n;this.forceUpdate();},bg:on?'var(--red)':'var(--card)',fg:on?'#fff':'var(--ink)',bd:on?'var(--red)':'var(--line)'};});
-    const goals=['К экзамену по анатомии','К зачёту','К практическим занятиям'];
-    R.goalChips=goals.map((label,i)=>{const on=(this._goal==null?0:this._goal)===i;return{code:String(i+1).padStart(2,'0'),label,pressed:on?'true':'false',onClick:()=>{this._goal=i;this.forceUpdate();},bg:on?'var(--redsoft)':'var(--card)',fg:'var(--ink)',bd:on?'var(--red)':'var(--line)'};});
+    const goals=this.learningGoals();
+    R.goalChips=goals.map((goal,i)=>{const label=goal.label,on=(this._goal==null?0:this._goal)===i;return{code:String(i+1).padStart(2,'0'),label,pressed:on?'true':'false',onClick:()=>{this._goal=i;this.forceUpdate();},bg:on?'var(--redsoft)':'var(--card)',fg:'var(--ink)',bd:on?'var(--red)':'var(--line)'};});
 
     // current-module stats
     const tops=this.curTopics();
@@ -3030,15 +3060,16 @@ async logout(){
   finish(){
     this.clearExam();
     const s=this.state; const pct=Math.round(s.sessCorrect/(s.sessTotal||1)*100)||0;
+    const plan=this.goalPlan(s.user&&s.user.goal);
     const rewarded={...(s.rewarded||{})}; let newN=0; (this._sessKeys||[]).forEach(k=>{ if(!rewarded[k]){ rewarded[k]=1; newN++; } }); this._sessKeys=[]; const earned=newN*10;
     const missionDay=new Date().toDateString();
     const priorDayDone=s.dayKey===missionDay?s.dayDone:0;
-    const nextDayDone=Math.min(s.dayGoal,priorDayDone+s.sessTotal);
+    const nextDayDone=Math.min(plan.dayGoal,priorDayDone+s.sessTotal);
     const missionRewards=this.dailyMissionRewards();
     const missionDefs=[
-      {id:'cards',label:'Цель по заданиям',xp:missionRewards.cards,done:nextDayDone>=s.dayGoal},
+      {id:'cards',label:'Цель по заданиям',xp:missionRewards.cards,done:nextDayDone>=plan.dayGoal},
       {id:'session',label:'Первая сессия дня',xp:missionRewards.session,done:true},
-      {id:'accuracy',label:'Точность не ниже 75%',xp:missionRewards.accuracy,done:pct>=75}
+      {id:'accuracy',label:'Точность не ниже '+plan.accuracyGoal+'%',xp:missionRewards.accuracy,done:pct>=plan.accuracyGoal}
     ];
     const missionBonuses=[];
     missionDefs.forEach(m=>{ const mk=this.dailyMissionKey(missionDay,m.id); if(m.done&&!rewarded[mk]){ rewarded[mk]=1; missionBonuses.push({id:m.id,label:m.label,xp:m.xp}); } });
@@ -3059,7 +3090,7 @@ async logout(){
       pct, correct:s.sessCorrect, total:s.sessTotal, xp:totalEarned, baseXp:earned, missionXp, ts:Date.now() };
     const history=[entry,...(s.history||[])].slice(0,40);
     const streakUp=st.streak>s.streak;
-    this.setState({ screen:'result', resPct:pct, resXp:totalEarned, resBaseXp:earned, resMissionXp:missionXp, resMissionBonuses:missionBonuses, resRankUp:rankUp, resRankTitle:rankAfter.title, resRankLevel:rankAfter.level, xp:s.xp+totalEarned, dayDone:nextDayDone, dayKey:missionDay, progress, mistakes, rewarded, streak:st.streak, lastActive:st.lastActive, examDone: s.mode==='exam'?true:s.examDone, history, showGain:false, streakUp }, ()=>{ this.persist(); if(missionXp>0||rankUp)this.rewardHaptic(); setTimeout(()=>this.setState({showGain:true}),120); });
+    this.setState({ screen:'result', resPct:pct, resXp:totalEarned, resBaseXp:earned, resMissionXp:missionXp, resMissionBonuses:missionBonuses, resRankUp:rankUp, resRankTitle:rankAfter.title, resRankLevel:rankAfter.level, xp:s.xp+totalEarned, dayDone:nextDayDone, dayGoal:plan.dayGoal, dayKey:missionDay, progress, mistakes, rewarded, streak:st.streak, lastActive:st.lastActive, examDone: s.mode==='exam'?true:s.examDone, history, showGain:false, streakUp }, ()=>{ this.persist(); if(missionXp>0||rankUp)this.rewardHaptic(); setTimeout(()=>this.setState({showGain:true}),120); });
   }
 }
 </script>
