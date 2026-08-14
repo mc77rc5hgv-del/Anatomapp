@@ -65,6 +65,13 @@ An original gamified anatomy-learning interface: tactile and encouraging like a 
 - Pair completed-green with a checkmark and text so status never relies on color alone.
 - The seven-day activity row uses real session dates, highlights today with a gold outline, and remains readable at 320 px.
 
+### Long-term ranks
+
+- XP maps to eight transparent ranks without changing or resetting saved XP: Наблюдатель (0), Исследователь (300), Знаток систем (800), Практик анатомии (1500), Анатом (2500), Эксперт (4000), Наставник (6500), Мастер атласа (10000).
+- The Profile screen names the current rank, shows the exact next threshold, and previews the previous/current/next steps.
+- Rank-up feedback appears on the Result screen only when a completed session crosses a real XP threshold.
+- At the maximum rank, progress stays at 100% and the interface says that the maximum has been reached; it never invents another target.
+
 ### Navigation
 
 - Three top-level destinations: Study, Rating, Profile.
