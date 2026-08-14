@@ -55,6 +55,13 @@ An original gamified anatomy-learning interface: tactile and encouraging like a 
 - Always pair color with a number, label, or icon.
 - Keep XP, streak, completion, and correctness semantically separate.
 
+### Daily missions
+
+- The Home screen shows three measurable tasks: card volume, one completed session, and at least 75% accuracy.
+- Mission completion must be derived from saved learning activity; never display invented rewards or progress.
+- Pair completed-green with a checkmark and text so status never relies on color alone.
+- The seven-day activity row uses real session dates, highlights today with a gold outline, and remains readable at 320 px.
+
 ### Navigation
 
 - Three top-level destinations: Study, Rating, Profile.

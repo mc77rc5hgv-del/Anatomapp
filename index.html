@@ -193,6 +193,32 @@ iframe[src*="telegram.org"]{background:transparent!important;color-scheme:light!
   .game-stat:after{content:"";position:absolute;left:10px;right:10px;bottom:5px;height:2px;border-radius:2px;background:linear-gradient(90deg,transparent,var(--redsoft),transparent)}
   .game-daily{background:radial-gradient(120% 140% at 100% 0%,rgba(237,185,98,.34),transparent 42%),linear-gradient(145deg,var(--reddk),var(--red))!important;color:#fff!important;border:2px solid color-mix(in srgb,var(--red) 74%,#fff)!important;box-shadow:0 5px 0 color-mix(in srgb,var(--reddk) 84%,#16080b)!important}
   .game-daily:after{content:"+XP";position:absolute;right:13px;top:10px;padding:3px 7px;border-radius:8px;background:rgba(255,255,255,.13);font:900 9px Nunito;letter-spacing:.06em;color:rgba(255,255,255,.8)}
+  .game-daily__value{background:var(--reddk)!important;color:#fff!important;border:1px solid rgba(255,255,255,.16)}
+  .game-missions{margin:14px 16px 0;padding:16px;border:2px solid var(--line);border-radius:22px;background:var(--card);box-shadow:0 4px 0 var(--game-depth)}
+  .game-missions__head,.game-week__head{display:flex;align-items:center;justify-content:space-between;gap:12px}
+  .game-missions__title{font:900 16px Nunito;color:var(--ink)}
+  .game-missions__counter{flex-shrink:0;padding:4px 9px;border-radius:10px;background:var(--redsoft);color:color-mix(in srgb,var(--red) 62%,var(--ink));font:900 11px Nunito}
+  .game-missions__grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;margin-top:12px}
+  .game-mission{min-width:0;padding:10px 9px 9px;border:1.5px solid var(--line);border-radius:15px;background:var(--card2)}
+  .game-mission.is-done{border-color:color-mix(in srgb,var(--green) 45%,var(--line));background:var(--greensoft)}
+  .game-mission__top{display:flex;align-items:center;justify-content:space-between;gap:5px}
+  .game-mission__mark{width:23px;height:23px;flex:0 0 23px;border-radius:8px;display:flex;align-items:center;justify-content:center;background:var(--card);color:color-mix(in srgb,var(--red) 62%,var(--ink));font:900 9px Nunito;box-shadow:0 2px 0 var(--line)}
+  .game-mission.is-done .game-mission__mark{background:var(--green);color:#fff;box-shadow:0 2px 0 color-mix(in srgb,var(--green) 75%,#10291d)}
+  .game-mission__value{min-width:0;color:var(--mut);font:800 10px Nunito;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .game-mission.is-done .game-mission__value{color:var(--green)}
+  .game-mission__label{margin-top:8px;color:var(--ink);font:800 10.5px/1.25 Nunito;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .game-mission__track{height:5px;margin-top:7px;border-radius:5px;background:var(--line);overflow:hidden}
+  .game-mission__fill{height:100%;border-radius:inherit;background:var(--red);transition:width .35s ease}
+  .game-mission.is-done .game-mission__fill{background:var(--green)}
+  .game-week{margin-top:15px;padding-top:13px;border-top:1px solid var(--line)}
+  .game-week__title{font:800 12px Nunito;color:var(--ink)}
+  .game-week__streak{color:var(--gold);font:800 10.5px Nunito}
+  .game-week__days{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:5px;margin-top:10px}
+  .game-week__day{min-width:0;text-align:center}
+  .game-week__label{color:var(--mut);font:800 8px Nunito;letter-spacing:.04em}
+  .game-week__dot{width:29px;height:29px;margin:5px auto 0;border:1.5px solid var(--line);border-radius:10px;display:flex;align-items:center;justify-content:center;background:var(--card2);color:var(--mut);font:900 9px Nunito}
+  .game-week__day.is-active .game-week__dot{border-color:var(--green);background:var(--green);color:#fff;box-shadow:0 2px 0 color-mix(in srgb,var(--green) 72%,#10291d)}
+  .game-week__day.is-today .game-week__dot{outline:2px solid var(--gold);outline-offset:2px}
   .game-cover{border-bottom:4px solid var(--line);box-shadow:0 12px 28px -24px rgba(44,19,22,.8)}
   .game-topbar{background:color-mix(in srgb,var(--bg) 88%,transparent)!important;backdrop-filter:blur(16px) saturate(1.15);box-shadow:0 8px 22px -22px rgba(35,16,18,.7)}
   .game-info{border:2px solid color-mix(in srgb,var(--red) 22%,var(--line));box-shadow:0 3px 0 color-mix(in srgb,var(--red) 14%,var(--line))}
@@ -219,7 +245,7 @@ iframe[src*="telegram.org"]{background:transparent!important;color-scheme:light!
   .game-nav-item.is-active{background:var(--redsoft)!important;box-shadow:inset 0 0 0 1.5px color-mix(in srgb,var(--red) 18%,var(--line)),0 3px 0 color-mix(in srgb,var(--red) 18%,var(--line));transform:translateY(-2px)}
   .game-nav-item.is-active .atlas-nav-icon{transform:scale(1.08)}
   @media (hover:hover){.game-card[style*="cursor:pointer"]:hover{transform:translateY(-2px);border-color:color-mix(in srgb,var(--red) 32%,var(--line))!important;filter:saturate(1.03)}.game-screen button:not(:disabled):hover{filter:brightness(1.025)}}
-  @media (max-width:360px){.game-tabbar{padding-left:6px!important;padding-right:6px!important}.game-nav-item{border-radius:15px!important}.game-choice-mark--lg{width:48px;height:48px;flex-basis:48px}.game-screen input,.game-screen textarea{font-size:16px!important}.game-home-hero{padding-left:16px!important;padding-right:16px!important}.game-home-head{gap:7px!important}.game-home-user{gap:8px!important;flex:1}.game-home-user>div:first-child{width:42px!important;height:42px!important}.game-home-greeting{display:none}.game-home-name{font-size:19px!important}.game-home-stats{gap:5px!important}.game-home-stats>div{padding:7px 10px 7px 7px!important}}
+  @media (max-width:360px){.game-tabbar{padding-left:6px!important;padding-right:6px!important}.game-nav-item{border-radius:15px!important}.game-choice-mark--lg{width:48px;height:48px;flex-basis:48px}.game-screen input,.game-screen textarea{font-size:16px!important}.game-home-hero{padding-left:16px!important;padding-right:16px!important}.game-home-head{gap:7px!important}.game-home-user{gap:8px!important;flex:1}.game-home-user>div:first-child{width:42px!important;height:42px!important}.game-home-greeting{display:none}.game-home-name{font-size:19px!important}.game-home-stats{gap:5px!important}.game-home-stats>div{padding:7px 10px 7px 7px!important}.game-missions{padding:14px 12px}.game-missions__grid{gap:5px}.game-mission{padding:9px 7px 8px}.game-mission__label{font-size:10px}.game-week__days{gap:3px}.game-week__dot{width:27px;height:27px}}
   @media (prefers-reduced-motion:reduce){.game-screen,.game-screen *,.game-screen *:before,.game-screen *:after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
 
   .admin-hero>div,.admin-tools,.admin-list{max-width:920px;margin-left:auto;margin-right:auto}
@@ -430,13 +456,51 @@ iframe[src*="telegram.org"]{background:transparent!important;color-scheme:light!
         <div class="game-daily" style="margin:12px 16px 0;background:var(--ink);border-radius:22px;padding:18px 20px;display:flex;align-items:center;gap:16px;color:var(--bg);position:relative;overflow:hidden">
           <div style="position:relative;width:62px;height:62px;flex-shrink:0">
             <div style="width:62px;height:62px;border-radius:50%;background:conic-gradient(var(--gold) {{ dayDeg }}deg,rgba(255,255,255,.16) 0)"></div>
-            <div style="position:absolute;inset:7px;border-radius:50%;background:var(--ink);display:flex;align-items:center;justify-content:center;font:900 15px Nunito">{{ dayPct }}%</div>
+            <div class="game-daily__value" style="position:absolute;inset:7px;border-radius:50%;background:var(--ink);display:flex;align-items:center;justify-content:center;font:900 15px Nunito">{{ dayPct }}%</div>
           </div>
           <div style="flex:1">
             <div style="font:800 15px Nunito">Цель дня</div>
             <div style="font-size:12.5px;opacity:.7;margin-top:2px">{{ dayDone }} / {{ dayGoal }} карточек · перед парой по анатомии</div>
           </div>
         </div>
+
+        <section class="game-missions" aria-labelledby="daily-missions-title">
+          <div class="game-missions__head">
+            <div>
+              <div id="daily-missions-title" class="game-missions__title">План на сегодня</div>
+              <div style="margin-top:2px;color:var(--mut);font-size:10.5px">Три коротких шага вместо перегрузки</div>
+            </div>
+            <div class="game-missions__counter">{{ dailyDone }} / {{ dailyTotal }}</div>
+          </div>
+          <div class="game-missions__grid">
+            <sc-for list="{{ dailyMissions }}" as="mission" hint-placeholder-count="3">
+              <div class="game-mission {{ mission.stateClass }}">
+                <div class="game-mission__top">
+                  <div class="game-mission__mark">{{ mission.mark }}</div>
+                  <div class="game-mission__value">{{ mission.value }}</div>
+                </div>
+                <div class="game-mission__label">{{ mission.label }}</div>
+                <div class="game-mission__track" role="progressbar" aria-label="{{ mission.aria }}" aria-valuemin="0" aria-valuemax="100" aria-valuenow="{{ mission.pct }}">
+                  <div class="game-mission__fill" style="width:{{ mission.pct }}%"></div>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+          <div class="game-week">
+            <div class="game-week__head">
+              <div class="game-week__title">Активность недели</div>
+              <div class="game-week__streak">{{ weekStreak }}</div>
+            </div>
+            <div class="game-week__days" aria-label="Активность за текущую неделю">
+              <sc-for list="{{ weekDays }}" as="day" hint-placeholder-count="7">
+                <div class="game-week__day {{ day.stateClass }}" aria-label="{{ day.aria }}">
+                  <div class="game-week__label">{{ day.label }}</div>
+                  <div class="game-week__dot">{{ day.mark }}</div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </section>
 
         <sc-if value="{{ hasReview }}" hint-placeholder-val="">
           <div style="margin:14px 16px 8px;display:flex;align-items:center;justify-content:space-between"><div class="atlas-section-title">На повторение сегодня</div><span style="font:800 11px Nunito;color:#fff;background:var(--gold);padding:2px 8px;border-radius:9px">{{ reviewCount }}</span></div>
@@ -1916,6 +1980,27 @@ async logout(){
 
     R.streak=s.streak; R.xp=s.xp; R.level=s.level; R.dayDone=s.dayDone; R.dayGoal=s.dayGoal;
     R.dayPct=Math.round(s.dayDone/s.dayGoal*100); R.dayDeg=Math.round(s.dayDone/s.dayGoal*360);
+    {
+      const now=new Date(), todayKey=now.toDateString();
+      const todayHistory=(s.history||[]).filter(h=>new Date(h.ts).toDateString()===todayKey);
+      const sessionsToday=todayHistory.length;
+      const bestToday=todayHistory.reduce((best,h)=>Math.max(best,Number(h.pct)||0),0);
+      const missionData=[
+        {label:'Карточки',value:Math.min(s.dayDone,s.dayGoal)+' / '+s.dayGoal,pct:Math.min(100,Math.round(s.dayDone/Math.max(1,s.dayGoal)*100)),done:s.dayDone>=s.dayGoal},
+        {label:'Одна сессия',value:sessionsToday?'готово':'0 / 1',pct:sessionsToday?100:0,done:sessionsToday>0},
+        {label:'Точность 75%',value:bestToday?bestToday+'%':'0%',pct:Math.min(100,Math.round(bestToday/75*100)),done:bestToday>=75}
+      ];
+      R.dailyMissions=missionData.map((m,i)=>({label:m.label,value:m.value,pct:m.pct,mark:m.done?'✓':'0'+(i+1),stateClass:m.done?'is-done':'',aria:m.label+': '+m.value}));
+      R.dailyDone=missionData.filter(m=>m.done).length; R.dailyTotal=missionData.length;
+
+      const monday=new Date(now); monday.setHours(0,0,0,0); monday.setDate(now.getDate()-((now.getDay()+6)%7));
+      const activeKeys=new Set((s.history||[]).map(h=>new Date(h.ts).toDateString()));
+      if(s.dayDone>0) activeKeys.add(todayKey);
+      const weekLabels=['ПН','ВТ','СР','ЧТ','ПТ','СБ','ВС'];
+      R.weekDays=weekLabels.map((label,i)=>{ const d=new Date(monday); d.setDate(monday.getDate()+i); const key=d.toDateString(), active=activeKeys.has(key), today=key===todayKey; return {label,mark:active?'✓':String(d.getDate()),stateClass:(active?'is-active ':'')+(today?'is-today':''),aria:label+', '+d.getDate()+': '+(active?'занятие выполнено':today?'сегодня, занятие ещё не выполнено':'нет активности')}; });
+      const streakWord=s.streak%10===1&&s.streak%100!==11?'день':(s.streak%10>=2&&s.streak%10<=4&&(s.streak%100<12||s.streak%100>14)?'дня':'дней');
+      R.weekStreak=s.streak>0?'Серия '+s.streak+' '+streakWord:'Начните сегодня';
+    }
 
     // onboarding
     R.goLogin=()=>this.setState({screen:'login',authErr:''});
