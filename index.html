@@ -330,6 +330,20 @@ iframe[src*="telegram.org"]{background:transparent!important;color-scheme:light!
   .game-missions__head,.game-week__head{display:flex;align-items:center;justify-content:space-between;gap:12px}
   .game-missions__title{font:900 16px Nunito;color:var(--ink)}
   .game-missions__counter{flex-shrink:0;padding:4px 9px;border-radius:10px;background:var(--redsoft);color:color-mix(in srgb,var(--red) 62%,var(--ink));font:900 11px Nunito}
+  .game-smart{--smart-accent:var(--red);width:100%;min-height:82px;margin-top:12px;padding:11px 12px;border:1.5px solid color-mix(in srgb,var(--smart-accent) 34%,var(--line));border-radius:17px;background:radial-gradient(100% 140% at 100% 0%,color-mix(in srgb,var(--smart-accent) 12%,transparent),transparent 58%),var(--card2);color:var(--ink);display:grid;grid-template-columns:42px minmax(0,1fr) auto;align-items:center;gap:11px;text-align:left;cursor:pointer;box-shadow:0 3px 0 color-mix(in srgb,var(--smart-accent) 22%,var(--game-depth));transition:transform .1s ease,box-shadow .1s ease,border-color .18s ease}
+  .game-smart.is-review{--smart-accent:var(--gold)}
+  .game-smart.is-mistakes{--smart-accent:var(--red)}
+  .game-smart:active{transform:translateY(3px);box-shadow:0 0 0 transparent}
+  .game-smart__icon{width:42px;height:42px;border-radius:13px;background:var(--smart-accent);color:#fff;display:grid;place-items:center;box-shadow:0 3px 0 color-mix(in srgb,var(--smart-accent) 72%,#251015)}
+  .game-smart__icon .ui-icon{width:23px;height:23px}
+  .game-smart__copy{min-width:0;display:block}
+  .game-smart__eyebrow{display:block;color:var(--smart-accent);font:900 8.5px Nunito;letter-spacing:.075em;text-transform:uppercase}
+  .game-smart__title{display:block;margin-top:2px;color:var(--ink);font:900 12.5px/1.2 Nunito;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .game-smart__sub{display:block;margin-top:2px;color:var(--mut);font:650 10px/1.3 Manrope;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .game-smart__aside{min-width:58px;display:flex;flex-direction:column;align-items:flex-end;gap:5px}
+  .game-smart__time{color:var(--mut);font:800 9px Nunito;white-space:nowrap}
+  .game-smart__action{display:flex;align-items:center;gap:2px;color:var(--smart-accent);font:900 10px Nunito;white-space:nowrap}
+  .game-smart__action .game-chevron{width:14px;height:14px;color:currentColor}
   .game-missions__grid{display:flex;flex-direction:column;gap:9px;margin-top:12px}
   .game-screen .game-mission{width:100%;min-height:82px;padding:11px 12px;border:1.5px solid var(--line);border-radius:16px;background:var(--card2);color:var(--ink);display:grid;grid-template-columns:38px minmax(0,1fr) auto;align-items:center;gap:11px;text-align:left;cursor:pointer;box-shadow:0 3px 0 var(--game-depth);transition:transform .1s ease,box-shadow .1s ease,border-color .18s ease,background .18s ease}
   .game-mission:active{transform:translateY(2px);box-shadow:0 1px 0 var(--game-depth)}
@@ -562,7 +576,7 @@ iframe[src*="telegram.org"]{background:transparent!important;color-scheme:light!
   .game-chevron{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;color:var(--mut);flex-shrink:0}
   .game-favorite-list{display:flex;flex-direction:column;gap:8px}
   .game-favorite-row{width:100%;min-height:56px;border:1px solid var(--line);background:var(--card);border-radius:15px;padding:11px 13px;display:flex;align-items:center;gap:11px;cursor:pointer;text-align:left;box-shadow:0 3px 0 var(--game-depth)}
-  @media (max-width:360px){.game-profile-week{padding:14px}.game-profile-week__metrics{gap:5px}.game-profile-week__metric{padding:9px 4px}.game-profile-week__day i{width:24px;height:24px}.game-achievements{grid-template-columns:repeat(3,minmax(0,1fr))}}
+  @media (max-width:360px){.game-profile-week{padding:14px}.game-profile-week__metrics{gap:5px}.game-profile-week__metric{padding:9px 4px}.game-profile-week__day i{width:24px;height:24px}.game-achievements{grid-template-columns:repeat(3,minmax(0,1fr))}.game-smart{grid-template-columns:38px minmax(0,1fr) auto;gap:8px;padding-left:8px;padding-right:8px}.game-smart__icon{width:38px;height:38px}.game-smart__aside{min-width:48px}.game-smart__title{font-size:11px}.game-smart__sub{font-size:9px}}
   .game-history .game-card{box-shadow:0 3px 0 var(--game-depth)!important}
   .game-admin .admin-list>div{border-width:2px!important;box-shadow:0 3px 0 var(--game-depth)!important}
   .rating-mine,.rating-podium__card,.rating-row{border-width:2px;box-shadow:0 4px 0 var(--game-depth)}
@@ -780,6 +794,11 @@ iframe[src*="telegram.org"]{background:transparent!important;color-scheme:light!
             </div>
             <div class="game-missions__counter">{{ dailyDone }} / {{ dailyTotal }}</div>
           </div>
+          <button type="button" class="game-smart {{ smartClass }}" onClick="{{ startSmartSession }}" aria-label="{{ smartAria }}">
+            <span class="game-smart__icon"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M9.5 4.2A3.2 3.2 0 0 0 4.8 7a3.5 3.5 0 0 0 .2 6.7A3.6 3.6 0 0 0 9 19.8c1.2 0 2.3-.6 3-1.5V6.5c-.5-1.3-1.4-2.1-2.5-2.3Zm5 0A3.2 3.2 0 0 1 19.2 7a3.5 3.5 0 0 1-.2 6.7 3.6 3.6 0 0 1-4 6.1c-1.2 0-2.3-.6-3-1.5V6.5c.5-1.3 1.4-2.1 2.5-2.3ZM7 9.5c1.7 0 2.5.8 2.5 2.3M17 9.5c-1.7 0-2.5.8-2.5 2.3"/></svg></span>
+            <span class="game-smart__copy"><span class="game-smart__eyebrow">{{ smartEyebrow }}</span><span class="game-smart__title">{{ smartTitle }}</span><span class="game-smart__sub">{{ smartSub }}</span></span>
+            <span class="game-smart__aside"><span class="game-smart__time">≈ {{ smartMinutes }} мин</span><span class="game-smart__action">Начать<svg class="game-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></span></span>
+          </button>
           <div class="game-missions__grid">
             <sc-for list="{{ dailyMissions }}" as="mission" hint-placeholder-count="3">
               <button type="button" class="game-mission {{ mission.stateClass }}" onClick="{{ mission.onClick }}" aria-label="{{ mission.aria }}">
@@ -1054,7 +1073,7 @@ iframe[src*="telegram.org"]{background:transparent!important;color-scheme:light!
                   <div class="game-choice-mark game-choice-mark--lg" style="background:{{ mc.iconBg }}" aria-hidden="true">{{ mc.code }}</div>
                   <div style="flex:1"><div style="font:800 15px Nunito;color:var(--ink)">{{ mc.title }}</div><div style="font-size:12px;color:var(--mut);margin-top:2px;line-height:1.4">{{ mc.desc }}</div></div>
                   <div style="font:800 12px Nunito;color:var(--red);background:var(--redsoft);padding:3px 9px;border-radius:9px">{{ mc.count }}</div>
-                </div>
+                </button>
               </sc-for>
             </div>
           </div>
@@ -1299,7 +1318,7 @@ iframe[src*="telegram.org"]{background:transparent!important;color-scheme:light!
                 <div class="rating-section__head">
                   <div><div class="rating-section__kicker">Общий зачёт</div><h2 id="rating-table-title" class="rating-section__title">Участники</h2></div>
                   <div class="rating-section__note">ещё {{ remainingPlayers }}</div>
-                </button>
+                </div>
                 <div class="rating-table">
                   <sc-for list="{{ leaders }}" as="u" hint-placeholder-count="5">
                     <article class="rating-row" style="background:{{ u.bg }};border-color:{{ u.bd }}">
@@ -2138,21 +2157,51 @@ async sendBroadcast(){
   }
   dailyMissionRewards(){ return { cards:30, session:15, accuracy:25 }; }
   dailyMissionKey(day,id){ return 'daily:'+String(day||new Date().toDateString())+':'+id; }
-  startDailyMission(id){
+  dailyTarget(id){
     const s=this.state;
-    const plan=this.goalPlan(s.user&&s.user.goal);
     const candidates=this.MODULES.filter(m=>m.ready).flatMap(m=>this.topicsOf(m.id).map((topic,idx)=>({mid:m.id,topic,idx,key:this.pk(topic.num,m.id)})));
     const supports=item=>id==='accuracy'?(item.topic.tests||[]).length>0:((item.topic.cards||[]).length>0||(item.topic.pairs||[]).length>0||(item.topic.tests||[]).length>0);
     const unfinished=item=>((s.progress[item.key]||{}).bestPct||0)<75;
     const last=s.lastTopic&&candidates.find(item=>item.mid===s.lastTopic.moduleId&&item.idx===s.lastTopic.topicIdx&&supports(item));
-    const target=(last&&unfinished(last)?last:null)||candidates.find(item=>supports(item)&&unfinished(item))||candidates.find(supports);
+    return (last&&unfinished(last)?last:null)||candidates.find(item=>supports(item)&&unfinished(item))||candidates.find(supports)||null;
+  }
+  preferredMode(target, forceTest){
+    const plan=this.goalPlan(this.state.user&&this.state.user.goal), topic=target&&target.topic;
+    if(!topic) return 'test';
+    if(forceTest&&(topic.tests||[]).length) return 'test';
+    if(plan.preferred==='term'&&(topic.pairs||[]).length) return 'term';
+    if(plan.preferred==='test'&&(topic.tests||[]).length) return 'test';
+    if((topic.cards||[]).length) return 'flash';
+    if((topic.pairs||[]).length) return 'term';
+    return 'test';
+  }
+  smartSessionPlan(){
+    const s=this.state, due=this.dueReviews().filter(d=>(d.topic.cards||[]).length);
+    if(due.length){
+      const count=Math.min(15,due.reduce((sum,d)=>sum+Math.min(4,(d.topic.cards||[]).length),0));
+      return {kind:'review',className:'is-review',eyebrow:'Повторение по расписанию',title:'Вернуть темы в активную память',sub:due.length+' '+(due.length===1?'тема ждёт':(due.length<5?'темы ждут':'тем ждут'))+' повторения',minutes:Math.max(2,Math.ceil(count/3))};
+    }
+    const mistakes=(s.mistakes||[]).length;
+    if(mistakes>=3){
+      const count=Math.min(15,mistakes);
+      return {kind:'mistakes',className:'is-mistakes',eyebrow:'Точечная практика',title:'Закрепить слабые места',sub:count+' '+(count===1?'вопрос':(count<5?'вопроса':'вопросов'))+' из последних ошибок',minutes:Math.max(3,Math.ceil(count/2))};
+    }
+    const target=this.dailyTarget('session'), mode=this.preferredMode(target,false), plan=this.goalPlan(s.user&&s.user.goal);
+    const labels={test:'Проверить себя на следующей теме',flash:'Закрепить ключевые структуры',term:'Вспомнить термины без подсказок'};
+    const source=target?(mode==='test'?(target.topic.tests||[]):mode==='term'?(target.topic.pairs||[]):(target.topic.cards||[])):[];
+    const count=Math.min(15,source.length||10);
+    return {kind:'goal',className:'',eyebrow:'Режим «'+plan.short+'»',title:labels[mode]||labels.flash,sub:target?target.topic.name:'Учебные материалы готовятся',minutes:Math.max(3,Math.ceil(count/2.5))};
+  }
+  startSmartSession(){
+    const smart=this.smartSessionPlan();
+    if(smart.kind==='review') this.startReview();
+    else if(smart.kind==='mistakes') this.startMode('mistakes');
+    else this.startDailyMission('session');
+  }
+  startDailyMission(id){
+    const target=this.dailyTarget(id);
     if(!target){ this.ping('Учебные задания ещё загружаются'); return; }
-    let mode='test';
-    if(id==='accuracy') mode='test';
-    else if(plan.preferred==='term'&&(target.topic.pairs||[]).length) mode='term';
-    else if(plan.preferred==='test'&&(target.topic.tests||[]).length) mode='test';
-    else if((target.topic.cards||[]).length) mode='flash';
-    else if((target.topic.pairs||[]).length) mode='term';
+    const mode=this.preferredMode(target,id==='accuracy');
     this.setState({moduleId:target.mid,topicIdx:target.idx,subKey:null,lastTopic:{moduleId:target.mid,topicIdx:target.idx}},()=>{ this.persist(); this.startMode(mode); });
   }
   rankLadder(){ return [
@@ -2201,10 +2250,13 @@ async sendBroadcast(){
     return out.sort((a,b)=>b.overdue-a.overdue);
   }
   startReview(){
-    const due=this.dueReviews(); if(!due.length){this.ping('Нет тем к повторению 🎉');return;}
-    let cards=[]; due.forEach(d=>(d.topic.cards||[]).slice(0,4).forEach(c=>cards.push(c)));
-    cards=this.shuffle(cards).slice(0,15); if(!cards.length){this.ping('Нет карточек к повторению');return;}
-    this._reviewKeys=due.map(d=>d.key);
+    const due=this.dueReviews().filter(d=>(d.topic.cards||[]).length); if(!due.length){this.ping('Все повторения выполнены ✓');return;}
+    const selected=[];
+    for(let round=0;round<4&&selected.length<15;round++){
+      for(const d of due){ const card=(d.topic.cards||[])[round]; if(card) selected.push({card,key:d.key}); if(selected.length>=15) break; }
+    }
+    const cards=this.shuffle(selected.map(item=>item.card)); if(!cards.length){this.ping('Нет карточек к повторению');return;}
+    this._reviewKeys=[...new Set(selected.map(item=>item.key))];
     this.setState({ screen:'train', mode:'flash', idx:0, flipped:false, sessCorrect:0, sessTotal:cards.length, sessItems:cards,
       isReview:true, testSel:null, testAnswered:false, sessWrong:[], sessRight:[], combo:0 });
   }
@@ -2456,6 +2508,7 @@ async logout(){
     R.streak=s.streak; R.xp=s.xp; R.level=s.level; R.dayGoal=learningPlan.dayGoal; R.dayDone=Math.min(s.dayDone,learningPlan.dayGoal);
     R.dayPct=Math.min(100,Math.round(R.dayDone/Math.max(1,R.dayGoal)*100)); R.dayDeg=Math.min(360,Math.round(R.dayDone/Math.max(1,R.dayGoal)*360));
     R.goalShort=learningPlan.short; R.dayContext=learningPlan.dayContext; R.userGoal=learningPlan.label; R.goalFocus=learningPlan.focus;
+    { const smart=this.smartSessionPlan(); R.smartClass=smart.className; R.smartEyebrow=smart.eyebrow; R.smartTitle=smart.title; R.smartSub=smart.sub; R.smartMinutes=smart.minutes; R.smartAria=smart.eyebrow+'. '+smart.title+'. '+smart.sub+'. Примерно '+smart.minutes+' минут'; R.startSmartSession=()=>this.startSmartSession(); }
     {
       const now=new Date(), todayKey=now.toDateString();
       const todayHistory=(s.history||[]).filter(h=>new Date(h.ts).toDateString()===todayKey);

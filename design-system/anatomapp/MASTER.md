@@ -62,6 +62,13 @@ An original gamified anatomy-learning interface: tactile and encouraging like a 
 - Users can review and change the goal from Profile. Changing it updates the current daily plan without discarding completed activity.
 - Accounts without a saved goal use an explicit balanced fallback rather than pretending that the plan is personalized.
 
+### Smart session
+
+- The daily plan exposes one dominant adaptive start action before the individual missions.
+- Priority is evidence-based: due spaced-repetition topics first, then a meaningful mistake queue, then the training mode defined by the preparation goal.
+- The card names why the session is recommended, what it will cover, and an honest duration estimate derived from the real item count.
+- Completing a review may reschedule only topics that actually appeared in that review session; capped queues never advance unseen material.
+
 ### Daily missions
 
 - The Home screen shows three measurable tasks: completed training items, one completed session, and the accuracy target defined by the saved preparation goal.
