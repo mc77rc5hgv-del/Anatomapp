@@ -72,6 +72,14 @@ An original gamified anatomy-learning interface: tactile and encouraging like a 
 - Rank-up feedback appears on the Result screen only when a completed session crosses a real XP threshold.
 - At the maximum rank, progress stays at 100% and the interface says that the maximum has been reached; it never invents another target.
 
+### Personal learning route
+
+- The Home screen names one honest next action instead of presenting the last opened topic as generic progress.
+- The route uses three observable stages: Material, Practice, and Pass. A stage is complete only when saved activity proves it.
+- If the last topic is passed, the route advances to the next unfinished topic in the same module, then to the next ready module.
+- The primary button opens material, starts a short practice, or launches the test depending on the saved state; users never have to guess what to do next.
+- Course completion is derived from real passed-topic counts and receives a distinct completion state rather than an invented next lesson.
+
 ### Navigation
 
 - Three top-level destinations: Study, Rating, Profile.
