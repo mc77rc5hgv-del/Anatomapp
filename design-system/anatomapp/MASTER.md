@@ -1,0 +1,79 @@
+# AnatomApp — Master Design System
+
+## Direction
+
+An original gamified anatomy-learning interface: tactile and encouraging like a modern language-learning app, but visually rooted in anatomical atlases and medical education. Do not copy Duolingo characters, colors, illustrations, or layouts.
+
+## Visual language
+
+- Muscle burgundy is the primary action and progress color.
+- Warm bone white is the background and reading surface.
+- Brass gold marks XP, streaks, and exceptional progress.
+- Clinical green is reserved for correct answers and completed work.
+- Real anatomical imagery provides subject identity; never add skeleton line art, coordinate grids, or decorative Latin labels.
+- Use rounded, substantial surfaces with a visible 3–5 px lower edge to make controls feel pressable.
+
+## Core tokens
+
+| Role | Light | Dark | Existing token |
+|---|---:|---:|---|
+| Background | `#F8F6F3` | `#12100F` | `--bg` |
+| Card | `#FFFFFF` | `#1B1816` | `--card` |
+| Raised/muted | `#F1EDE8` | `#25211E` | `--card2` |
+| Text | `#1B1715` | `#F5F1ED` | `--ink` |
+| Secondary text | `#756D67` | `#A89F98` | `--mut` |
+| Border/depth | `#E6DFD8` | `#302A26` | `--line` |
+| Muscle primary | `#A72636` | `#A72636` | `--red` |
+| Muscle depth | `#741923` | `#741923` | `--reddk` |
+| Reward gold | `#B57A2B` | `#B57A2B` | `--gold` |
+| Correct | `#2D875C` | `#2D875C` | `--green` |
+
+## Typography
+
+- Headings, metrics, button labels: Nunito 800–900.
+- Body, helper text, forms: Manrope 500–700.
+- Latin anatomical terminology only: Lora italic.
+- Maintain a clear 10/12/14/16/18/22/27 px scale; form inputs stay at least 16 px on mobile.
+
+## Components
+
+### Tactile cards
+
+- 18–22 px radius, 2 px border, 4 px lower depth edge.
+- Press moves the surface down 3 px and reduces the lower edge to 1 px.
+- Use animation only to communicate state or entry; never animate dense data continuously.
+
+### Primary actions
+
+- Burgundy for the main next step; green only for known/correct/complete.
+- Minimum touch size 44 px, visible focus ring, concise action-first label.
+- One dominant action per screen.
+
+### Progress
+
+- Chunky 12–14 px tracks with a subtle inner highlight.
+- Always pair color with a number, label, or icon.
+- Keep XP, streak, completion, and correctness semantically separate.
+
+### Navigation
+
+- Three top-level destinations: Study, Rating, Profile.
+- Active destination uses a soft burgundy pill plus icon and text.
+- Training screens hide global navigation and provide a clear close action.
+
+## Motion and accessibility
+
+- Press response: 80–120 ms. Screen/state transition: 180–340 ms.
+- Respect `prefers-reduced-motion` and render the final state immediately.
+- Normal text contrast is at least 4.5:1; meaningful graphical controls at least 3:1.
+- Icon-only controls need accessible names. Decorative SVGs use `aria-hidden="true"`.
+- Long names and dynamic values truncate or wrap without horizontal scrolling.
+- Validate 320 px, 375 px, and landscape layouts in both themes.
+
+## Avoid
+
+- Duolingo brand green, owl mascot, copied lesson path, or copied reward artwork.
+- Emoji as structural navigation or mode icons.
+- Purple AI gradients, glass decoration without function, and random shadow scales.
+- Skeleton line graphics, coordinate grids, and ornamental Latin labels.
+- Flat controls with no press feedback, tiny targets, or color-only answer states.
