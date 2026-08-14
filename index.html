@@ -125,6 +125,59 @@ iframe[src*="telegram.org"]{background:transparent!important;color-scheme:light!
   }
   @keyframes wordcycle{0%{opacity:0;transform:translateY(14px) rotateX(-40deg)}12%,84%{opacity:1;transform:none}100%{opacity:0;transform:translateY(-14px) rotateX(40deg)}}
 
+  .auth-page{position:absolute;inset:0;padding:54px 20px 26px;overflow:auto;background:radial-gradient(110% 58% at 100% 0%,var(--redsoft),transparent 60%),var(--bg);scrollbar-width:none}
+  .auth-shell{width:100%;max-width:430px;margin:0 auto;display:flex;flex-direction:column;min-height:100%}
+  .auth-brand{display:flex;align-items:center;justify-content:space-between;gap:16px}
+  .auth-brand__identity{display:flex;align-items:center;gap:10px;color:var(--ink);font:900 17px Nunito;letter-spacing:.035em}
+  .auth-brand__mark{width:34px;height:34px;border-radius:11px;background:linear-gradient(145deg,var(--red2),var(--reddk));display:grid;place-items:center;color:#fff;font:900 17px Nunito;box-shadow:0 4px 0 color-mix(in srgb,var(--reddk) 72%,#3f1016)}
+  .auth-step{padding:6px 9px;border:1px solid var(--line);border-radius:11px;background:var(--card);color:var(--mut);font:900 9px Nunito;letter-spacing:.04em}
+  .auth-tabs{display:flex;gap:5px;margin-top:20px;padding:4px;border:1px solid color-mix(in srgb,var(--line) 78%,transparent);border-radius:15px;background:var(--card2)}
+  .auth-tab{flex:1;min-height:42px;border:0;border-radius:11px;background:transparent;color:var(--mut);font:900 12.5px Nunito;cursor:pointer}
+  .auth-tab[aria-pressed="true"]{background:var(--card);color:var(--red);box-shadow:0 3px 0 var(--game-depth)}
+  .auth-heading{margin-top:22px}
+  .auth-heading__eyebrow{color:var(--red);font:900 9px Nunito;letter-spacing:.09em;text-transform:uppercase}
+  .auth-heading h1{margin:4px 0 0;color:var(--ink);font:900 25px/1.12 Nunito;text-wrap:balance}
+  .auth-heading p{margin:7px 0 0;color:var(--mut);font:600 13px/1.5 Manrope}
+  .auth-provider{width:100%;min-height:54px;margin-top:20px;border:0;border-radius:17px;background:linear-gradient(180deg,#2aabee,#229ed9);color:#fff;display:flex;align-items:center;justify-content:center;gap:11px;font:900 14px Nunito;box-shadow:0 4px 0 #187cab;cursor:pointer}
+  .auth-provider__icon{width:24px;height:24px;border-radius:50%;background:#fff;display:grid;place-items:center;flex-shrink:0}
+  .auth-divider{display:flex;align-items:center;gap:11px;margin:16px 0 14px;color:var(--mut);font:700 10.5px Manrope}
+  .auth-divider:before,.auth-divider:after{content:"";height:1px;flex:1;background:var(--line)}
+  .auth-fields{display:flex;flex-direction:column;gap:13px}
+  .auth-field{display:flex;flex-direction:column;gap:6px}
+  .auth-field__label{display:flex;align-items:center;justify-content:space-between;gap:10px;color:var(--ink);font:900 11px Nunito}
+  .auth-field__hint{color:var(--mut);font:600 9.5px Manrope}
+  .auth-field__control{position:relative}
+  .auth-field input{width:100%;min-height:50px;padding:13px 15px;border:1.5px solid var(--line);border-radius:14px;background:var(--card);color:var(--ink);font:600 16px Manrope;outline:none}
+  .auth-field input[aria-invalid="true"]{border-color:var(--red);background:color-mix(in srgb,var(--redsoft) 55%,var(--card))}
+  .auth-field__error{min-height:16px;margin:0;color:var(--red);font:800 10.5px/1.4 Manrope}
+  .auth-password input{padding-right:48px}
+  .auth-password button{position:absolute;right:3px;top:50%;transform:translateY(-50%);width:44px;height:44px;border:0;background:transparent;color:var(--mut);display:grid;place-items:center;cursor:pointer}
+  .auth-message{margin-top:12px;padding:10px 12px;border:1px solid var(--red);border-radius:12px;background:var(--redsoft);color:var(--red);display:flex;align-items:flex-start;gap:8px;font:800 11.5px/1.4 Manrope}
+  .auth-submit{width:100%;min-height:52px;margin-top:4px;border:0;border-radius:16px;background:var(--red);color:#fff;font:900 14px Nunito;box-shadow:0 4px 0 var(--reddk);cursor:pointer}
+  .auth-submit:active{transform:translateY(3px);box-shadow:0 1px 0 var(--reddk)}
+  .auth-legal{margin-top:auto;padding-top:20px;text-align:center;color:var(--mut);font:600 9.5px/1.5 Manrope}
+  .auth-security{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:10px;color:var(--mut);font:700 9.5px Manrope}
+  .onboard-shell{width:100%;max-width:520px;margin:0 auto;display:flex;flex-direction:column;min-height:100%}
+  .onboard-progress{display:flex;align-items:center;gap:8px;margin-top:18px}
+  .onboard-progress span{height:6px;flex:1;border-radius:6px;background:var(--line)}
+  .onboard-progress span.is-done{background:var(--red)}
+  .onboard-back{min-width:44px;min-height:44px;margin-top:10px;padding:0 11px;border:1.5px solid var(--line);border-radius:13px;background:var(--card);color:var(--mut);display:flex;align-items:center;gap:6px;font:900 11px Nunito;cursor:pointer;align-self:flex-start}
+  .onboard-card{margin-top:18px;padding:18px;border:2px solid var(--line);border-radius:22px;background:var(--card);box-shadow:0 4px 0 var(--game-depth)}
+  .onboard-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+  .onboard-field--wide{grid-column:1/-1}
+  .onboard-section{margin-top:20px}
+  .onboard-section__head{margin-bottom:9px;color:var(--ink);font:900 12px Nunito}
+  .onboard-choice-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+  .onboard-choice{min-height:66px;padding:10px 8px;border:1.5px solid var(--line);border-radius:14px;background:var(--card);color:var(--ink);display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:5px;text-align:left;font:800 11px/1.25 Manrope;cursor:pointer}
+  .onboard-choice[aria-pressed="true"]{border-color:var(--red);background:var(--redsoft);box-shadow:0 3px 0 color-mix(in srgb,var(--red) 22%,var(--line))}
+  .onboard-choice__mark{width:24px;height:24px;border-radius:8px;background:var(--card2);color:var(--mut);display:grid;place-items:center;font:900 9px Nunito}
+  .onboard-choice[aria-pressed="true"] .onboard-choice__mark{background:var(--red);color:#fff}
+  .onboard-course-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+  .onboard-course{min-height:48px;border:1.5px solid var(--line);border-radius:14px;background:var(--card);color:var(--ink);font:900 13px Nunito;cursor:pointer}
+  .onboard-course[aria-pressed="true"]{border-color:var(--red);background:var(--red);color:#fff;box-shadow:0 3px 0 var(--reddk)}
+  @media (max-width:400px){.auth-page{padding-left:16px;padding-right:16px}.onboard-card{padding:15px}.onboard-choice-grid{grid-template-columns:1fr}.onboard-choice{min-height:52px;flex-direction:row;align-items:center}.onboard-grid{grid-template-columns:1fr}.onboard-field--wide{grid-column:auto}}
+  @media (orientation:landscape) and (max-height:520px){.auth-page{padding:22px 28px}.auth-shell{max-width:760px;display:grid;grid-template-columns:minmax(230px,.8fr) minmax(300px,1.2fr);column-gap:32px}.auth-brand,.auth-heading,.auth-tabs{grid-column:1}.auth-provider,.auth-divider,.auth-fields,.auth-legal,.auth-security{grid-column:2}.auth-provider{grid-row:1;margin-top:0}.auth-tabs{align-self:end}.auth-heading{align-self:start}.auth-legal{margin-top:0}.onboard-shell{max-width:850px}.onboard-card{margin-top:10px}.onboard-section{margin-top:12px}}
+
   .rating-page{background:linear-gradient(180deg,var(--card2) 0,var(--bg) 250px) !important}
   .rating-hero{position:relative;padding:54px 20px 46px;background:radial-gradient(90% 140% at 92% 0%,rgba(214,150,72,.28),transparent 52%),linear-gradient(145deg,#30151a 0%,#6f1d2a 58%,#a52a39 100%);overflow:hidden;color:#fff}
   .rating-hero:before{content:"";position:absolute;right:-48px;bottom:-82px;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.12),transparent 68%);pointer-events:none}
@@ -463,9 +516,9 @@ iframe[src*="telegram.org"]{background:transparent!important;color-scheme:light!
     <div class="ds-tag">Учи анатомию правильно и с пользой</div>
     <div class="ds-sub">Полное совпадение с курсом кафедры нормальной анатомии ВМедА · по программе Гайворонского</div>
     <div class="ds-feats">
-      <div class="ds-feat"><span>📚</span><div><b>6 разделов</b><i>Остеология · Синдесмология · Миология · Спланхнология · Неврология · Ангиология</i></div></div>
-      <div class="ds-feat"><span>🎯</span><div><b>1660+ тестов</b><i>Флэш-карты, ввод терминов, сопоставление, тест-зачёт и экзамен</i></div></div>
-      <div class="ds-feat"><span>🔥</span><div><b>Прогресс и серии</b><i>XP, стрик по дням, интервальное повторение и работа над ошибками</i></div></div>
+      <div class="ds-feat"><span><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5A3.5 3.5 0 0 1 7.5 2H11v17H7.5A3.5 3.5 0 0 0 4 22V5.5ZM20 5.5A3.5 3.5 0 0 0 16.5 2H13v17h3.5A3.5 3.5 0 0 1 20 22V5.5Z"/></svg></span><div><b>6 разделов</b><i>Остеология · Синдесмология · Миология · Спланхнология · Неврология · Ангиология</i></div></div>
+      <div class="ds-feat"><span><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/><path d="m15 9 5-5m-2 0h2v2"/></svg></span><div><b>1660+ тестов</b><i>Флэш-карты, ввод терминов, сопоставление, тест-зачёт и экзамен</i></div></div>
+      <div class="ds-feat"><span><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12.5 2.5c1 4-2.5 5.2-2.5 8 0 1.7 1 2.8 2.4 3.5-.1-2.2 1.7-3.4 3-4.8 1.1 1.8 2.1 3.7 2.1 6A5.5 5.5 0 0 1 12 20.5a5.5 5.5 0 0 1-5.5-5.3c0-4.5 3.3-7.4 6-12.7Z"/></svg></span><div><b>Прогресс и серии</b><i>XP, стрик по дням, интервальное повторение и работа над ошибками</i></div></div>
     </div>
     <div class="ds-foot">Наведи и учись прямо в окне приложения →</div>
   </div>
@@ -503,48 +556,32 @@ iframe[src*="telegram.org"]{background:transparent!important;color-scheme:light!
             <div style="position:absolute;bottom:-6px;right:-6px;width:34px;height:34px;background:var(--gold);border-radius:11px;display:flex;align-items:center;justify-content:center;transform:rotate(8deg);box-shadow:0 6px 14px -4px rgba(0,0,0,.4)"><svg class="ui-icon ui-icon--sm" viewBox="0 0 24 24" aria-hidden="true" style="color:#fff"><path d="M7.2 8.5 15.5 17m-8.7-3.5 9-8.8M5.6 6.1a2.7 2.7 0 1 1 3.2-3.2l8.3 8.3a2.7 2.7 0 1 1 3.2 3.2 2.7 2.7 0 1 1-3.2 3.2L8.8 9.3a2.7 2.7 0 1 1-3.2-3.2Z"/></svg></div>
           </div>
           <div style="font:900 34px Nunito;letter-spacing:.04em">АНАТОМ</div>
-          <div style="font:700 15px Nunito;opacity:.9;margin-top:6px;letter-spacing:.12em;text-align:center">УЧИ АНАТОМИЮ</div>
-          <div style="height:24px;margin-top:2px;perspective:400px;text-align:center"><span style="display:inline-block;font:800 16px Nunito;letter-spacing:.1em;color:#ffd9a1;animation:wordcycle 2.2s ease-in-out infinite">{{ flipWord }}</span></div>
-          <div style="margin-top:10px;font-size:12.5px;opacity:.72;line-height:1.5">Полное совпадение с курсом<br>кафедры анатомии ВМедА · по Гайворонскому</div>
+          <div style="font:700 14px Nunito;opacity:.9;margin-top:7px;letter-spacing:.08em;text-align:center">АНАТОМИЯ КАК СИСТЕМА</div>
+          <div style="margin-top:11px;font:700 13px/1.5 Manrope;opacity:.82">Изучайте материал, закрепляйте практикой<br>и наблюдайте реальный прогресс.</div>
         </div>
-        <button onClick="{{ goLogin }}" style="margin-top:40px;width:100%;max-width:280px;padding:16px;border:none;border-radius:17px;background:#fff;color:var(--red);font:800 16px Nunito;box-shadow:0 5px 0 rgba(0,0,0,.18);cursor:pointer;animation:rise .7s ease">Начать →</button>
-        <div style="margin-top:14px;font-size:12px;opacity:.7">Уже с нами? <a href="#" onClick="{{ goLogin }}" style="color:#fff;text-decoration:underline">Войти</a></div>
+        <button type="button" onClick="{{ goLogin }}" style="margin-top:34px;width:100%;max-width:280px;min-height:52px;padding:14px;border:none;border-radius:17px;background:#fff;color:var(--red);font:900 15px Nunito;box-shadow:0 5px 0 rgba(0,0,0,.18);cursor:pointer;animation:rise .7s ease">Начать обучение</button>
+        <div style="margin-top:13px;font-size:11.5px;opacity:.82">Уже есть профиль? <button type="button" onClick="{{ goSignin }}" style="min-height:44px;padding:0 6px;border:0;background:transparent;color:#fff;text-decoration:underline;font:800 11.5px Manrope;cursor:pointer">Войти</button></div>
       </div>
     </sc-if>
 
     <!-- ===================== LOGIN ===================== -->
     <sc-if value="{{ isLogin }}" hint-placeholder-val="">
-      <div class="premium-login game-screen game-form" ref="{{ loginRef }}" style="position:absolute;inset:0;padding:62px 30px 28px;display:flex;flex-direction:column;background:var(--bg);overflow:auto;scrollbar-width:none">
-        <div style="display:flex;align-items:center;gap:9px">
-          <div style="width:30px;height:30px;position:relative"><div style="position:absolute;inset:0;background:var(--red);border-radius:9px;transform:rotate(45deg)"></div><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font:900 16px Nunito;color:#fff">А</div></div>
-          <span style="font:900 17px Nunito;color:var(--ink);letter-spacing:.03em">АНАТОМ</span>
+      <div class="premium-login game-screen auth-page" ref="{{ loginRef }}">
+        <div class="auth-shell">
+          <div class="auth-brand"><div class="auth-brand__identity"><span class="auth-brand__mark">А</span><span>АНАТОМ</span></div><span class="auth-step">{{ authEyebrow }}</span></div>
+          <div class="auth-tabs" role="group" aria-label="Выбор действия"><button type="button" class="auth-tab" onClick="{{ tabSignup }}" aria-pressed="{{ tabSignupPressed }}">Регистрация</button><button type="button" class="auth-tab" onClick="{{ tabSignin }}" aria-pressed="{{ tabSigninPressed }}">Вход</button></div>
+          <header class="auth-heading"><div class="auth-heading__eyebrow">Персональный прогресс</div><h1>{{ authTitle }}</h1><p>{{ authSub }}</p></header>
+          <button type="button" class="auth-provider" onClick="{{ doTelegram }}"><span class="auth-provider__icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="#2AABEE" aria-hidden="true"><path d="M20.7 3.4 2.9 10.2c-1.2.5-1.2 1.1-.2 1.4l4.6 1.4 1.8 5.5c.2.6.1.8.7.8.4 0 .7-.2.9-.4l2.2-2.1 4.6 3.4c.8.5 1.5.3 1.7-.8l3-14.2c.3-1.4-.5-2.1-1.5-1.8ZM9 12.7l9-5.7c.4-.3.8-.1.5.2l-7.4 6.7-.3 3.3L9 12.7Z"/></svg></span>Продолжить через Telegram</button>
+          <div class="auth-divider">или по электронной почте</div>
+          <div class="auth-fields">
+            <label class="auth-field" for="auth-email"><span class="auth-field__label">Электронная почта <span class="auth-field__hint">для синхронизации</span></span><input id="auth-email" ref="{{ emailRef }}" value="{{ email }}" onInput="{{ onEmail }}" onBlur="{{ onEmailBlur }}" placeholder="student@example.ru" type="email" inputmode="email" autocomplete="email" aria-invalid="{{ emailInvalid }}" aria-describedby="auth-email-error"><span id="auth-email-error" class="auth-field__error">{{ authEmailErr }}</span></label>
+            <div class="auth-field"><label class="auth-field__label" for="auth-password">Пароль <span class="auth-field__hint">минимум 6 символов</span></label><span class="auth-field__control auth-password"><input id="auth-password" ref="{{ passRef }}" value="{{ pass }}" onInput="{{ onPass }}" onBlur="{{ onPassBlur }}" placeholder="Введите пароль" type="{{ passType }}" autocomplete="{{ authPasswordAutocomplete }}" aria-invalid="{{ passInvalid }}" aria-describedby="auth-password-error"><button type="button" onClick="{{ toggleShowPass }}" aria-label="Показать или скрыть пароль" aria-pressed="{{ showPass }}"><svg class="ui-icon ui-icon--sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z"/><circle cx="12" cy="12" r="2.5"/></svg></button></span><span id="auth-password-error" class="auth-field__error">{{ authPassErr }}</span></div>
+            <sc-if value="{{ hasAuthErr }}" hint-placeholder-val=""><div class="auth-message" role="alert"><span aria-hidden="true">!</span><span>{{ authErr }}</span></div></sc-if>
+            <button type="button" class="auth-submit" onClick="{{ submitAuth }}">{{ authCta }}</button>
+          </div>
+          <div class="auth-security"><svg class="ui-icon ui-icon--sm" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10" width="14" height="10" rx="3"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>Данные защищены и нужны только для сохранения прогресса</div>
+          <div class="auth-legal">Продолжая, вы принимаете оферту и согласие на обработку данных (152-ФЗ)</div>
         </div>
-        <div style="display:flex;gap:6px;margin-top:22px;background:var(--card2);padding:4px;border-radius:14px">
-          <button onClick="{{ tabSignup }}" style="flex:1;padding:10px;border:none;border-radius:11px;background:{{ tabSignupBg }};color:{{ tabSignupFg }};font:800 13.5px Nunito;cursor:pointer">Регистрация</button>
-          <button onClick="{{ tabSignin }}" style="flex:1;padding:10px;border:none;border-radius:11px;background:{{ tabSigninBg }};color:{{ tabSigninFg }};font:800 13.5px Nunito;cursor:pointer">Вход</button>
-        </div>
-        <div style="font:900 24px Nunito;color:var(--ink);margin-top:24px">{{ authTitle }}</div>
-        <div style="color:var(--mut);font-size:13.5px;margin-top:6px;line-height:1.5">{{ authSub }}</div>
-        <button onClick="{{ doTelegram }}" style-active="transform:translateY(1px)" style="margin-top:22px;display:flex;align-items:center;justify-content:center;gap:11px;width:100%;padding:17px 18px;border:none;border-radius:18px;background:linear-gradient(180deg,#2AABEE,#229ED9);color:#ffffff;font:800 15.5px Nunito,system-ui,sans-serif;box-shadow:0 10px 24px -8px rgba(34,158,217,.6);cursor:pointer;line-height:1.15;text-shadow:none;-webkit-font-smoothing:antialiased;transition:transform .1s">
-          <span style="display:inline-flex;width:22px;height:22px;border-radius:50%;background:#fff;align-items:center;justify-content:center;flex-shrink:0">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="#2AABEE"><path d="M12 0C5.37 0 0 5.37 0 12s5.37 12 12 12 12-5.37 12-12S18.63 0 12 0zm5.56 8.25l-1.87 8.8c-.14.62-.5.77-1.02.48l-2.82-2.08-1.36 1.31c-.15.15-.28.28-.57.28l.2-2.85 5.18-4.68c.23-.2-.05-.31-.35-.12l-6.4 4.03-2.76-.86c-.6-.19-.61-.6.12-.89l10.8-4.16c.5-.19.94.12.77.85z"/></svg>
-          </span>
-          Продолжить через Telegram
-        </button>
-        <div style="display:flex;align-items:center;gap:12px;color:var(--mut);font-size:12px;margin:16px 0"><span style="flex:1;height:1px;background:var(--line)"></span>или по почте<span style="flex:1;height:1px;background:var(--line)"></span></div>
-        <input value="{{ email }}" onInput="{{ onEmail }}" placeholder="Электронная почта" type="email" style="width:100%;padding:14px 16px;border:1.5px solid var(--line);border-radius:14px;background:var(--card);color:var(--ink);font:600 14px Manrope;outline:none">
-        <sc-if value="{{ isSignup }}" hint-placeholder-val="{{ true }}">
-          <div style="margin-top:7px;font-size:11.5px;color:var(--mut);line-height:1.4"><b style="color:var(--ink)">Telegram:</b> на следующем шаге можно указать имя вида <b style="color:var(--ink)">@username</b>.</div>
-        </sc-if>
-        <div style="position:relative;margin-top:12px">
-          <input value="{{ pass }}" onInput="{{ onPass }}" placeholder="Пароль (мин. 6 символов)" type="{{ passType }}" style="width:100%;padding:14px 46px 14px 16px;border:1.5px solid var(--line);border-radius:14px;background:var(--card);color:var(--ink);font:600 14px Manrope;outline:none">
-          <button onClick="{{ toggleShowPass }}" aria-label="Показать или скрыть пароль" aria-pressed="{{ showPass }}" style="position:absolute;right:1px;top:50%;transform:translateY(-50%);width:44px;height:44px;border:none;background:none;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--mut)"><svg class="ui-icon ui-icon--sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z"/><circle cx="12" cy="12" r="2.5"/></svg></button>
-        </div>
-        <sc-if value="{{ hasAuthErr }}" hint-placeholder-val="">
-          <div style="margin-top:12px;background:var(--redsoft);border:1px solid var(--red);border-radius:12px;padding:10px 14px;font:700 12.5px Nunito;color:var(--red);display:flex;align-items:center;gap:8px"><span aria-hidden="true" style="width:18px;height:18px;border:1.5px solid currentColor;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:11px">!</span>{{ authErr }}</div>
-        </sc-if>
-        <button onClick="{{ submitAuth }}" style="margin-top:16px;width:100%;padding:15px;border:none;border-radius:16px;background:var(--red);color:#fff;font:800 15px Nunito;box-shadow:0 4px 0 var(--reddk);cursor:pointer;transition:transform .08s,box-shadow .08s" style-active="transform:translateY(4px);box-shadow:0 0 0 var(--reddk)">{{ authCta }}</button>
-        <div style="margin-top:auto;padding-top:20px;text-align:center;font-size:11.5px;color:var(--mut);line-height:1.5">Продолжая, вы принимаете оферту и<br>согласие на обработку данных (152-ФЗ)</div>
       </div>
     </sc-if>
 
@@ -567,28 +604,24 @@ iframe[src*="telegram.org"]{background:transparent!important;color-scheme:light!
 
     <!-- ===================== PROFILE FILL ===================== -->
     <sc-if value="{{ isProfile }}" hint-placeholder-val="">
-      <div class="game-screen game-form" style="position:absolute;inset:0;padding:64px 30px 30px;display:flex;flex-direction:column;background:var(--bg);overflow:auto">
-        <div style="font:900 24px Nunito;color:var(--ink)">Заполни профиль</div>
-        <div style="color:var(--mut);font-size:13.5px;margin-top:6px">Это откроет рейтинг и тесты. Займёт минуту.</div>
-        <div style="margin:24px 0 8px;font:800 12px Nunito;color:var(--mut);letter-spacing:.08em">ФИО</div>
-        <input value="{{ fullName }}" onInput="{{ onFullName }}" placeholder="Фамилия Имя Отчество" style="width:100%;padding:14px 16px;border:1.5px solid var(--line);border-radius:14px;background:var(--card);color:var(--ink);font:600 14px Manrope;outline:none">
-        <div style="margin:18px 0 8px;font:800 12px Nunito;color:var(--mut);letter-spacing:.08em">КУРС</div>
-        <div style="display:flex;gap:8px">
-          <sc-for list="{{ courseChips }}" as="c" hint-placeholder-count="2">
-            <button onClick="{{ c.onClick }}" style="flex:1;padding:12px;border:1.5px solid {{ c.bd }};border-radius:13px;background:{{ c.bg }};color:{{ c.fg }};font:800 14px Nunito;cursor:pointer">{{ c.label }}</button>
-          </sc-for>
+      <div class="game-screen auth-page">
+        <div class="onboard-shell">
+          <div class="auth-brand"><div class="auth-brand__identity"><span class="auth-brand__mark">А</span><span>АНАТОМ</span></div><span class="auth-step">Шаг 2 из 2</span></div>
+          <div class="onboard-progress" aria-label="Шаг 2 из 2"><span class="is-done"></span><span class="is-done"></span></div>
+          <button type="button" class="onboard-back" onClick="{{ backToAuth }}"><svg class="game-chevron" viewBox="0 0 24 24" aria-hidden="true" style="transform:rotate(180deg)"><path d="m9 5 7 7-7 7"/></svg>Назад</button>
+          <header class="auth-heading"><div class="auth-heading__eyebrow">Настройка обучения</div><h1>Расскажите немного о себе</h1><p>Это поможет подписать профиль и сохранить подходящую цель подготовки.</p></header>
+          <div class="onboard-card">
+            <div class="onboard-grid">
+              <label class="auth-field onboard-field--wide" for="profile-name"><span class="auth-field__label">Имя в профиле <span class="auth-field__hint">видно в рейтинге</span></span><input id="profile-name" ref="{{ profileNameRef }}" value="{{ fullName }}" onInput="{{ onFullName }}" placeholder="Имя или ФИО" autocomplete="name" aria-invalid="{{ profileNameInvalid }}" aria-describedby="profile-name-error"><span id="profile-name-error" class="auth-field__error">{{ profileNameErr }}</span></label>
+              <label class="auth-field" for="profile-faculty"><span class="auth-field__label">Факультет или группа</span><input id="profile-faculty" ref="{{ facultyRef }}" value="{{ facultyVal }}" onInput="{{ onFaculty }}" placeholder="Лечебный факультет" aria-invalid="{{ profileFacultyInvalid }}" aria-describedby="profile-faculty-error"><span id="profile-faculty-error" class="auth-field__error">{{ profileFacultyErr }}</span></label>
+              <label class="auth-field" for="profile-telegram"><span class="auth-field__label">Telegram <span class="auth-field__hint">необязательно</span></span><input id="profile-telegram" value="{{ tgUsername }}" onInput="{{ onTgUsername }}" placeholder="@username" autocomplete="off" autocapitalize="none" spellcheck="false"></label>
+            </div>
+            <section class="onboard-section" aria-labelledby="course-label"><div id="course-label" class="onboard-section__head">На каком вы курсе?</div><div class="onboard-course-grid"><sc-for list="{{ courseChips }}" as="c" hint-placeholder-count="2"><button type="button" class="onboard-course" onClick="{{ c.onClick }}" aria-pressed="{{ c.pressed }}">{{ c.label }}</button></sc-for></div></section>
+            <section class="onboard-section" aria-labelledby="goal-label"><div id="goal-label" class="onboard-section__head">Главная цель подготовки</div><div class="onboard-choice-grid"><sc-for list="{{ goalChips }}" as="g" hint-placeholder-count="3"><button type="button" class="onboard-choice" onClick="{{ g.onClick }}" aria-pressed="{{ g.pressed }}"><span class="onboard-choice__mark" aria-hidden="true">{{ g.code }}</span><span>{{ g.label }}</span></button></sc-for></div></section>
+          </div>
+          <button type="button" class="auth-submit" onClick="{{ finishProfile }}" style="max-width:520px;margin-top:18px">Перейти к первой теме</button>
+          <div class="auth-legal">Профиль и прогресс можно изменить позже в настройках.</div>
         </div>
-        <div style="margin:18px 0 8px;font:800 12px Nunito;color:var(--mut);letter-spacing:.08em">ФАКУЛЬТЕТ</div>
-        <input value="{{ facultyVal }}" onInput="{{ onFaculty }}" placeholder="Факультет" style="width:100%;padding:14px 16px;border:1.5px solid var(--line);border-radius:14px;background:var(--card);color:var(--ink);font:600 14px Manrope;outline:none">
-        <div style="margin:18px 0 8px;font:800 12px Nunito;color:var(--mut);letter-spacing:.08em">TELEGRAM <span style="color:var(--mut);font-weight:600;text-transform:none;letter-spacing:0">— необязательно</span></div>
-        <input value="{{ tgUsername }}" onInput="{{ onTgUsername }}" placeholder="@username" style="width:100%;padding:14px 16px;border:1.5px solid var(--line);border-radius:14px;background:var(--card);color:var(--ink);font:600 14px Manrope;outline:none">
-        <div style="margin:18px 0 8px;font:800 12px Nunito;color:var(--mut);letter-spacing:.08em">ЦЕЛЬ ПОДГОТОВКИ</div>
-        <div style="display:flex;flex-direction:column;gap:8px">
-          <sc-for list="{{ goalChips }}" as="g" hint-placeholder-count="3">
-            <button onClick="{{ g.onClick }}" style="display:flex;align-items:center;gap:10px;padding:13px 15px;border:1.5px solid {{ g.bd }};border-radius:13px;background:{{ g.bg }};color:{{ g.fg }};font:700 13.5px Manrope;cursor:pointer;text-align:left"><span class="game-choice-mark" aria-hidden="true">{{ g.code }}</span>{{ g.label }}</button>
-          </sc-for>
-        </div>
-        <button onClick="{{ finishProfile }}" style-active="transform:translateY(4px);box-shadow:0 0 0 var(--reddk)" style="margin-top:26px;width:100%;padding:16px;border:none;border-radius:16px;background:var(--red);color:#fff;font:800 16px Nunito;box-shadow:0 4px 0 var(--reddk);cursor:pointer;transition:transform .08s,box-shadow .08s">Начать обучение →</button>
       </div>
     </sc-if>
 
@@ -1621,9 +1654,9 @@ class Component extends DCLogic {
       testSel: null, testAnswered: false, sessWrong: [], sessRight: [],
       progress: ls.progress||{}, mistakes: ls.mistakes||[], favorites: ls.favorites||[], notes: ls.notes||{},
       query: '', examLeft: 0, lastActive: ls.lastActive||'',
-      authTab: 'signup', email: has?(saved.email||''):'', pass: '', showPass: false, fullName: '', faculty: 'Лечебный факультет', tgUsername: '', authErr: '', user: has?saved:null,
+      authTab: 'signup', email: has?(saved.email||''):'', pass: '', showPass: false, fullName: '', faculty: 'Лечебный факультет', tgUsername: '', authErr: '', authEmailErr: '', authPassErr: '', profileNameErr: '', profileFacultyErr: '', user: has?saved:null,
       examDone: !!ls.examDone, termLang: ls.termLang||'ru', reminders: (typeof ls.reminders==='boolean'?ls.reminders:true),
-      history: ls.history||[], showGain: false, rewarded: ls.rewarded||{}, flipIdx: 0,
+      history: ls.history||[], showGain: false, rewarded: ls.rewarded||{},
       xp: ls.xp||0, streak: ls.streak||0, level: 1,
       dayDone: (ls.dayKey===today?(ls.dayDone||0):0), dayGoal: ls.dayGoal||20, dayKey: today, lastTopic: ls.lastTopic||null,
       resPct: 0, resXp: 0, resBaseXp: 0, resMissionXp: 0, resMissionBonuses: [], resRankUp: false, resRankTitle: '', resRankLevel: 1, toast: '', dbLeaders: null, dbUsers: null, profileSystemsExpanded: false
@@ -1747,7 +1780,6 @@ class Component extends DCLogic {
     this._loadStarted=Date.now();
     this._loaderGuard=setTimeout(()=>this.setState({initialLoading:false}),8000);
     this.applyTheme(this.state.dark);
-    this._flip=setInterval(()=>this.setState(st=>({flipIdx:(st.flipIdx||0)+1})),2200);
     window.onTelegramAuth=(u)=>this.authTelegram(u);
     this.tgWebAppInit();
     this.loadAnnouncements();
@@ -2008,7 +2040,7 @@ async sendBroadcast(){
   cycleTermLang(){ this.setState({termLang:this.state.termLang==='ru'?'en':'ru'},()=>this.persist()); }
   toggleReminders(){ this.setState({reminders:!this.state.reminders},()=>{ this.persist(); this.ping(this.state.reminders?'Напоминания включены 🔔':'Напоминания выключены'); }); }
   componentWillUnmount(){
-    this.clearExam(); clearInterval(this._flip); clearTimeout(this._loaderGuard); clearTimeout(this._sync); clearTimeout(this._dbsync); clearTimeout(this._n);
+    this.clearExam(); clearTimeout(this._loaderGuard); clearTimeout(this._sync); clearTimeout(this._dbsync); clearTimeout(this._n);
     if(window.onTelegramAuth) window.onTelegramAuth=null;
   }
   clearExam(){ if(this._exam){ clearInterval(this._exam); this._exam=null; } }
@@ -2097,7 +2129,7 @@ async logout(){
     this._authLock=false;
     this.setState({
       user:null, screen:"splash", email:"", pass:"", fullName:"", faculty:"Лечебный факультет",
-      authErr:"", authTab:"signup", authBusy:false,
+      authErr:"", authEmailErr:"", authPassErr:"", profileNameErr:"", profileFacultyErr:"", authTab:"signup", authBusy:false,
       progress:{}, mistakes:[], favorites:[], notes:{}, history:[], rewarded:{},
       xp:0, streak:0, dayDone:0, lastTopic:null, examDone:false,
       dbLeaders:null, dbUsers:null, announcements:[], broadcastText:""
@@ -2109,9 +2141,10 @@ async logout(){
     var s=this.state;
     var email=(s.email||"").trim().toLowerCase();
     var pass=s.pass||"";
-    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){ this.setState({authErr:"Введите корректный e-mail"}); return; }
-    if(pass.length<6){ this.setState({authErr:"Пароль не короче 6 символов"}); return; }
-    if(s.authTab==="signup"){ this.setState({authErr:"", screen:"profile"}); return; }
+    var emailErr=!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)?"Введите корректный e-mail":"";
+    var passErr=pass.length<6?"Минимум 6 символов":"";
+    if(emailErr||passErr){ this.setState({authErr:"",authEmailErr:emailErr,authPassErr:passErr}); setTimeout(()=>{ var el=emailErr?this._emailInput:this._passInput; if(el&&el.focus) el.focus(); },0); return; }
+    if(s.authTab==="signup"){ this.setState({authErr:"",authEmailErr:"",authPassErr:"",screen:"profile"}); return; }
     this._authLock=true;
     this.setState({authErr:"", authBusy:true});
     var db=this.db();
@@ -2149,10 +2182,13 @@ async logout(){
     var goals=["К экзамену по анатомии","К зачёту","К практическим занятиям"];
     var email=(s.email||"").trim().toLowerCase();
     var pass=s.pass||"";
-    var name=(s.fullName||"").trim()||"Студент ВМедА";
+    var name=(s.fullName||"").trim();
     var course=this._course||1;
-    var faculty=(s.faculty||"Лечебный факультет").trim()||"Лечебный факультет";
+    var faculty=(s.faculty||"").trim();
     var goal=goals[this._goal||0];
+    var nameErr=name.length<2?"Укажите имя, которое будет видно в рейтинге":"";
+    var facultyErr=faculty.length<2?"Укажите факультет или учебную группу":"";
+    if(nameErr||facultyErr){ this.setState({profileNameErr:nameErr,profileFacultyErr:facultyErr}); setTimeout(()=>{ var el=nameErr?this._profileNameInput:this._facultyInput; if(el&&el.focus) el.focus(); },0); return; }
     if(!email){ this.setState({authErr:"Укажите e-mail", screen:"login"}); return; }
     if(pass.length<6){ this.setState({authErr:"Пароль слишком короткий", screen:"login"}); return; }
     var tg=this.normTg(s.tgUsername);
@@ -2307,7 +2343,6 @@ async logout(){
     R.loaderTitle=s.tgLoading?'Входим через Telegram':(s.authBusy?'Проверяем данные':'Готовим материалы');
     R.loaderText=s.tgLoading?'Безопасно подтверждаем профиль':(s.authBusy?'Это займёт несколько секунд':'Загружаем учебный прогресс');
     R.appRef=el=>{ this._app=el; if(el) this.applyTheme(this.state.dark); };
-    { const words=['правильно','эффективно','быстро','наглядно','с интересом']; R.flipWord=words[(s.flipIdx||0)%words.length].toUpperCase(); }
 
     R.streak=s.streak; R.xp=s.xp; R.level=s.level; R.dayDone=s.dayDone; R.dayGoal=s.dayGoal;
     R.dayPct=Math.round(s.dayDone/s.dayGoal*100); R.dayDeg=Math.round(s.dayDone/s.dayGoal*360);
@@ -2342,27 +2377,35 @@ async logout(){
     }
 
     // onboarding
-    R.goLogin=()=>this.setState({screen:'login',authErr:''});
+    R.goLogin=()=>this.setState({screen:'login',authTab:'signup',authErr:'',authEmailErr:'',authPassErr:''});
+    R.goSignin=()=>this.setState({screen:'login',authTab:'signin',authErr:'',authEmailErr:'',authPassErr:''});
     R.authTab=s.authTab;
     R.loginRef=(el)=>{ this._loginPanel=el; };
-    R.tabSignup=()=>{ if(document.activeElement) document.activeElement.blur(); this.setState({authTab:'signup',authErr:''},()=>{ if(this._loginPanel) this._loginPanel.scrollTop=0; }); };
-    R.tabSignin=()=>{ if(document.activeElement) document.activeElement.blur(); this.setState({authTab:'signin',authErr:''},()=>{ if(this._loginPanel) this._loginPanel.scrollTop=0; }); };
+    R.tabSignup=()=>{ if(document.activeElement) document.activeElement.blur(); this.setState({authTab:'signup',authErr:'',authEmailErr:'',authPassErr:''},()=>{ if(this._loginPanel) this._loginPanel.scrollTop=0; }); };
+    R.tabSignin=()=>{ if(document.activeElement) document.activeElement.blur(); this.setState({authTab:'signin',authErr:'',authEmailErr:'',authPassErr:''},()=>{ if(this._loginPanel) this._loginPanel.scrollTop=0; }); };
     R.tabSignupBg=s.authTab==='signup'?'var(--card)':'transparent'; R.tabSignupFg=s.authTab==='signup'?'var(--red)':'var(--mut)';
     R.tabSigninBg=s.authTab==='signin'?'var(--card)':'transparent'; R.tabSigninFg=s.authTab==='signin'?'var(--red)':'var(--mut)';
-    R.authTitle=s.authTab==='signup'?'Создать аккаунт':'С возвращением 👋';
-    R.authSub=s.authTab==='signup'?'Регистрация откроет прогресс, рейтинг и тесты.':'Войди, чтобы продолжить подготовку.';
-    R.authCta=s.authTab==='signup'?'Зарегистрироваться':'Войти';
+    R.tabSignupPressed=s.authTab==='signup'?'true':'false'; R.tabSigninPressed=s.authTab==='signin'?'true':'false';
+    R.authEyebrow=s.authTab==='signup'?'Шаг 1 из 2':'Продолжение обучения';
+    R.authTitle=s.authTab==='signup'?'Создайте учебный профиль':'С возвращением';
+    R.authSub=s.authTab==='signup'?'Сохраним прогресс, серию занятий и результаты тестов.':'Войдите, чтобы продолжить с сохранённого шага.';
+    R.authCta=s.authTab==='signup'?'Продолжить настройку':'Войти в аккаунт';
     R.isSignup=s.authTab==='signup';
-    R.email=s.email; R.onEmail=e=>this.setState({email:e.target.value,authErr:''});
-    R.pass=s.pass; R.onPass=e=>this.setState({pass:e.target.value,authErr:''});
-    R.passType=s.showPass?'text':'password'; R.showPassIcon=s.showPass?'🙈':'👁'; R.toggleShowPass=()=>this.setState({showPass:!s.showPass});
+    R.email=s.email; R.emailRef=el=>{this._emailInput=el;}; R.onEmail=e=>this.setState({email:e.target.value,authErr:'',authEmailErr:''}); R.onEmailBlur=e=>{ const v=(e.target.value||'').trim(); if(v&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)) this.setState({authEmailErr:'Проверьте адрес электронной почты'}); };
+    R.pass=s.pass; R.passRef=el=>{this._passInput=el;}; R.onPass=e=>this.setState({pass:e.target.value,authErr:'',authPassErr:''}); R.onPassBlur=e=>{ const v=e.target.value||''; if(v&&v.length<6) this.setState({authPassErr:'Минимум 6 символов'}); };
+    R.passType=s.showPass?'text':'password'; R.authPasswordAutocomplete=s.authTab==='signup'?'new-password':'current-password'; R.toggleShowPass=()=>this.setState({showPass:!s.showPass});
     R.authErr=s.authErr; R.hasAuthErr=!!s.authErr;
+    R.authEmailErr=s.authEmailErr; R.hasAuthEmailErr=!!s.authEmailErr; R.emailInvalid=s.authEmailErr?'true':'false';
+    R.authPassErr=s.authPassErr; R.hasAuthPassErr=!!s.authPassErr; R.passInvalid=s.authPassErr?'true':'false';
     R.submitAuth=()=>this.submitAuth();
     R.doTelegram=()=>this.doTelegram();
     R.finishProfile=()=>this.finishProfile();
-    R.fullName=s.fullName; R.onFullName=e=>this.setState({fullName:e.target.value});
-    R.facultyVal=s.faculty; R.onFaculty=e=>this.setState({faculty:e.target.value});
+    R.backToAuth=()=>this.setState({screen:'login',authErr:'',profileNameErr:'',profileFacultyErr:''});
+    R.fullName=s.fullName; R.profileNameRef=el=>{this._profileNameInput=el;}; R.onFullName=e=>this.setState({fullName:e.target.value,profileNameErr:''});
+    R.facultyVal=s.faculty; R.facultyRef=el=>{this._facultyInput=el;}; R.onFaculty=e=>this.setState({faculty:e.target.value,profileFacultyErr:''});
     R.tgUsername=s.tgUsername; R.onTgUsername=e=>this.setState({tgUsername:e.target.value});
+    R.profileNameErr=s.profileNameErr; R.hasProfileNameErr=!!s.profileNameErr; R.profileNameInvalid=s.profileNameErr?'true':'false';
+    R.profileFacultyErr=s.profileFacultyErr; R.hasProfileFacultyErr=!!s.profileFacultyErr; R.profileFacultyInvalid=s.profileFacultyErr?'true':'false';
     R.onTgConfirm=()=>this.onTgConfirm(); R.tgBack=()=>this.setState({screen:'login'});
     R.isTg=scr==='tg';
     R.tgLoading=s.tgLoading;
@@ -2384,9 +2427,9 @@ async logout(){
     R.userIni=((toks.slice(0,2).map(t=>t[0]).join(''))||'СВ').toUpperCase();
     R.userMeta=(u.course||1)+' курс · '+(u.faculty||'Лечебный факультет')+' · ВМедА';
     R.logout=()=>this.logout();
-    R.courseChips=[1,2].map(n=>{const on=(this._course||1)===n;return{label:n+' курс',onClick:()=>{this._course=n;this.forceUpdate();},bg:on?'var(--red)':'var(--card)',fg:on?'#fff':'var(--ink)',bd:on?'var(--red)':'var(--line)'};});
+    R.courseChips=[1,2].map(n=>{const on=(this._course||1)===n;return{label:n+' курс',pressed:on?'true':'false',onClick:()=>{this._course=n;this.forceUpdate();},bg:on?'var(--red)':'var(--card)',fg:on?'#fff':'var(--ink)',bd:on?'var(--red)':'var(--line)'};});
     const goals=['К экзамену по анатомии','К зачёту','К практическим занятиям'];
-    R.goalChips=goals.map((label,i)=>{const on=(this._goal==null?0:this._goal)===i;return{code:String(i+1),label,onClick:()=>{this._goal=i;this.forceUpdate();},bg:on?'var(--redsoft)':'var(--card)',fg:'var(--ink)',bd:on?'var(--red)':'var(--line)'};});
+    R.goalChips=goals.map((label,i)=>{const on=(this._goal==null?0:this._goal)===i;return{code:String(i+1).padStart(2,'0'),label,pressed:on?'true':'false',onClick:()=>{this._goal=i;this.forceUpdate();},bg:on?'var(--redsoft)':'var(--card)',fg:'var(--ink)',bd:on?'var(--red)':'var(--line)'};});
 
     // current-module stats
     const tops=this.curTopics();
