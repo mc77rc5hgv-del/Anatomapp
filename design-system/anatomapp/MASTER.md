@@ -57,9 +57,9 @@ An original gamified anatomy-learning interface: tactile and encouraging like a 
 
 ### Daily missions
 
-- The Home screen shows three measurable tasks: card volume, one completed session, and at least 75% accuracy.
+- The Home screen shows three measurable tasks: completed training items, one completed session, and at least 75% accuracy.
 - Mission completion and XP must be derived from saved learning activity; never display invented rewards or progress.
-- Rewards are granted once per local calendar day and stored with a day-specific key: cards +30 XP, first session +15 XP, accuracy +25 XP.
+- Rewards are granted once per local calendar day and stored with a day-specific key: training items +30 XP, first session +15 XP, accuracy +25 XP.
 - The Result screen separates training XP from mission bonuses and names every completed mission.
 - Opening or syncing the app never advances the streak; only a completed learning session can start or extend it.
 - Pair completed-green with a checkmark and text so status never relies on color alone.

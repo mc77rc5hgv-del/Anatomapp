@@ -328,18 +328,24 @@ iframe[src*="telegram.org"]{background:transparent!important;color-scheme:light!
   .game-missions__head,.game-week__head{display:flex;align-items:center;justify-content:space-between;gap:12px}
   .game-missions__title{font:900 16px Nunito;color:var(--ink)}
   .game-missions__counter{flex-shrink:0;padding:4px 9px;border-radius:10px;background:var(--redsoft);color:color-mix(in srgb,var(--red) 62%,var(--ink));font:900 11px Nunito}
-  .game-missions__grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;margin-top:12px}
-  .game-mission{min-width:0;padding:10px 9px 9px;border:1.5px solid var(--line);border-radius:15px;background:var(--card2)}
+  .game-missions__grid{display:flex;flex-direction:column;gap:9px;margin-top:12px}
+  .game-screen .game-mission{width:100%;min-height:82px;padding:11px 12px;border:1.5px solid var(--line);border-radius:16px;background:var(--card2);color:var(--ink);display:grid;grid-template-columns:38px minmax(0,1fr) auto;align-items:center;gap:11px;text-align:left;cursor:pointer;box-shadow:0 3px 0 var(--game-depth);transition:transform .1s ease,box-shadow .1s ease,border-color .18s ease,background .18s ease}
+  .game-mission:active{transform:translateY(2px);box-shadow:0 1px 0 var(--game-depth)}
   .game-mission.is-done{border-color:color-mix(in srgb,var(--green) 45%,var(--line));background:var(--greensoft)}
-  .game-mission__top{display:flex;align-items:center;justify-content:space-between;gap:5px}
-  .game-mission__mark{width:23px;height:23px;flex:0 0 23px;border-radius:8px;display:flex;align-items:center;justify-content:center;background:var(--card);color:color-mix(in srgb,var(--red) 62%,var(--ink));font:900 9px Nunito;box-shadow:0 2px 0 var(--line)}
+  .game-mission__mark{width:38px;height:38px;border-radius:12px;display:flex;align-items:center;justify-content:center;background:var(--card);color:color-mix(in srgb,var(--red) 62%,var(--ink));font:900 10px Nunito;box-shadow:0 3px 0 var(--line)}
+  .game-mission__mark .ui-icon{width:19px;height:19px}
   .game-mission.is-done .game-mission__mark{background:var(--green);color:#fff;box-shadow:0 2px 0 color-mix(in srgb,var(--green) 75%,#10291d)}
-  .game-mission__value{min-width:0;color:color-mix(in srgb,var(--gold) 78%,var(--ink));font:900 9.5px Nunito;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .game-mission__body{display:block;min-width:0}
+  .game-mission__label{display:block;color:var(--ink);font:900 12.5px/1.25 Nunito}
+  .game-mission__progress{display:block;margin-top:3px;color:var(--mut);font:650 10px/1.3 Manrope}
+  .game-mission__track{display:block;height:6px;margin-top:8px;border-radius:6px;background:var(--line);overflow:hidden}
+  .game-mission__fill{display:block;height:100%;border-radius:inherit;background:var(--red);transition:width .35s ease}
+  .game-mission__aside{align-self:stretch;min-width:58px;display:flex;flex-direction:column;align-items:flex-end;justify-content:space-between;gap:8px}
+  .game-mission__value{color:color-mix(in srgb,var(--gold) 78%,var(--ink));font:900 10px Nunito;white-space:nowrap}
   .game-mission.is-done .game-mission__value{color:var(--green)}
-  .game-mission__label{margin-top:8px;color:var(--ink);font:800 10.5px/1.25 Nunito;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .game-mission__progress{margin-top:3px;color:var(--mut);font:700 9px Nunito;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .game-mission__track{height:5px;margin-top:7px;border-radius:5px;background:var(--line);overflow:hidden}
-  .game-mission__fill{height:100%;border-radius:inherit;background:var(--red);transition:width .35s ease}
+  .game-mission__action{display:flex;align-items:center;gap:2px;color:var(--red);font:900 9.5px Nunito;white-space:nowrap}
+  .game-mission__action .game-chevron{width:14px;height:14px}
+  .game-mission.is-done .game-mission__action{color:var(--green)}
   .game-mission.is-done .game-mission__fill{background:var(--green)}
   .game-week{margin-top:15px;padding-top:13px;border-top:1px solid var(--line)}
   .game-week__title{font:800 12px Nunito;color:var(--ink)}
@@ -758,7 +764,7 @@ iframe[src*="telegram.org"]{background:transparent!important;color-scheme:light!
           </div>
           <div style="flex:1">
             <div style="font:800 15px Nunito">Цель дня</div>
-            <div style="font-size:12.5px;opacity:.7;margin-top:2px">{{ dayDone }} / {{ dayGoal }} карточек · перед парой по анатомии</div>
+            <div style="font-size:12.5px;opacity:.7;margin-top:2px">{{ dayDone }} / {{ dayGoal }} заданий · перед парой по анатомии</div>
           </div>
         </div>
 
@@ -766,23 +772,24 @@ iframe[src*="telegram.org"]{background:transparent!important;color-scheme:light!
           <div class="game-missions__head">
             <div>
               <div id="daily-missions-title" class="game-missions__title">План на сегодня</div>
-              <div style="margin-top:2px;color:var(--mut);font-size:10.5px">Три коротких шага вместо перегрузки</div>
+              <div style="margin-top:2px;color:var(--mut);font-size:10.5px">{{ dailyRewardHint }}</div>
             </div>
             <div class="game-missions__counter">{{ dailyDone }} / {{ dailyTotal }}</div>
           </div>
           <div class="game-missions__grid">
             <sc-for list="{{ dailyMissions }}" as="mission" hint-placeholder-count="3">
-              <div class="game-mission {{ mission.stateClass }}">
-                <div class="game-mission__top">
-                  <div class="game-mission__mark">{{ mission.mark }}</div>
-                  <div class="game-mission__value">{{ mission.value }}</div>
-                </div>
-                <div class="game-mission__label">{{ mission.label }}</div>
-                <div class="game-mission__progress">{{ mission.progressText }}</div>
-                <div class="game-mission__track" role="progressbar" aria-label="{{ mission.aria }}" aria-valuemin="0" aria-valuemax="100" aria-valuenow="{{ mission.pct }}">
-                  <div class="game-mission__fill" style="width:{{ mission.pct }}%"></div>
-                </div>
-              </div>
+              <button type="button" class="game-mission {{ mission.stateClass }}" onClick="{{ mission.onClick }}" aria-label="{{ mission.aria }}">
+                <span class="game-mission__mark">
+                  <sc-if value="{{ mission.done }}" hint-placeholder-val=""><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg></sc-if>
+                  <sc-if value="{{ mission.pending }}" hint-placeholder-val="{{ true }}">{{ mission.code }}</sc-if>
+                </span>
+                <span class="game-mission__body">
+                  <span class="game-mission__label">{{ mission.label }}</span>
+                  <span class="game-mission__progress">{{ mission.progressText }}</span>
+                  <span class="game-mission__track" role="progressbar" aria-label="{{ mission.progressAria }}" aria-valuemin="0" aria-valuemax="100" aria-valuenow="{{ mission.pct }}"><span class="game-mission__fill" style="width:{{ mission.pct }}%"></span></span>
+                </span>
+                <span class="game-mission__aside"><span class="game-mission__value">{{ mission.value }}</span><span class="game-mission__action">{{ mission.actionLabel }}<svg class="game-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></span></span>
+              </button>
             </sc-for>
           </div>
           <div class="game-week">
@@ -2109,6 +2116,17 @@ async sendBroadcast(){
   touchStreak(){ const key=new Date().toDateString(), last=this.activityDay(this.state.lastActive); if(last===key) return {streak:Math.max(1,this.state.streak||0),lastActive:key}; const y=new Date(Date.now()-864e5).toDateString(); const streak=last===y?Math.max(1,(this.state.streak||0)+1):1; return {streak,lastActive:key}; }
   dailyMissionRewards(){ return { cards:30, session:15, accuracy:25 }; }
   dailyMissionKey(day,id){ return 'daily:'+String(day||new Date().toDateString())+':'+id; }
+  startDailyMission(id){
+    const s=this.state;
+    const candidates=this.MODULES.filter(m=>m.ready).flatMap(m=>this.topicsOf(m.id).map((topic,idx)=>({mid:m.id,topic,idx,key:this.pk(topic.num,m.id)})));
+    const supports=item=>id==='accuracy'?(item.topic.tests||[]).length>0:((item.topic.cards||[]).length>0||(item.topic.pairs||[]).length>0||(item.topic.tests||[]).length>0);
+    const unfinished=item=>((s.progress[item.key]||{}).bestPct||0)<75;
+    const last=s.lastTopic&&candidates.find(item=>item.mid===s.lastTopic.moduleId&&item.idx===s.lastTopic.topicIdx&&supports(item));
+    const target=(last&&unfinished(last)?last:null)||candidates.find(item=>supports(item)&&unfinished(item))||candidates.find(supports);
+    if(!target){ this.ping('Учебные задания ещё загружаются'); return; }
+    const mode=id==='accuracy'?'test':((target.topic.cards||[]).length?'flash':((target.topic.pairs||[]).length?'term':'test'));
+    this.setState({moduleId:target.mid,topicIdx:target.idx,subKey:null,lastTopic:{moduleId:target.mid,topicIdx:target.idx}},()=>{ this.persist(); this.startMode(mode); });
+  }
   rankLadder(){ return [
     {title:'Наблюдатель',min:0},
     {title:'Исследователь',min:300},
@@ -2415,12 +2433,14 @@ async logout(){
       const bestToday=todayHistory.reduce((best,h)=>Math.max(best,Number(h.pct)||0),0);
       const rewards=this.dailyMissionRewards(), missionDay=s.dayKey||todayKey;
       const missionData=[
-        {id:'cards',label:'Карточки',value:Math.min(s.dayDone,s.dayGoal)+' / '+s.dayGoal,pct:Math.min(100,Math.round(s.dayDone/Math.max(1,s.dayGoal)*100)),done:s.dayDone>=s.dayGoal,reward:rewards.cards},
+        {id:'cards',label:'Тренировочные задания',value:Math.min(s.dayDone,s.dayGoal)+' / '+s.dayGoal,pct:Math.min(100,Math.round(s.dayDone/Math.max(1,s.dayGoal)*100)),done:s.dayDone>=s.dayGoal,reward:rewards.cards},
         {id:'session',label:'Одна сессия',value:sessionsToday?'1 / 1':'0 / 1',pct:sessionsToday?100:0,done:sessionsToday>0,reward:rewards.session},
         {id:'accuracy',label:'Точность 75%',value:bestToday?bestToday+'%':'0%',pct:Math.min(100,Math.round(bestToday/75*100)),done:bestToday>=75,reward:rewards.accuracy}
       ];
-      R.dailyMissions=missionData.map((m,i)=>{ const claimed=!!(s.rewarded||{})[this.dailyMissionKey(missionDay,m.id)]; return {label:m.label,value:claimed?'получено':('+'+m.reward+' XP'),progressText:m.value,pct:m.pct,mark:m.done?'✓':'0'+(i+1),stateClass:m.done?'is-done':'',aria:m.label+': '+m.value+', награда '+m.reward+' XP'+(claimed?', получена':'')}; });
+      R.dailyMissions=missionData.map((m,i)=>{ const claimed=!!(s.rewarded||{})[this.dailyMissionKey(missionDay,m.id)], action=m.done?'Повторить':(m.id==='accuracy'?'Пройти тест':'Начать'); return {id:m.id,label:m.label,value:claimed?'Получено':('+'+m.reward+' XP'),progressText:m.value,pct:m.pct,code:'0'+(i+1),done:m.done,pending:!m.done,stateClass:m.done?'is-done':'',actionLabel:action,progressAria:m.label+': выполнено на '+m.pct+'%',aria:(m.done?'Повторить задание. ':'Начать задание. ')+m.label+': '+m.value+', награда '+m.reward+' XP'+(claimed?', получена':''),onClick:()=>this.startDailyMission(m.id)}; });
       R.dailyDone=missionData.filter(m=>m.done).length; R.dailyTotal=missionData.length;
+      const rewardLeft=missionData.reduce((sum,m)=>sum+((s.rewarded||{})[this.dailyMissionKey(missionDay,m.id)]?0:m.reward),0);
+      R.dailyRewardHint=rewardLeft>0?('Доступно ещё +'+rewardLeft+' XP'):'Все награды дня собраны';
 
       const monday=new Date(now); monday.setHours(0,0,0,0); monday.setDate(now.getDate()-((now.getDay()+6)%7));
       const activeKeys=new Set((s.history||[]).map(h=>new Date(h.ts).toDateString()));
@@ -2777,7 +2797,7 @@ async logout(){
     R.resSealBg=R.hasRankUp?'var(--goldsoft)':(s.resPct>=75?'var(--greensoft)':'var(--redsoft)'); R.resSealFg=R.hasRankUp?'var(--gold)':(s.resPct>=75?'var(--green)':'var(--red)');
     R.resTitle=R.hasRankUp?'Новый ранг!':(s.resPct>=75?'Отлично!':(s.resPct>=50?'Неплохо!':'Продолжай'));
     R.resSub=R.hasRankUp?('Теперь вы — '+R.resRankTitle):(s.resPct>=75?'Тема освоена — так держать':'Повтори сложные места');
-    R.resBaseXp=s.resBaseXp||0; R.resMissionXp=s.resMissionXp||0; R.resBaseLabel=R.resBaseXp>0?('За тренировку +'+R.resBaseXp+' XP'):'Карточки уже приносили XP';
+    R.resBaseXp=s.resBaseXp||0; R.resMissionXp=s.resMissionXp||0; R.resBaseLabel=R.resBaseXp>0?('За тренировку +'+R.resBaseXp+' XP'):'Эти задания уже приносили XP';
     R.resMissionBonuses=(s.resMissionBonuses||[]).map((b,i)=>({code:'0'+(i+1),label:b.label,xp:b.xp}));
     R.hasMissionBonus=R.resMissionBonuses.length>0;
     R.resAgain=()=>{ if(s.isReview){this.startReview();} else this.startMode(s.mode); };
@@ -3016,7 +3036,7 @@ async logout(){
     const nextDayDone=Math.min(s.dayGoal,priorDayDone+s.sessTotal);
     const missionRewards=this.dailyMissionRewards();
     const missionDefs=[
-      {id:'cards',label:'Цель по карточкам',xp:missionRewards.cards,done:nextDayDone>=s.dayGoal},
+      {id:'cards',label:'Цель по заданиям',xp:missionRewards.cards,done:nextDayDone>=s.dayGoal},
       {id:'session',label:'Первая сессия дня',xp:missionRewards.session,done:true},
       {id:'accuracy',label:'Точность не ниже 75%',xp:missionRewards.accuracy,done:pct>=75}
     ];
