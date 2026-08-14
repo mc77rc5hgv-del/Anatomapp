@@ -250,6 +250,56 @@ iframe[src*="telegram.org"]{background:transparent!important;color-scheme:light!
   .game-learning-route__action .ui-icon{width:17px;height:17px}
   .game-learning-route__complete{padding:20px;text-align:center;background:radial-gradient(90% 120% at 100% 0%,var(--goldsoft),transparent 62%),var(--card)}
   .game-learning-route__complete-mark{width:52px;height:52px;margin:0 auto;border-radius:17px;display:flex;align-items:center;justify-content:center;background:var(--goldsoft);color:var(--gold);box-shadow:0 4px 0 color-mix(in srgb,var(--gold) 28%,var(--line))}
+  .game-lesson{padding:14px 16px 4px}
+  .game-lesson-hero{position:relative;min-height:182px;overflow:hidden;border:2px solid var(--line);border-radius:24px;background:var(--card2);box-shadow:0 5px 0 var(--game-depth)}
+  .game-lesson-hero__image{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 42%;filter:saturate(.82) contrast(1.04)}
+  .game-lesson-hero__shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,12,13,.08) 10%,rgba(20,12,13,.82) 100%)}
+  .game-lesson-hero__body{position:relative;z-index:1;min-height:182px;padding:18px;display:flex;flex-direction:column;justify-content:flex-end;color:#fff}
+  .game-lesson-hero__eyebrow{font:900 9.5px Nunito;letter-spacing:.08em;text-transform:uppercase;opacity:.78}
+  .game-lesson-hero__title{max-width:330px;margin:5px 0 0;color:#fff;font:900 22px/1.15 Nunito;text-wrap:balance;text-shadow:0 2px 8px rgba(0,0,0,.34)}
+  .game-lesson-hero__meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:11px}
+  .game-lesson-hero__pill{padding:5px 8px;border:1px solid rgba(255,255,255,.22);border-radius:9px;background:rgba(20,12,13,.28);backdrop-filter:blur(7px);font:800 9.5px Nunito}
+  .game-lesson-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;margin-top:12px}
+  .game-lesson-stat{min-width:0;padding:10px 7px;border:1.5px solid var(--line);border-radius:14px;background:var(--card);text-align:center;box-shadow:0 3px 0 var(--game-depth)}
+  .game-lesson-stat__value{color:var(--ink);font:900 14px Nunito;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .game-lesson-stat__label{margin-top:2px;color:var(--mut);font:700 8.5px Nunito;text-transform:uppercase;letter-spacing:.035em}
+  .game-lesson-route{margin-top:12px;padding:14px;border:2px solid var(--line);border-radius:19px;background:var(--card);box-shadow:0 4px 0 var(--game-depth)}
+  .game-lesson-route__head{display:flex;align-items:center;justify-content:space-between;gap:10px}
+  .game-lesson-route__title{color:var(--ink);font:900 13px Nunito}
+  .game-lesson-route__state{flex-shrink:0;color:var(--red);font:900 9.5px Nunito}
+  .game-lesson-route__steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin-top:11px}
+  .game-lesson-route__step{min-width:0;padding:8px 5px;border:1.5px solid var(--line);border-radius:12px;background:var(--card2);text-align:center;color:var(--mut);font:800 9px/1.15 Nunito}
+  .game-lesson-route__step.is-current{border-color:color-mix(in srgb,var(--red) 50%,var(--line));background:var(--redsoft);color:var(--red);box-shadow:0 2px 0 color-mix(in srgb,var(--red) 22%,var(--line))}
+  .game-lesson-route__step.is-complete{border-color:color-mix(in srgb,var(--green) 42%,var(--line));background:var(--greensoft);color:var(--green)}
+  .game-lesson-route__track{height:8px;margin-top:11px;padding:2px;border:1px solid var(--line);border-radius:7px;background:var(--card2);overflow:hidden}
+  .game-lesson-route__fill{height:100%;border-radius:5px;background:linear-gradient(90deg,var(--red),color-mix(in srgb,var(--red) 55%,var(--gold)));transition:width .35s ease}
+  .game-lesson-section{margin-top:14px;padding:15px;border:2px solid var(--line);border-radius:20px;background:var(--card);box-shadow:0 4px 0 var(--game-depth)}
+  .game-lesson-section__eyebrow{color:var(--red);font:900 9px Nunito;letter-spacing:.08em;text-transform:uppercase}
+  .game-lesson-section__title{margin:3px 0 0;color:var(--ink);font:900 16px/1.25 Nunito}
+  .game-lesson-goals{display:flex;flex-direction:column;gap:9px;margin-top:12px}
+  .game-lesson-goal{display:flex;gap:10px;align-items:flex-start;color:var(--ink);font:650 12px/1.45 Manrope}
+  .game-lesson-goal__mark{width:25px;height:25px;flex:0 0 25px;border-radius:8px;display:flex;align-items:center;justify-content:center;background:var(--redsoft);color:var(--red);font:900 8px Nunito;box-shadow:0 2px 0 color-mix(in srgb,var(--red) 18%,var(--line))}
+  .game-lesson-terms{display:grid;grid-template-columns:1fr;gap:7px;margin-top:12px}
+  .game-lesson-term{padding:10px 11px;border:1.5px solid var(--line);border-radius:13px;background:var(--card2)}
+  .game-lesson-term__lat{color:var(--red);font:800 12px/1.3 Lora;font-style:italic}
+  .game-lesson-term__ru{margin-top:2px;color:var(--ink);font:700 10.5px/1.35 Manrope}
+  .game-lesson-depth{display:flex;gap:6px;margin-top:14px;padding:4px;border:1.5px solid var(--line);border-radius:14px;background:var(--card2)}
+  .game-lesson-depth button{min-height:44px!important}
+  .game-lesson-source{margin-top:10px!important}
+  .game-lesson-source__icon{width:30px;height:30px;flex:0 0 30px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:var(--card);color:var(--red);box-shadow:0 2px 0 color-mix(in srgb,var(--red) 18%,var(--line))}
+  .game-lesson-source__icon .ui-icon{width:16px;height:16px}
+  .game-lesson-copy{margin-top:14px;padding:16px;border:2px solid var(--line);border-radius:20px;background:var(--card);box-shadow:0 4px 0 var(--game-depth)}
+  .game-lesson-copy__head{padding-bottom:12px;border-bottom:1px solid var(--line)}
+  .game-lesson-copy h3{display:flex;align-items:center;gap:8px;margin:22px 0 10px;color:var(--reddk);font:900 16px/1.3 Nunito}
+  .game-lesson-copy h3:before{content:"";width:4px;height:18px;flex:0 0 4px;border-radius:3px;background:var(--red)}
+  .game-lesson-copy p{margin:0 0 13px;color:var(--ink);font-size:14px;line-height:1.68;text-wrap:pretty}
+  .game-lesson-notes{margin-top:14px;padding:15px;border:2px solid var(--line);border-radius:20px;background:var(--card);box-shadow:0 4px 0 var(--game-depth)}
+  .game-lesson-next{margin-top:14px;padding:16px;border:2px solid color-mix(in srgb,var(--red) 52%,var(--line));border-radius:21px;background:radial-gradient(100% 160% at 100% 0%,var(--goldsoft),transparent 55%),var(--redsoft);box-shadow:0 4px 0 color-mix(in srgb,var(--red) 22%,var(--line))}
+  .game-lesson-next__head{display:flex;align-items:flex-start;gap:11px}
+  .game-lesson-next__mark{width:42px;height:42px;flex:0 0 42px;border-radius:13px;display:flex;align-items:center;justify-content:center;background:var(--red);color:#fff;box-shadow:0 3px 0 var(--reddk)}
+  .game-lesson-next__mark .ui-icon{width:21px;height:21px}
+  .game-lesson-next__button{width:100%;min-height:48px;margin-top:13px;border:0;border-radius:15px;display:flex;align-items:center;justify-content:center;gap:8px;background:var(--red);color:#fff;font:900 14px Nunito;box-shadow:0 4px 0 var(--reddk);cursor:pointer}
+  .game-lesson-next__button .ui-icon{width:17px;height:17px}
   .game-cover{border-bottom:4px solid var(--line);box-shadow:0 12px 28px -24px rgba(44,19,22,.8)}
   .game-topbar{background:color-mix(in srgb,var(--bg) 88%,transparent)!important;backdrop-filter:blur(16px) saturate(1.15);box-shadow:0 8px 22px -22px rgba(35,16,18,.7)}
   .game-info{border:2px solid color-mix(in srgb,var(--red) 22%,var(--line));box-shadow:0 3px 0 color-mix(in srgb,var(--red) 14%,var(--line))}
@@ -316,7 +366,8 @@ iframe[src*="telegram.org"]{background:transparent!important;color-scheme:light!
   .game-nav-item.is-active{background:var(--redsoft)!important;box-shadow:inset 0 0 0 1.5px color-mix(in srgb,var(--red) 18%,var(--line)),0 3px 0 color-mix(in srgb,var(--red) 18%,var(--line));transform:translateY(-2px)}
   .game-nav-item.is-active .atlas-nav-icon{transform:scale(1.08)}
   @media (hover:hover){.game-card[style*="cursor:pointer"]:hover{transform:translateY(-2px);border-color:color-mix(in srgb,var(--red) 32%,var(--line))!important;filter:saturate(1.03)}.game-screen button:not(:disabled):hover{filter:brightness(1.025)}}
-  @media (max-width:360px){.game-tabbar{padding-left:6px!important;padding-right:6px!important}.game-nav-item{border-radius:15px!important}.game-choice-mark--lg{width:48px;height:48px;flex-basis:48px}.game-screen input,.game-screen textarea{font-size:16px!important}.game-home-hero{padding-left:16px!important;padding-right:16px!important}.game-home-head{gap:7px!important}.game-home-user{gap:8px!important;flex:1}.game-home-user>div:first-child{width:42px!important;height:42px!important}.game-home-greeting{display:none}.game-home-name{font-size:19px!important}.game-home-stats{gap:5px!important}.game-home-stats>div{padding:7px 10px 7px 7px!important}.game-missions{padding:14px 12px}.game-missions__grid{gap:5px}.game-mission{padding:9px 7px 8px}.game-mission__label{font-size:10px}.game-week__days{gap:3px}.game-week__dot{width:27px;height:27px}.game-learning-route__body{padding:13px 11px}.game-learning-route__visual{height:98px}.game-learning-route__steps{gap:4px}.game-learning-step{padding-left:4px;padding-right:4px}.game-learning-step__label{font-size:9px}.game-result__content{padding:26px 18px}.game-result__seal{width:68px;height:68px;border-radius:22px}.game-result__seal .ui-icon{width:36px;height:36px}.game-rank-road{padding:0 12px}.game-rank-road__panel{padding:13px 11px}.game-rank-road__steps{gap:5px}.game-rank-step{padding:9px 5px}.game-rank-step__title{font-size:9.5px}}
+  @media (min-width:520px){.game-lesson-terms{grid-template-columns:repeat(2,minmax(0,1fr))}.game-lesson-hero__body{padding:22px}.game-lesson-copy{padding:20px}}
+  @media (max-width:360px){.game-tabbar{padding-left:6px!important;padding-right:6px!important}.game-nav-item{border-radius:15px!important}.game-choice-mark--lg{width:48px;height:48px;flex-basis:48px}.game-screen input,.game-screen textarea{font-size:16px!important}.game-home-hero{padding-left:16px!important;padding-right:16px!important}.game-home-head{gap:7px!important}.game-home-user{gap:8px!important;flex:1}.game-home-user>div:first-child{width:42px!important;height:42px!important}.game-home-greeting{display:none}.game-home-name{font-size:19px!important}.game-home-stats{gap:5px!important}.game-home-stats>div{padding:7px 10px 7px 7px!important}.game-missions{padding:14px 12px}.game-missions__grid{gap:5px}.game-mission{padding:9px 7px 8px}.game-mission__label{font-size:10px}.game-week__days{gap:3px}.game-week__dot{width:27px;height:27px}.game-learning-route__body{padding:13px 11px}.game-learning-route__visual{height:98px}.game-learning-route__steps{gap:4px}.game-learning-step{padding-left:4px;padding-right:4px}.game-learning-step__label{font-size:9px}.game-lesson{padding-left:12px;padding-right:12px}.game-lesson-hero,.game-lesson-hero__body{min-height:168px}.game-lesson-hero__title{font-size:20px}.game-lesson-stat{padding-left:4px;padding-right:4px}.game-lesson-route,.game-lesson-section,.game-lesson-copy,.game-lesson-notes,.game-lesson-next{padding-left:12px;padding-right:12px}.game-result__content{padding:26px 18px}.game-result__seal{width:68px;height:68px;border-radius:22px}.game-result__seal .ui-icon{width:36px;height:36px}.game-rank-road{padding:0 12px}.game-rank-road__panel{padding:13px 11px}.game-rank-road__steps{gap:5px}.game-rank-step{padding:9px 5px}.game-rank-step__title{font-size:9.5px}}
   @media (prefers-reduced-motion:reduce){.game-screen,.game-screen *,.game-screen *:before,.game-screen *:after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
 
   .admin-hero>div,.admin-tools,.admin-list{max-width:920px;margin-left:auto;margin-right:auto}
@@ -743,18 +794,63 @@ iframe[src*="telegram.org"]{background:transparent!important;color-scheme:light!
         </div>
 
         <sc-if value="{{ showMat }}" hint-placeholder-val="{{ true }}">
-          <div style="padding:14px 16px">
-            <div style="display:flex;gap:8px;margin-bottom:16px;background:var(--card2);padding:4px;border-radius:13px">
-              <button onClick="{{ depthSurface }}" style="flex:1;padding:8px;border:none;border-radius:10px;background:{{ surfBg }};color:{{ surfFg }};font:800 12px Nunito;cursor:pointer">Поверхностный</button>
-              <button onClick="{{ depthDeep }}" style="flex:1;padding:8px;border:none;border-radius:10px;background:{{ deepBg }};color:{{ deepFg }};font:800 12px Nunito;cursor:pointer">Глубокий</button>
+          <main class="game-lesson">
+            <section class="game-lesson-hero" aria-labelledby="lesson-title">
+              <img class="game-lesson-hero__image" src="{{ lessonImg }}" width="720" height="420" alt="" aria-hidden="true" decoding="async">
+              <div class="game-lesson-hero__shade"></div>
+              <div class="game-lesson-hero__body">
+                <div class="game-lesson-hero__eyebrow">Урок {{ curTopic.num }} · {{ curModule.title }}</div>
+                <h1 id="lesson-title" class="game-lesson-hero__title">{{ curTopic.title }}</h1>
+                <div class="game-lesson-hero__meta"><span class="game-lesson-hero__pill">{{ lessonReadLabel }}</span><span class="game-lesson-hero__pill">{{ lessonLevelLabel }}</span></div>
+              </div>
+            </section>
+
+            <div class="game-lesson-stats" aria-label="Объём урока">
+              <sc-for list="{{ lessonStats }}" as="stat" hint-placeholder-count="3">
+                <div class="game-lesson-stat"><div class="game-lesson-stat__value">{{ stat.value }}</div><div class="game-lesson-stat__label">{{ stat.label }}</div></div>
+              </sc-for>
             </div>
-            <div class="game-info" style="background:var(--redsoft);border-radius:14px;padding:11px 14px;display:flex;gap:9px;align-items:flex-start;margin-bottom:16px">
-              <span class="atlas-specimen">SRC</span><div style="font-size:11.5px;color:var(--reddk);line-height:1.45">Источник: Гайворонский И.В. «Нормальная анатомия человека», Том 1 · {{ depthNote }}</div>
+
+            <section class="game-lesson-route" aria-labelledby="lesson-route-title">
+              <div class="game-lesson-route__head"><h2 id="lesson-route-title" class="game-lesson-route__title" style="margin:0">Маршрут темы</h2><div class="game-lesson-route__state">{{ lessonProgressLabel }}</div></div>
+              <div class="game-lesson-route__steps" aria-label="{{ lessonProgressAria }}">
+                <sc-for list="{{ lessonSteps }}" as="step" hint-placeholder-count="3"><div class="game-lesson-route__step {{ step.stateClass }}">{{ step.label }}</div></sc-for>
+              </div>
+              <div class="game-lesson-route__track" role="progressbar" aria-label="{{ lessonProgressAria }}" aria-valuemin="0" aria-valuemax="100" aria-valuenow="{{ lessonProgressPct }}"><div class="game-lesson-route__fill" style="width:{{ lessonProgressPct }}%"></div></div>
+            </section>
+
+            <sc-if value="{{ hasLessonGoals }}" hint-placeholder-val="{{ true }}">
+              <section class="game-lesson-section" aria-labelledby="lesson-goals-title">
+                <div class="game-lesson-section__eyebrow">Цель урока</div>
+                <h2 id="lesson-goals-title" class="game-lesson-section__title">После урока вы сможете ответить</h2>
+                <div class="game-lesson-goals">
+                  <sc-for list="{{ lessonGoals }}" as="goal" hint-placeholder-count="3"><div class="game-lesson-goal"><span class="game-lesson-goal__mark">{{ goal.code }}</span><span>{{ goal.text }}</span></div></sc-for>
+                </div>
+              </section>
+            </sc-if>
+
+            <sc-if value="{{ hasLessonTerms }}" hint-placeholder-val="">
+              <section class="game-lesson-section" aria-labelledby="lesson-terms-title">
+                <div class="game-lesson-section__eyebrow">Перед чтением</div>
+                <h2 id="lesson-terms-title" class="game-lesson-section__title">Ключевые термины</h2>
+                <div class="game-lesson-terms">
+                  <sc-for list="{{ lessonTerms }}" as="term" hint-placeholder-count="4"><div class="game-lesson-term"><div class="game-lesson-term__lat">{{ term.lat }}</div><div class="game-lesson-term__ru">{{ term.ru }}</div></div></sc-for>
+                </div>
+              </section>
+            </sc-if>
+
+            <div class="game-lesson-depth" role="group" aria-label="Глубина конспекта">
+              <button onClick="{{ depthSurface }}" aria-pressed="{{ surfPressed }}" style="flex:1;padding:8px;border:none;border-radius:10px;background:{{ surfBg }};color:{{ surfFg }};font:800 12px Nunito;cursor:pointer">Кратко</button>
+              <button onClick="{{ depthDeep }}" aria-pressed="{{ deepPressed }}" style="flex:1;padding:8px;border:none;border-radius:10px;background:{{ deepBg }};color:{{ deepFg }};font:800 12px Nunito;cursor:pointer">Полный конспект</button>
             </div>
-            <div>
+            <div class="game-info game-lesson-source" style="background:var(--redsoft);border-radius:14px;padding:11px 14px;display:flex;gap:10px;align-items:flex-start">
+              <span class="game-lesson-source__icon" aria-hidden="true"><svg class="ui-icon" viewBox="0 0 24 24"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H11v17H6.5A2.5 2.5 0 0 0 4 22V5.5ZM20 5.5A2.5 2.5 0 0 0 17.5 3H13v17h4.5A2.5 2.5 0 0 1 20 22V5.5Z"/></svg></span><div><div style="font:900 10.5px Nunito;color:var(--reddk)">Проверенный источник</div><div style="margin-top:2px;font-size:11px;color:var(--reddk);line-height:1.45">Гайворонский И.В. «Нормальная анатомия человека», Том 1 · {{ depthNote }}</div></div>
+            </div>
+            <article class="game-lesson-copy" aria-labelledby="lesson-copy-title">
+              <div class="game-lesson-copy__head"><div class="game-lesson-section__eyebrow">Теория</div><h2 id="lesson-copy-title" class="game-lesson-section__title">Конспект урока</h2></div>
               <sc-for list="{{ matBlocks }}" as="b" hint-placeholder-count="6">
-                <sc-if value="{{ b.isH }}" hint-placeholder-val=""><div style="display:flex;align-items:center;gap:8px;margin:20px 0 10px"><span style="width:4px;height:17px;background:var(--red);border-radius:2px"></span><span style="font:800 16px Nunito;color:var(--reddk)">{{ b.x }}</span></div></sc-if>
-                <sc-if value="{{ b.isP }}" hint-placeholder-val="{{ true }}"><p style="margin:0 0 12px;font-size:14px;line-height:1.66;color:var(--ink);text-wrap:pretty"><sc-for list="{{ b.segs }}" as="sg" hint-placeholder-count="2"><sc-if value="{{ sg.isT }}" hint-placeholder-val="{{ true }}"><span>{{ sg.s }}</span></sc-if><sc-if value="{{ sg.isLat }}" hint-placeholder-val=""><i style="font-family:Lora;font-style:italic;color:var(--red);font-weight:700">{{ sg.s }}</i></sc-if><sc-if value="{{ sg.isEm }}" hint-placeholder-val=""><b style="color:var(--ink);font-weight:800">{{ sg.s }}</b></sc-if></sc-for></p></sc-if>
+                <sc-if value="{{ b.isH }}" hint-placeholder-val=""><h3>{{ b.x }}</h3></sc-if>
+                <sc-if value="{{ b.isP }}" hint-placeholder-val="{{ true }}"><p><sc-for list="{{ b.segs }}" as="sg" hint-placeholder-count="2"><sc-if value="{{ sg.isT }}" hint-placeholder-val="{{ true }}"><span>{{ sg.s }}</span></sc-if><sc-if value="{{ sg.isLat }}" hint-placeholder-val=""><i style="font-family:Lora;font-style:italic;color:var(--red);font-weight:700">{{ sg.s }}</i></sc-if><sc-if value="{{ sg.isEm }}" hint-placeholder-val=""><b style="color:var(--ink);font-weight:800">{{ sg.s }}</b></sc-if></sc-for></p></sc-if>
                 <sc-if value="{{ b.isUl }}" hint-placeholder-val="">
                   <div class="game-panel" style="display:flex;flex-direction:column;gap:8px;margin:0 0 14px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:13px 15px">
                     <sc-for list="{{ b.items }}" as="it" hint-placeholder-count="3">
@@ -763,11 +859,18 @@ iframe[src*="telegram.org"]{background:transparent!important;color-scheme:light!
                   </div>
                 </sc-if>
               </sc-for>
-            </div>
-            <div style="margin-top:6px;font:800 12px Nunito;color:var(--mut);letter-spacing:.05em">МОИ ЗАМЕТКИ</div>
-            <textarea value="{{ noteVal }}" onInput="{{ onNote }}" placeholder="Запиши, что важно запомнить по этой теме…" style="margin-top:8px;width:100%;min-height:78px;padding:13px 15px;border:1.5px solid var(--line);border-radius:14px;background:var(--card);color:var(--ink);font:500 13px Manrope;line-height:1.5;outline:none;resize:vertical"></textarea>
-            <button onClick="{{ tabTrain }}" style="margin-top:14px;width:100%;padding:15px;border:none;border-radius:16px;background:var(--red);color:#fff;font:800 15px Nunito;box-shadow:0 4px 0 var(--reddk);cursor:pointer;transition:transform .08s,box-shadow .08s" style-active="transform:translateY(4px);box-shadow:0 0 0 var(--reddk)">Закрепить тренировкой →</button>
-          </div>
+            </article>
+
+            <section class="game-lesson-notes" aria-labelledby="lesson-notes-title">
+              <div class="game-lesson-section__eyebrow">Личный конспект</div><h2 id="lesson-notes-title" class="game-lesson-section__title">Мои заметки</h2>
+              <textarea value="{{ noteVal }}" onInput="{{ onNote }}" aria-label="Заметки по теме" placeholder="Запишите своими словами то, что важно запомнить…" style="margin-top:10px;width:100%;min-height:92px;padding:13px 15px;border:1.5px solid var(--line);border-radius:14px;background:var(--card2);color:var(--ink);font:500 13px Manrope;line-height:1.5;outline:none;resize:vertical"></textarea>
+            </section>
+
+            <section class="game-lesson-next" aria-labelledby="lesson-next-title">
+              <div class="game-lesson-next__head"><div class="game-lesson-next__mark" aria-hidden="true"><svg class="ui-icon" viewBox="0 0 24 24"><path d="M9.5 4.2A3.2 3.2 0 0 0 4.8 7a3.5 3.5 0 0 0 .2 6.7A3.6 3.6 0 0 0 9 19.8c1.2 0 2.3-.6 3-1.5V6.5c-.5-1.3-1.4-2.1-2.5-2.3Zm5 0A3.2 3.2 0 0 1 19.2 7a3.5 3.5 0 0 1-.2 6.7 3.6 3.6 0 0 1-4 6.1c-1.2 0-2.3-.6-3-1.5V6.5c.5-1.3 1.4-2.1 2.5-2.3Z"/></svg></div><div><div class="game-lesson-section__eyebrow">Следующий шаг</div><h2 id="lesson-next-title" class="game-lesson-section__title">{{ lessonNextTitle }}</h2><div style="margin-top:3px;color:var(--mut);font:650 11.5px/1.45 Manrope">{{ lessonNextText }}</div></div></div>
+              <button class="game-lesson-next__button" onClick="{{ lessonNextAction }}"><span>{{ lessonNextLabel }}</span><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-5-5 5 5-5 5"/></svg></button>
+            </section>
+          </main>
         </sc-if>
 
         <sc-if value="{{ showTrainPick }}" hint-placeholder-val="">
@@ -2296,7 +2399,7 @@ async logout(){
     // current topic
     const topic = tops[s.topicIdx] || null;
     const sec = topic?this.sectionOf(topic.num,s.moduleId):this.sectionsFor(s.moduleId)[0]||{name:''};
-    R.curTopic = topic?{title:topic.name,lat:topic.lat}:{title:'',lat:''};
+    R.curTopic = topic?{title:topic.name,lat:topic.lat,num:topic.num}:{title:'',lat:'',num:''};
     R.curSection = sec.name.toUpperCase();
     R.tabMat=()=>this.setState({tab:'mat'}); R.tabTrain=()=>this.setState({tab:'train'});
     const matTab=s.tab==='mat';
@@ -2307,9 +2410,55 @@ async logout(){
     R.depthSurface=()=>this.setState({depth:'surface'}); R.depthDeep=()=>this.setState({depth:'deep'});
     R.surfBg=surf?'var(--card)':'transparent'; R.surfFg=surf?'var(--red)':'var(--mut)';
     R.deepBg=!surf?'var(--card)':'transparent'; R.deepFg=!surf?'var(--red)':'var(--mut)';
+    R.surfPressed=surf?'true':'false'; R.deepPressed=!surf?'true':'false';
     R.depthNote = surf?'краткий конспект — главное':'полная теоретическая часть';
     const theory = topic?topic.theory:[];
-    const shown = surf ? theory.slice(0, Math.min(4, theory.length)) : theory;
+    const theoryText=theory.map(b=>b.t==='ul'?(b.items||[]).join(' '):(b.x||'')).join(' ').trim();
+    const wordCount=theoryText?theoryText.split(/\s+/).filter(Boolean).length:0;
+    const readMinutes=Math.max(2,Math.ceil(wordCount/180));
+    const headingCount=theory.filter(b=>b.t!=='ul'&&this.isHeading(b.x||'')).length;
+    R.lessonImg=(sec&&sec.img)||mod.img;
+    R.lessonReadLabel='≈ '+readMinutes+' мин чтения';
+    R.lessonLevelLabel=surf?'Краткий разбор':'Углублённый разбор';
+    R.lessonStats=[
+      {value:String(Math.max(1,headingCount)),label:'разделов'},
+      {value:String(topic&&topic.pairs?topic.pairs.length:0),label:'терминов'},
+      {value:String(topic&&topic.tests?topic.tests.length:0),label:'вопросов'}
+    ];
+    const goalSource=(topic&&topic.cards&&topic.cards.length?topic.cards.map(c=>c.front):(topic&&topic.tests?topic.tests.map(t=>t.q||t.question||''):[])).filter(Boolean);
+    R.lessonGoals=goalSource.slice(0,3).map((text,i)=>({code:String(i+1).padStart(2,'0'),text}));
+    R.hasLessonGoals=R.lessonGoals.length>0;
+    R.lessonTerms=(topic&&topic.pairs?topic.pairs:[]).slice(0,4).map(p=>({lat:p.term,ru:p.def}));
+    R.hasLessonTerms=R.lessonTerms.length>0;
+    const lessonKey=topic?this.pk(topic.num):'';
+    const lessonPr=lessonKey?(s.progress[lessonKey]||{}):{};
+    const lessonPassed=(lessonPr.bestPct||0)>=75;
+    const lessonPracticed=!!lessonPr.studied;
+    const lessonAttempted=(lessonPr.attempts||0)>0;
+    const lessonStepIndex=lessonPassed?3:(lessonPracticed?2:0);
+    R.lessonProgressPct=lessonPassed?100:(lessonPracticed?67:33);
+    R.lessonProgressLabel=lessonPassed?'Тема зачтена':('Шаг '+(lessonStepIndex+1)+' из 3');
+    R.lessonProgressAria=lessonPassed?'Маршрут темы завершён':('Маршрут темы: шаг '+(lessonStepIndex+1)+' из 3');
+    R.lessonSteps=['Материал','Практика','Зачёт'].map((label,i)=>({label,stateClass:i<lessonStepIndex?'is-complete':(i===lessonStepIndex?'is-current':'')}));
+    if(lessonPassed) R.lessonSteps=R.lessonSteps.map(step=>({label:step.label,stateClass:'is-complete'}));
+    const practiceMode=topic&&topic.cards&&topic.cards.length?'flash':(topic&&topic.pairs&&topic.pairs.length?'term':'test');
+    const nextMode=lessonPassed?practiceMode:(lessonPracticed&&topic&&topic.tests&&topic.tests.length?'test':practiceMode);
+    if(lessonPassed){ R.lessonNextTitle='Сохраните уверенность'; R.lessonNextText='Короткое повторение укрепит материал и поддержит серию занятий.'; R.lessonNextLabel='Повторить карточки'; }
+    else if(lessonPracticed){ R.lessonNextTitle=lessonAttempted?'Улучшите результат':'Проверьте знания'; R.lessonNextText=lessonAttempted?('Лучший результат — '+(lessonPr.bestPct||0)+'%. Для зачёта нужно не менее 75%.'):'Пройдите короткий тест и закройте тему в учебном маршруте.'; R.lessonNextLabel=lessonAttempted?'Повторить тест':'Пройти тест-зачёт'; }
+    else { R.lessonNextTitle='Закрепите материал'; R.lessonNextText='Ответьте на вопросы по теме, чтобы перевести знания из чтения в практику.'; R.lessonNextLabel=practiceMode==='flash'?'Начать флэш-карты':(practiceMode==='term'?'Начать тренировку терминов':'Пройти тест-зачёт'); }
+    R.lessonNextAction=()=>this.startMode(nextMode);
+    let shown=theory;
+    if(surf){
+      const summary=[], seen=new Set(); let intro=0, sections=0, needBody=false;
+      theory.forEach(b=>{
+        const isH=b.t!=='ul'&&this.isHeading(b.x||'');
+        if(!isH&&intro<2){ summary.push(b); seen.add(b); intro++; return; }
+        if(isH&&sections<2){ summary.push(b); seen.add(b); sections++; needBody=true; return; }
+        if(needBody&&!isH){ summary.push(b); seen.add(b); needBody=false; }
+      });
+      theory.forEach(b=>{ if(summary.length<6&&!seen.has(b)){ summary.push(b); seen.add(b); } });
+      shown=summary.slice(0,6);
+    }
     R.matBlocks = shown.map(b=>{
       if(b.t==='ul') return { isUl:true, isP:false, isH:false, items:(b.items||[]).map(it=>({ segs:this.segsOf(it) })) };
       const x=b.x||'';
