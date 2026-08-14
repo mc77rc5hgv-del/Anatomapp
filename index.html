@@ -32,9 +32,27 @@ iframe[src*="telegram.org"]{background:transparent!important;color-scheme:light!
 <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,600;0,700;0,800;0,900;1,700&family=Manrope:wght@400;500;600;700;800&family=Lora:ital@1&display=swap" rel="stylesheet">
 <style>
   *{box-sizing:border-box}
-  body{margin:0;background:#e9e2d8;font-family:Manrope,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+  body{margin:0;background:#eeeae5;font-family:Manrope,system-ui,sans-serif;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
   #app a{color:var(--red);text-decoration:none}
   #app a:hover{color:var(--red2)}
+  #app{isolation:isolate;color-scheme:light}
+  #app ::selection{background:rgba(167,38,54,.16);color:var(--ink)}
+  #app button,#app input,#app textarea,#app select{font-family:Manrope,system-ui,sans-serif;-webkit-tap-highlight-color:transparent}
+  #app button{transition:transform .16s ease,box-shadow .18s ease,background-color .18s ease,border-color .18s ease}
+  #app button:active{transform:translateY(1px) scale(.99)}
+  #app button:focus-visible,#app input:focus-visible,#app textarea:focus-visible,#app select:focus-visible{outline:none;box-shadow:0 0 0 3px rgba(157,35,48,.13) !important;border-color:var(--red) !important}
+  #app input,#app textarea,#app select{box-shadow:0 1px 0 rgba(255,255,255,.65) inset,0 8px 24px -24px rgba(34,20,15,.55);transition:border-color .18s ease,box-shadow .18s ease,background-color .18s ease}
+  #app [style*="background:var(--card);border:1px solid var(--line)"]{box-shadow:0 10px 30px -26px rgba(43,25,19,.7) !important}
+  #app [style*="background:var(--card2)"]{border-color:rgba(120,91,72,.08)}
+  #app button[style*="background:var(--red)"]{background:linear-gradient(180deg,var(--red2),var(--red)) !important;box-shadow:0 10px 24px -14px rgba(126,26,38,.6) !important}
+  #app button[style*="background:var(--green)"]{background:linear-gradient(180deg,#3b9869,var(--green)) !important;box-shadow:0 10px 24px -16px rgba(35,111,74,.55) !important}
+  #tabbar{background:rgba(255,255,255,.86) !important;border-top:1px solid rgba(112,85,68,.13) !important;backdrop-filter:blur(18px) saturate(1.35);-webkit-backdrop-filter:blur(18px) saturate(1.35);box-shadow:0 -12px 32px -28px rgba(35,20,15,.65)}
+  #tabbar button{min-height:50px;border-radius:14px !important}
+  .premium-splash:before{content:"";position:absolute;inset:0;background:radial-gradient(80% 54% at 50% 14%,rgba(255,255,255,.14),transparent 68%);pointer-events:none}
+  .premium-login{background:linear-gradient(180deg,var(--bg) 0%,var(--bg) 68%,var(--card2) 145%) !important}
+  .premium-login>div:first-child{filter:drop-shadow(0 8px 14px rgba(122,24,34,.14))}
+  @media (hover:hover){#app button:hover{transform:translateY(-1px)}#app [style*="cursor:pointer"][style*="background:var(--card)"]:hover{border-color:rgba(157,35,48,.22) !important}}
+  @media (prefers-reduced-motion:reduce){#app *,#app *:before,#app *:after{scroll-behavior:auto !important;animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important}}
   .scr::-webkit-scrollbar{width:0}
   .scr{-webkit-overflow-scrolling:touch;transform:translateZ(0);will-change:scroll-position;backface-visibility:hidden}
   @keyframes pop{0%{transform:scale(.96);opacity:0}100%{transform:scale(1);opacity:1}}
@@ -98,7 +116,7 @@ iframe[src*="telegram.org"]{background:transparent!important;color-scheme:light!
     <div class="ds-foot">Наведи и учись прямо в окне приложения →</div>
   </div>
 </aside>
-<div id="app" ref="{{ appRef }}" style="--bg:#faf6f0;--card:#ffffff;--card2:#f6efe6;--ink:#20160f;--mut:#8a7b70;--line:#ece2d6;--red:#c02a30;--red2:#e0454b;--reddk:#961f24;--redsoft:#f9e9e8;--gold:#d98a2b;--goldsoft:#faefd9;--green:#2f9e5f;--greendk:#217a47;--greensoft:#e6f4ec;width:392px;height:812px;position:relative;border-radius:44px;background:#0b0908;padding:11px;box-shadow:0 30px 70px -18px rgba(60,20,15,.5),0 0 0 2px rgba(0,0,0,.15) inset,0 0 0 11px #171310;font-family:Manrope,sans-serif">
+<div id="app" ref="{{ appRef }}" style="--bg:#f8f6f3;--card:#ffffff;--card2:#f1ede8;--ink:#1b1715;--mut:#756d67;--line:#e6dfd8;--red:#a72636;--red2:#c44350;--reddk:#741923;--redsoft:#f7e9eb;--gold:#b57a2b;--goldsoft:#f6eddd;--green:#2d875c;--greendk:#216b47;--greensoft:#e7f2eb;width:392px;height:812px;position:relative;border-radius:44px;background:#0b0908;padding:11px;box-shadow:0 30px 70px -18px rgba(60,20,15,.5),0 0 0 2px rgba(0,0,0,.15) inset,0 0 0 11px #171310;font-family:Manrope,sans-serif">
   <div class="notch" style="position:absolute;top:20px;left:50%;transform:translateX(-50%);width:118px;height:30px;background:#0b0908;border-radius:0 0 18px 18px;z-index:60"></div>
 
   <div class="scr" style="position:relative;width:100%;height:100%;border-radius:34px;overflow:hidden;background:var(--bg);color:var(--ink)">
@@ -120,7 +138,7 @@ iframe[src*="telegram.org"]{background:transparent!important;color-scheme:light!
 
     <!-- ===================== SPLASH ===================== -->
     <sc-if value="{{ isSplash }}" hint-placeholder-val="{{ true }}">
-      <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 34px;background:radial-gradient(130% 80% at 50% 0%,#e0454b 0%,#c02a30 42%,#8f1d22 100%);color:#fff;text-align:center">
+      <div class="premium-splash" style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 34px;background:radial-gradient(120% 76% at 50% 0%,#c74c58 0%,#a72636 45%,#681923 100%);color:#fff;text-align:center">
         <div style="animation:rise .6s ease">
           <div style="width:112px;height:112px;margin:0 auto 26px;position:relative">
             <div style="position:absolute;inset:0;background:#fff;border-radius:30px;transform:rotate(45deg);box-shadow:0 18px 40px -12px rgba(0,0,0,.5)"></div>
@@ -139,7 +157,7 @@ iframe[src*="telegram.org"]{background:transparent!important;color-scheme:light!
 
     <!-- ===================== LOGIN ===================== -->
     <sc-if value="{{ isLogin }}" hint-placeholder-val="">
-      <div style="position:absolute;inset:0;padding:62px 30px 28px;display:flex;flex-direction:column;background:var(--bg);overflow:auto">
+      <div class="premium-login" ref="{{ loginRef }}" style="position:absolute;inset:0;padding:62px 30px 28px;display:flex;flex-direction:column;background:var(--bg);overflow:auto;scrollbar-width:none">
         <div style="display:flex;align-items:center;gap:9px">
           <div style="width:30px;height:30px;position:relative"><div style="position:absolute;inset:0;background:var(--red);border-radius:9px;transform:rotate(45deg)"></div><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font:900 16px Nunito;color:#fff">А</div></div>
           <span style="font:900 17px Nunito;color:var(--ink);letter-spacing:.03em">АНАТОМ</span>
@@ -220,8 +238,8 @@ iframe[src*="telegram.org"]{background:transparent!important;color-scheme:light!
     <!-- ===================== HOME ===================== -->
     <sc-if value="{{ isHome }}" hint-placeholder-val="">
       <div class="scr" style="position:absolute;inset:0;overflow:auto;background:var(--bg);padding-bottom:92px;animation:screenIn .34s ease">
-        <div style="padding:54px 20px 26px;background:radial-gradient(140% 120% at 85% -10%,#e85055 0%,#c62a30 40%,#8f1d22 78%,#6e1519 100%);position:relative;overflow:hidden;border-bottom:2px solid rgba(224,166,75,.35)">
-          <div style="position:absolute;inset:0;opacity:.14;font-size:30px;line-height:1.9;letter-spacing:20px;overflow:hidden;user-select:none;pointer-events:none;white-space:pre-wrap;word-break:break-word;color:#fff;transform:rotate(-8deg) scale(1.3);transform-origin:center">💀 🦴 🧠 💀 🦴 🧠 💀 🦴 🧠 💀 🦴 🧠 💀 🦴 🧠 💀 🦴 🧠 💀 🦴 🧠 💀 🦴 🧠 💀 🦴 🧠 💀 🦴 🧠 💀 🦴 🧠 💀 🦴 🧠 💀 🦴 🧠 💀</div>
+        <div style="padding:54px 20px 26px;background:linear-gradient(145deg,#33171c 0%,#711f2b 56%,#a62a39 100%);position:relative;overflow:hidden;border-bottom:1px solid rgba(255,255,255,.08);box-shadow:0 18px 34px -28px rgba(67,15,23,.9)">
+          <div style="position:absolute;inset:0;opacity:.13;user-select:none;pointer-events:none;background-image:linear-gradient(rgba(255,255,255,.18) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.18) 1px,transparent 1px);background-size:34px 34px;mask-image:linear-gradient(to bottom,black,transparent 88%)"></div>
           <div style="position:absolute;top:-40px;right:-30px;width:180px;height:180px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.14),transparent 68%)"></div>
           <div style="position:absolute;left:0;right:0;bottom:0;height:1px;background:linear-gradient(90deg,transparent,rgba(224,166,75,.6),transparent)"></div>
           <div style="position:relative;display:flex;align-items:center;justify-content:space-between;gap:12px">
@@ -1706,9 +1724,9 @@ async logout(){
   shuffle(a){ return a.map(x=>[Math.random(),x]).sort((p,q)=>p[0]-q[0]).map(p=>p[1]); }
   applyTheme(dark){
     const el=this._app; if(!el) return;
-    const L={'--bg':'#faf6f0','--card':'#ffffff','--card2':'#f6efe6','--ink':'#20160f','--mut':'#8a7b70','--line':'#ece2d6','--redsoft':'#f9e9e8','--goldsoft':'#faefd9','--greensoft':'#e6f4ec'};
-    const D={'--bg':'#141110','--card':'#1e1a18','--card2':'#282320','--ink':'#f4ece6','--mut':'#a89a92','--line':'#2f2825','--redsoft':'#2c1a1b','--goldsoft':'#2a2216','--greensoft':'#16261c'};
-    const m=dark?D:L; Object.keys(m).forEach(k=>el.style.setProperty(k,m[k]));
+    const L={'--bg':'#f8f6f3','--card':'#ffffff','--card2':'#f1ede8','--ink':'#1b1715','--mut':'#756d67','--line':'#e6dfd8','--redsoft':'#f7e9eb','--goldsoft':'#f6eddd','--greensoft':'#e7f2eb'};
+    const D={'--bg':'#12100f','--card':'#1b1816','--card2':'#25211e','--ink':'#f5f1ed','--mut':'#a89f98','--line':'#302a26','--redsoft':'#30191d','--goldsoft':'#2b2318','--greensoft':'#17271e'};
+    const m=dark?D:L; Object.keys(m).forEach(k=>el.style.setProperty(k,m[k])); el.style.colorScheme=dark?'dark':'light';
   }
 
   curTopics(){ const all=this.state.datasets[this.state.moduleId]||[]; const subs=this.SUBSECTIONS[this.state.moduleId]; if(subs && this.state.subKey){ const sub=subs.find(x=>x.name===this.state.subKey); if(sub) return all.filter(t=>t.num>=sub.from&&t.num<=sub.to); } return all; }
@@ -1738,8 +1756,9 @@ async logout(){
     // onboarding
     R.goLogin=()=>this.setState({screen:'login',authErr:''});
     R.authTab=s.authTab;
-    R.tabSignup=()=>this.setState({authTab:'signup',authErr:''});
-    R.tabSignin=()=>this.setState({authTab:'signin',authErr:''});
+    R.loginRef=(el)=>{ this._loginPanel=el; };
+    R.tabSignup=()=>{ if(document.activeElement) document.activeElement.blur(); this.setState({authTab:'signup',authErr:''},()=>{ if(this._loginPanel) this._loginPanel.scrollTop=0; }); };
+    R.tabSignin=()=>{ if(document.activeElement) document.activeElement.blur(); this.setState({authTab:'signin',authErr:''},()=>{ if(this._loginPanel) this._loginPanel.scrollTop=0; }); };
     R.tabSignupBg=s.authTab==='signup'?'var(--card)':'transparent'; R.tabSignupFg=s.authTab==='signup'?'var(--red)':'var(--mut)';
     R.tabSigninBg=s.authTab==='signin'?'var(--card)':'transparent'; R.tabSigninFg=s.authTab==='signin'?'var(--red)':'var(--mut)';
     R.authTitle=s.authTab==='signup'?'Создать аккаунт':'С возвращением 👋';
