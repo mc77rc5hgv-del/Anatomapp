@@ -237,6 +237,24 @@ iframe[src*="telegram.org"]{background:transparent!important;color-scheme:light!
   .course-topic-fav[aria-pressed="true"]{color:var(--gold);background:var(--goldsoft)}
   @media (max-width:360px){.course-module-overview{margin-left:12px;margin-right:12px;padding:14px}.course-section,.course-topic-section{margin-left:12px;margin-right:12px}.course-exam{width:calc(100% - 24px);margin-left:12px;margin-right:12px}.course-topic-main{padding-left:9px;gap:8px}.course-topic-fav{width:46px}}
 
+  .game-home,.game-module,.game-topic,.game-profile,.game-history,.game-admin{scroll-padding:76px 0 104px}
+  #app button{touch-action:manipulation}
+  .home-search-chip{min-height:44px;padding:8px 13px;border:1px solid var(--line);border-radius:20px;background:var(--card);color:var(--mut);font:800 11px Manrope;cursor:pointer}
+  .home-search-result{width:100%;min-height:58px;padding:11px 13px;border:1.5px solid var(--line);border-radius:15px;background:var(--card);color:var(--ink);display:flex;align-items:center;gap:11px;text-align:left;box-shadow:0 3px 0 var(--game-depth);cursor:pointer}
+  .home-review-item{width:100%;min-height:58px;padding:11px 13px;border:1.5px solid color-mix(in srgb,var(--gold) 62%,var(--line));border-radius:15px;background:var(--goldsoft);color:var(--ink);display:flex;align-items:center;gap:11px;text-align:left;box-shadow:0 3px 0 color-mix(in srgb,var(--gold) 20%,var(--line));cursor:pointer}
+  .home-review-action,.home-mistakes-action{width:calc(100% - 32px);min-height:72px;margin:12px 16px 0;padding:13px 15px;border-radius:20px;display:flex;align-items:center;gap:13px;text-align:left;cursor:pointer}
+  .home-review-action{border:0;background:linear-gradient(135deg,var(--green),var(--greendk));color:#fff;box-shadow:0 4px 0 color-mix(in srgb,var(--greendk) 78%,#10291d)}
+  .home-mistakes-action{border:1.5px solid var(--red);background:var(--redsoft);color:var(--red);box-shadow:0 4px 0 color-mix(in srgb,var(--red) 20%,var(--line))}
+  .home-action-icon{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;flex-shrink:0}
+  .home-action-copy{flex:1;min-width:0}
+  .home-action-copy strong{display:block;font:900 14px Nunito}
+  .home-action-copy span{display:block;margin-top:2px;font:600 11px/1.35 Manrope}
+  .admin-user-card{border:1px solid var(--line);border-radius:16px;background:var(--card);overflow:hidden;transition:border-color .2s,box-shadow .2s}
+  .admin-user-trigger{width:100%;min-height:64px;padding:12px 13px;border:0;background:transparent;color:var(--ink);display:flex;align-items:flex-start;gap:11px;text-align:left;cursor:pointer}
+  .admin-user-chevron{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;color:var(--mut);transition:transform .18s ease;flex-shrink:0;margin-top:8px}
+  .admin-user-trigger[aria-expanded="true"] .admin-user-chevron{transform:rotate(90deg)}
+  .admin-user-details{margin:0 13px 13px;padding-top:12px;border-top:1px solid var(--line)}
+
   .rating-page{background:linear-gradient(180deg,var(--card2) 0,var(--bg) 250px) !important}
   .rating-hero{position:relative;padding:54px 20px 46px;background:radial-gradient(90% 140% at 92% 0%,rgba(214,150,72,.28),transparent 52%),linear-gradient(145deg,#30151a 0%,#6f1d2a 58%,#a52a39 100%);overflow:hidden;color:#fff}
   .rating-hero:before{content:"";position:absolute;right:-48px;bottom:-82px;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.12),transparent 68%);pointer-events:none}
@@ -647,7 +665,7 @@ iframe[src*="telegram.org"]{background:transparent!important;color-scheme:light!
     <!-- ===================== TELEGRAM CONFIRM ===================== -->
     <sc-if value="{{ isTg }}" hint-placeholder-val="">
       <div class="game-screen game-form" style="position:absolute;inset:0;padding:62px 30px 30px;display:flex;flex-direction:column;background:var(--bg)">
-        <button onClick="{{ tgBack }}" aria-label="Назад" style="width:36px;height:36px;border-radius:11px;border:1px solid var(--line);background:var(--card);color:var(--ink);font-size:18px;cursor:pointer">‹</button>
+        <button onClick="{{ tgBack }}" aria-label="Назад" style="width:44px;height:44px;border-radius:13px;border:1px solid var(--line);background:var(--card);color:var(--ink);display:grid;place-items:center;cursor:pointer"><svg class="game-chevron" viewBox="0 0 24 24" aria-hidden="true" style="transform:rotate(180deg)"><path d="m9 5 7 7-7 7"/></svg></button>
         <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center">
           <div style="width:88px;height:88px;border-radius:26px;background:#2aabee;display:flex;align-items:center;justify-content:center;color:#fff;box-shadow:0 14px 30px -12px rgba(42,171,238,.6)"><svg width="42" height="42" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.7 3.4 2.9 10.2c-1.2.5-1.2 1.1-.2 1.4l4.6 1.4 1.8 5.5c.2.6.1.8.7.8.4 0 .7-.2.9-.4l2.2-2.1 4.6 3.4c.8.5 1.5.3 1.7-.8l3-14.2c.3-1.4-.5-2.1-1.5-1.8ZM9 12.7l9-5.7c.4-.3.8-.1.5.2l-7.4 6.7-.3 3.3L9 12.7Z"/></svg></div>
           <div style="font:900 22px Nunito;color:var(--ink);margin-top:22px">Вход через Telegram</div>
@@ -710,24 +728,24 @@ iframe[src*="telegram.org"]{background:transparent!important;color-scheme:light!
         <div style="width:100%;max-width:900px;margin:0 auto">
         <div class="atlas-search" style="padding:0 16px;margin-top:14px">
           <svg class="ui-icon ui-icon--sm" viewBox="0 0 24 24" aria-hidden="true" style="left:31px"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4 4"/></svg>
-          <input value="{{ query }}" onInput="{{ onQuery }}" aria-label="Поиск по темам и терминам" placeholder="Тема, латынь или текст теории…" style-focus="border-color:var(--red);box-shadow:0 0 0 3px var(--redsoft)" style="width:100%;padding:12px 14px;border:1.5px solid var(--line);border-radius:14px;background:var(--card);color:var(--ink);font:600 13px Manrope;outline:none;transition:.15s">
+          <input value="{{ query }}" onInput="{{ onQuery }}" aria-label="Поиск по темам и терминам" placeholder="Тема, латынь или текст теории…" autocomplete="off" enterkeyhint="search" style-focus="border-color:var(--red);box-shadow:0 0 0 3px var(--redsoft)" style="width:100%;min-height:50px;padding:12px 14px;border:1.5px solid var(--line);border-radius:14px;background:var(--card);color:var(--ink);font:600 16px Manrope;outline:none;transition:.15s">
         </div>
         
         <sc-if value="{{ hasRecent }}" hint-placeholder-val="">
           <div style="padding:10px 16px 0;display:flex;flex-wrap:wrap;gap:6px">
             <sc-for list="{{ recentQueries }}" as="rq" hint-placeholder-count="3">
-              <button onClick="{{ rq.onClick }}" style="padding:6px 12px;border:1px solid var(--line);border-radius:20px;background:var(--card);color:var(--mut);font:700 12px Manrope;cursor:pointer">{{ rq.label }}</button>
+              <button type="button" class="home-search-chip" onClick="{{ rq.onClick }}">{{ rq.label }}</button>
             </sc-for>
           </div>
         </sc-if>
 <sc-if value="{{ hasQuery }}" hint-placeholder-val="">
           <div style="padding:12px 16px 0;display:flex;flex-direction:column;gap:8px">
             <sc-for list="{{ searchResults }}" as="r" hint-placeholder-count="3">
-              <div class="game-card" onClick="{{ r.onClick }}" style="display:flex;align-items:center;gap:11px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:11px 13px;cursor:pointer">
+              <button type="button" class="home-search-result" onClick="{{ r.onClick }}" aria-label="{{ r.aria }}">
                 <div style="width:30px;height:30px;border-radius:9px;background:var(--redsoft);color:var(--red);display:flex;align-items:center;justify-content:center;font:800 12px Nunito;flex-shrink:0">{{ r.num }}</div>
                 <div style="flex:1;min-width:0"><div style="font:800 13px Nunito;color:var(--ink)">{{ r.title }}</div><div style="font-size:11px;color:var(--mut)"><span style="color:var(--red);font-weight:700">{{ r.tag }}</span> · <i style="font-style:italic;font-family:Lora">{{ r.lat }}</i></div></div>
-                <div style="font-size:17px;color:var(--mut)">›</div>
-              </div>
+                <svg class="game-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg>
+              </button>
             </sc-for>
             <sc-if value="{{ noResults }}" hint-placeholder-val=""><div style="text-align:center;color:var(--mut);font-size:13px;padding:16px">Ничего не найдено</div></sc-if>
           </div>
@@ -787,27 +805,19 @@ iframe[src*="telegram.org"]{background:transparent!important;color-scheme:light!
           <div style="margin:14px 16px 8px;display:flex;align-items:center;justify-content:space-between"><div class="atlas-section-title">На повторение сегодня</div><span style="font:800 11px Nunito;color:#fff;background:var(--gold);padding:2px 8px;border-radius:9px">{{ reviewCount }}</span></div>
           <div style="display:flex;flex-direction:column;gap:8px;padding:0 16px">
             <sc-for list="{{ reviewList }}" as="rv" hint-placeholder-count="2">
-              <div class="game-card" onClick="{{ rv.onClick }}" style="display:flex;align-items:center;gap:11px;background:var(--goldsoft);border:1px solid var(--gold);border-radius:15px;padding:11px 13px;cursor:pointer">
+              <button type="button" class="home-review-item" onClick="{{ rv.onClick }}" aria-label="{{ rv.aria }}">
                 <div style="width:34px;height:34px;border-radius:11px;background:var(--gold);color:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0"><svg class="ui-icon ui-icon--sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 7v5h-5M4 17v-5h5"/><path d="M18.3 10A7 7 0 0 0 6.2 6.2L4 8m16 8-2.2 1.8A7 7 0 0 1 5.7 14"/></svg></div>
                 <div style="flex:1;min-width:0"><div style="font:800 13px Nunito;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ rv.title }}</div><div style="font-size:11px;color:var(--gold);font-weight:700"><i style="font-family:Lora">{{ rv.lat }}</i></div></div>
-                <div style="font-size:17px;color:var(--gold)">›</div>
-              </div>
+                <svg class="game-chevron" viewBox="0 0 24 24" aria-hidden="true" style="color:var(--gold)"><path d="m9 5 7 7-7 7"/></svg>
+              </button>
             </sc-for>
           </div>
         </sc-if>
         <sc-if value="{{ hasReview }}" hint-placeholder-val="">
-          <div class="game-cta" onClick="{{ startReview }}" style-active="transform:translateY(3px)" style="margin:12px 16px 0;background:linear-gradient(135deg,var(--green),var(--greendk));border-radius:20px;padding:14px 16px;display:flex;align-items:center;gap:13px;cursor:pointer;transition:transform .12s;box-shadow:0 12px 24px -14px rgba(47,158,95,.7)">
-            <div style="width:46px;height:46px;border-radius:14px;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.22);display:flex;align-items:center;justify-content:center;color:#fff;flex-shrink:0"><svg class="ui-icon ui-icon--lg" viewBox="0 0 24 24" aria-hidden="true"><path d="M9.5 4.2A3.2 3.2 0 0 0 4.8 7a3.5 3.5 0 0 0 .2 6.7A3.6 3.6 0 0 0 9 19.8c1.2 0 2.3-.6 3-1.5V6.5c-.5-1.3-1.4-2.1-2.5-2.3Zm5 0A3.2 3.2 0 0 1 19.2 7a3.5 3.5 0 0 1-.2 6.7 3.6 3.6 0 0 1-4 6.1c-1.2 0-2.3-.6-3-1.5V6.5c.5-1.3 1.4-2.1 2.5-2.3ZM7 9.5c1.7 0 2.5.8 2.5 2.3M17 9.5c-1.7 0-2.5.8-2.5 2.3M7.4 15.2c1.3-.2 2.2.2 2.8 1.2m6.4-1.2c-1.3-.2-2.2.2-2.8 1.2"/></svg></div>
-            <div style="flex:1;color:#fff"><div style="font:800 14px Nunito">Повторение на сегодня</div><div style="font-size:12px;opacity:.9">{{ reviewSub }} · интервальный метод</div></div>
-            <div style="font:900 18px Nunito;color:#fff">{{ reviewCount }}</div>
-          </div>
+          <button type="button" class="home-review-action" onClick="{{ startReview }}"><span class="home-action-icon" style="background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.22)"><svg class="ui-icon ui-icon--lg" viewBox="0 0 24 24" aria-hidden="true"><path d="M9.5 4.2A3.2 3.2 0 0 0 4.8 7a3.5 3.5 0 0 0 .2 6.7A3.6 3.6 0 0 0 9 19.8c1.2 0 2.3-.6 3-1.5V6.5c-.5-1.3-1.4-2.1-2.5-2.3Zm5 0A3.2 3.2 0 0 1 19.2 7a3.5 3.5 0 0 1-.2 6.7 3.6 3.6 0 0 1-4 6.1c-1.2 0-2.3-.6-3-1.5V6.5c.5-1.3 1.4-2.1 2.5-2.3ZM7 9.5c1.7 0 2.5.8 2.5 2.3M17 9.5c-1.7 0-2.5.8-2.5 2.3M7.4 15.2c1.3-.2 2.2.2 2.8 1.2m6.4-1.2c-1.3-.2-2.2.2-2.8 1.2"/></svg></span><span class="home-action-copy"><strong>Повторение на сегодня</strong><span>{{ reviewSub }} · интервальный метод</span></span><span style="font:900 17px Nunito">{{ reviewCount }}</span></button>
         </sc-if>
         <sc-if value="{{ hasMistakes }}" hint-placeholder-val="">
-          <div class="game-card" onClick="{{ startMistakes }}" style="margin:12px 16px 0;background:var(--redsoft);border:1.5px solid var(--red);border-radius:20px;padding:14px 16px;display:flex;align-items:center;gap:13px;cursor:pointer;box-shadow:0 6px 16px -14px rgba(150,30,35,.6)">
-            <div style="width:46px;height:46px;border-radius:14px;background:var(--red);display:flex;align-items:center;justify-content:center;color:#fff;flex-shrink:0"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 7v5h-5M4 17v-5h5"/><path d="M18.3 10A7 7 0 0 0 6.2 6.2L4 8m16 8-2.2 1.8A7 7 0 0 1 5.7 14"/></svg></div>
-            <div style="flex:1"><div style="font:800 14px Nunito;color:var(--reddk)">Работа над ошибками</div><div style="font-size:12px;color:var(--red)">{{ mistakeCount }} вопросов ждут повторения</div></div>
-            <div style="font-size:19px;color:var(--red)">›</div>
-          </div>
+          <button type="button" class="home-mistakes-action" onClick="{{ startMistakes }}"><span class="home-action-icon" style="background:var(--red);color:#fff"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 7v5h-5M4 17v-5h5"/><path d="M18.3 10A7 7 0 0 0 6.2 6.2L4 8m16 8-2.2 1.8A7 7 0 0 1 5.7 14"/></svg></span><span class="home-action-copy"><strong>Работа над ошибками</strong><span>{{ mistakeCount }} вопросов ждут повторения</span></span><svg class="game-chevron" viewBox="0 0 24 24" aria-hidden="true" style="color:var(--red)"><path d="m9 5 7 7-7 7"/></svg></button>
         </sc-if>
         <sc-if value="{{ hasLearningRoute }}" hint-placeholder-val="">
           <section class="game-learning-route" aria-labelledby="learning-route-title">
@@ -1387,7 +1397,7 @@ iframe[src*="telegram.org"]{background:transparent!important;color-scheme:light!
     <sc-if value="{{ isHistory }}" hint-placeholder-val="">
       <div class="scr game-screen game-history" style="position:absolute;inset:0;overflow:auto;background:var(--bg);padding-bottom:24px">
         <div class="game-topbar" style="position:sticky;top:0;z-index:10;background:var(--bg);padding:50px 16px 12px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:12px">
-          <button onClick="{{ backProfile }}" aria-label="Назад в профиль" style="width:36px;height:36px;border-radius:11px;border:1px solid var(--line);background:var(--card);color:var(--ink);font-size:18px;cursor:pointer">‹</button>
+          <button onClick="{{ backProfile }}" aria-label="Назад в профиль" style="width:44px;height:44px;border-radius:13px;border:1px solid var(--line);background:var(--card);color:var(--ink);display:grid;place-items:center;cursor:pointer"><svg class="game-chevron" viewBox="0 0 24 24" aria-hidden="true" style="transform:rotate(180deg)"><path d="m9 5 7 7-7 7"/></svg></button>
           <div><div style="font:900 18px Nunito;color:var(--ink)">История тренировок</div><div style="font-size:11.5px;color:var(--mut)">последние сессии</div></div>
         </div>
         <div style="display:flex;flex-direction:column;gap:9px;padding:14px 16px">
@@ -1406,7 +1416,7 @@ iframe[src*="telegram.org"]{background:transparent!important;color-scheme:light!
     <sc-if value="{{ isEditProf }}" hint-placeholder-val="">
       <div class="game-screen game-form" style="position:absolute;inset:0;padding:56px 30px 30px;display:flex;flex-direction:column;background:var(--bg);overflow:auto">
         <div style="display:flex;align-items:center;gap:12px">
-          <button onClick="{{ backProfile }}" aria-label="Назад в профиль" style="width:36px;height:36px;border-radius:11px;border:1px solid var(--line);background:var(--card);color:var(--ink);font-size:18px;cursor:pointer">‹</button>
+          <button onClick="{{ backProfile }}" aria-label="Назад в профиль" style="width:44px;height:44px;border-radius:13px;border:1px solid var(--line);background:var(--card);color:var(--ink);display:grid;place-items:center;cursor:pointer"><svg class="game-chevron" viewBox="0 0 24 24" aria-hidden="true" style="transform:rotate(180deg)"><path d="m9 5 7 7-7 7"/></svg></button>
           <div style="font:900 20px Nunito;color:var(--ink)">Редактировать профиль</div>
         </div>
         <div style="margin:24px 0 8px;font:800 12px Nunito;color:var(--mut);letter-spacing:.08em">ФИО</div>
@@ -1414,7 +1424,7 @@ iframe[src*="telegram.org"]{background:transparent!important;color-scheme:light!
         <div style="margin:18px 0 8px;font:800 12px Nunito;color:var(--mut);letter-spacing:.08em">КУРС</div>
         <div style="display:flex;gap:8px">
           <sc-for list="{{ courseChips }}" as="c" hint-placeholder-count="2">
-            <button onClick="{{ c.onClick }}" style="flex:1;padding:12px;border:1.5px solid {{ c.bd }};border-radius:13px;background:{{ c.bg }};color:{{ c.fg }};font:800 14px Nunito;cursor:pointer">{{ c.label }}</button>
+            <button type="button" onClick="{{ c.onClick }}" aria-pressed="{{ c.pressed }}" style="flex:1;min-height:44px;padding:12px;border:1.5px solid {{ c.bd }};border-radius:13px;background:{{ c.bg }};color:{{ c.fg }};font:800 14px Nunito;cursor:pointer">{{ c.label }}</button>
           </sc-for>
         </div>
         <div style="margin:18px 0 8px;font:800 12px Nunito;color:var(--mut);letter-spacing:.08em">ФАКУЛЬТЕТ</div>
@@ -1429,7 +1439,7 @@ iframe[src*="telegram.org"]{background:transparent!important;color-scheme:light!
       <div class="scr admin-shell game-screen game-admin" style="position:absolute;inset:0;overflow:auto;background:var(--bg)">
         <div class="admin-hero" style="position:sticky;top:0;z-index:10;background:linear-gradient(145deg,#28181b 0%,#541f27 58%,#7f2631 100%);color:#fff;padding:calc(42px + env(safe-area-inset-top)) 18px 18px;box-shadow:0 12px 30px -22px rgba(30,8,12,.85)">
           <div style="display:flex;align-items:center;gap:13px">
-            <button onClick="{{ backProfile }}" aria-label="Назад" style="width:44px;height:44px;border-radius:14px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.1);color:#fff;font-size:20px;cursor:pointer;backdrop-filter:blur(8px)">‹</button>
+            <button onClick="{{ backProfile }}" aria-label="Назад" style="width:44px;height:44px;border-radius:14px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.1);color:#fff;display:grid;place-items:center;cursor:pointer;backdrop-filter:blur(8px)"><svg class="game-chevron" viewBox="0 0 24 24" aria-hidden="true" style="color:#fff;transform:rotate(180deg)"><path d="m9 5 7 7-7 7"/></svg></button>
             <div style="flex:1"><div style="font:800 9.5px Manrope;letter-spacing:.16em;text-transform:uppercase;opacity:.62">Управление</div><div style="font:900 22px Nunito;letter-spacing:-.02em;margin-top:2px">Пользователи</div><div style="font:500 11px Manrope;opacity:.68;margin-top:1px">Сводка активности и учебного прогресса</div></div>
           </div>
           <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:17px">
@@ -1439,22 +1449,22 @@ iframe[src*="telegram.org"]{background:transparent!important;color-scheme:light!
           </div>
         </div>
         <div class="admin-tools" style="padding:16px 16px 12px">
-          <div style="position:relative"><span style="position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:15px;opacity:.5">⌕</span><input value="{{ adminQuery }}" onInput="{{ onAdminQuery }}" placeholder="Имя, Telegram ID или username" style="width:100%;height:46px;padding:0 14px 0 40px;border:1px solid var(--line);border-radius:14px;background:var(--card);color:var(--ink);font:600 13px Manrope;outline:none;box-shadow:0 6px 20px -18px rgba(0,0,0,.55)"></div>
+          <div style="position:relative"><svg class="ui-icon ui-icon--sm" viewBox="0 0 24 24" aria-hidden="true" style="position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--mut);pointer-events:none"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4 4"/></svg><input value="{{ adminQuery }}" onInput="{{ onAdminQuery }}" aria-label="Поиск пользователей" placeholder="Имя, Telegram ID или username" autocomplete="off" style="width:100%;height:48px;padding:0 14px 0 40px;border:1px solid var(--line);border-radius:14px;background:var(--card);color:var(--ink);font:600 16px Manrope;outline:none;box-shadow:0 6px 20px -18px rgba(0,0,0,.55)"></div>
           <div style="display:flex;gap:7px;margin-top:10px;overflow:auto;padding-bottom:2px">
-            <sc-for list="{{ adminFilters }}" as="f" hint-placeholder-count="3"><button onClick="{{ f.onClick }}" style="height:34px;padding:0 13px;border:1px solid {{ f.border }};border-radius:11px;background:{{ f.bg }};color:{{ f.color }};font:800 10.5px Nunito;white-space:nowrap;cursor:pointer">{{ f.label }}</button></sc-for>
+            <sc-for list="{{ adminFilters }}" as="f" hint-placeholder-count="3"><button type="button" onClick="{{ f.onClick }}" aria-pressed="{{ f.pressed }}" style="min-height:44px;padding:0 13px;border:1px solid {{ f.border }};border-radius:12px;background:{{ f.bg }};color:{{ f.color }};font:800 10.5px Nunito;white-space:nowrap;cursor:pointer">{{ f.label }}</button></sc-for>
           </div>
           <div style="font:700 10.5px Manrope;color:var(--mut);margin-top:12px">Показано {{ adminShown }} из {{ adminTotal }}</div>
         </div>
         <div class="admin-list" style="display:flex;flex-direction:column;gap:10px;padding:0 16px 24px">
           <sc-for list="{{ adminUsers }}" as="u" hint-placeholder-count="6">
-            <div onClick="{{ u.onClick }}" style="background:var(--card);border:1px solid {{ u.border }};border-radius:16px;padding:12px 13px;cursor:pointer;transition:border-color .2s,box-shadow .2s;box-shadow:{{ u.shadow }}">
-              <div style="display:flex;align-items:flex-start;gap:11px">
+            <article class="admin-user-card" style="border-color:{{ u.border }};box-shadow:{{ u.shadow }}">
+              <button type="button" class="admin-user-trigger" onClick="{{ u.onClick }}" aria-expanded="{{ u.expanded }}" aria-label="{{ u.aria }}">
               <div style="width:38px;height:38px;border-radius:11px;background:var(--card2);display:flex;align-items:center;justify-content:center;font:800 13px Nunito;color:var(--ink);position:relative"><span>{{ u.ini }}</span><span style="position:absolute;bottom:-1px;right:-1px;width:11px;height:11px;border-radius:50%;background:{{ u.dot }};border:2px solid var(--card)"></span></div>
               <div style="flex:1;min-width:0"><div style="font:800 13.5px Nunito;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ u.name }}</div><div style="font-size:10.5px;color:var(--mut);margin-top:2px">{{ u.meta }}</div><div style="display:flex;flex-wrap:wrap;gap:5px;margin-top:7px"><span style="font:800 9.5px Nunito;color:var(--gold);background:var(--goldsoft);padding:3px 7px;border-radius:8px">{{ u.xp }} XP</span><span style="font:800 9.5px Nunito;color:var(--ink);background:var(--card2);padding:3px 7px;border-radius:8px">{{ u.badges }}</span><span style="font:800 9.5px Nunito;color:var(--mut);background:var(--card2);padding:3px 7px;border-radius:8px">{{ u.last }}</span></div></div>
-              <div style="font-size:16px;color:var(--mut);padding-top:8px">{{ u.chevron }}</div>
-              </div>
-              <sc-if value="{{ u.open }}" hint-placeholder-val=""><div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--line)"><div style="display:grid;grid-template-columns:repeat(5,1fr);gap:6px"><div style="text-align:center;background:var(--card2);border-radius:10px;padding:8px 3px"><div style="font:900 13px Nunito;color:var(--ink)">{{ u.topics }}</div><div style="font:600 8px Manrope;color:var(--mut);margin-top:2px">темы</div></div><div style="text-align:center;background:var(--card2);border-radius:10px;padding:8px 3px"><div style="font:900 13px Nunito;color:var(--ink)">{{ u.sessions }}</div><div style="font:600 8px Manrope;color:var(--mut);margin-top:2px">сессии</div></div><div style="text-align:center;background:var(--card2);border-radius:10px;padding:8px 3px"><div style="font:900 13px Nunito;color:var(--ink)">{{ u.mistakes }}</div><div style="font:600 8px Manrope;color:var(--mut);margin-top:2px">ошибки</div></div><div style="text-align:center;background:var(--card2);border-radius:10px;padding:8px 3px"><div style="font:900 13px Nunito;color:var(--ink)">{{ u.favorites }}</div><div style="font:600 8px Manrope;color:var(--mut);margin-top:2px">избранное</div></div><div style="text-align:center;background:var(--card2);border-radius:10px;padding:8px 3px"><div style="font:900 13px Nunito;color:var(--ink)">{{ u.notes }}</div><div style="font:600 8px Manrope;color:var(--mut);margin-top:2px">заметки</div></div></div><div style="margin-top:10px;padding:10px 11px;background:var(--card2);border-radius:11px"><div style="font:700 10px Manrope;color:var(--ink);line-height:1.55">{{ u.identity }}</div><div style="font:500 9.5px Manrope;color:var(--mut);margin-top:3px;line-height:1.55">{{ u.regInfo }}</div></div></div></sc-if>
-            </div>
+              <svg class="admin-user-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg>
+              </button>
+              <sc-if value="{{ u.open }}" hint-placeholder-val=""><div class="admin-user-details"><div style="display:grid;grid-template-columns:repeat(5,1fr);gap:6px"><div style="text-align:center;background:var(--card2);border-radius:10px;padding:8px 3px"><div style="font:900 13px Nunito;color:var(--ink)">{{ u.topics }}</div><div style="font:600 9px Manrope;color:var(--mut);margin-top:2px">темы</div></div><div style="text-align:center;background:var(--card2);border-radius:10px;padding:8px 3px"><div style="font:900 13px Nunito;color:var(--ink)">{{ u.sessions }}</div><div style="font:600 9px Manrope;color:var(--mut);margin-top:2px">сессии</div></div><div style="text-align:center;background:var(--card2);border-radius:10px;padding:8px 3px"><div style="font:900 13px Nunito;color:var(--ink)">{{ u.mistakes }}</div><div style="font:600 9px Manrope;color:var(--mut);margin-top:2px">ошибки</div></div><div style="text-align:center;background:var(--card2);border-radius:10px;padding:8px 3px"><div style="font:900 13px Nunito;color:var(--ink)">{{ u.favorites }}</div><div style="font:600 9px Manrope;color:var(--mut);margin-top:2px">избранное</div></div><div style="text-align:center;background:var(--card2);border-radius:10px;padding:8px 3px"><div style="font:900 13px Nunito;color:var(--ink)">{{ u.notes }}</div><div style="font:600 9px Manrope;color:var(--mut);margin-top:2px">заметки</div></div></div><div style="margin-top:10px;padding:10px 11px;background:var(--card2);border-radius:11px"><div style="font:700 10px Manrope;color:var(--ink);line-height:1.55">{{ u.identity }}</div><div style="font:500 9.5px Manrope;color:var(--mut);margin-top:3px;line-height:1.55">{{ u.regInfo }}</div></div></div></sc-if>
+            </article>
           </sc-for>
           <sc-if value="{{ adminEmpty }}" hint-placeholder-val=""><div style="text-align:center;color:var(--mut);font-size:13px;padding:30px 16px;line-height:1.5">Пока нет зарегистрированных пользователей на этом устройстве.<br>Список наполняется по мере входа студентов.</div></sc-if>
         </div>
@@ -2870,8 +2880,8 @@ async logout(){
       var aq=(s.adminQuery||'').trim().toLowerCase();
       if(aq) arr=arr.filter(u=>((u.name||'')+(u.email||'')+(u.faculty||'')+(u.username||'')+(u.tg_id||'')+String(u.course||'')).toLowerCase().includes(aq));
       const date=t=>t?new Date(t).toLocaleDateString('ru-RU'):'—';
-      R.adminUsers=arr.map(u=>{ const st=u.stats||{}; const key=u.id||u.tg_id||u.email||u.name; const open=s.adminOpenId===key; return { ini:ini(u.name), name:u.name||'Студент', meta:(u.course?u.course+' курс':'')+(u.faculty?' · '+u.faculty:'')+(u.username?' · @'+u.username:(u.handle?' · '+u.handle:(u.tg_id?' · Telegram':' · '+(u.email||'без контакта')))), topics:st.topics||0,sessions:st.sessions||0,mistakes:st.mistakes||0,favorites:st.favorites||0,notes:st.notes||0,identity:u.tg_id?'Telegram ID · '+u.tg_id:(u.email?'Email · '+u.email:'Контакт не указан'),regInfo:'Регистрация · '+date(u.createdAt)+(u.language?'  ·  '+u.language.toUpperCase():'')+(u.premium?'  ·  Telegram Premium':''), badges:'🔥 '+(u.streak||0)+(st.examDone?' · Экзамен ✓':''), xp:u.xp||0, last:fmt(u.lastActive), dot:(now-(u.lastActive||0)<15*60000)?'var(--green)':'var(--mut)', open:open, chevron:open?'⌃':'⌄', border:open?'var(--red)':'var(--line)', shadow:open?'0 10px 28px -20px rgba(137,28,40,.7)':'0 8px 24px -22px rgba(0,0,0,.42)', onClick:()=>this.setState({adminOpenId:open?null:key}) }; });
-      R.adminFilters=[['all','Все'],['active','Активные 7 дней'],['inactive','Неактивные']].map(f=>{var on=af===f[0];return{label:f[1],onClick:()=>this.setState({adminFilter:f[0],adminOpenId:null}),bg:on?'var(--ink)':'var(--card)',color:on?'var(--bg)':'var(--mut)',border:on?'var(--ink)':'var(--line)'};});
+      R.adminUsers=arr.map(u=>{ const st=u.stats||{}; const key=u.id||u.tg_id||u.email||u.name; const open=s.adminOpenId===key, name=u.name||'Студент'; return { ini:ini(u.name), name, meta:(u.course?u.course+' курс':'')+(u.faculty?' · '+u.faculty:'')+(u.username?' · @'+u.username:(u.handle?' · '+u.handle:(u.tg_id?' · Telegram':' · '+(u.email||'без контакта')))), topics:st.topics||0,sessions:st.sessions||0,mistakes:st.mistakes||0,favorites:st.favorites||0,notes:st.notes||0,identity:u.tg_id?'Telegram ID · '+u.tg_id:(u.email?'Email · '+u.email:'Контакт не указан'),regInfo:'Регистрация · '+date(u.createdAt)+(u.language?'  ·  '+u.language.toUpperCase():'')+(u.premium?'  ·  Telegram Premium':''), badges:'Серия '+(u.streak||0)+(st.examDone?' · Экзамен пройден':''), xp:u.xp||0, last:fmt(u.lastActive), dot:(now-(u.lastActive||0)<15*60000)?'var(--green)':'var(--mut)', open:open, expanded:open?'true':'false', aria:(open?'Свернуть сведения: ':'Показать сведения: ')+name, border:open?'var(--red)':'var(--line)', shadow:open?'0 10px 28px -20px rgba(137,28,40,.7)':'0 8px 24px -22px rgba(0,0,0,.42)', onClick:()=>this.setState({adminOpenId:open?null:key}) }; });
+      R.adminFilters=[['all','Все'],['active','Активные 7 дней'],['inactive','Неактивные']].map(f=>{var on=af===f[0];return{label:f[1],pressed:on?'true':'false',onClick:()=>this.setState({adminFilter:f[0],adminOpenId:null}),bg:on?'var(--ink)':'var(--card)',color:on?'var(--bg)':'var(--mut)',border:on?'var(--ink)':'var(--line)'};});
       R.adminTotal=totalAll; R.adminShown=arr.length; R.adminOnline=onlineAll; R.adminInactive=inactiveAll;
       R.adminEmpty=arr.length===0; }
 
@@ -2900,7 +2910,7 @@ async logout(){
     R.reviewCount=due.length;
     R.reviewSub=due.length? (due.length+' '+(due.length===1?'тема ждёт':(due.length<5?'темы ждут':'тем ждут'))+' повторения') : '';
     R.startReview=()=>this.startReview();
-    R.reviewList=due.slice(0,4).map(d=>({ key:d.key, title:d.topic.name, lat:d.topic.lat, overdue:d.overdue, onClick:()=>{ const dd=this.topicsOf(d.moduleId); this.setState({moduleId:d.moduleId,topicIdx:dd.indexOf(d.topic),screen:'topic',tab:'train'}); } }));
+    R.reviewList=due.slice(0,4).map(d=>({ key:d.key, title:d.topic.name, lat:d.topic.lat, overdue:d.overdue, aria:'Открыть повторение темы '+d.topic.name, onClick:()=>{ const dd=this.topicsOf(d.moduleId); this.setState({moduleId:d.moduleId,topicIdx:dd.indexOf(d.topic),screen:'topic',tab:'train'}); } }));
     const favKeys=s.favorites||[];
     R.hasFavs=favKeys.length>0;
     R.favTopics=favKeys.map(key=>{ const [mid,ns]=String(key).split(':'); const num=+ns; const d=this.topicsOf(mid); const t=d.find(x=>x.num===num); return t?{ title:t.name, lat:t.lat,
@@ -2952,7 +2962,7 @@ async logout(){
         try{ localStorage.setItem('anatom_recent_q', JSON.stringify(recent)); }catch(e){}
       }
     }
-    R.searchResults=res.map(o=>({ num:o.t.num, title:o.t.name, lat:o.t.lat, tag:o.tag, onClick:()=>{ const d=this.topicsOf(o.mid); this.setState({moduleId:o.mid,topicIdx:d.indexOf(o.t),screen:'topic',tab:'mat',depth:'deep',query:'',lastTopic:{moduleId:o.mid,topicIdx:d.indexOf(o.t)}},()=>this.persist()); } }));
+    R.searchResults=res.map(o=>({ num:o.t.num, title:o.t.name, lat:o.t.lat, tag:o.tag, aria:'Открыть тему '+o.t.name+', раздел '+o.tag, onClick:()=>{ const d=this.topicsOf(o.mid); this.setState({moduleId:o.mid,topicIdx:d.indexOf(o.t),screen:'topic',tab:'mat',depth:'deep',query:'',lastTopic:{moduleId:o.mid,topicIdx:d.indexOf(o.t)}},()=>this.persist()); } }));
     R.noResults=q.length>0&&res.length===0;
     // exam
     R.startExam=()=>this.startExam();
