@@ -782,14 +782,13 @@ iframe[src*="telegram.org"]{background:transparent!important;color-scheme:light!
             <div style="flex:1;background:rgba(255,255,255,.09);border-radius:12px;padding:9px 11px"><div style="font:900 17px Nunito;color:#ff9a9e">{{ adminInactive }}</div><div style="font-size:10px;opacity:.7">неактив 2 нед</div></div>
           </div>
         </div>
-        <div style="padding:12px 16px"><input placeholder="🔍 Поиск по ФИО, группе, почте…" style="width:100%;padding:12px 14px;border:1.5px solid var(--line);border-radius:13px;background:var(--card);color:var(--ink);font:600 13px Manrope;outline:none"></div>
+        <div style="padding:12px 16px"><input value="{{ adminQuery }}" onInput="{{ onAdminQuery }}" placeholder="🔍 Поиск по ФИО, Telegram ID, username…" style="width:100%;padding:12px 14px;border:1.5px solid var(--line);border-radius:13px;background:var(--card);color:var(--ink);font:600 13px Manrope;outline:none"></div>
         <div style="display:flex;flex-direction:column;gap:8px;padding:0 16px 20px">
           <sc-for list="{{ adminUsers }}" as="u" hint-placeholder-count="6">
-            <div style="display:flex;align-items:center;gap:11px;background:var(--card);border:1px solid var(--line);border-radius:15px;padding:11px 13px">
+            <div style="display:flex;align-items:flex-start;gap:11px;background:var(--card);border:1px solid var(--line);border-radius:15px;padding:12px 13px">
               <div style="width:38px;height:38px;border-radius:11px;background:var(--card2);display:flex;align-items:center;justify-content:center;font:800 13px Nunito;color:var(--ink);position:relative"><span>{{ u.ini }}</span><span style="position:absolute;bottom:-1px;right:-1px;width:11px;height:11px;border-radius:50%;background:{{ u.dot }};border:2px solid var(--card)"></span></div>
-              <div style="flex:1;min-width:0"><div style="font:800 13px Nunito;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ u.name }}</div><div style="font-size:10.5px;color:var(--mut)">{{ u.meta }}</div></div>
-              <div style="text-align:right"><div style="font:800 13px Nunito;color:var(--gold)">{{ u.xp }}</div><div style="font-size:10px;color:var(--mut)">{{ u.last }}</div></div>
-              <div style="font-size:16px;color:var(--mut)">⋯</div>
+              <div style="flex:1;min-width:0"><div style="font:800 13px Nunito;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ u.name }}</div><div style="font-size:10.5px;color:var(--mut);margin-top:2px">{{ u.meta }}</div><div style="font-size:10px;color:var(--mut);margin-top:4px;line-height:1.45">{{ u.details }}</div><div style="font-size:9.5px;color:var(--mut);opacity:.78;margin-top:3px">{{ u.joined }}</div></div>
+              <div style="text-align:right;flex-shrink:0"><div style="font:800 13px Nunito;color:var(--gold)">{{ u.xp }} XP</div><div style="font-size:10px;color:var(--mut)">{{ u.last }}</div><div style="font-size:9.5px;color:var(--mut);margin-top:4px">{{ u.badges }}</div></div>
             </div>
           </sc-for>
           <sc-if value="{{ adminEmpty }}" hint-placeholder-val=""><div style="text-align:center;color:var(--mut);font-size:13px;padding:30px 16px;line-height:1.5">Пока нет зарегистрированных пользователей на этом устройстве.<br>Список наполняется по мере входа студентов.</div></sc-if>
@@ -999,6 +998,7 @@ window.AnatomDB = (function () {
 <script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:392,&quot;height&quot;:812}}">
 class Component extends DCLogic {
   API_BASE='https://anatom-bot-api-production.up.railway.app';
+  AUTH_BASE='';
   BOT_NAME='Vmeda_anatom_bot';
   ADMIN_EMAIL='pismenniyaleks.1@gmail.com';
   loadUsers(){ try{ return JSON.parse(localStorage.getItem('anatom_users')||'{}'); }catch(e){ return {}; } }
@@ -1007,6 +1007,7 @@ class Component extends DCLogic {
   isAdmin(){
     var u=this.state.user;
     if(!u) return false;
+    if(u.isAdmin) return true;
     var em=(u.email||'').toLowerCase().trim();
     if(em && em===this.ADMIN_EMAIL) return true;
     return false;
@@ -1136,9 +1137,17 @@ class Component extends DCLogic {
 
   db(){ return (window.AnatomDB && window.AnatomDB.ready()) ? window.AnatomDB : null; }
   async fetchDbLists(){
-    var db=this.db(); if(!db) return;
-    try{ this.setState({ dbLeaders: await db.leaderboard(50) }); }catch(e){ console.warn(e); }
-    if(this.isAdmin()){ try{ this.setState({ dbUsers: await db.allUsers() }); }catch(e){} }
+    var db=this.db();
+    if(db){
+      try{ this.setState({ dbLeaders: await db.leaderboard(50) }); }catch(e){ console.warn(e); }
+      if(this.isAdmin()){ try{ this.setState({ dbUsers: await db.allUsers() }); }catch(e){} }
+    }
+    if(this.isAdmin()){
+      try{
+        var r=await fetch(this.AUTH_BASE+'/api/users',{headers:this.authHeaders()});
+        if(r.ok){ var j=await r.json(); this.setState({dbUsers:j.users||[]}); }
+      }catch(e){}
+    }
   }
   componentDidMount(){
     this.applyTheme(this.state.dark);
@@ -1557,82 +1566,42 @@ async logout(){
     try{
       var wa=window.Telegram&&window.Telegram.WebApp; if(!wa) return;
       try{ wa.ready(); wa.expand&&wa.expand(); }catch(e){}
-      var tu=wa.initDataUnsafe&&wa.initDataUnsafe.user; if(!tu||!tu.id) return;
-      var saved=this.loadUser(); if(saved&&(saved.email||saved.tgId||saved.id)) return; // уже вошёл
-      var self=this;
-      var tgId=String(tu.id);
-      var name=[tu.first_name,tu.last_name].filter(Boolean).join(' ')||tu.username||('Студент '+tgId);
-      var user={ tgId:tgId, name:name, username:tu.username||'', photo:tu.photo_url||'', course:1, faculty:'Лечебный факультет', email:'tg'+tgId+'@anatomapp.ru' };
-      this.saveUser(user); this.registerUser(user);
-      (async function(){
-        var db=self.db(); if(!db){ self.hydrateUser(user); self.fetchDbLists(); return; }
-        try{
-          var pass='Tg#'+tgId+'!AnatomApp';
-          try{ await db.signUp(user.email, pass, { name:user.name, tg_id:tgId, username:user.username }); }
-          catch(e){ try{ await db.signIn(user.email, pass); }catch(e2){} }
-          var u=await db.currentUser();
-          if(u){ user.id=u.id;
-            await db.saveProfile(u.id, { email:user.email, name:user.name, course:user.course, faculty:user.faculty, username:user.username||'', tg_id:tgId, handle:(user.username?('@'+user.username):('tg'+tgId)), xp:self.state.xp||0, streak:self.state.streak||0 }).catch(function(){});
-            var st=await db.loadState(u.id).catch(function(){ return {}; });
-            self.saveUser(user); self.registerUser(user); self.hydrateUser(user, st||{}); self.fetchDbLists(); return; }
-        }catch(ce){ console.warn('tg webapp', ce); }
-        self.hydrateUser(user); self.fetchDbLists();
-      })();
+      var saved=this.loadUser();
+      if(!wa.initData) return;
+      this.authTelegram({init_data:wa.initData});
     }catch(e){ console.warn('tgWebAppInit', e); }
   }
   authTelegram(data){
     var self=this;
     this.setState({tgLoading:true, authErr:''});
-    fetch(this.API_BASE+'/auth/telegram',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)})
+    fetch(this.AUTH_BASE+'/api/auth/telegram',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)})
       .then(function(r){ return r.ok?r.json():Promise.reject(r.status); })
       .then(async function(res){
         if(res.token){ try{ localStorage.setItem('anatom_token',res.token); }catch(e){} }
         var p=res.user||data;
-        var tgId=String(p.id||'');
+        var tgId=String(p.tgId||p.id||'');
         var name=[p.first_name,p.last_name].filter(Boolean).join(' ')||p.username||'Студент';
         var saved=self.loadUser();
         var user={
           tgId: tgId,
+          id: p.id||'',
           name: (saved&&saved.tgId===tgId&&saved.name)?saved.name:name,
           username: p.username||'',
           photo: p.photo_url||'',
-          course: (saved&&saved.course)||1,
-          faculty: (saved&&saved.faculty)||'Лечебный факультет',
-          email: 'tg'+tgId+'@anatomapp.ru'
+          course: p.course||(saved&&saved.course)||1,
+          faculty: p.faculty||(saved&&saved.faculty)||'Лечебный факультет',
+          email: '',
+          isAdmin: !!p.isAdmin
         };
-        // Cloud: create/link Supabase account so admin sees the user
-        var db=self.db();
-        if(db && tgId){
-          try{
-            var pass='Tg#'+tgId+'!AnatomApp';
-            try{ await db.signUp(user.email, pass, { name:user.name, tg_id:tgId, username:user.username }); }
-            catch(suErr){
-              var sm=(suErr&&suErr.message)||'';
-              if(/already|exists|registered/i.test(sm)){ await db.signIn(user.email, pass); }
-              else { try{ await db.signIn(user.email, pass); }catch(e2){ console.warn('tg cloud', sm); } }
-            }
-            var u=await db.currentUser();
-            if(u){
-              user.id=u.id;
-              await db.saveProfile(u.id, {
-                email:user.email, name:user.name, course:user.course, faculty:user.faculty,
-                username:user.username||'', tg_id:tgId, handle:(user.username?('@'+user.username):('tg'+tgId)),
-                xp: self.state.xp||0, streak: self.state.streak||0
-              }).catch(function(){});
-              var st=await db.loadState(u.id).catch(function(){ return {}; });
-              self.saveUser(user);
-              self.setState({tgLoading:false});
-              self.hydrateUser(user, st||{});
-              self.fetchDbLists();
-              self.ping('Вход через Telegram ✓');
-              return;
-            }
-          }catch(ce){ console.warn('tg supabase', ce); }
-        }
+        try{
+          var oldKey='anatom_data_tg'+tgId, newKey='anatom_data_id'+user.id;
+          var oldData=localStorage.getItem(oldKey);
+          if(oldData&&!localStorage.getItem(newKey)) localStorage.setItem(newKey,oldData);
+        }catch(e){}
         self.saveUser(user);
+        self.registerUser(user);
         self.setState({tgLoading:false});
         self.hydrateUser(user);
-        self.syncPull();
         self.fetchDbLists();
         self.ping('Вход через Telegram ✓');
       })
@@ -1641,16 +1610,17 @@ async logout(){
   authHeaders(){ let t=''; try{ t=localStorage.getItem('anatom_token')||''; }catch(e){} return t?{'Authorization':'Bearer '+t}:{}; }
   syncPull(){
     if(!this.state.user||!this.state.user.tgId) return;
-    fetch(this.API_BASE+'/api/state',{headers:this.authHeaders()})
+    fetch(this.AUTH_BASE+'/api/state',{headers:this.authHeaders()})
       .then(r=>r.ok?r.json():Promise.reject(r.status))
-      .then(res=>{ const st=res&&res.state; if(st&&Object.keys(st).length){ const k=this.dataKey(); if(k){ try{ localStorage.setItem(k,JSON.stringify(st)); }catch(e){} } this.hydrateUser(this.state.user); } })
+      .then(res=>{ const st=res&&res.state; if(st&&Object.keys(st).length){ const k=this.dataKey(); var merged=st; if(k){ try{ var local=JSON.parse(localStorage.getItem(k)||'{}'); merged=this.mergeState(local,st); localStorage.setItem(k,JSON.stringify(merged)); }catch(e){} } this.hydrateUser(this.state.user,merged); } })
       .catch(()=>{});
   }
   syncPush(blob){
     if(!this.state.user||!this.state.user.tgId) return;
     clearTimeout(this._sync);
     this._sync=setTimeout(()=>{
-      fetch(this.API_BASE+'/api/state',{method:'PUT',headers:Object.assign({'Content-Type':'application/json'},this.authHeaders()),body:JSON.stringify({state:blob})}).catch(()=>{});
+      var u=this.state.user||{};
+      fetch(this.AUTH_BASE+'/api/state',{method:'PUT',headers:Object.assign({'Content-Type':'application/json'},this.authHeaders()),body:JSON.stringify({state:blob,profile:{name:u.name||'',course:u.course||1,faculty:u.faculty||''}})}).catch(()=>{});
     },1200);
   }
   onTgConfirm(){ const saved=this.loadUser(); if(saved&&(saved.email||saved.tgId)){ this.hydrateUser(saved); if(saved.tgId) this.syncPull(); this.ping('Вход выполнен ✓'); } else { this.ping('Ожидание подтверждения…'); } }
@@ -1988,12 +1958,13 @@ async logout(){
     R.dismissAnnounce=()=>this.dismissAnnounce();
 
     R.isAdminUser=this.isAdmin();
-    { const now=Date.now(); const dbu=s.dbUsers; const arr = dbu ? dbu.map(u=>({name:u.name,email:u.email,course:u.course,faculty:u.faculty,username:u.username,handle:u.handle,tg_id:u.tg_id,xp:u.xp||0,lastActive:u.last_active?Date.parse(u.last_active):0})).sort((a,b)=>(b.lastActive||0)-(a.lastActive||0)) : Object.values(this.loadUsers()).sort((a,b)=>(b.lastActive||0)-(a.lastActive||0));
+    { const now=Date.now(); const dbu=s.dbUsers; const arr = dbu ? dbu.map(u=>({name:u.name,email:u.email,course:u.course,faculty:u.faculty,username:u.username,handle:u.handle,tg_id:u.tg_id,xp:u.xp||0,streak:u.streak||0,language:u.language_code||'',premium:!!u.is_premium,stats:u.stats||{},createdAt:u.created_at?Date.parse(u.created_at):0,lastActive:u.last_active?Date.parse(u.last_active):0})).sort((a,b)=>(b.lastActive||0)-(a.lastActive||0)) : Object.values(this.loadUsers()).sort((a,b)=>(b.lastActive||0)-(a.lastActive||0));
       const fmt=(t)=>{ if(!t) return '—'; const d=Math.floor((now-t)/60000); if(d<1)return 'сейчас'; if(d<60)return d+' мин'; const h=Math.floor(d/60); if(h<24)return h+' ч'; const dd=Math.floor(h/24); return dd+' дн.'; };
       const ini=(n)=>((n||'').trim().split(/\s+/).slice(0,2).map(x=>x[0]||'').join('')||'?').toUpperCase();
       var aq=(s.adminQuery||'').trim().toLowerCase();
-      if(aq) arr=arr.filter(u=>((u.name||'')+(u.email||'')+(u.faculty||'')+String(u.course||'')).toLowerCase().includes(aq));
-      R.adminUsers=arr.map(u=>({ ini:ini(u.name), name:u.name||'Студент', meta:(u.course?u.course+' курс':'')+(u.faculty?' · '+u.faculty:'')+(u.username?' · @'+u.username:(u.handle?' · '+u.handle:(u.tg_id?' · tg'+u.tg_id:(u.email?' · '+u.email:'')))), xp:u.xp||0, last:fmt(u.lastActive), dot:(now-(u.lastActive||0)<15*60000)?'var(--green)':'var(--mut)' }));
+      if(aq) arr=arr.filter(u=>((u.name||'')+(u.email||'')+(u.faculty||'')+(u.username||'')+(u.tg_id||'')+String(u.course||'')).toLowerCase().includes(aq));
+      const date=t=>t?new Date(t).toLocaleDateString('ru-RU'):'—';
+      R.adminUsers=arr.map(u=>{ const st=u.stats||{}; return { ini:ini(u.name), name:u.name||'Студент', meta:(u.course?u.course+' курс':'')+(u.faculty?' · '+u.faculty:'')+(u.username?' · @'+u.username:(u.handle?' · '+u.handle:(u.tg_id?' · tg'+u.tg_id:(u.email?' · '+u.email:'')))), details:'Темы: '+(st.topics||0)+' · Сессии: '+(st.sessions||0)+' · Ошибки: '+(st.mistakes||0)+' · Избранное: '+(st.favorites||0)+' · Заметки: '+(st.notes||0), joined:'Telegram ID: '+(u.tg_id||'—')+' · Регистрация: '+date(u.createdAt)+(u.language?' · '+u.language.toUpperCase():'')+(u.premium?' · Premium':''), badges:'🔥 '+(u.streak||0)+(st.examDone?' · Экзамен ✓':''), xp:u.xp||0, last:fmt(u.lastActive), dot:(now-(u.lastActive||0)<15*60000)?'var(--green)':'var(--mut)' }; });
       R.adminTotal=arr.length; R.adminOnline=arr.filter(u=>now-(u.lastActive||0)<15*60000).length; R.adminInactive=arr.filter(u=>now-(u.lastActive||0)>14*864e5).length;
       R.adminEmpty=arr.length===0; }
 
