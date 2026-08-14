@@ -178,6 +178,65 @@ iframe[src*="telegram.org"]{background:transparent!important;color-scheme:light!
   @media (max-width:400px){.auth-page{padding-left:16px;padding-right:16px}.onboard-card{padding:15px}.onboard-choice-grid{grid-template-columns:1fr}.onboard-choice{min-height:52px;flex-direction:row;align-items:center}.onboard-grid{grid-template-columns:1fr}.onboard-field--wide{grid-column:auto}}
   @media (orientation:landscape) and (max-height:520px){.auth-page{padding:22px 28px}.auth-shell{max-width:760px;display:grid;grid-template-columns:minmax(230px,.8fr) minmax(300px,1.2fr);column-gap:32px}.auth-brand,.auth-heading,.auth-tabs{grid-column:1}.auth-provider,.auth-divider,.auth-fields,.auth-legal,.auth-security{grid-column:2}.auth-provider{grid-row:1;margin-top:0}.auth-tabs{align-self:end}.auth-heading{align-self:start}.auth-legal{margin-top:0}.onboard-shell{max-width:850px}.onboard-card{margin-top:10px}.onboard-section{margin-top:12px}}
 
+  .course-module-body{width:100%;max-width:900px;margin:0 auto}
+  .course-module-overview{margin:14px 16px 0;padding:17px;border:2px solid color-mix(in srgb,var(--red) 18%,var(--line));border-radius:22px;background:radial-gradient(90% 130% at 100% 0%,color-mix(in srgb,var(--red) 10%,transparent),transparent 60%),var(--card);box-shadow:0 4px 0 var(--game-depth)}
+  .course-module-overview__head{display:flex;align-items:flex-start;justify-content:space-between;gap:14px}
+  .course-module-overview__eyebrow{color:var(--red);font:900 9px Nunito;letter-spacing:.08em;text-transform:uppercase}
+  .course-module-overview__title{margin-top:3px;color:var(--ink);font:900 17px/1.2 Nunito}
+  .course-module-overview__count{flex-shrink:0;color:var(--red);font:900 13px Nunito}
+  .course-module-overview__track{height:12px;margin-top:12px;padding:2px;border:1px solid var(--line);border-radius:8px;background:var(--card2);overflow:hidden}
+  .course-module-overview__fill{height:100%;border-radius:6px;background:linear-gradient(90deg,var(--red),color-mix(in srgb,var(--red) 62%,var(--gold)));transition:width .32s ease}
+  .course-module-overview__meta{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;margin-top:12px}
+  .course-module-overview__stat{padding:9px 7px;border:1px solid var(--line);border-radius:13px;background:var(--card2);text-align:center}
+  .course-module-overview__stat strong{display:block;color:var(--ink);font:900 15px Nunito}
+  .course-module-overview__stat span{display:block;margin-top:1px;color:var(--mut);font:700 9px Manrope}
+  .course-module-next{width:100%;min-height:50px;margin-top:13px;padding:11px 13px;border:0;border-radius:15px;background:var(--red);color:#fff;display:flex;align-items:center;justify-content:space-between;gap:12px;text-align:left;box-shadow:0 4px 0 var(--reddk);cursor:pointer}
+  .course-module-next__copy{min-width:0}
+  .course-module-next__copy span{display:block;font:700 9px Manrope;opacity:.8}
+  .course-module-next__copy strong{display:block;margin-top:2px;font:900 12.5px Nunito;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .course-module-next.is-complete{background:var(--green);box-shadow:0 4px 0 var(--greendk)}
+  .course-section{margin:20px 16px 0}
+  .course-section__head{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin-bottom:9px}
+  .course-section__eyebrow{color:var(--mut);font:900 9px Nunito;letter-spacing:.08em;text-transform:uppercase}
+  .course-section__title{margin:2px 0 0;color:var(--ink);font:900 16px Nunito}
+  .course-section__meta{color:var(--mut);font:800 10px Nunito;text-align:right}
+  .course-subsections{display:flex;flex-direction:column;gap:10px}
+  .course-subsection{width:100%;min-height:82px;padding:14px;border:2px solid var(--line);border-radius:19px;background:var(--card);color:var(--ink);display:flex;align-items:center;gap:13px;text-align:left;box-shadow:0 4px 0 var(--game-depth);cursor:pointer}
+  .course-subsection.is-locked{opacity:.58}
+  .course-subsection__body{flex:1;min-width:0}
+  .course-subsection__title{font:900 15px/1.2 Nunito}
+  .course-subsection__desc{margin-top:3px;color:var(--mut);font:600 11px/1.35 Manrope}
+  .course-subsection__meta{margin-top:5px;color:var(--red);font:800 10px Nunito}
+  .course-subsection__track{height:6px;margin-top:7px;border-radius:5px;background:var(--card2);overflow:hidden}
+  .course-subsection__fill{height:100%;border-radius:5px;background:var(--red)}
+  .course-back{min-height:44px;margin:12px 16px 0;padding:0 11px;border:1.5px solid var(--line);border-radius:13px;background:var(--card);color:var(--red);display:inline-flex;align-items:center;gap:6px;font:900 11px Nunito;cursor:pointer}
+  .course-exam{width:calc(100% - 32px);min-height:78px;margin:16px 16px 0;padding:14px 16px;border:2px solid color-mix(in srgb,var(--red) 48%,var(--line));border-radius:19px;background:var(--redsoft);color:var(--ink);display:flex;align-items:center;gap:13px;text-align:left;box-shadow:0 4px 0 color-mix(in srgb,var(--red) 22%,var(--line));cursor:pointer}
+  .course-exam__icon{width:44px;height:44px;border-radius:13px;background:var(--card);color:var(--red);display:grid;place-items:center;flex-shrink:0}
+  .course-exam__body{flex:1;min-width:0}
+  .course-exam__title{display:block;font:900 14px Nunito}
+  .course-exam__meta{display:block;margin-top:3px;color:var(--mut);font:600 10.5px/1.35 Manrope}
+  .course-topic-section{margin:20px 16px 0}
+  .course-topic-section__head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:9px}
+  .course-topic-section__identity{display:flex;align-items:center;gap:9px;min-width:0}
+  .course-topic-section__identity img{width:32px;height:32px;border-radius:9px;object-fit:cover;flex-shrink:0}
+  .course-topic-section__identity h2{margin:0;color:var(--ink);font:900 13px/1.2 Nunito}
+  .course-topic-section__meta{flex-shrink:0;color:var(--mut);font:800 9.5px Nunito}
+  .course-topic-list{display:flex;flex-direction:column;gap:9px}
+  .course-topic-row{display:flex;align-items:stretch;border:2px solid var(--line);border-radius:18px;background:var(--card);box-shadow:0 4px 0 var(--game-depth);overflow:hidden}
+  .course-topic-row.is-complete{border-color:color-mix(in srgb,var(--green) 36%,var(--line))}
+  .course-topic-main{min-width:0;min-height:68px;flex:1;padding:11px 10px 11px 12px;border:0;background:transparent;color:var(--ink);display:flex;align-items:center;gap:11px;text-align:left;cursor:pointer}
+  .course-topic-badge{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;flex-shrink:0;font:900 12px Nunito}
+  .course-topic-copy{min-width:0;flex:1}
+  .course-topic-title{font:900 13px/1.25 Nunito}
+  .course-topic-lat{margin-top:2px;color:var(--mut);font:italic 10.5px/1.3 Lora;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .course-topic-status{display:flex;align-items:center;gap:5px;margin-top:6px;color:var(--mut);font:800 9px Nunito}
+  .course-topic-status__dot{width:6px;height:6px;border-radius:50%;background:currentColor}
+  .course-topic-row.is-complete .course-topic-status{color:var(--green)}
+  .course-topic-row.is-progress .course-topic-status{color:var(--gold)}
+  .course-topic-fav{width:48px;min-height:68px;border:0;border-left:1px solid var(--line);border-radius:0;background:transparent;color:var(--mut);display:grid;place-items:center;cursor:pointer;flex-shrink:0}
+  .course-topic-fav[aria-pressed="true"]{color:var(--gold);background:var(--goldsoft)}
+  @media (max-width:360px){.course-module-overview{margin-left:12px;margin-right:12px;padding:14px}.course-section,.course-topic-section{margin-left:12px;margin-right:12px}.course-exam{width:calc(100% - 24px);margin-left:12px;margin-right:12px}.course-topic-main{padding-left:9px;gap:8px}.course-topic-fav{width:46px}}
+
   .rating-page{background:linear-gradient(180deg,var(--card2) 0,var(--bg) 250px) !important}
   .rating-hero{position:relative;padding:54px 20px 46px;background:radial-gradient(90% 140% at 92% 0%,rgba(214,150,72,.28),transparent 52%),linear-gradient(145deg,#30151a 0%,#6f1d2a 58%,#a52a39 100%);overflow:hidden;color:#fff}
   .rating-hero:before{content:"";position:absolute;right:-48px;bottom:-82px;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.12),transparent 68%);pointer-events:none}
@@ -784,7 +843,7 @@ iframe[src*="telegram.org"]{background:transparent!important;color-scheme:light!
         </div>
         <div style="display:flex;flex-direction:column;gap:11px;padding:0 16px">
           <sc-for list="{{ modules }}" as="m" hint-placeholder-count="6">
-            <div onClick="{{ m.onClick }}" class="stg atlas-module-card game-card game-module-card" style-active="transform:translateY(3px)" style="animation-delay:{{ m.animDelay }};display:flex;align-items:center;gap:13px;background:var(--card);border:1px solid var(--line);border-radius:20px;padding:11px;cursor:pointer;transition:transform .12s;box-shadow:0 6px 16px -14px rgba(60,20,15,.5)">
+            <button type="button" onClick="{{ m.onClick }}" aria-label="{{ m.aria }}" class="stg atlas-module-card game-card game-module-card" style-active="transform:translateY(3px)" style="width:100%;animation-delay:{{ m.animDelay }};display:flex;align-items:center;gap:13px;background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:20px;padding:11px;cursor:pointer;text-align:left;transition:transform .12s;box-shadow:0 6px 16px -14px rgba(60,20,15,.5)">
               <div style="width:56px;height:56px;border-radius:15px;flex-shrink:0;position:relative;overflow:hidden;background:var(--card2)">
                 <img src="{{ m.img }}" style="width:100%;height:100%;object-fit:cover;object-position:center 42%">
                 <sc-if value="{{ m.locked }}" hint-placeholder-val=""><div style="position:absolute;inset:0;background:rgba(10,8,7,.42);display:flex;align-items:center;justify-content:center;color:#fff"><svg class="ui-icon ui-icon--sm" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></div></sc-if>
@@ -794,8 +853,8 @@ iframe[src*="telegram.org"]{background:transparent!important;color-scheme:light!
                 <div style="font:800 14px Nunito;color:var(--ink);margin-top:4px;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ m.title }}</div>
                 <div style="margin-top:7px;height:6px;border-radius:4px;background:var(--card2);overflow:hidden"><div style="width:{{ m.pct }}%;height:100%;background:{{ m.bar }};border-radius:4px"></div></div>
               </div>
-              <div style="font-size:20px;color:var(--mut)">›</div>
-            </div>
+              <svg class="game-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg>
+            </button>
           </sc-for>
         </div>
         <div style="height:8px"></div>
@@ -811,57 +870,49 @@ iframe[src*="telegram.org"]{background:transparent!important;color-scheme:light!
           <img src="{{ curModule.img }}" style="position:absolute;inset:-8px;width:calc(100% + 16px);height:calc(100% + 16px);object-fit:cover;object-position:center 40%;filter:blur(14px) saturate(1.15) brightness(.9);transform:scale(1.08)">
           <img src="{{ curModule.img }}" style="position:relative;width:100%;height:100%;object-fit:cover;object-position:center 40%;image-rendering:auto">
           <div style="position:absolute;inset:0;background:radial-gradient(120% 90% at 50% 20%,transparent 40%,rgba(20,15,12,.28) 100%),linear-gradient(180deg,rgba(20,15,12,.18) 0%,transparent 22%,transparent 46%,var(--bg) 100%)"></div>
-          <button onClick="{{ goHome }}" aria-label="Назад к разделам" style="position:absolute;top:52px;left:16px;width:38px;height:38px;border-radius:12px;border:none;background:rgba(20,15,12,.5);backdrop-filter:blur(6px);color:#fff;font-size:19px;cursor:pointer">‹</button>
+          <button onClick="{{ goHome }}" aria-label="Назад к разделам" style="position:absolute;top:50px;left:16px;width:44px;height:44px;border-radius:14px;border:1px solid rgba(255,255,255,.2);background:rgba(20,15,12,.58);backdrop-filter:blur(6px);color:#fff;display:grid;place-items:center;cursor:pointer"><svg class="game-chevron" viewBox="0 0 24 24" aria-hidden="true" style="color:#fff;transform:rotate(180deg)"><path d="m9 5 7 7-7 7"/></svg></button>
           <div style="position:absolute;left:20px;right:20px;bottom:12px">
             <div style="font:800 11px Nunito;background:var(--red);color:#fff;display:inline-block;padding:3px 9px;border-radius:8px">{{ curModule.tag }}</div>
             <div style="font:900 24px Nunito;color:var(--ink);margin-top:8px;display:flex;align-items:center;gap:10px"><span class="atlas-specimen">{{ curModule.n }}</span>{{ curModule.title }}</div>
           </div>
         </div>
+        <div class="course-module-body">
 
         <sc-if value="{{ moduleReady }}" hint-placeholder-val="{{ true }}">
+          <section class="course-module-overview" aria-labelledby="module-progress-title">
+            <div class="course-module-overview__head"><div><div class="course-module-overview__eyebrow">{{ moduleScopeLabel }}</div><h2 id="module-progress-title" class="course-module-overview__title" style="margin-bottom:0">Прогресс раздела</h2></div><div class="course-module-overview__count">{{ moduleProgressPct }}%</div></div>
+            <div class="course-module-overview__track" role="progressbar" aria-label="{{ moduleProgressAria }}" aria-valuemin="0" aria-valuemax="100" aria-valuenow="{{ moduleProgressPct }}"><div class="course-module-overview__fill" style="width:{{ moduleProgressPct }}%"></div></div>
+            <div class="course-module-overview__meta"><div class="course-module-overview__stat"><strong>{{ modulePassedLabel }}</strong><span>тем пройдено</span></div><div class="course-module-overview__stat"><strong>{{ curModule.cards }}</strong><span>карточек</span></div><div class="course-module-overview__stat"><strong>{{ curModule.tests }}</strong><span>вопросов</span></div></div>
+            <button type="button" class="course-module-next {{ moduleNextClass }}" onClick="{{ moduleNextAction }}"><span class="course-module-next__copy"><span>{{ moduleNextKicker }}</span><strong>{{ moduleNextTitle }}</strong></span><svg class="ui-icon ui-icon--sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-5-5 5 5-5 5"/></svg></button>
+          </section>
           <sc-if value="{{ showSubPicker }}" hint-placeholder-val="">
-            <div style="padding:16px">
-              <div style="font:800 12px Nunito;color:var(--mut);letter-spacing:.05em;margin-bottom:12px">ПОДРАЗДЕЛЫ</div>
-              <div style="display:flex;flex-direction:column;gap:12px">
+            <section class="course-section" aria-labelledby="subsections-title">
+              <div class="course-section__head"><div><div class="course-section__eyebrow">Карта раздела</div><h2 id="subsections-title" class="course-section__title">Подразделы</h2></div></div>
+              <div class="course-subsections">
                 <sc-for list="{{ subsections }}" as="sub" hint-placeholder-count="3">
-                  <div class="game-card" onClick="{{ sub.onClick }}" style-active="transform:translateY(3px)" style="display:flex;align-items:center;gap:14px;background:var(--card);border:1px solid var(--line);border-radius:20px;padding:16px;cursor:pointer;opacity:{{ sub.op }};transition:transform .12s;box-shadow:0 8px 20px -16px rgba(60,20,15,.5)">
+                  <button type="button" class="course-subsection {{ sub.stateClass }}" onClick="{{ sub.onClick }}" aria-label="{{ sub.progressAria }}">
                     <div class="game-choice-mark game-choice-mark--lg" aria-hidden="true">{{ sub.code }}</div>
-                    <div style="flex:1;min-width:0"><div style="font:900 17px Nunito;color:var(--ink)">{{ sub.title }}</div><div style="font-size:12px;color:var(--mut);margin-top:2px">{{ sub.desc }}</div><div style="font:700 11px Nunito;color:var(--red);margin-top:5px">{{ sub.meta }}</div></div>
-                    <div style="font-size:20px;color:var(--mut)">{{ sub.arrow }}</div>
-                  </div>
+                    <div class="course-subsection__body"><div class="course-subsection__title">{{ sub.title }}</div><div class="course-subsection__desc">{{ sub.desc }}</div><div class="course-subsection__meta">{{ sub.meta }}</div><div class="course-subsection__track" role="progressbar" aria-label="{{ sub.progressAria }}" aria-valuemin="0" aria-valuemax="100" aria-valuenow="{{ sub.pct }}"><div class="course-subsection__fill" style="width:{{ sub.pct }}%"></div></div></div>
+                    <svg class="game-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg>
+                  </button>
                 </sc-for>
               </div>
-            </div>
+            </section>
           </sc-if>
           <sc-if value="{{ showTopicList }}" hint-placeholder-val="{{ true }}">
           <sc-if value="{{ hasSubs }}" hint-placeholder-val="">
-            <div onClick="{{ subBack }}" style="margin:14px 16px 0;display:flex;align-items:center;gap:8px;cursor:pointer;font:800 13px Nunito;color:var(--red)"><span style="font-size:17px">‹</span>Все подразделы · <span style="color:var(--ink)">{{ curSubName }}</span></div>
+            <button type="button" class="course-back" onClick="{{ subBack }}"><svg class="game-chevron" viewBox="0 0 24 24" aria-hidden="true" style="transform:rotate(180deg)"><path d="m9 5 7 7-7 7"/></svg>Все подразделы</button>
           </sc-if>
-          <div style="padding:14px 16px 0;display:flex;gap:10px">
-            <div class="game-stat" style="flex:1;background:var(--card);border:1px solid var(--line);border-radius:15px;padding:11px 13px"><div style="font:900 18px Nunito;color:var(--red)">{{ curModule.total }}</div><div style="font-size:11px;color:var(--mut)">тем</div></div>
-            <div class="game-stat" style="flex:1;background:var(--card);border:1px solid var(--line);border-radius:15px;padding:11px 13px"><div style="font:900 18px Nunito;color:var(--gold)">{{ curModule.cards }}</div><div style="font-size:11px;color:var(--mut)">карточек</div></div>
-            <div class="game-stat" style="flex:1;background:var(--card);border:1px solid var(--line);border-radius:15px;padding:11px 13px"><div style="font:900 18px Nunito;color:var(--green)">{{ curModule.tests }}</div><div style="font-size:11px;color:var(--mut)">тест-вопросов</div></div>
-          </div>
-          <div class="game-cta" onClick="{{ startExam }}" style="margin:16px 16px 0;background:linear-gradient(135deg,var(--reddk),var(--red));border-radius:20px;padding:16px 18px;display:flex;align-items:center;gap:14px;cursor:pointer;box-shadow:0 12px 24px -14px rgba(150,30,35,.85)">
-            <div style="width:48px;height:48px;border-radius:14px;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;color:#fff;flex-shrink:0"><svg class="ui-icon ui-icon--lg" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.7 1.7M9 2h6m-3 0v3"/></svg></div>
-            <div style="flex:1;color:#fff"><div style="font:800 15px Nunito">Экзамен по разделу</div><div style="font-size:12px;opacity:.85">20 вопросов из всех тем · 10 минут · на время</div></div>
-            <div style="font-size:20px;color:#fff">›</div>
-          </div>
+          <button type="button" class="course-exam" onClick="{{ startExam }}"><span class="course-exam__icon"><svg class="ui-icon ui-icon--lg" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.7 1.7M9 2h6m-3 0v3"/></svg></span><span class="course-exam__body"><span class="course-exam__title">Экзамен по разделу</span><span class="course-exam__meta">20 вопросов из всех тем · 10 минут · на время</span></span><svg class="game-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></button>
           <sc-for list="{{ topicGroups }}" as="grp" hint-placeholder-count="4">
-            <div style="margin:18px 16px 8px;display:flex;align-items:center;gap:9px;font:800 12px Nunito;color:var(--mut);letter-spacing:.05em"><img src="{{ grp.iconImg }}" style="width:30px;height:30px;border-radius:8px;object-fit:cover;flex-shrink:0">{{ grp.section }}</div>
-            <div style="display:flex;flex-direction:column;gap:10px;padding:0 16px">
+            <section class="course-topic-section" aria-label="{{ grp.section }}">
+              <div class="course-topic-section__head"><div class="course-topic-section__identity"><img src="{{ grp.iconImg }}" alt="" loading="lazy" decoding="async"><h2>{{ grp.section }}</h2></div><div class="course-topic-section__meta">{{ grp.sectionMeta }} пройдено</div></div>
+              <div class="course-topic-list">
               <sc-for list="{{ grp.topics }}" as="t" hint-placeholder-count="4">
-                <div class="game-card game-topic-card" onClick="{{ t.onClick }}" style-active="transform:translateY(3px)" style="display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:11px 13px;cursor:pointer;transition:transform .12s;box-shadow:0 5px 14px -14px rgba(60,20,15,.5)">
-                  <div style="width:36px;height:36px;border-radius:11px;flex-shrink:0;background:{{ t.badgeBg }};color:{{ t.badgeFg }};display:flex;align-items:center;justify-content:center;font:800 14px Nunito">{{ t.badge }}</div>
-                  <div style="flex:1;min-width:0">
-                    <div style="font:800 14px Nunito;color:var(--ink);line-height:1.25">{{ t.title }}</div>
-                    <div style="font-size:11.5px;color:var(--mut);margin-top:2px"><i style="font-family:Lora">{{ t.lat }}</i></div>
-                  </div>
-                  <sc-if value="{{ t.hasBest }}" hint-placeholder-val=""><span style="font:800 11px Nunito;color:{{ t.bestColor }};background:var(--card2);padding:3px 8px;border-radius:9px">{{ t.bestLabel }}</span></sc-if>
-                  <button onClick="{{ t.onFav }}" aria-label="Добавить тему в избранное" style="border:none;background:none;cursor:pointer;font-size:18px;color:{{ t.starColor }};padding:2px 4px">{{ t.star }}</button>
-                </div>
+                <article class="course-topic-row {{ t.stateClass }}"><button type="button" class="course-topic-main" onClick="{{ t.onClick }}"><span class="course-topic-badge" style="background:{{ t.badgeBg }};color:{{ t.badgeFg }}">{{ t.badge }}</span><span class="course-topic-copy"><span class="course-topic-title">{{ t.title }}</span><span class="course-topic-lat">{{ t.lat }}</span><span class="course-topic-status"><span class="course-topic-status__dot" aria-hidden="true"></span>{{ t.statusLabel }}</span></span><svg class="game-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></button><button type="button" class="course-topic-fav" onClick="{{ t.onFav }}" aria-label="{{ t.favLabel }}" aria-pressed="{{ t.favPressed }}"><svg class="ui-icon ui-icon--sm" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-3-5.6 3 1.1-6.2L3 9.6l6.2-.9L12 3Z"/></svg></button></article>
               </sc-for>
-            </div>
+              </div>
+            </section>
           </sc-for>
           <div style="height:8px"></div>
           </sc-if>
@@ -874,6 +925,7 @@ iframe[src*="telegram.org"]{background:transparent!important;color-scheme:light!
             <button onClick="{{ goSplanch }}" style="margin-top:20px;padding:13px 22px;border:none;border-radius:14px;background:var(--red);color:#fff;font:800 14px Nunito;box-shadow:0 4px 0 var(--reddk);cursor:pointer;transition:transform .08s,box-shadow .08s" style-active="transform:translateY(4px);box-shadow:0 0 0 var(--reddk)">К спланхнологии →</button>
           </div>
         </sc-if>
+        </div>
       </div>
     </sc-if>
 
@@ -882,13 +934,13 @@ iframe[src*="telegram.org"]{background:transparent!important;color-scheme:light!
       <div class="scr game-screen game-topic" style="position:absolute;inset:0;overflow:auto;background:var(--bg);padding-bottom:92px;animation:screenIn .34s ease">
         <div class="game-topbar" style="position:sticky;top:0;z-index:20;background:var(--bg);padding:50px 16px 10px;border-bottom:1px solid var(--line)">
           <div style="display:flex;align-items:center;gap:10px">
-            <button onClick="{{ backToModule }}" aria-label="Назад к темам" style="width:36px;height:36px;border-radius:11px;border:1px solid var(--line);background:var(--card);color:var(--ink);font-size:18px;cursor:pointer">‹</button>
+            <button onClick="{{ backToModule }}" aria-label="Назад к темам" style="width:44px;height:44px;border-radius:13px;border:1px solid var(--line);background:var(--card);color:var(--ink);display:grid;place-items:center;cursor:pointer"><svg class="game-chevron" viewBox="0 0 24 24" aria-hidden="true" style="transform:rotate(180deg)"><path d="m9 5 7 7-7 7"/></svg></button>
             <div style="flex:1;min-width:0"><div style="font:800 10px Nunito;color:var(--red)">{{ curSection }}</div><div style="font:800 16px Nunito;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ curTopic.title }}</div><div style="font-size:11px;color:var(--mut);font-style:italic;font-family:Lora">{{ curTopic.lat }}</div></div>
-            <button onClick="{{ toggleFavCur }}" aria-label="Добавить тему в избранное" style="width:36px;height:36px;border-radius:11px;border:1px solid var(--line);background:var(--card);color:{{ favColor }};font-size:19px;cursor:pointer;flex-shrink:0">{{ favStar }}</button>
+            <button onClick="{{ toggleFavCur }}" aria-label="{{ currentFavLabel }}" aria-pressed="{{ currentFavPressed }}" style="width:44px;height:44px;border-radius:13px;border:1px solid var(--line);background:var(--card);color:{{ favColor }};display:grid;place-items:center;cursor:pointer;flex-shrink:0"><svg class="ui-icon ui-icon--sm" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-3-5.6 3 1.1-6.2L3 9.6l6.2-.9L12 3Z"/></svg></button>
           </div>
           <div style="display:flex;gap:8px;margin-top:12px">
-            <button onClick="{{ tabMat }}" style="flex:1;padding:9px;border:none;border-radius:11px;background:{{ tabMatBg }};color:{{ tabMatFg }};font:800 13px Nunito;cursor:pointer">Материал</button>
-            <button onClick="{{ tabTrain }}" style="flex:1;padding:9px;border:none;border-radius:11px;background:{{ tabTrainBg }};color:{{ tabTrainFg }};font:800 13px Nunito;cursor:pointer">Тренировка</button>
+            <button onClick="{{ tabMat }}" aria-pressed="{{ matPressed }}" style="flex:1;min-height:44px;padding:9px;border:none;border-radius:11px;background:{{ tabMatBg }};color:{{ tabMatFg }};font:800 13px Nunito;cursor:pointer">Материал</button>
+            <button onClick="{{ tabTrain }}" aria-pressed="{{ trainPressed }}" style="flex:1;min-height:44px;padding:9px;border:none;border-radius:11px;background:{{ tabTrainBg }};color:{{ tabTrainFg }};font:800 13px Nunito;cursor:pointer">Тренировка</button>
           </div>
         </div>
 
@@ -2443,6 +2495,7 @@ async logout(){
       const realPct=dtops.length?Math.round(passedN/dtops.length*100):0;
       return { ...m, pct:realPct, animDelay:(i*55)+'ms',
       meta: m.ready?(c.topics+' тем · '+c.cards+' карт'):'скоро',
+      aria:m.title+', '+(m.ready?(passedN+' из '+dtops.length+' тем пройдено'):'раздел пока не открыт'),
       locked: !m.ready, iconop: m.ready?'1':'0.85',
       bar: realPct>0?'var(--red)':'var(--line)',
       onClick:()=>{ this.setState({moduleId:m.id,screen:'module',subKey:null}); } }; });
@@ -2499,7 +2552,21 @@ async logout(){
 
     // module screen
     const mod=this.MODULES.find(m=>m.id===s.moduleId)||this.MODULES[0];
-    R.curModule={ ...mod, total:tops.length, cards:totalCards, tests:totalTests };
+    const allModuleTopics=this.topicsOf(s.moduleId);
+    const allModuleCards=allModuleTopics.reduce((sum,t)=>sum+(t.cards?t.cards.length:0),0);
+    const allModuleTests=allModuleTopics.reduce((sum,t)=>sum+(t.tests?t.tests.length:0),0);
+    const modulePassed=allModuleTopics.filter(t=>((s.progress[this.pk(t.num,s.moduleId)]||{}).bestPct||0)>=75).length;
+    const moduleProgressPct=allModuleTopics.length?Math.round(modulePassed/allModuleTopics.length*100):0;
+    R.curModule={ ...mod, total:allModuleTopics.length, cards:allModuleCards, tests:allModuleTests };
+    R.modulePassed=modulePassed; R.moduleTotal=allModuleTopics.length; R.modulePassedLabel=modulePassed+' / '+allModuleTopics.length; R.moduleProgressPct=moduleProgressPct;
+    R.moduleProgressAria=mod.title+': пройдено '+modulePassed+' из '+allModuleTopics.length+' тем, '+moduleProgressPct+'%';
+    R.moduleScopeLabel='Раздел целиком';
+    { let nextTopic=tops.find(t=>((s.progress[this.pk(t.num,s.moduleId)]||{}).bestPct||0)<75);
+      if(!nextTopic) nextTopic=allModuleTopics.find(t=>((s.progress[this.pk(t.num,s.moduleId)]||{}).bestPct||0)<75);
+      if(nextTopic){ const local=tops.indexOf(nextTopic), global=allModuleTopics.indexOf(nextTopic), pr=s.progress[this.pk(nextTopic.num,s.moduleId)]||{};
+        R.moduleComplete=false; R.moduleNextClass=''; R.moduleNextKicker=(pr.studied||(pr.attempts||0)>0)?'Продолжить маршрут':'Следующая тема'; R.moduleNextTitle=nextTopic.name;
+        R.moduleNextAction=()=>this.setState({subKey:local>=0?s.subKey:null,topicIdx:local>=0?local:global,screen:'topic',tab:'mat',depth:'deep',lastTopic:{moduleId:s.moduleId,topicIdx:global}},()=>this.persist());
+      } else { R.moduleComplete=true; R.moduleNextClass='is-complete'; R.moduleNextKicker='Раздел завершён'; R.moduleNextTitle='Выбрать следующий раздел'; R.moduleNextAction=()=>this.setState({screen:'home',subKey:null}); } }
     R.moduleReady = mod.ready && tops.length>0;
     R.moduleEmpty = !mod.ready;
     // subsections (Neurology → ЦНС button, ПНС/органы чувств locked)
@@ -2507,27 +2574,29 @@ async logout(){
     R.hasSubs = !!subs;
     R.showSubPicker = !!subs && !s.subKey;
     R.showTopicList = !subs || !!s.subKey;
-    R.subsections = subs ? subs.map((sub,subIndex)=>{ const cardsN=tops.filter(t=>t.num>=sub.from&&t.num<=sub.to).reduce((a,t)=>a+(t.cards?t.cards.length:0),0);
+    R.subsections = subs ? subs.map((sub,subIndex)=>{ const subTopics=allModuleTopics.filter(t=>t.num>=sub.from&&t.num<=sub.to); const cardsN=subTopics.reduce((a,t)=>a+(t.cards?t.cards.length:0),0); const passedN=subTopics.filter(t=>((s.progress[this.pk(t.num,s.moduleId)]||{}).bestPct||0)>=75).length; const pct=subTopics.length?Math.round(passedN/subTopics.length*100):0;
       return { title:sub.name, code:String(subIndex+1).padStart(2,'0'), desc:sub.desc, ready:sub.ready,
-        meta: sub.ready?((sub.to-sub.from+1)+' тем · '+cardsN+' карточек'):'скоро',
+        meta: sub.ready?(passedN+' / '+subTopics.length+' тем · '+cardsN+' карточек'):'Скоро откроется', pct, stateClass:sub.ready?'':'is-locked', progressAria:sub.name+': пройдено '+passedN+' из '+subTopics.length+' тем',
         op: sub.ready?'1':'.55', arrow: sub.ready?'›':'—',
         onClick:()=>{ if(sub.ready) this.setState({subKey:sub.name}); else this.ping('Подраздел скоро откроется'); } }; }) : [];
     R.subBack = ()=>this.setState({subKey:null});
     R.curSubName = s.subKey||'';
     const activeSub = subs ? subs.find(x=>x.name===s.subKey) : null;
     const groupSecs = this.sectionsFor(s.moduleId).filter(sec=> !activeSub || (sec.from>=activeSub.from && sec.to<=activeSub.to));
-    R.topicGroups = groupSecs.map(sec=>({
-      section: sec.name, icon: sec.icon, iconImg: sec.img||'',
-      topics: tops.filter(t=>t.num>=sec.from&&t.num<=sec.to).map(t=>{
+    R.topicGroups = groupSecs.map(sec=>{ const groupTopics=tops.filter(t=>t.num>=sec.from&&t.num<=sec.to); const groupPassed=groupTopics.filter(t=>((s.progress[this.pk(t.num,s.moduleId)]||{}).bestPct||0)>=75).length; return {
+      section: sec.name, icon: sec.icon, iconImg: sec.img||'', sectionMeta:groupPassed+' / '+groupTopics.length,
+      topics: groupTopics.map(t=>{
         const key=this.pk(t.num); const pr=s.progress[key]||{}; const passed=(pr.bestPct||0)>=75;
+        const attempted=(pr.attempts||0)>0, studied=!!pr.studied, fav=s.favorites.includes(key); const globalIndex=allModuleTopics.indexOf(t), localIndex=tops.indexOf(t);
+        const statusLabel=passed?'Пройдено':(attempted?('Лучший результат '+(pr.bestPct||0)+'%'):(studied?'Материал изучен':'Не начато'));
         return { title:t.name, lat:t.lat,
           badge: passed?'✓':(''+t.num), badgeBg: passed?'var(--green)':'var(--redsoft)', badgeFg: passed?'#fff':'var(--red)',
-          hasBest:(pr.attempts||0)>0, bestLabel:(pr.bestPct||0)+'%', bestColor: passed?'var(--green)':'var(--gold)',
-          star: s.favorites.includes(key)?'★':'☆', starColor: s.favorites.includes(key)?'var(--gold)':'var(--mut)',
+          hasBest:attempted, bestLabel:(pr.bestPct||0)+'%', bestColor: passed?'var(--green)':'var(--gold)', statusLabel, stateClass:passed?'is-complete':((attempted||studied)?'is-progress':''),
+          favPressed:fav?'true':'false', favLabel:(fav?'Убрать из избранного: ':'Добавить в избранное: ')+t.name,
           onFav:(e)=>{ if(e&&e.stopPropagation)e.stopPropagation(); this.toggleFav(key); },
-          onClick:()=>this.setState({topicIdx: tops.indexOf(t), screen:'topic', tab:'mat', depth:'deep', lastTopic:{moduleId:s.moduleId,topicIdx:tops.indexOf(t)}},()=>this.persist()) };
+          onClick:()=>this.setState({topicIdx:localIndex, screen:'topic', tab:'mat', depth:'deep', lastTopic:{moduleId:s.moduleId,topicIdx:globalIndex}},()=>this.persist()) };
       })
-    })).filter(g=>g.topics.length);
+    }}).filter(g=>g.topics.length);
 
     // current topic
     const topic = tops[s.topicIdx] || null;
@@ -2537,6 +2606,7 @@ async logout(){
     R.tabMat=()=>this.setState({tab:'mat'}); R.tabTrain=()=>this.setState({tab:'train'});
     const matTab=s.tab==='mat';
     R.showMat=matTab; R.showTrainPick=!matTab;
+    R.matPressed=matTab?'true':'false'; R.trainPressed=matTab?'false':'true';
     R.tabMatBg=matTab?'var(--red)':'var(--card2)'; R.tabMatFg=matTab?'#fff':'var(--mut)';
     R.tabTrainBg=!matTab?'var(--red)':'var(--card2)'; R.tabTrainFg=!matTab?'#fff':'var(--mut)';
     const surf=s.depth==='surface';
@@ -2839,6 +2909,7 @@ async logout(){
     const curKey=topic?this.pk(topic.num):'';
     R.favStar=favKeys.includes(curKey)?'★':'☆';
     R.favColor=favKeys.includes(curKey)?'var(--gold)':'var(--mut)';
+    R.currentFavPressed=favKeys.includes(curKey)?'true':'false'; R.currentFavLabel=(favKeys.includes(curKey)?'Убрать из избранного: ':'Добавить в избранное: ')+(topic?topic.name:'тема');
     R.toggleFavCur=()=>this.toggleFav(curKey);
     R.noteVal=(s.notes&&s.notes[curKey])||'';
     R.onNote=e=>this.setNote(curKey,e.target.value);
