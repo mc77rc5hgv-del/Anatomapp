@@ -34,6 +34,28 @@ function adminIds() {
   return new Set(String(process.env.ADMIN_TELEGRAM_IDS || "").split(",").map(v => v.trim()).filter(Boolean));
 }
 
+async function readSupabaseUser(token) {
+  const key = env("SUPABASE_SERVICE_ROLE_KEY");
+  const response = await fetch(`${env("SUPABASE_URL").replace(/\/$/, "")}/auth/v1/user`, {
+    headers: { apikey: key, Authorization: `Bearer ${token}` },
+  });
+  if (!response.ok) return null;
+  return response.json();
+}
+
+async function readAdmin(req) {
+  const appSession = readSession(req);
+  if (appSession && appSession.isAdmin) return appSession;
+  const token = String(req.headers.authorization || "").replace(/^Bearer\s+/i, "");
+  if (!token) return null;
+  const user = await readSupabaseUser(token);
+  const allowedEmails = new Set(String(process.env.ADMIN_EMAILS || "pismenniyaleks.1@gmail.com")
+    .split(",").map(value => value.trim().toLowerCase()).filter(Boolean));
+  return user && allowedEmails.has(String(user.email || "").toLowerCase())
+    ? { sub: user.id, email: user.email, isAdmin: true }
+    : null;
+}
+
 async function supabase(path, options = {}) {
   const key = env("SUPABASE_SERVICE_ROLE_KEY");
   const response = await fetch(`${env("SUPABASE_URL").replace(/\/$/, "")}${path}`, {
@@ -60,4 +82,4 @@ function cleanText(value, max = 120) {
   return String(value || "").replace(/[<>]/g, "").trim().slice(0, max);
 }
 
-module.exports = { adminIds, cleanText, readSession, signSession, supabase };
+module.exports = { adminIds, cleanText, readAdmin, readSession, signSession, supabase };

@@ -18,12 +18,12 @@ alter table public.profiles add column if not exists photo_url text;
 alter table public.profiles add column if not exists created_at timestamptz default now();
 
 update public.profiles
-set tg_id = substring(lower(email) from '^tg([0-9]+)@users\.anatomapp\.ru$')
+set tg_id = substring(lower(email) from '^tg([0-9]+)@(users\.)?anatomapp\.ru$')
 where tg_id is null
-  and lower(email) ~ '^tg[0-9]+@users\.anatomapp\.ru$'
+  and lower(email) ~ '^tg[0-9]+@(users\.)?anatomapp\.ru$'
   and not exists (
     select 1 from public.profiles existing
-    where existing.tg_id = substring(lower(profiles.email) from '^tg([0-9]+)@users\.anatomapp\.ru$')
+    where existing.tg_id = substring(lower(profiles.email) from '^tg([0-9]+)@(users\.)?anatomapp\.ru$')
   );
 create unique index if not exists profiles_tg_id_unique
   on public.profiles (tg_id) where tg_id is not null;

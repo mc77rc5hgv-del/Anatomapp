@@ -10,6 +10,7 @@
    - `SUPABASE_URL` и `SUPABASE_SERVICE_ROLE_KEY` — Project Settings → API;
    - `SESSION_SECRET` — случайная строка длиной не менее 32 байт;
    - `ADMIN_TELEGRAM_IDS` — Telegram ID администраторов через запятую.
+   - `ADMIN_EMAILS` — email администраторов через запятую (необязательно; по умолчанию используется текущий email владельца).
 3. В BotFather задайте production-домен Vercel через `/setdomain` и URL Mini App через `/setmenubutton` или настройки приложения.
 4. Выполните новое production-развёртывание после добавления переменных.
 

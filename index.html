@@ -64,6 +64,12 @@ iframe[src*="telegram.org"]{background:transparent!important;color-scheme:light!
   }
   @keyframes wordcycle{0%{opacity:0;transform:translateY(14px) rotateX(-40deg)}12%,84%{opacity:1;transform:none}100%{opacity:0;transform:translateY(-14px) rotateX(40deg)}}
 
+  .admin-hero>div,.admin-tools,.admin-list{max-width:920px;margin-left:auto;margin-right:auto}
+  .admin-tools input:focus{border-color:var(--red) !important;box-shadow:0 0 0 3px rgba(171,39,52,.1) !important}
+  .admin-list>div:active{transform:scale(.995)}
+  @media (min-width:760px){.admin-list{display:grid !important;grid-template-columns:repeat(2,minmax(0,1fr));align-items:start}.admin-tools{padding-left:24px !important;padding-right:24px !important}.admin-list{padding-left:24px !important;padding-right:24px !important}}
+  @media (prefers-reduced-motion:reduce){.admin-list>div{transition:none !important}}
+
 </style>
 </helmet>
 <div id="wrap" style="min-height:100vh;display:flex;align-items:center;justify-content:center;padding:26px;background:radial-gradient(120% 90% at 50% -10%,#f4efe6 0%,#e0d7ca 60%,#d3c8b8 100%)">
@@ -770,25 +776,34 @@ iframe[src*="telegram.org"]{background:transparent!important;color-scheme:light!
 
     <!-- ===================== ADMIN ===================== -->
     <sc-if value="{{ isAdmin }}" hint-placeholder-val="">
-      <div class="scr" style="position:absolute;inset:0;overflow:auto;background:var(--bg)">
-        <div style="position:sticky;top:0;z-index:10;background:var(--ink);color:var(--bg);padding:50px 18px 16px">
-          <div style="display:flex;align-items:center;gap:12px">
-            <button onClick="{{ backProfile }}" style="width:34px;height:34px;border-radius:11px;border:none;background:rgba(255,255,255,.14);color:var(--bg);font-size:17px;cursor:pointer">‹</button>
-            <div><div style="font:900 18px Nunito">🛠 Админ-панель</div><div style="font-size:11.5px;opacity:.65">Пользователи · {{ adminTotal }} зарегистрировано</div></div>
+      <div class="scr admin-shell" style="position:absolute;inset:0;overflow:auto;background:var(--bg)">
+        <div class="admin-hero" style="position:sticky;top:0;z-index:10;background:linear-gradient(145deg,#28181b 0%,#541f27 58%,#7f2631 100%);color:#fff;padding:calc(42px + env(safe-area-inset-top)) 18px 18px;box-shadow:0 12px 30px -22px rgba(30,8,12,.85)">
+          <div style="display:flex;align-items:center;gap:13px">
+            <button onClick="{{ backProfile }}" aria-label="Назад" style="width:44px;height:44px;border-radius:14px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.1);color:#fff;font-size:20px;cursor:pointer;backdrop-filter:blur(8px)">‹</button>
+            <div style="flex:1"><div style="font:800 9.5px Manrope;letter-spacing:.16em;text-transform:uppercase;opacity:.62">Управление</div><div style="font:900 22px Nunito;letter-spacing:-.02em;margin-top:2px">Пользователи</div><div style="font:500 11px Manrope;opacity:.68;margin-top:1px">Сводка активности и учебного прогресса</div></div>
           </div>
-          <div style="display:flex;gap:8px;margin-top:14px">
-            <div style="flex:1;background:rgba(255,255,255,.09);border-radius:12px;padding:9px 11px"><div style="font:900 17px Nunito;color:#ffd48a">{{ adminTotal }}</div><div style="font-size:10px;opacity:.7">всего</div></div>
-            <div style="flex:1;background:rgba(255,255,255,.09);border-radius:12px;padding:9px 11px"><div style="font:900 17px Nunito;color:#8ee0ac">{{ adminOnline }}</div><div style="font-size:10px;opacity:.7">онлайн сейчас</div></div>
-            <div style="flex:1;background:rgba(255,255,255,.09);border-radius:12px;padding:9px 11px"><div style="font:900 17px Nunito;color:#ff9a9e">{{ adminInactive }}</div><div style="font-size:10px;opacity:.7">неактив 2 нед</div></div>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:17px">
+            <div style="background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:11px 12px"><div style="font:900 20px Nunito">{{ adminTotal }}</div><div style="font:600 9.5px Manrope;opacity:.62;margin-top:1px">всего</div></div>
+            <div style="background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:11px 12px"><div style="font:900 20px Nunito;color:#9ce7b7">{{ adminOnline }}</div><div style="font:600 9.5px Manrope;opacity:.62;margin-top:1px">онлайн</div></div>
+            <div style="background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:11px 12px"><div style="font:900 20px Nunito;color:#ffc1c5">{{ adminInactive }}</div><div style="font:600 9.5px Manrope;opacity:.62;margin-top:1px">неактивны</div></div>
           </div>
         </div>
-        <div style="padding:12px 16px"><input value="{{ adminQuery }}" onInput="{{ onAdminQuery }}" placeholder="🔍 Поиск по ФИО, Telegram ID, username…" style="width:100%;padding:12px 14px;border:1.5px solid var(--line);border-radius:13px;background:var(--card);color:var(--ink);font:600 13px Manrope;outline:none"></div>
-        <div style="display:flex;flex-direction:column;gap:8px;padding:0 16px 20px">
+        <div class="admin-tools" style="padding:16px 16px 12px">
+          <div style="position:relative"><span style="position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:15px;opacity:.5">⌕</span><input value="{{ adminQuery }}" onInput="{{ onAdminQuery }}" placeholder="Имя, Telegram ID или username" style="width:100%;height:46px;padding:0 14px 0 40px;border:1px solid var(--line);border-radius:14px;background:var(--card);color:var(--ink);font:600 13px Manrope;outline:none;box-shadow:0 6px 20px -18px rgba(0,0,0,.55)"></div>
+          <div style="display:flex;gap:7px;margin-top:10px;overflow:auto;padding-bottom:2px">
+            <sc-for list="{{ adminFilters }}" as="f" hint-placeholder-count="3"><button onClick="{{ f.onClick }}" style="height:34px;padding:0 13px;border:1px solid {{ f.border }};border-radius:11px;background:{{ f.bg }};color:{{ f.color }};font:800 10.5px Nunito;white-space:nowrap;cursor:pointer">{{ f.label }}</button></sc-for>
+          </div>
+          <div style="font:700 10.5px Manrope;color:var(--mut);margin-top:12px">Показано {{ adminShown }} из {{ adminTotal }}</div>
+        </div>
+        <div class="admin-list" style="display:flex;flex-direction:column;gap:10px;padding:0 16px 24px">
           <sc-for list="{{ adminUsers }}" as="u" hint-placeholder-count="6">
-            <div style="display:flex;align-items:flex-start;gap:11px;background:var(--card);border:1px solid var(--line);border-radius:15px;padding:12px 13px">
+            <div onClick="{{ u.onClick }}" style="background:var(--card);border:1px solid {{ u.border }};border-radius:16px;padding:12px 13px;cursor:pointer;transition:border-color .2s,box-shadow .2s;box-shadow:{{ u.shadow }}">
+              <div style="display:flex;align-items:flex-start;gap:11px">
               <div style="width:38px;height:38px;border-radius:11px;background:var(--card2);display:flex;align-items:center;justify-content:center;font:800 13px Nunito;color:var(--ink);position:relative"><span>{{ u.ini }}</span><span style="position:absolute;bottom:-1px;right:-1px;width:11px;height:11px;border-radius:50%;background:{{ u.dot }};border:2px solid var(--card)"></span></div>
-              <div style="flex:1;min-width:0"><div style="font:800 13px Nunito;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ u.name }}</div><div style="font-size:10.5px;color:var(--mut);margin-top:2px">{{ u.meta }}</div><div style="font-size:10px;color:var(--mut);margin-top:4px;line-height:1.45">{{ u.details }}</div><div style="font-size:9.5px;color:var(--mut);opacity:.78;margin-top:3px">{{ u.joined }}</div></div>
-              <div style="text-align:right;flex-shrink:0"><div style="font:800 13px Nunito;color:var(--gold)">{{ u.xp }} XP</div><div style="font-size:10px;color:var(--mut)">{{ u.last }}</div><div style="font-size:9.5px;color:var(--mut);margin-top:4px">{{ u.badges }}</div></div>
+              <div style="flex:1;min-width:0"><div style="font:800 13.5px Nunito;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ u.name }}</div><div style="font-size:10.5px;color:var(--mut);margin-top:2px">{{ u.meta }}</div><div style="display:flex;flex-wrap:wrap;gap:5px;margin-top:7px"><span style="font:800 9.5px Nunito;color:var(--gold);background:var(--goldsoft);padding:3px 7px;border-radius:8px">{{ u.xp }} XP</span><span style="font:800 9.5px Nunito;color:var(--ink);background:var(--card2);padding:3px 7px;border-radius:8px">{{ u.badges }}</span><span style="font:800 9.5px Nunito;color:var(--mut);background:var(--card2);padding:3px 7px;border-radius:8px">{{ u.last }}</span></div></div>
+              <div style="font-size:16px;color:var(--mut);padding-top:8px">{{ u.chevron }}</div>
+              </div>
+              <sc-if value="{{ u.open }}" hint-placeholder-val=""><div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--line)"><div style="display:grid;grid-template-columns:repeat(5,1fr);gap:6px"><div style="text-align:center;background:var(--card2);border-radius:10px;padding:8px 3px"><div style="font:900 13px Nunito;color:var(--ink)">{{ u.topics }}</div><div style="font:600 8px Manrope;color:var(--mut);margin-top:2px">темы</div></div><div style="text-align:center;background:var(--card2);border-radius:10px;padding:8px 3px"><div style="font:900 13px Nunito;color:var(--ink)">{{ u.sessions }}</div><div style="font:600 8px Manrope;color:var(--mut);margin-top:2px">сессии</div></div><div style="text-align:center;background:var(--card2);border-radius:10px;padding:8px 3px"><div style="font:900 13px Nunito;color:var(--ink)">{{ u.mistakes }}</div><div style="font:600 8px Manrope;color:var(--mut);margin-top:2px">ошибки</div></div><div style="text-align:center;background:var(--card2);border-radius:10px;padding:8px 3px"><div style="font:900 13px Nunito;color:var(--ink)">{{ u.favorites }}</div><div style="font:600 8px Manrope;color:var(--mut);margin-top:2px">избранное</div></div><div style="text-align:center;background:var(--card2);border-radius:10px;padding:8px 3px"><div style="font:900 13px Nunito;color:var(--ink)">{{ u.notes }}</div><div style="font:600 8px Manrope;color:var(--mut);margin-top:2px">заметки</div></div></div><div style="margin-top:10px;padding:10px 11px;background:var(--card2);border-radius:11px"><div style="font:700 10px Manrope;color:var(--ink);line-height:1.55">{{ u.identity }}</div><div style="font:500 9.5px Manrope;color:var(--mut);margin-top:3px;line-height:1.55">{{ u.regInfo }}</div></div></div></sc-if>
             </div>
           </sc-for>
           <sc-if value="{{ adminEmpty }}" hint-placeholder-val=""><div style="text-align:center;color:var(--mut);font-size:13px;padding:30px 16px;line-height:1.5">Пока нет зарегистрированных пользователей на этом устройстве.<br>Список наполняется по мере входа студентов.</div></sc-if>
@@ -866,6 +881,14 @@ window.AnatomDB = (function () {
     } catch (e) {}
     var res = await sb.auth.getUser();
     return (res.data && res.data.user) || null;
+  }
+
+  async function accessToken() {
+    if (!init()) return "";
+    try {
+      var res = await sb.auth.getSession();
+      return (res && res.data && res.data.session && res.data.session.access_token) || "";
+    } catch (e) { return ""; }
   }
 
   async function saveProfile(id, p) {
@@ -985,7 +1008,7 @@ window.AnatomDB = (function () {
   return {
     init: init, ready: ready,
     signUp: signUp, signIn: signIn, signOut: signOut,
-    currentUser: currentUser,
+    currentUser: currentUser, accessToken: accessToken,
     saveProfile: saveProfile, getProfile: getProfile,
     saveState: saveState, loadState: loadState,
     leaderboard: leaderboard, allUsers: allUsers,
@@ -1144,7 +1167,7 @@ class Component extends DCLogic {
     }
     if(this.isAdmin()){
       try{
-        var r=await fetch(this.AUTH_BASE+'/api/users',{headers:this.authHeaders()});
+        var r=await fetch(this.AUTH_BASE+'/api/users',{headers:await this.adminAuthHeaders()});
         if(r.ok){ var j=await r.json(); this.setState({dbUsers:j.users||[]}); }
       }catch(e){}
     }
@@ -1609,6 +1632,10 @@ async logout(){
       .catch(function(){ self.setState({tgLoading:false, authErr:'Не удалось войти через Telegram. Попробуйте ещё раз.'}); });
   }
   authHeaders(){ let t=''; try{ t=localStorage.getItem('anatom_token')||''; }catch(e){} return t?{'Authorization':'Bearer '+t}:{}; }
+  async adminAuthHeaders(){
+    var h=this.authHeaders(); if(h.Authorization) return h;
+    try{ var db=this.db(); var t=db&&db.accessToken?await db.accessToken():''; return t?{'Authorization':'Bearer '+t}:{}; }catch(e){ return {}; }
+  }
   syncPull(){
     if(!this.state.user||!this.state.user.tgId) return;
     fetch(this.AUTH_BASE+'/api/state',{headers:this.authHeaders()})
@@ -1959,14 +1986,19 @@ async logout(){
     R.dismissAnnounce=()=>this.dismissAnnounce();
 
     R.isAdminUser=this.isAdmin();
-    { const now=Date.now(); const dbu=s.dbUsers; const arr = dbu ? dbu.map(u=>({name:u.name,email:u.email,course:u.course,faculty:u.faculty,username:u.username,handle:u.handle,tg_id:u.tg_id,xp:u.xp||0,streak:u.streak||0,language:u.language_code||'',premium:!!u.is_premium,stats:u.stats||{},createdAt:u.created_at?Date.parse(u.created_at):0,lastActive:u.last_active?Date.parse(u.last_active):0})).sort((a,b)=>(b.lastActive||0)-(a.lastActive||0)) : Object.values(this.loadUsers()).sort((a,b)=>(b.lastActive||0)-(a.lastActive||0));
+    { const now=Date.now(); const dbu=s.dbUsers; const tgFromEmail=e=>{var m=String(e||'').toLowerCase().match(/^tg([0-9]+)@(users\.)?anatomapp\.ru$/);return m?m[1]:'';}; let arr = dbu ? dbu.map(u=>({id:u.id||'',name:u.name,email:u.email,course:u.course,faculty:u.faculty,username:u.username,handle:u.handle,tg_id:u.tg_id||tgFromEmail(u.email),xp:u.xp||0,streak:u.streak||0,language:u.language_code||'',premium:!!u.is_premium,stats:u.stats||{},createdAt:u.created_at?Date.parse(u.created_at):0,lastActive:u.last_active?Date.parse(u.last_active):(u.lastActive||0)})).sort((a,b)=>(b.lastActive||0)-(a.lastActive||0)) : Object.values(this.loadUsers()).map(u=>Object.assign({},u,{tg_id:u.tgId||tgFromEmail(u.email),createdAt:u.created||0})).sort((a,b)=>(b.lastActive||0)-(a.lastActive||0));
       const fmt=(t)=>{ if(!t) return '—'; const d=Math.floor((now-t)/60000); if(d<1)return 'сейчас'; if(d<60)return d+' мин'; const h=Math.floor(d/60); if(h<24)return h+' ч'; const dd=Math.floor(h/24); return dd+' дн.'; };
       const ini=(n)=>((n||'').trim().split(/\s+/).slice(0,2).map(x=>x[0]||'').join('')||'?').toUpperCase();
+      const totalAll=arr.length, onlineAll=arr.filter(u=>now-(u.lastActive||0)<15*60000).length, inactiveAll=arr.filter(u=>!u.lastActive||now-u.lastActive>14*864e5).length;
+      var af=s.adminFilter||'all';
+      if(af==='active') arr=arr.filter(u=>u.lastActive&&now-u.lastActive<=7*864e5);
+      if(af==='inactive') arr=arr.filter(u=>!u.lastActive||now-u.lastActive>14*864e5);
       var aq=(s.adminQuery||'').trim().toLowerCase();
       if(aq) arr=arr.filter(u=>((u.name||'')+(u.email||'')+(u.faculty||'')+(u.username||'')+(u.tg_id||'')+String(u.course||'')).toLowerCase().includes(aq));
       const date=t=>t?new Date(t).toLocaleDateString('ru-RU'):'—';
-      R.adminUsers=arr.map(u=>{ const st=u.stats||{}; return { ini:ini(u.name), name:u.name||'Студент', meta:(u.course?u.course+' курс':'')+(u.faculty?' · '+u.faculty:'')+(u.username?' · @'+u.username:(u.handle?' · '+u.handle:(u.tg_id?' · tg'+u.tg_id:(u.email?' · '+u.email:'')))), details:'Темы: '+(st.topics||0)+' · Сессии: '+(st.sessions||0)+' · Ошибки: '+(st.mistakes||0)+' · Избранное: '+(st.favorites||0)+' · Заметки: '+(st.notes||0), joined:'Telegram ID: '+(u.tg_id||'—')+' · Регистрация: '+date(u.createdAt)+(u.language?' · '+u.language.toUpperCase():'')+(u.premium?' · Premium':''), badges:'🔥 '+(u.streak||0)+(st.examDone?' · Экзамен ✓':''), xp:u.xp||0, last:fmt(u.lastActive), dot:(now-(u.lastActive||0)<15*60000)?'var(--green)':'var(--mut)' }; });
-      R.adminTotal=arr.length; R.adminOnline=arr.filter(u=>now-(u.lastActive||0)<15*60000).length; R.adminInactive=arr.filter(u=>now-(u.lastActive||0)>14*864e5).length;
+      R.adminUsers=arr.map(u=>{ const st=u.stats||{}; const key=u.id||u.tg_id||u.email||u.name; const open=s.adminOpenId===key; return { ini:ini(u.name), name:u.name||'Студент', meta:(u.course?u.course+' курс':'')+(u.faculty?' · '+u.faculty:'')+(u.username?' · @'+u.username:(u.handle?' · '+u.handle:(u.tg_id?' · Telegram':' · '+(u.email||'без контакта')))), topics:st.topics||0,sessions:st.sessions||0,mistakes:st.mistakes||0,favorites:st.favorites||0,notes:st.notes||0,identity:u.tg_id?'Telegram ID · '+u.tg_id:(u.email?'Email · '+u.email:'Контакт не указан'),regInfo:'Регистрация · '+date(u.createdAt)+(u.language?'  ·  '+u.language.toUpperCase():'')+(u.premium?'  ·  Telegram Premium':''), badges:'🔥 '+(u.streak||0)+(st.examDone?' · Экзамен ✓':''), xp:u.xp||0, last:fmt(u.lastActive), dot:(now-(u.lastActive||0)<15*60000)?'var(--green)':'var(--mut)', open:open, chevron:open?'⌃':'⌄', border:open?'var(--red)':'var(--line)', shadow:open?'0 10px 28px -20px rgba(137,28,40,.7)':'0 8px 24px -22px rgba(0,0,0,.42)', onClick:()=>this.setState({adminOpenId:open?null:key}) }; });
+      R.adminFilters=[['all','Все'],['active','Активные 7 дней'],['inactive','Неактивные']].map(f=>{var on=af===f[0];return{label:f[1],onClick:()=>this.setState({adminFilter:f[0],adminOpenId:null}),bg:on?'var(--ink)':'var(--card)',color:on?'var(--bg)':'var(--mut)',border:on?'var(--ink)':'var(--line)'};});
+      R.adminTotal=totalAll; R.adminShown=arr.length; R.adminOnline=onlineAll; R.adminInactive=inactiveAll;
       R.adminEmpty=arr.length===0; }
 
     // nav
