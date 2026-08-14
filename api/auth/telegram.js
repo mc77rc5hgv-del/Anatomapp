@@ -36,8 +36,13 @@ function validateWidget(payload, botToken) {
 
 async function findOrCreateProfile(tg) {
   const tgId = String(tg.id);
+  const legacyEmail = `tg${tgId}@users.anatomapp.ru`;
   const found = await supabase(`/rest/v1/profiles?tg_id=eq.${encodeURIComponent(tgId)}&select=*&limit=1`);
   let profile = found && found[0];
+  if (!profile) {
+    const legacy = await supabase(`/rest/v1/profiles?email=eq.${encodeURIComponent(legacyEmail)}&select=*&limit=1`);
+    profile = legacy && legacy[0];
+  }
   const name = cleanText([tg.first_name, tg.last_name].filter(Boolean).join(" ") || tg.username || `Студент ${tgId}`, 100);
   const username = cleanText(tg.username, 40);
 
@@ -45,7 +50,7 @@ async function findOrCreateProfile(tg) {
     const created = await supabase("/auth/v1/admin/users", {
       method: "POST",
       body: JSON.stringify({
-        email: `tg${tgId}@users.anatomapp.ru`,
+        email: legacyEmail,
         password: crypto.randomBytes(32).toString("base64url"),
         email_confirm: true,
         user_metadata: { name, username, tg_id: tgId },
@@ -56,7 +61,7 @@ async function findOrCreateProfile(tg) {
 
   const row = {
     id: profile.id,
-    email: profile.email || `tg${tgId}@users.anatomapp.ru`,
+    email: profile.email || legacyEmail,
     name,
     username: username || null,
     tg_id: tgId,

@@ -1578,6 +1578,7 @@ async logout(){
       .then(function(r){ return r.ok?r.json():Promise.reject(r.status); })
       .then(async function(res){
         if(res.token){ try{ localStorage.setItem('anatom_token',res.token); }catch(e){} }
+        try{ var legacyDb=self.db(); if(legacyDb) await legacyDb.signOut(); }catch(e){}
         var p=res.user||data;
         var tgId=String(p.tgId||p.id||'');
         var name=[p.first_name,p.last_name].filter(Boolean).join(' ')||p.username||'Студент';
