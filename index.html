@@ -1585,12 +1585,21 @@ window.AnatomDB = (function () {
     throw err;
   }
 
+  function withTimeout(promise, label) {
+    return Promise.race([
+      promise,
+      new Promise(function (_, reject) {
+        setTimeout(function () { reject(new Error((label || "Сервер") + " не отвечает. Проверьте соединение и попробуйте ещё раз.")); }, 12000);
+      })
+    ]);
+  }
+
   async function signUp(email, password, meta) {
     init();
-    var res = await sb.auth.signUp({ email: email, password: password, options: { data: meta || {} } });
+    var res = await withTimeout(sb.auth.signUp({ email: email, password: password, options: { data: meta || {} } }), "Регистрация");
     if (res.error) fail(res.error);
     if (!res.data.session) {
-      var r2 = await sb.auth.signInWithPassword({ email: email, password: password });
+      var r2 = await withTimeout(sb.auth.signInWithPassword({ email: email, password: password }), "Вход");
       if (!r2.error) return r2.data;
     }
     return res.data;
@@ -1598,7 +1607,7 @@ window.AnatomDB = (function () {
 
   async function signIn(email, password) {
     init();
-    var res = await sb.auth.signInWithPassword({ email: email, password: password });
+    var res = await withTimeout(sb.auth.signInWithPassword({ email: email, password: password }), "Вход");
     if (res.error) fail(res.error);
     return res.data;
   }
@@ -1611,18 +1620,18 @@ window.AnatomDB = (function () {
   async function currentUser() {
     if (!init()) return null;
     try {
-      var sess = await sb.auth.getSession();
+      var sess = await withTimeout(sb.auth.getSession(), "Сессия");
       if (sess && sess.data && sess.data.session && sess.data.session.user)
         return sess.data.session.user;
     } catch (e) {}
-    var res = await sb.auth.getUser();
+    var res = await withTimeout(sb.auth.getUser(), "Сессия");
     return (res.data && res.data.user) || null;
   }
 
   async function accessToken() {
     if (!init()) return "";
     try {
-      var res = await sb.auth.getSession();
+      var res = await withTimeout(sb.auth.getSession(), "Сессия");
       return (res && res.data && res.data.session && res.data.session.access_token) || "";
     } catch (e) { return ""; }
   }
@@ -1641,45 +1650,45 @@ window.AnatomDB = (function () {
       streak: typeof p.streak === "number" ? Math.max(0, Math.min(9999, p.streak)) : 0,
       last_active: new Date().toISOString()
     };
-    var res = await sb.from("profiles").upsert(row, { onConflict: "id" });
+    var res = await withTimeout(sb.from("profiles").upsert(row, { onConflict: "id" }), "Профиль");
     if (res.error) fail(res.error);
   }
 
   async function getProfile(id) {
     init();
-    var res = await sb.from("profiles").select("*").eq("id", id).maybeSingle();
+    var res = await withTimeout(sb.from("profiles").select("*").eq("id", id).maybeSingle(), "Профиль");
     if (res.error) fail(res.error);
     return res.data;
   }
 
   async function saveState(userId, state) {
     init();
-    var res = await sb.from("user_state").upsert({
+    var res = await withTimeout(sb.from("user_state").upsert({
       user_id: userId,
       state: state || {},
       updated_at: new Date().toISOString()
-    }, { onConflict: "user_id" });
+    }, { onConflict: "user_id" }), "Сохранение прогресса");
     if (res.error) fail(res.error);
-    await sb.from("profiles").update({
+    await withTimeout(sb.from("profiles").update({
       xp: (state && state.xp) || 0,
       streak: (state && state.streak) || 0,
       last_active: new Date().toISOString()
-    }).eq("id", userId);
+    }).eq("id", userId), "Сохранение прогресса");
   }
 
   async function loadState(userId) {
     init();
-    var res = await sb.from("user_state").select("state").eq("user_id", userId).maybeSingle();
+    var res = await withTimeout(sb.from("user_state").select("state").eq("user_id", userId).maybeSingle(), "Загрузка прогресса");
     if (res.error) fail(res.error);
     return (res.data && res.data.state) || {};
   }
 
   async function leaderboard(limit) {
     init();
-    var res = await sb.from("profiles")
+    var res = await withTimeout(sb.from("profiles")
       .select("id,name,xp,streak,course,faculty,email,last_active")
       .order("xp", { ascending: false })
-      .limit(limit || 100);
+      .limit(limit || 100), "Рейтинг").catch(function (e) { return { error: e }; });
     if (res.error) { console.warn("leaderboard", res.error.message); return []; }
     var seen = {}, rows = [];
     (res.data || []).forEach(function (r) {
@@ -1707,9 +1716,9 @@ window.AnatomDB = (function () {
 
   async function resetPassword(email) {
     init();
-    var res = await sb.auth.resetPasswordForEmail(email, {
+    var res = await withTimeout(sb.auth.resetPasswordForEmail(email, {
       redirectTo: (typeof location !== 'undefined' ? location.origin : 'https://anatomapp.ru')
-    });
+    }), "Восстановление пароля");
     if (res.error) throw res.error;
     return true;
   }
@@ -1718,20 +1727,20 @@ window.AnatomDB = (function () {
     init();
     var msg = String(message||"").replace(/[<>]/g,"").trim().slice(0, 500);
     if(!msg) throw new Error("Пустое сообщение");
-    var res = await sb.from('announcements').insert({
+    var res = await withTimeout(sb.from('announcements').insert({
       message: msg,
       created_by: authorId || null
-    }).select().maybeSingle();
+    }).select().maybeSingle(), "Объявление");
     if (res.error) throw res.error;
     return res.data;
   }
 
   async function listAnnouncements(limit) {
     init();
-    var res = await sb.from('announcements')
+    var res = await withTimeout(sb.from('announcements')
       .select('id,message,created_at,created_by')
       .order('created_at', { ascending: false })
-      .limit(limit || 10);
+      .limit(limit || 10), "Объявления").catch(function (e) { return { error: e }; });
     if (res.error) { console.warn('announcements', res.error.message); return []; }
     return res.data || [];
   }
