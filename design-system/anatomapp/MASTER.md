@@ -69,6 +69,14 @@ An original gamified anatomy-learning interface: tactile and encouraging like a 
 - The card names why the session is recommended, what it will cover, and an honest duration estimate derived from the real item count.
 - Completing a review may reschedule only topics that actually appeared in that review session; capped queues never advance unseen material.
 
+### Resumable practice
+
+- Every non-exam training mode auto-saves its exact position, score, answers, and earned-item keys after each meaningful interaction.
+- An interrupted session returns as a single prominent Home card with the real topic, mode, completed count, and progress percentage.
+- Resuming restores the same shuffled items and answer state; it never silently starts a different exercise or grants duplicate XP.
+- Users can explicitly discard the checkpoint. A timestamped tombstone syncs that choice so an older cloud copy cannot resurrect it.
+- Saved sessions expire after seven days. Timed exams are intentionally excluded because resuming would invalidate the time limit.
+
 ### Daily missions
 
 - The Home screen shows three measurable tasks: completed training items, one completed session, and the accuracy target defined by the saved preparation goal.

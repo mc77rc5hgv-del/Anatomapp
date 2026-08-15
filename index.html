@@ -327,6 +327,29 @@ iframe[src*="telegram.org"]{background:transparent!important;color-scheme:light!
   .game-daily__head{display:flex;align-items:center;gap:7px;padding-right:42px}
   .game-goal-mode{padding:3px 7px;border:1px solid rgba(255,255,255,.2);border-radius:8px;background:rgba(255,255,255,.12);font:900 8.5px Nunito;letter-spacing:.04em;text-transform:uppercase;white-space:nowrap}
   .game-daily__value{background:var(--reddk)!important;color:#fff!important;border:1px solid rgba(255,255,255,.16)}
+  .game-resume{margin:14px 16px 0;padding:15px;border:2px solid color-mix(in srgb,var(--gold) 48%,var(--line));border-radius:22px;background:radial-gradient(100% 150% at 100% 0%,color-mix(in srgb,var(--gold) 16%,transparent),transparent 58%),var(--card);box-shadow:0 5px 0 color-mix(in srgb,var(--gold) 22%,var(--game-depth))}
+  .game-resume__head{display:grid;grid-template-columns:44px minmax(0,1fr) 44px;align-items:center;gap:11px}
+  .game-resume__mark{width:44px;height:44px;border-radius:14px;display:grid;place-items:center;background:var(--goldsoft);color:var(--gold);box-shadow:0 3px 0 color-mix(in srgb,var(--gold) 24%,var(--line))}
+  .game-resume__mark .ui-icon{width:22px;height:22px}
+  .game-resume__copy{min-width:0}
+  .game-resume__eyebrow{color:color-mix(in srgb,var(--gold) 72%,var(--ink));font:900 8.5px Nunito;letter-spacing:.08em;text-transform:uppercase}
+  .game-resume__title{margin-top:2px;color:var(--ink);font:900 13.5px/1.25 Nunito;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .game-resume__meta{margin-top:3px;color:var(--mut);font:650 10.5px/1.3 Manrope;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .game-resume__discard{width:44px;height:44px;border:0;border-radius:13px;background:transparent;color:var(--mut);display:grid;place-items:center;cursor:pointer;transition:background .12s ease,color .12s ease}
+  .game-resume__discard:active{background:var(--card2);color:var(--red)}
+  .game-resume__progress{display:flex;align-items:center;gap:10px;margin-top:13px}
+  .game-resume__track{height:9px;flex:1;padding:2px;border:1px solid var(--line);border-radius:8px;background:var(--card2);overflow:hidden}
+  .game-resume__fill{height:100%;border-radius:5px;background:linear-gradient(90deg,var(--gold),color-mix(in srgb,var(--gold) 54%,var(--red)));transition:width .35s ease}
+  .game-resume__count{flex-shrink:0;color:var(--mut);font:900 9.5px Nunito;font-variant-numeric:tabular-nums}
+  .game-resume__action{width:100%;min-height:48px;margin-top:12px;padding:12px 15px;border:0;border-radius:15px;background:var(--red);color:#fff;display:flex;align-items:center;justify-content:center;gap:8px;font:900 14px Nunito;box-shadow:0 4px 0 var(--reddk);cursor:pointer;transition:transform .1s ease,box-shadow .1s ease}
+  .game-resume__action:active{transform:translateY(3px);box-shadow:0 1px 0 var(--reddk)}
+  .game-resume__action .ui-icon{width:17px;height:17px}
+  .game-resume__confirm{margin-top:13px;padding:11px;border:1.5px solid color-mix(in srgb,var(--red) 34%,var(--line));border-radius:15px;background:var(--redsoft)}
+  .game-resume__confirm-text{color:var(--ink);font:800 11.5px/1.4 Manrope}
+  .game-resume__confirm-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:9px}
+  .game-resume__confirm-actions button{min-height:44px;border-radius:12px;font:900 12px Nunito;cursor:pointer}
+  .game-resume__cancel{border:1.5px solid var(--line);background:var(--card);color:var(--ink)}
+  .game-resume__remove{border:1.5px solid var(--red);background:var(--red);color:#fff}
   .game-missions{margin:14px 16px 0;padding:16px;border:2px solid var(--line);border-radius:22px;background:var(--card);box-shadow:0 4px 0 var(--game-depth)}
   .game-missions__head,.game-week__head{display:flex;align-items:center;justify-content:space-between;gap:12px}
   .game-missions__title{font:900 16px Nunito;color:var(--ink)}
@@ -786,6 +809,23 @@ iframe[src*="telegram.org"]{background:transparent!important;color-scheme:light!
             <div style="font-size:12.5px;opacity:.7;margin-top:2px">{{ dayDone }} / {{ dayGoal }} заданий · {{ dayContext }}</div>
           </div>
         </div>
+
+        <sc-if value="{{ hasActiveSession }}" hint-placeholder-val="">
+          <section class="game-resume" aria-labelledby="resume-session-title">
+            <div class="game-resume__head">
+              <div class="game-resume__mark" aria-hidden="true"><svg class="ui-icon" viewBox="0 0 24 24"><path d="m9 6 9 6-9 6V6Z"/></svg></div>
+              <div class="game-resume__copy"><div class="game-resume__eyebrow">Сессия сохранена</div><h2 id="resume-session-title" class="game-resume__title" style="margin-bottom:0">{{ activeSessionTitle }}</h2><div class="game-resume__meta">{{ activeSessionMeta }}</div></div>
+              <button type="button" class="game-resume__discard" onClick="{{ requestDiscardSession }}" aria-label="Удалить сохранённую тренировку"><svg class="ui-icon ui-icon--sm" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button>
+            </div>
+            <sc-if value="{{ activeSessionReady }}" hint-placeholder-val="{{ true }}">
+              <div class="game-resume__progress"><div class="game-resume__track" role="progressbar" aria-label="{{ activeSessionProgressAria }}" aria-valuemin="0" aria-valuemax="100" aria-valuenow="{{ activeSessionPct }}"><div class="game-resume__fill" style="width:{{ activeSessionPct }}%"></div></div><div class="game-resume__count">{{ activeSessionCount }}</div></div>
+              <button type="button" class="game-resume__action" onClick="{{ resumeActiveSession }}"><span>Продолжить тренировку</span><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-5-5 5 5-5 5"/></svg></button>
+            </sc-if>
+            <sc-if value="{{ activeSessionConfirm }}" hint-placeholder-val="">
+              <div class="game-resume__confirm" role="alert"><div class="game-resume__confirm-text">Удалить сохранённый прогресс этой тренировки?</div><div class="game-resume__confirm-actions"><button type="button" class="game-resume__cancel" onClick="{{ cancelDiscardSession }}">Отмена</button><button type="button" class="game-resume__remove" onClick="{{ discardActiveSession }}">Удалить</button></div></div>
+            </sc-if>
+          </section>
+        </sc-if>
 
         <section class="game-missions" aria-labelledby="daily-missions-title">
           <div class="game-missions__head">
@@ -1757,6 +1797,7 @@ class Component extends DCLogic {
       history: ls.history||[], showGain: false, rewarded: ls.rewarded||{},
       xp: ls.xp||0, streak: ls.streak||0, level: 1,
       dayDone: (ls.dayKey===today?(ls.dayDone||0):0), dayGoal: ls.dayGoal||20, dayKey: today, lastTopic: ls.lastTopic||null,
+      activeSession: ls.activeSession||null, confirmSessionDiscard:false,
       resPct: 0, resXp: 0, resBaseXp: 0, resMissionXp: 0, resMissionBonuses: [], resRankUp: false, resRankTitle: '', resRankLevel: 1, toast: '', dbLeaders: null, dbUsers: null, profileSystemsExpanded: false
     };
   })();
@@ -1944,7 +1985,8 @@ persist(){
         progress:s.progress||{}, mistakes:s.mistakes||[], favorites:s.favorites||[], notes:s.notes||{},
         xp:s.xp||0, streak:s.streak||0, lastActive:s.lastActive||'', examDone:!!s.examDone,
         termLang:s.termLang||'ru', reminders:s.reminders!==false, history:s.history||[],
-        dayDone:s.dayDone||0, dayKey:s.dayKey||'', dayGoal:s.dayGoal||20, lastTopic:s.lastTopic||null, rewarded:s.rewarded||{}
+        dayDone:s.dayDone||0, dayKey:s.dayKey||'', dayGoal:s.dayGoal||20, lastTopic:s.lastTopic||null, rewarded:s.rewarded||{},
+        activeSession:s.activeSession||null
       };
       try{ localStorage.setItem(k, JSON.stringify(blob)); }catch(e){}
       var db=this.db();
@@ -1979,12 +2021,14 @@ persist(){
       var today=new Date().toDateString();
       var sameDay=ls.dayKey===today;
       var plan=self.goalPlan(user&&user.goal);
+      var restoredSession=self.validActiveSession(ls.activeSession)?ls.activeSession:(ls.activeSession?{cleared:true,updatedAt:Date.now()}:null);
       self.setState({
         progress:ls.progress||{}, mistakes:ls.mistakes||[], favorites:ls.favorites||[], notes:ls.notes||{},
         lastActive:ls.lastActive||'', dayDone:sameDay?Math.min(ls.dayDone||0,plan.dayGoal):0, dayKey:today,
         dayGoal:plan.dayGoal, lastTopic:ls.lastTopic||null,
         termLang:ls.termLang||"ru", reminders:(typeof ls.reminders==="boolean"?ls.reminders:true),
         examDone:!!ls.examDone, history:ls.history||[], rewarded:ls.rewarded||{},
+        activeSession:restoredSession,
         xp:(typeof ls.xp==="number"?ls.xp:0), streak:(typeof ls.streak==="number"?ls.streak:0),
         screen:"home"
       }, function(){
@@ -2016,6 +2060,8 @@ persist(){
     var notes=Object.assign({}, L.notes||{}, C.notes||{});
     var history=(C.history||[]).concat(L.history||[]).slice(0,40);
     var rewarded=Object.assign({}, L.rewarded||{}, C.rewarded||{});
+    var localSession=L.activeSession||null, cloudSession=C.activeSession||null;
+    var activeSession=(Number(cloudSession&&cloudSession.updatedAt)||0)>(Number(localSession&&localSession.updatedAt)||0)?cloudSession:localSession;
     return {
       progress: progress,
       mistakes: mist.slice(-60),
@@ -2023,6 +2069,7 @@ persist(){
       notes: notes,
       history: history,
       rewarded: rewarded,
+      activeSession: activeSession,
       xp: Math.max(L.xp||0, C.xp||0),
       streak: Math.max(L.streak||0, C.streak||0),
       examDone: !!(L.examDone||C.examDone),
@@ -2158,6 +2205,51 @@ async sendBroadcast(){
   }
   dailyMissionRewards(){ return { cards:30, session:15, accuracy:25 }; }
   dailyMissionKey(day,id){ return 'daily:'+String(day||new Date().toDateString())+':'+id; }
+  validActiveSession(value){
+    if(!value||value.cleared||value.mode==='exam'||!Number(value.sessTotal)||!Array.isArray(value.sessItems)) return false;
+    const age=Date.now()-(Number(value.updatedAt)||0);
+    return age>=0&&age<=7*864e5&&Number(value.idx||0)<Number(value.sessTotal||0);
+  }
+  sessionSnapshot(){
+    const s=this.state;
+    if(s.mode==='exam'||!Number(s.sessTotal)) return {cleared:true,updatedAt:Date.now()};
+    return {
+      mode:s.mode,moduleId:s.moduleId,topicIdx:s.topicIdx,subKey:s.subKey||null,idx:s.idx||0,flipped:!!s.flipped,
+      sessCorrect:s.sessCorrect||0,sessTotal:s.sessTotal||0,sessItems:s.sessItems||[],isReview:!!s.isReview,
+      termVal:s.termVal||'',termChecked:!!s.termChecked,termCorrect:!!s.termCorrect,
+      selTerm:s.selTerm===undefined?null:s.selTerm,matched:s.matched||[],matchPairs:s.matchPairs||[],defOrder:s.defOrder||[],
+      testSel:s.testSel===undefined?null:s.testSel,testAnswered:!!s.testAnswered,sessWrong:s.sessWrong||[],sessRight:s.sessRight||[],combo:s.combo||0,
+      reviewKeys:(this._reviewKeys||[]).slice(),sessKeys:(this._sessKeys||[]).slice(),updatedAt:Date.now()
+    };
+  }
+  saveSessionCheckpoint(){
+    if(this.state.screen!=='train'||this.state.mode==='exam') return;
+    const activeSession=this.sessionSnapshot();
+    this.setState({activeSession},()=>this.persist());
+  }
+  pauseSession(){
+    const s=this.state, destination=s.mode==='exam'?'module':((s.mode==='mistakes'||s.isReview)?'home':'topic');
+    this.clearExam();
+    const activeSession=s.mode==='exam'?{cleared:true,updatedAt:Date.now()}:this.sessionSnapshot();
+    this.setState({activeSession,screen:destination,tab:'train',confirmSessionDiscard:false},()=>this.persist());
+  }
+  resumeSession(){
+    const a=this.state.activeSession;
+    if(!this.validActiveSession(a)){ this.discardActiveSession(false); this.ping('Сохранённая сессия уже завершена'); return; }
+    this._reviewKeys=(a.reviewKeys||[]).slice();
+    this._sessKeys=(a.sessKeys||[]).slice();
+    this.setState({
+      screen:'train',mode:a.mode,moduleId:a.moduleId||'m1',topicIdx:Number(a.topicIdx)||0,subKey:a.subKey||null,confirmSessionDiscard:false,
+      idx:Number(a.idx)||0,flipped:!!a.flipped,sessCorrect:Number(a.sessCorrect)||0,sessTotal:Number(a.sessTotal)||0,sessItems:a.sessItems||[],isReview:!!a.isReview,
+      termVal:a.termVal||'',termChecked:!!a.termChecked,termCorrect:!!a.termCorrect,selTerm:a.selTerm===undefined?null:a.selTerm,
+      matched:a.matched||[],wrongPair:null,matchPairs:a.matchPairs||[],defOrder:a.defOrder||[],
+      testSel:a.testSel===undefined?null:a.testSel,testAnswered:!!a.testAnswered,sessWrong:a.sessWrong||[],sessRight:a.sessRight||[],combo:Number(a.combo)||0
+    },()=>this.saveSessionCheckpoint());
+  }
+  discardActiveSession(showToast=true){
+    this._reviewKeys=null; this._sessKeys=[];
+    this.setState({activeSession:{cleared:true,updatedAt:Date.now()},confirmSessionDiscard:false},()=>{ this.persist(); if(showToast)this.ping('Сохранённая тренировка удалена'); });
+  }
   dailyTarget(id){
     const s=this.state;
     const candidates=this.MODULES.filter(m=>m.ready).flatMap(m=>this.topicsOf(m.id).map((topic,idx)=>({mid:m.id,topic,idx,key:this.pk(topic.num,m.id)})));
@@ -2239,7 +2331,7 @@ async sendBroadcast(){
     this._sessKeys=[];
     this._exam=setInterval(()=>{ const l=this.state.examLeft-1; if(l<=0){ this.clearExam(); this.setState({examLeft:0},()=>this.finish()); } else this.setState({examLeft:l}); },1000);
     this.setState({ screen:'train', mode:'exam', idx:0, sessCorrect:0, sessTotal:items.length, sessItems:items, isReview:false,
-      testSel:null, testAnswered:false, sessWrong:[], sessRight:[], combo:0, examLeft:600 });
+      testSel:null, testAnswered:false, sessWrong:[], sessRight:[], combo:0, examLeft:600, activeSession:{cleared:true,updatedAt:Date.now()},confirmSessionDiscard:false },()=>this.persist());
   }
   dueReviews(){
     const s=this.state, now=Date.now(), out=[];
@@ -2252,14 +2344,14 @@ async sendBroadcast(){
   }
   startReview(){
     const due=this.dueReviews().filter(d=>(d.topic.cards||[]).length); if(!due.length){this.ping('Все повторения выполнены ✓');return;}
-    const selected=[];
+    const selected=[]; this._sessKeys=[];
     for(let round=0;round<4&&selected.length<15;round++){
       for(const d of due){ const card=(d.topic.cards||[])[round]; if(card) selected.push({card,key:d.key}); if(selected.length>=15) break; }
     }
     const cards=this.shuffle(selected.map(item=>item.card)); if(!cards.length){this.ping('Нет карточек к повторению');return;}
     this._reviewKeys=[...new Set(selected.map(item=>item.key))];
     this.setState({ screen:'train', mode:'flash', idx:0, flipped:false, sessCorrect:0, sessTotal:cards.length, sessItems:cards,
-      isReview:true, testSel:null, testAnswered:false, sessWrong:[], sessRight:[], combo:0 });
+      isReview:true, testSel:null, testAnswered:false, sessWrong:[], sessRight:[], combo:0,confirmSessionDiscard:false },()=>this.saveSessionCheckpoint());
   }
   loadUser(){ try{ return JSON.parse(localStorage.getItem('anatom_user')||'null'); }catch(e){ return null; } }
   saveUser(u){
@@ -2292,7 +2384,7 @@ async logout(){
       user:null, screen:"splash", email:"", pass:"", fullName:"", faculty:"Лечебный факультет",
       authErr:"", authEmailErr:"", authPassErr:"", profileNameErr:"", profileFacultyErr:"", authTab:"signup", authBusy:false,
       progress:{}, mistakes:[], favorites:[], notes:{}, history:[], rewarded:{},
-      xp:0, streak:0, dayDone:0, lastTopic:null, examDone:false,
+      xp:0, streak:0, dayDone:0, lastTopic:null, activeSession:null, confirmSessionDiscard:false, examDone:false,
       dbLeaders:null, dbUsers:null, announcements:[], broadcastText:""
     });
     this._course=1; this._goal=0;
@@ -2510,6 +2602,27 @@ async logout(){
     R.dayPct=Math.min(100,Math.round(R.dayDone/Math.max(1,R.dayGoal)*100)); R.dayDeg=Math.min(360,Math.round(R.dayDone/Math.max(1,R.dayGoal)*360));
     R.goalShort=learningPlan.short; R.dayContext=learningPlan.dayContext; R.userGoal=learningPlan.label; R.goalFocus=learningPlan.focus;
     { const smart=this.smartSessionPlan(); R.smartClass=smart.className; R.smartEyebrow=smart.eyebrow; R.smartTitle=smart.title; R.smartSub=smart.sub; R.smartMinutes=smart.minutes; R.smartAria=smart.eyebrow+'. '+smart.title+'. '+smart.sub+'. Примерно '+smart.minutes+' минут'; R.startSmartSession=()=>this.startSmartSession(); }
+    {
+      const active=this.validActiveSession(s.activeSession)?s.activeSession:null;
+      R.hasActiveSession=!!active;
+      R.activeSessionConfirm=!!s.confirmSessionDiscard; R.activeSessionReady=!s.confirmSessionDiscard;
+      R.activeSessionTitle=''; R.activeSessionMeta=''; R.activeSessionPct=0; R.activeSessionCount=''; R.activeSessionProgressAria='';
+      R.resumeActiveSession=()=>this.resumeSession(); R.requestDiscardSession=()=>this.setState({confirmSessionDiscard:true}); R.cancelDiscardSession=()=>this.setState({confirmSessionDiscard:false}); R.discardActiveSession=()=>this.discardActiveSession();
+      if(active){
+        let activeTopics=this.topicsOf(active.moduleId);
+        const activeSub=(this.SUBSECTIONS[active.moduleId]||[]).find(item=>item.name===active.subKey);
+        if(activeSub) activeTopics=activeTopics.filter(item=>item.num>=activeSub.from&&item.num<=activeSub.to);
+        const activeTopic=activeTopics[Number(active.topicIdx)||0];
+        const modeNames={flash:'Флэш-карты',term:'Латинские термины',match:'Сопоставление',test:'Тест-зачёт',mistakes:'Работа над ошибками'};
+        const completed=active.mode==='match'?(active.matched||[]).length:Math.min(Number(active.idx)||0,Number(active.sessTotal)||0);
+        const total=Math.max(1,Number(active.sessTotal)||1);
+        R.activeSessionTitle=active.isReview?'Повторение на сегодня':((activeTopic&&activeTopic.name)||'Тренировка по анатомии');
+        R.activeSessionMeta=(active.isReview?'Интервальное повторение':(modeNames[active.mode]||'Тренировка'))+' · осталось '+Math.max(0,total-completed);
+        R.activeSessionPct=Math.min(100,Math.round(completed/total*100));
+        R.activeSessionCount=completed+' / '+total;
+        R.activeSessionProgressAria='Сохранённая тренировка: выполнено '+completed+' из '+total;
+      }
+    }
     {
       const now=new Date(), todayKey=now.toDateString();
       const todayHistory=(s.history||[]).filter(h=>new Date(h.ts).toDateString()===todayKey);
@@ -2793,7 +2906,7 @@ async logout(){
     R.backToModule=()=>this.setState({screen:'module'});
 
     // training common
-    R.exitTrain=()=>{ this.clearExam(); this.setState({screen: s.mode==='exam'?'module':((s.mode==='mistakes'||s.isReview)?'home':'topic'), tab:'train'}); };
+    R.exitTrain=()=>this.pauseSession();
     R.progPct=Math.round(s.idx/(s.sessTotal||1)*100)||0;
     R.idx1=Math.min(s.idx+1,s.sessTotal); R.sessTotal=s.sessTotal;
     R.trainProgressAria='Прогресс тренировки: '+s.idx+' из '+s.sessTotal+' завершено';
@@ -2809,7 +2922,7 @@ async logout(){
     R.flippedPressed=s.flipped?'true':'false';
     R.cardFlipLabel=s.flipped?'Ответ открыт. Нажмите, чтобы вернуться к вопросу':'Показать ответ';
     R.flipT=s.flipped?'rotateY(180deg)':'rotateY(0)';
-    R.flip=()=>this.setState({flipped:!s.flipped});
+    R.flip=()=>this.setState({flipped:!s.flipped},()=>this.saveSessionCheckpoint());
     R.cardKnow=()=>this.advance(true); R.cardHard=()=>this.advance(false);
 
     // term input
@@ -2818,13 +2931,13 @@ async logout(){
     R.termChecked=s.termChecked; R.termNotChecked=!s.termChecked;
     R.termBd=!s.termChecked?'var(--line)':(s.termCorrect?'var(--green)':'var(--red)');
     R.termInputRef=el=>{this._term=el;};
-    R.onTermInput=e=>this.setState({termVal:e.target.value});
-    R.termCheck=()=>{ if(!String(s.termVal||'').trim()){ this.ping('Введите термин перед проверкой'); if(this._term)this._term.focus(); return; } const ok=this.norm(s.termVal)===this.norm(tm.term); if(ok)(this._sessKeys=this._sessKeys||[]).push('t:'+tm.term); this.setState({termChecked:true,termCorrect:ok,sessCorrect:s.sessCorrect+(ok?1:0)}); this.ping(ok?'Верно! +10 XP':'Ошибка — запомни термин'); };
+    R.onTermInput=e=>this.setState({termVal:e.target.value},()=>this.saveSessionCheckpoint());
+    R.termCheck=()=>{ if(!String(s.termVal||'').trim()){ this.ping('Введите термин перед проверкой'); if(this._term)this._term.focus(); return; } const ok=this.norm(s.termVal)===this.norm(tm.term); if(ok)(this._sessKeys=this._sessKeys||[]).push('t:'+tm.term); this.setState({termChecked:true,termCorrect:ok,sessCorrect:s.sessCorrect+(ok?1:0)},()=>this.saveSessionCheckpoint()); this.ping(ok?'Верно! +10 XP':'Ошибка — запомни термин'); };
     R.termFbBg=s.termCorrect?'var(--greensoft)':'var(--redsoft)';
     R.termFbFg=s.termCorrect?'var(--greendk)':'var(--red)';
     R.termFbMark=s.termCorrect?'✓':'×'; R.termFbTitle=s.termCorrect?'Правильно!':'Не совсем';
     R.termNextBg=s.termCorrect?'var(--green)':'var(--red)'; R.termNextSh=s.termCorrect?'var(--greendk)':'var(--reddk)';
-    R.termNext=()=>{ const nx=s.idx+1; if(nx>=s.sessTotal){this.finish();} else this.setState({idx:nx,termVal:'',termChecked:false,termCorrect:false}); };
+    R.termNext=()=>{ const nx=s.idx+1; if(nx>=s.sessTotal){this.finish();} else this.setState({idx:nx,termVal:'',termChecked:false,termCorrect:false},()=>this.saveSessionCheckpoint()); };
 
     // matching
     const mp=s.matchPairs;
@@ -2873,7 +2986,7 @@ async logout(){
       R.fbBannerAnswer=okk?'Ответ закреплён в прогрессе темы.':('Запомни: '+((tq.options||[])[tq.correct]||'')); }
     R.testNextBg=(s.testSel===tq.correct)?'var(--green)':'var(--red)';
     R.testNextSh=(s.testSel===tq.correct)?'var(--greendk)':'var(--reddk)';
-    R.testNext=()=>{ const nx=s.idx+1; if(nx>=s.sessTotal){this.finish();} else this.setState({idx:nx,testSel:null,testAnswered:false}); };
+    R.testNext=()=>{ const nx=s.idx+1; if(nx>=s.sessTotal){this.finish();} else this.setState({idx:nx,testSel:null,testAnswered:false},()=>this.saveSessionCheckpoint()); };
 
     // result
     R.resPct=s.resPct; R.resXp=s.resXp; R.resPassed=s.resPct>=75; R.resFail=s.resPct<75;
@@ -3084,22 +3197,23 @@ async logout(){
     else if(mode==='test'){ items=this.shuffle((topic.tests||[]).slice()).slice(0,10); }
     else if(mode==='mistakes'){ items=this.shuffle((this.state.mistakes||[]).slice()).slice(0,15); if(!items.length){this.ping('Ошибок нет — отличный результат');return;} }
     const total = mode==='match'?matchPairs.length:items.length;
+    if(!total){ this.ping('В этой теме пока нет заданий для выбранного режима'); return; }
     this.setState({ screen:'train', mode, idx:0, flipped:false, sessCorrect:0, sessTotal:total, sessItems:items, isReview:false,
       termVal:'', termChecked:false, termCorrect:false, selTerm:null, matched:[], wrongPair:null, matchPairs, defOrder,
-      testSel:null, testAnswered:false, sessWrong:[], sessRight:[], combo:0 });
+      testSel:null, testAnswered:false, sessWrong:[], sessRight:[], combo:0,confirmSessionDiscard:false },()=>this.saveSessionCheckpoint());
   }
   advance(known){
     const s=this.state; const correct=s.sessCorrect+(known?1:0); const nx=s.idx+1;
     if(known){ const it=s.sessItems[s.idx]; if(it) (this._sessKeys=this._sessKeys||[]).push('f:'+(it.front||'')); }
     if(nx>=s.sessTotal) this.setState({sessCorrect:correct},()=>this.finish());
-    else this.setState({idx:nx,flipped:false,sessCorrect:correct});
+    else this.setState({idx:nx,flipped:false,sessCorrect:correct},()=>this.saveSessionCheckpoint());
   }
-  pickTerm(i){ if(this.state.matched.includes(i))return; this.setState({selTerm:i}); }
+  pickTerm(i){ if(this.state.matched.includes(i))return; this.setState({selTerm:i},()=>this.saveSessionCheckpoint()); }
   pickDef(di){
     const s=this.state; if(s.matched.includes(di))return;
     if(s.selTerm===null){ this.ping('Сначала выбери термин слева'); return; }
-    if(s.selTerm===di){ const pr=s.matchPairs[di]; if(pr)(this._sessKeys=this._sessKeys||[]).push('m:'+pr.term); this.setState({matched:[...s.matched,di],selTerm:null,sessCorrect:s.sessCorrect+1}); this.ping('Пара верна! +10 XP'); }
-    else { const wp=[s.selTerm,di]; this.setState({wrongPair:wp}); setTimeout(()=>this.setState({wrongPair:null,selTerm:null}),450); this.ping('Не та пара'); }
+    if(s.selTerm===di){ const pr=s.matchPairs[di]; if(pr)(this._sessKeys=this._sessKeys||[]).push('m:'+pr.term); this.setState({matched:[...s.matched,di],selTerm:null,sessCorrect:s.sessCorrect+1},()=>this.saveSessionCheckpoint()); this.ping('Пара верна! +10 XP'); }
+    else { const wp=[s.selTerm,di]; this.setState({wrongPair:wp},()=>this.saveSessionCheckpoint()); setTimeout(()=>this.setState({wrongPair:null,selTerm:null},()=>this.saveSessionCheckpoint()),450); this.ping('Не та пара'); }
   }
   pickTest(i){
     const s=this.state; if(s.testAnswered)return;
@@ -3108,7 +3222,7 @@ async logout(){
     const sessWrong=ok?s.sessWrong:[...s.sessWrong,{q:tq.q,options:tq.options,correct:tq.correct}];
     const sessRight=ok?[...s.sessRight,tq.q]:s.sessRight;
     const combo=ok?(s.combo||0)+1:0;
-    this.setState({testSel:i,testAnswered:true,sessCorrect:s.sessCorrect+(ok?1:0),sessWrong,sessRight,combo});
+    this.setState({testSel:i,testAnswered:true,sessCorrect:s.sessCorrect+(ok?1:0),sessWrong,sessRight,combo},()=>this.saveSessionCheckpoint());
     this.ping(ok?(combo>=3?('Комбо x'+combo+'! +10 XP'):'Верно! +10 XP'):'Неверно');
   }
   finish(){
@@ -3144,7 +3258,7 @@ async logout(){
       pct, correct:s.sessCorrect, total:s.sessTotal, xp:totalEarned, baseXp:earned, missionXp, ts:Date.now() };
     const history=[entry,...(s.history||[])].slice(0,40);
     const streakUp=st.streak>s.streak;
-    this.setState({ screen:'result', resPct:pct, resXp:totalEarned, resBaseXp:earned, resMissionXp:missionXp, resMissionBonuses:missionBonuses, resRankUp:rankUp, resRankTitle:rankAfter.title, resRankLevel:rankAfter.level, xp:s.xp+totalEarned, dayDone:nextDayDone, dayGoal:plan.dayGoal, dayKey:missionDay, progress, mistakes, rewarded, streak:st.streak, lastActive:st.lastActive, examDone: s.mode==='exam'?true:s.examDone, history, showGain:false, streakUp }, ()=>{ this.persist(); if(missionXp>0||rankUp)this.rewardHaptic(); setTimeout(()=>this.setState({showGain:true}),120); });
+    this.setState({ screen:'result', resPct:pct, resXp:totalEarned, resBaseXp:earned, resMissionXp:missionXp, resMissionBonuses:missionBonuses, resRankUp:rankUp, resRankTitle:rankAfter.title, resRankLevel:rankAfter.level, xp:s.xp+totalEarned, dayDone:nextDayDone, dayGoal:plan.dayGoal, dayKey:missionDay, progress, mistakes, rewarded, streak:st.streak, lastActive:st.lastActive, examDone: s.mode==='exam'?true:s.examDone, history, activeSession:{cleared:true,updatedAt:Date.now()}, showGain:false, streakUp }, ()=>{ this.persist(); if(missionXp>0||rankUp)this.rewardHaptic(); setTimeout(()=>this.setState({showGain:true}),120); });
   }
 }
 </script>
