@@ -109,6 +109,14 @@ An original gamified anatomy-learning interface: tactile and encouraging like a 
 - Long names and dynamic values truncate or wrap without horizontal scrolling.
 - Validate 320 px, 375 px, and landscape layouts in both themes.
 
+## Loading and media
+
+- Critical HTML must not contain inline raster data URLs; image files stay independently cacheable.
+- Repeated artwork is content-addressed, deduplicated, and stored as WebP when that produces a smaller file.
+- Preload only the above-the-fold anatomy hero. Course, route, profile, and achievement artwork loads lazily with asynchronous decoding.
+- Every image reserves its rendered dimensions to prevent layout shift while the asset is loading.
+- Generated media filenames are immutable and may use a long-lived browser/CDN cache.
+
 ## Avoid
 
 - Duolingo brand green, owl mascot, copied lesson path, or copied reward artwork.
