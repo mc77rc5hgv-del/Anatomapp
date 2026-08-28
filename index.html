@@ -1783,7 +1783,7 @@ window.AnatomDB = (function () {
 </script>
 <script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:392,&quot;height&quot;:812}}">
 class Component extends DCLogic {
-  API_BASE='https://anatom-bot-api-production.up.railway.app';
+  API_BASE='';
   AUTH_BASE='';
   BOT_NAME='Vmeda_anatom_bot';
   ADMIN_EMAIL='pismenniyaleks.1@gmail.com';
@@ -1929,6 +1929,17 @@ class Component extends DCLogic {
       try{ this.setState({ dbLeaders: await db.leaderboard(50) }); }catch(e){ console.warn(e); }
       if(this.isAdmin()){ try{ this.setState({ dbUsers: await db.allUsers() }); }catch(e){} }
     }
+    try{
+      var lr=await this.request(this.API_BASE+'/api/leaderboard?limit=100',{headers:this.authHeaders()},12000);
+      if(lr.ok){
+        var lj=await lr.json();
+        var leaders=(lj.leaderboard||[]).map(function(u){ return {
+          id:u.user_id, name:u.name||u.username||'Студент', username:u.username||'',
+          xp:u.xp||0, streak:u.streak||0
+        }; });
+        if(leaders.length) this.setState({dbLeaders:leaders});
+      }
+    }catch(e){ console.warn('bot leaderboard',e); }
     if(this.isAdmin()){
       try{
         var r=await this.request(this.AUTH_BASE+'/api/users',{headers:await this.adminAuthHeaders()},12000);
@@ -2550,7 +2561,12 @@ async logout(){
         self.saveUser(user);
         self.registerUser(user);
         self.setState({tgLoading:false});
-        self.hydrateUser(user);
+        var cloudState={};
+        try{
+          var stateResponse=await self.request(self.AUTH_BASE+'/api/state',{headers:self.authHeaders()},12000);
+          if(stateResponse.ok){ var statePayload=await stateResponse.json(); cloudState=(statePayload&&statePayload.state)||{}; }
+        }catch(e){ console.warn('initial state sync',e); }
+        self.hydrateUser(user,cloudState);
         self.fetchDbLists();
         self.ping('Вход через Telegram ✓');
       })
