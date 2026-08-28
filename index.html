@@ -2030,9 +2030,27 @@ class Component extends DCLogic {
   }
   request(url, options, timeout){
     var controller=typeof AbortController!=='undefined'?new AbortController():null;
-    var timer=setTimeout(function(){ if(controller) controller.abort(); }, timeout||12000);
+    var timer=null, ms=timeout||12000;
     var opts=Object.assign({},options||{}); if(controller) opts.signal=controller.signal;
-    return fetch(url,opts).finally(function(){ clearTimeout(timer); });
+    var timedOut=new Promise(function(_,reject){
+      timer=setTimeout(function(){
+        try{ if(controller) controller.abort(); }catch(e){}
+        var error=new Error('Сервер не ответил вовремя'); error.name='TimeoutError'; reject(error);
+      },ms);
+    });
+    return Promise.race([fetch(url,opts),timedOut]).finally(function(){ clearTimeout(timer); });
+  }
+  clearBusyGuard(){ clearTimeout(this._busyGuard); this._busyGuard=null; }
+  armBusyGuard(){
+    this.clearBusyGuard();
+    this._busyGuard=setTimeout(()=>{
+      if(!this.state.authBusy&&!this.state.tgLoading) return;
+      this._authLock=false;
+      this.setState({
+        initialLoading:false, authBusy:false, tgLoading:false,
+        authErr:'Сервер отвечает слишком долго. Проверьте интернет и попробуйте ещё раз.'
+      });
+    },18000);
   }
   componentDidMount(){
     this._loadStarted=Date.now();
@@ -2308,7 +2326,7 @@ async sendBroadcast(){
   cycleTermLang(){ this.setState({termLang:this.state.termLang==='ru'?'en':'ru'},()=>this.persist()); }
   toggleReminders(){ this.setState({reminders:!this.state.reminders},()=>{ this.persist(); this.ping(this.state.reminders?'Напоминания включены 🔔':'Напоминания выключены'); }); }
   componentWillUnmount(){
-    this.clearExam(); clearTimeout(this._loaderGuard); clearTimeout(this._sync); clearTimeout(this._dbsync); clearTimeout(this._n);
+    this.clearExam(); this.clearBusyGuard(); clearTimeout(this._loaderGuard); clearTimeout(this._sync); clearTimeout(this._dbsync); clearTimeout(this._n);
     if(window.onTelegramAuth) window.onTelegramAuth=null;
   }
   clearExam(){ if(this._exam){ clearInterval(this._exam); this._exam=null; } }
@@ -2519,8 +2537,9 @@ async logout(){
     if(s.authTab==="signup"){ this.setState({authErr:"",authEmailErr:"",authPassErr:"",screen:"profile"}); return; }
     this._authLock=true;
     this.setState({authErr:"", authBusy:true});
+    this.armBusyGuard();
     var db=this.db();
-    if(!db){ this._authLock=false; this.setState({authBusy:false, authErr:"Нет связи с сервером."}); return; }
+    if(!db){ this.clearBusyGuard(); this._authLock=false; this.setState({authBusy:false, authErr:"Нет связи с сервером."}); return; }
     try{
       await db.signIn(email, pass);
       var u=await db.currentUser();
@@ -2537,12 +2556,14 @@ async logout(){
       this.saveUser(user);
       var st=await db.loadState(u.id).catch(function(){ return {}; });
       this._authLock=false;
+      this.clearBusyGuard();
       this.setState({pass:"", authBusy:false});
       this.hydrateUser(user, st);
       this.fetchDbLists();
       this.ping("С возвращением!");
     }catch(e){
       this._authLock=false;
+      this.clearBusyGuard();
       var msg=(e&&e.message)||"Неверная почта или пароль";
       if(/Invalid login/i.test(msg)) msg="Неверная почта или пароль";
       this.setState({authBusy:false, authErr:msg});
@@ -2567,6 +2588,7 @@ async logout(){
     var baseUser={ name:name, email:email, course:course, faculty:faculty, goal:goal, tg:tg };
     this._authLock=true;
     this.setState({authBusy:true, authErr:""});
+    this.armBusyGuard();
     var db=this.db();
     if(!db){ await this.localFinishProfile(baseUser); return; }
     try{
@@ -2587,6 +2609,7 @@ async logout(){
       try{ this.registerUser&&this.registerUser(user); }catch(e){}
       this.saveUser(user);
       this._authLock=false;
+      this.clearBusyGuard();
       this.setState({pass:"", authBusy:false});
       this.hydrateUser(user, {});
       this.fetchDbLists();
@@ -2600,7 +2623,7 @@ async logout(){
   async localFinishProfile(user){
     try{ var email=user.email; var accounts=this.loadAccounts(); var h=await this.hashPass(email,this.state.pass||''); accounts[email]={ name:user.name, passHash:h, course:user.course, faculty:user.faculty, tg:user.tg, goal:user.goal }; this.saveAccounts(accounts); }catch(e){}
     try{ this.registerUser&&this.registerUser(user); }catch(e){}
-    this.saveUser(user); this._authLock=false; this.setState({pass:'',authBusy:false}); this.hydrateUser(user,{}); this.ping('Аккаунт готов ✓');
+    this.saveUser(user); this._authLock=false; this.clearBusyGuard(); this.setState({pass:'',authBusy:false}); this.hydrateUser(user,{}); this.ping('Аккаунт готов ✓');
   }
   tgWebAppInit(){
     try{
@@ -2614,9 +2637,11 @@ async logout(){
   authTelegram(data){
     var self=this;
     this.setState({tgLoading:true, authErr:''});
+    this.armBusyGuard();
     self.request(this.AUTH_BASE+'/api/auth/telegram',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)},15000)
       .then(function(r){ return r.ok?r.json():Promise.reject(r.status); })
       .then(async function(res){
+        self.clearBusyGuard();
         if(res.token){ try{ localStorage.setItem('anatom_token',res.token); }catch(e){} }
         try{ var legacyDb=self.db(); if(legacyDb) await legacyDb.signOut(); }catch(e){}
         var p=res.user||data;
@@ -2651,7 +2676,7 @@ async logout(){
         self.fetchDbLists();
         self.ping('Вход через Telegram ✓');
       })
-      .catch(function(){ self.setState({tgLoading:false, authErr:'Не удалось войти через Telegram. Попробуйте ещё раз.'}); });
+      .catch(function(){ self.clearBusyGuard(); self.setState({tgLoading:false, authErr:'Не удалось войти через Telegram. Попробуйте ещё раз.'}); });
   }
   authHeaders(){ let t=''; try{ t=localStorage.getItem('anatom_token')||''; }catch(e){} return t?{'Authorization':'Bearer '+t}:{}; }
   async adminAuthHeaders(){
