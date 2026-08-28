@@ -1937,7 +1937,17 @@ class Component extends DCLogic {
           id:u.user_id, name:u.name||u.username||'Студент', username:u.username||'',
           xp:u.xp||0, streak:u.streak||0
         }; });
-        if(leaders.length) this.setState({dbLeaders:leaders});
+        if(leaders.length){
+          var merged=(this.state.dbLeaders||[]).slice();
+          leaders.forEach(function(u){
+            var byId=merged.findIndex(function(old){ return String(old.id)===String(u.id); });
+            var byName=merged.findIndex(function(old){ return String(old.name||'').trim().toLowerCase()===String(u.name||'').trim().toLowerCase(); });
+            var at=byId>=0?byId:byName;
+            if(at>=0) merged[at]=Object.assign({},merged[at],u,{xp:Math.max(merged[at].xp||0,u.xp||0),streak:Math.max(merged[at].streak||0,u.streak||0)});
+            else merged.push(u);
+          });
+          this.setState({dbLeaders:merged});
+        }
       }
     }catch(e){ console.warn('bot leaderboard',e); }
     if(this.isAdmin()){
