@@ -37,6 +37,14 @@
   }
   window.addEventListener('error', function(e){ record((e.message||'Error')+' @ '+(e.filename||'')+':'+(e.lineno||'')+':'+(e.colno||'')); });
   window.addEventListener('unhandledrejection', function(e){ var r=e.reason; record('Unhandled promise rejection: '+((r&&(r.stack||r.message))||r)); });
+  function fmt(a){ try{ return a instanceof Error ? (a.stack||a.message) : (typeof a==='object' ? JSON.stringify(a) : String(a)); }catch(e){ return String(a); } }
+  ['error','warn'].forEach(function(level){
+    var orig=console[level] ? console[level].bind(console) : function(){};
+    console[level]=function(){
+      try{ record('console.'+level+': '+Array.prototype.slice.call(arguments).map(fmt).join(' ')); }catch(e){}
+      orig.apply(console, arguments);
+    };
+  });
 })();
 </script>
 <script src="https://telegram.org/js/telegram-web-app.js" defer></script>
