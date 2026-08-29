@@ -39,19 +39,23 @@
   window.addEventListener('unhandledrejection', function(e){ var r=e.reason; record('Unhandled promise rejection: '+((r&&(r.stack||r.message))||r)); });
 })();
 </script>
-<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<script src="https://telegram.org/js/telegram-web-app.js" defer></script>
 <script>
 (function () {
-  try {
-    var webApp = window.Telegram && window.Telegram.WebApp;
-    if (!webApp) return;
-    try { if (webApp.setBackgroundColor) webApp.setBackgroundColor("#7b1d29"); } catch (error) {}
-    try { if (webApp.setHeaderColor) webApp.setHeaderColor("#681923"); } catch (error) {}
-    webApp.ready();
-    if (webApp.expand) webApp.expand();
-  } catch (error) {
-    console.warn('Telegram Mini App bootstrap', error);
+  function bootstrapTelegram() {
+    try {
+      var webApp = window.Telegram && window.Telegram.WebApp;
+      if (!webApp) return;
+      try { if (webApp.setBackgroundColor) webApp.setBackgroundColor("#7b1d29"); } catch (error) {}
+      try { if (webApp.setHeaderColor) webApp.setHeaderColor("#681923"); } catch (error) {}
+      webApp.ready();
+      if (webApp.expand) webApp.expand();
+    } catch (error) {
+      console.warn('Telegram Mini App bootstrap', error);
+    }
   }
+  if (window.Telegram && window.Telegram.WebApp) bootstrapTelegram();
+  else document.addEventListener('DOMContentLoaded', bootstrapTelegram);
 })();
 </script>
 <script>
