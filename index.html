@@ -799,7 +799,8 @@ iframe[src*="telegram.org"]{background:transparent!important;color-scheme:light!
             <label class="auth-field" for="auth-email"><span class="auth-field__label">Электронная почта <span class="auth-field__hint">для синхронизации</span></span><input id="auth-email" ref="{{ emailRef }}" value="{{ email }}" onInput="{{ onEmail }}" onBlur="{{ onEmailBlur }}" placeholder="student@example.ru" type="email" inputmode="email" autocomplete="email" aria-invalid="{{ emailInvalid }}" aria-describedby="auth-email-error"><span id="auth-email-error" class="auth-field__error">{{ authEmailErr }}</span></label>
             <div class="auth-field"><label class="auth-field__label" for="auth-password">Пароль <span class="auth-field__hint">минимум 6 символов</span></label><span class="auth-field__control auth-password"><input id="auth-password" ref="{{ passRef }}" value="{{ pass }}" onInput="{{ onPass }}" onBlur="{{ onPassBlur }}" placeholder="Введите пароль" type="{{ passType }}" autocomplete="{{ authPasswordAutocomplete }}" aria-invalid="{{ passInvalid }}" aria-describedby="auth-password-error"><button type="button" onClick="{{ toggleShowPass }}" aria-label="Показать или скрыть пароль" aria-pressed="{{ showPass }}"><svg class="ui-icon ui-icon--sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z"/><circle cx="12" cy="12" r="2.5"/></svg></button></span><span id="auth-password-error" class="auth-field__error">{{ authPassErr }}</span></div>
             <sc-if value="{{ hasAuthErr }}" hint-placeholder-val=""><div class="auth-message" role="alert"><span aria-hidden="true">!</span><span>{{ authErr }}</span></div></sc-if>
-            <button type="button" class="auth-submit" onClick="{{ submitAuth }}">{{ authCta }}</button>
+            <button type="button" class="auth-submit" onClick="{{ submitAuth }}" aria-busy="{{ authBusyAria }}">{{ authCta }}</button>
+            <sc-if value="{{ authBusy }}" hint-placeholder-val=""><div role="status" style="margin-top:9px;text-align:center;color:var(--mut);font:700 12px Nunito">Проверяем аккаунт в фоне…</div></sc-if>
           </div>
           <div class="auth-security"><svg class="ui-icon ui-icon--sm" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10" width="14" height="10" rx="3"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>Данные защищены и нужны только для сохранения прогресса</div>
           <div class="auth-legal">Продолжая, вы принимаете оферту и согласие на обработку данных (152-ФЗ)</div>
@@ -2062,7 +2063,7 @@ class Component extends DCLogic {
   }
   componentDidMount(){
     this._loadStarted=Date.now();
-    this._loaderGuard=setTimeout(()=>this.setState({initialLoading:false}),8000);
+    this._loaderGuard=setTimeout(()=>this.setState({initialLoading:false}),5000);
     this.applyTheme(this.state.dark);
     window.onTelegramAuth=(u)=>this.authTelegram(u);
     this.tgWebAppInit();
@@ -2750,9 +2751,11 @@ async logout(){
     R.isMatch=scr==='train'&&s.mode==='match';
     R.isTest=scr==='train'&&(s.mode==='test'||s.mode==='mistakes'||s.mode==='exam');
     R.toast=s.toast;
-    R.showLoader=!!(s.initialLoading||s.tgLoading||s.authBusy);
-    R.loaderTitle=s.tgLoading?'Входим через Telegram':(s.authBusy?'Проверяем данные':'Готовим материалы');
-    R.loaderText=s.tgLoading?'Безопасно подтверждаем профиль':(s.authBusy?'Это займёт несколько секунд':'Загружаем учебный прогресс');
+    // Authentication and cloud sync must never block the whole Mini App.
+    // Only the short, guarded dataset bootstrap may use the fullscreen loader.
+    R.showLoader=!!s.initialLoading;
+    R.loaderTitle='Готовим материалы';
+    R.loaderText='Загружаем учебный прогресс';
     R.appRef=el=>{ this._app=el; if(el) this.applyTheme(this.state.dark); };
 
     R.streak=s.streak; R.xp=s.xp; R.level=s.level; R.dayGoal=learningPlan.dayGoal; R.dayDone=Math.min(s.dayDone,learningPlan.dayGoal);
@@ -2825,7 +2828,8 @@ async logout(){
     R.authEyebrow=s.authTab==='signup'?'Шаг 1 из 2':'Продолжение обучения';
     R.authTitle=s.authTab==='signup'?'Создайте учебный профиль':'С возвращением';
     R.authSub=s.authTab==='signup'?'Сохраним прогресс, серию занятий и результаты тестов.':'Войдите, чтобы продолжить с сохранённого шага.';
-    R.authCta=s.authTab==='signup'?'Продолжить настройку':'Войти в аккаунт';
+    R.authCta=s.authBusy?'Проверяем…':(s.authTab==='signup'?'Продолжить настройку':'Войти в аккаунт');
+    R.authBusy=s.authBusy; R.authBusyAria=s.authBusy?'true':'false';
     R.isSignup=s.authTab==='signup';
     R.email=s.email; R.emailRef=el=>{this._emailInput=el;}; R.onEmail=e=>this.setState({email:e.target.value,authErr:'',authEmailErr:''}); R.onEmailBlur=e=>{ const v=(e.target.value||'').trim(); if(v&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)) this.setState({authEmailErr:'Проверьте адрес электронной почты'}); };
     R.pass=s.pass; R.passRef=el=>{this._passInput=el;}; R.onPass=e=>this.setState({pass:e.target.value,authErr:'',authPassErr:''}); R.onPassBlur=e=>{ const v=e.target.value||''; if(v&&v.length<6) this.setState({authPassErr:'Минимум 6 символов'}); };
