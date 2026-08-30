@@ -38,7 +38,7 @@
   window.addEventListener('error', function(e){ record((e.message||'Error')+' @ '+(e.filename||'')+':'+(e.lineno||'')+':'+(e.colno||'')); });
   window.addEventListener('unhandledrejection', function(e){ var r=e.reason; record('Unhandled promise rejection: '+((r&&(r.stack||r.message))||r)); });
   function fmt(a){ try{ return a instanceof Error ? (a.stack||a.message) : (typeof a==='object' ? JSON.stringify(a) : String(a)); }catch(e){ return String(a); } }
-  ['error','warn'].forEach(function(level){
+  ['error'].forEach(function(level){
     var orig=console[level] ? console[level].bind(console) : function(){};
     console[level]=function(){
       try{ record('console.'+level+': '+Array.prototype.slice.call(arguments).map(fmt).join(' ')); }catch(e){}
@@ -54,8 +54,9 @@
     try {
       var webApp = window.Telegram && window.Telegram.WebApp;
       if (!webApp) return;
-      try { if (webApp.setBackgroundColor) webApp.setBackgroundColor("#7b1d29"); } catch (error) {}
-      try { if (webApp.setHeaderColor) webApp.setHeaderColor("#681923"); } catch (error) {}
+      var supportsColors = !webApp.isVersionAtLeast || webApp.isVersionAtLeast("6.1");
+      try { if (supportsColors && webApp.setBackgroundColor) webApp.setBackgroundColor("#7b1d29"); } catch (error) {}
+      try { if (supportsColors && webApp.setHeaderColor) webApp.setHeaderColor("#681923"); } catch (error) {}
       webApp.ready();
       if (webApp.expand) webApp.expand();
     } catch (error) {
