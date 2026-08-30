@@ -71,8 +71,8 @@
 (function () {
   var cdn = "https://cdn.jsdelivr.net/npm/";
   window.__resources = Object.assign({}, window.__resources || {}, {
-    "https://unpkg.com/react@18.3.1/umd/react.production.min.js": cdn + "react@18.3.1/umd/react.production.min.js",
-    "https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js": cdn + "react-dom@18.3.1/umd/react-dom.production.min.js",
+    "https://unpkg.com/react@18.3.1/umd/react.production.min.js": "/assets/vendor/react-18.3.1.production.min.js",
+    "https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js": "/assets/vendor/react-dom-18.3.1.production.min.js",
     "https://unpkg.com/@babel/standalone@7.29.0/babel.min.js": cdn + "@babel/standalone@7.29.0/babel.min.js"
   });
 })();
@@ -1659,7 +1659,7 @@ iframe[src*="telegram.org"]{background:transparent!important;color-scheme:light!
 </div>
 </div>
 </x-dc>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="/assets/vendor/supabase-js-2.112.4.min.js"></script>
 <script>
 window.AnatomDB = (function () {
   var URL = "https://aysllpqnlaqejljyruiy.supabase.co";
