@@ -4,7 +4,6 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#7b1d29">
-<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <style id="miniapp-boot-style">
   html,body{background:#7b1d29}
   #__miniapp_boot{position:fixed;inset:0;z-index:2147483000;display:flex;align-items:center;justify-content:center;padding:28px;background:radial-gradient(100% 72% at 50% 0%,#c74c58 0%,#a72636 48%,#681923 100%);color:#fff;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;text-align:center}
@@ -12,6 +11,7 @@
   .miniapp-boot__mark{width:72px;height:72px;margin:0 auto 22px;border-radius:23px;background:#fff;color:#a72636;display:grid;place-items:center;font-size:36px;font-weight:900;box-shadow:0 18px 42px -16px rgba(0,0,0,.55)}
   .miniapp-boot__title{font-size:22px;font-weight:900;letter-spacing:.05em}
   .miniapp-boot__text{margin-top:8px;font-size:13px;line-height:1.45;opacity:.84}
+  .miniapp-boot__build{margin-top:9px;font-size:10px;font-weight:700;letter-spacing:.08em;opacity:.46}
   .miniapp-boot__bar{width:144px;height:4px;margin:24px auto 0;border-radius:4px;overflow:hidden;background:rgba(255,255,255,.2)}
   .miniapp-boot__bar:after{content:"";display:block;width:44%;height:100%;border-radius:inherit;background:#fff;animation:miniappBoot 1.1s ease-in-out infinite}
   .miniapp-boot__retry{display:none;min-height:44px;margin:20px auto 0;padding:11px 18px;border:0;border-radius:14px;background:#fff;color:#a72636;font:800 14px system-ui,-apple-system,"Segoe UI",sans-serif;cursor:pointer}
@@ -47,7 +47,7 @@
   });
 })();
 </script>
-<script src="https://telegram.org/js/telegram-web-app.js" defer></script>
+<script src="/assets/vendor/telegram-web-app.js"></script>
 <script>
 (function () {
   function bootstrapTelegram() {
@@ -69,11 +69,11 @@
 </script>
 <script>
 (function () {
-  var cdn = "https://cdn.jsdelivr.net/npm/";
+  window.__ANATOM_BUILD = "20260831-4";
   window.__resources = Object.assign({}, window.__resources || {}, {
     "https://unpkg.com/react@18.3.1/umd/react.production.min.js": "/assets/vendor/react-18.3.1.production.min.js",
     "https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js": "/assets/vendor/react-dom-18.3.1.production.min.js",
-    "https://unpkg.com/@babel/standalone@7.29.0/babel.min.js": cdn + "@babel/standalone@7.29.0/babel.min.js"
+    "https://unpkg.com/@babel/standalone@7.29.0/babel.min.js": "/assets/vendor/babel-7.29.0.min.js"
   });
 })();
 </script>
@@ -91,6 +91,7 @@ iframe[src*="telegram.org"]{background:transparent!important;color-scheme:light!
     <div class="miniapp-boot__mark" aria-hidden="true">А</div>
     <div class="miniapp-boot__title">АНАТОМ</div>
     <div class="miniapp-boot__text">Подготавливаем учебное пространство…</div>
+    <div class="miniapp-boot__build">СБОРКА 20260831-4</div>
     <div class="miniapp-boot__bar" aria-hidden="true"></div>
     <button class="miniapp-boot__retry" type="button">Загрузить ещё раз</button>
   </div>
@@ -107,13 +108,23 @@ iframe[src*="telegram.org"]{background:transparent!important;color-scheme:light!
   });
   observer.observe(document.documentElement, { childList: true, subtree: true });
   var retry = boot.querySelector(".miniapp-boot__retry");
-  if (retry) retry.addEventListener("click", function () { location.reload(); });
+  if (retry) retry.addEventListener("click", function () {
+    var url = new URL(location.href);
+    url.searchParams.set("v", "20260831-4");
+    url.searchParams.set("reload", String(Date.now()));
+    location.replace(url.toString());
+  });
+  var rescue = setInterval(function () {
+    if (!boot.isConnected) { clearInterval(rescue); return; }
+    if (document.readyState === "loading" || typeof window.__dcBoot !== "function") return;
+    try { window.__dcBoot(); } catch (error) { console.error("Mini App rescue boot", error); }
+  }, 1500);
   setTimeout(function () {
     if (!boot.isConnected) return;
     boot.classList.add("is-delayed");
     var text = boot.querySelector(".miniapp-boot__text");
-    if (text) text.textContent = "Загрузка заняла больше времени. Проверьте интернет и попробуйте снова.";
-  }, 12000);
+    if (text) text.textContent = "Интерфейс не запустился автоматически. Нажмите кнопку ниже — приложение откроется без старого кэша.";
+  }, 10000);
 })();
 </script>
 <script>
