@@ -1883,6 +1883,9 @@ class Component extends DCLogic {
     var saved=null;
     try{ saved=JSON.parse(localStorage.getItem('anatom_user')||'null'); }catch(e){}
     var has=saved && (saved.email||saved.tgId||saved.id);
+    // TEMP DIAGNOSTIC (revert via stable-before-noauth-test): skip the registration/login
+    // gate entirely and enter as a guest, to test whether auth is what blocks the Mini App.
+    if(!has){ saved={ id:'diag-guest', name:'Гость', course:1, faculty:'Лечебный факультет', email:'', goal:'' }; has=true; }
     var ls={};
     if(has){
       try{
