@@ -1801,29 +1801,21 @@ window.AnatomDB = (function () {
 
   async function leaderboard(limit) {
     init();
-    var res = await withTimeout(sb.from("profiles")
-      .select("id,name,xp,streak,course,faculty,email,last_active")
+    // leaderboard_public is a view, not the raw profiles table: it only
+    // exposes safe columns (no email/username/handle/tg_id) and does the
+    // ranking/dedup server-side, so no other authenticated user's email
+    // ever reaches the client. See supabase/telegram-storage.sql.
+    var res = await withTimeout(sb.from("leaderboard_public")
+      .select("id,name,xp,streak,course,faculty,last_active")
       .order("xp", { ascending: false })
       .limit(limit || 100), "Рейтинг").catch(function (e) { return { error: e }; });
     if (res.error) { console.warn("leaderboard", res.error.message); return []; }
-    var seen = {}, rows = [];
-    (res.data || []).forEach(function (r) {
-      var em = (r.email || "").toLowerCase().trim();
-      var key = em || ("id:" + r.id);
-      if (/^tg\d+@(mail\.ru|yandex\.ru)$/.test(em) || em === "user999@anatomapp.ru") return;
-      if (seen[key] !== undefined) {
-        if ((r.xp || 0) > (rows[seen[key]].xp || 0)) rows[seen[key]] = r;
-        return;
-      }
-      seen[key] = rows.length;
-      rows.push(r);
-    });
-    return rows.map(function (r, i) {
+    return (res.data || []).map(function (r, i) {
       return {
         rank: i + 1, id: r.id, name: r.name || "Студент",
         xp: r.xp || 0, streak: r.streak || 0,
         course: r.course, faculty: r.faculty,
-        email: r.email, lastActive: r.last_active ? Date.parse(r.last_active) : 0
+        lastActive: r.last_active ? Date.parse(r.last_active) : 0
       };
     });
   }
@@ -2891,7 +2883,7 @@ async logout(){
       sc.onerror=fallback;
       el.appendChild(sc); };
     const u=s.user||{}; const toks=(u.name||'').trim().split(/\s+/).filter(Boolean);
-    R.firstName=toks[1]||toks[0]||'Студент';
+    R.firstName=toks[0]||toks[1]||'Студент';
     R.userName=u.name||'Студент ВМедА';
     R.userIni=((toks.slice(0,2).map(t=>t[0]).join(''))||'СВ').toUpperCase();
     R.userMeta=(u.course||1)+' курс · '+(u.faculty||'Лечебный факультет')+' · ВМедА';

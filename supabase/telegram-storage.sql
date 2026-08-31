@@ -50,11 +50,29 @@ create policy "profiles_select_own" on public.profiles
   for select using (auth.uid() = id);
 
 -- The rating screen reads other users' name/xp/streak/course/faculty via
--- the client. Authenticated-only, not anon, to avoid exposing profiles
--- (including email) to unauthenticated requests.
-drop policy if exists "profiles_select_authenticated" on public.profiles;
-create policy "profiles_select_authenticated" on public.profiles
-  for select using (auth.role() = 'authenticated');
+-- the client (AnatomDB.leaderboard()/allUsers() in index.html). It must
+-- NOT be able to read email/username/handle/tg_id for other users, so
+-- this is deliberately not a blanket "authenticated can read all of
+-- profiles" policy -- that would leak every user's email to every other
+-- logged-in user. Instead, expose only the safe columns through a view,
+-- pre-deduplicated/filtered the same way the client used to do it with
+-- the raw email (matching legacy tg-placeholder accounts and the
+-- user999 test account) so the client can drop that logic once it
+-- queries this view instead of the table directly.
+create or replace view public.leaderboard_public
+with (security_invoker = false) as
+select distinct on (dedup_key)
+  id, name, xp, streak, course, faculty, last_active
+from (
+  select p.*,
+    coalesce(nullif(lower(trim(p.email)), ''), 'id:' || p.id::text) as dedup_key
+  from public.profiles p
+  where lower(coalesce(p.email, '')) !~ '^tg[0-9]+@(mail\.ru|yandex\.ru)$'
+    and lower(coalesce(p.email, '')) <> 'user999@anatomapp.ru'
+) ranked
+order by dedup_key, xp desc nulls last;
+
+grant select on public.leaderboard_public to authenticated;
 
 drop policy if exists "profiles_insert_own" on public.profiles;
 create policy "profiles_insert_own" on public.profiles
