@@ -2874,6 +2874,9 @@ async logout(){
       sc.setAttribute('data-userpic', 'false');
       sc.setAttribute('data-onauth', 'onTelegramAuth(user)');
       sc.setAttribute('data-request-access', 'write');
+      const fallback=()=>{ el.innerHTML='<a href="https://t.me/'+this.BOT_NAME+'" target="_blank" rel="noopener" style="color:var(--red);font:700 13px Manrope">Открыть @'+this.BOT_NAME+' в Telegram</a>'; };
+      setTimeout(()=>{ if(!el.querySelector('iframe')) fallback(); },8000);
+      sc.onerror=fallback;
       el.appendChild(sc); };
     const u=s.user||{}; const toks=(u.name||'').trim().split(/\s+/).filter(Boolean);
     R.firstName=toks[1]||toks[0]||'Студент';
