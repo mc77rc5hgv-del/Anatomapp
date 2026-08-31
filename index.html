@@ -801,7 +801,7 @@ iframe[src*="telegram.org"]{background:transparent!important;color-scheme:light!
     <sc-if value="{{ isLogin }}" hint-placeholder-val="">
       <div class="premium-login game-screen auth-page" ref="{{ loginRef }}">
         <div class="auth-shell">
-          <div class="auth-brand"><div class="auth-brand__identity"><span class="auth-brand__mark">А</span><span>АНАТОМ</span></div><span class="auth-step">{{ authEyebrow }}</span></div>
+          <div class="auth-brand"><button type="button" onClick="{{ backToSplash }}" aria-label="Назад" style="width:36px;height:36px;border-radius:11px;border:1px solid var(--line);background:var(--card);color:var(--ink);display:grid;place-items:center;cursor:pointer;flex-shrink:0"><svg class="game-chevron" viewBox="0 0 24 24" aria-hidden="true" style="transform:rotate(180deg)"><path d="m9 5 7 7-7 7"/></svg></button><div class="auth-brand__identity"><span class="auth-brand__mark">А</span><span>АНАТОМ</span></div><span class="auth-step">{{ authEyebrow }}</span></div>
           <div class="auth-tabs" role="group" aria-label="Выбор действия"><button type="button" class="auth-tab" onClick="{{ tabSignup }}" aria-pressed="{{ tabSignupPressed }}">Регистрация</button><button type="button" class="auth-tab" onClick="{{ tabSignin }}" aria-pressed="{{ tabSigninPressed }}">Вход</button></div>
           <header class="auth-heading"><div class="auth-heading__eyebrow">Персональный прогресс</div><h1>{{ authTitle }}</h1><p>{{ authSub }}</p></header>
           <button type="button" class="auth-provider" onClick="{{ doTelegram }}"><span class="auth-provider__icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="#2AABEE" aria-hidden="true"><path d="M20.7 3.4 2.9 10.2c-1.2.5-1.2 1.1-.2 1.4l4.6 1.4 1.8 5.5c.2.6.1.8.7.8.4 0 .7-.2.9-.4l2.2-2.1 4.6 3.4c.8.5 1.5.3 1.7-.8l3-14.2c.3-1.4-.5-2.1-1.5-1.8ZM9 12.7l9-5.7c.4-.3.8-.1.5.2l-7.4 6.7-.3 3.3L9 12.7Z"/></svg></span>Продолжить через Telegram</button>
@@ -1106,6 +1106,13 @@ iframe[src*="telegram.org"]{background:transparent!important;color-scheme:light!
           </sc-for>
           <div style="height:8px"></div>
           </sc-if>
+        </sc-if>
+        <sc-if value="{{ moduleLoading }}" hint-placeholder-val="">
+          <div style="padding:60px 40px;text-align:center">
+            <div class="game-question-mark" aria-hidden="true">…</div>
+            <div style="font:800 17px Nunito;color:var(--ink);margin-top:12px">Загружаем материал…</div>
+            <div style="font-size:13px;color:var(--mut);margin-top:6px;line-height:1.5">Это займёт несколько секунд</div>
+          </div>
         </sc-if>
         <sc-if value="{{ moduleEmpty }}" hint-placeholder-val="">
           <div style="padding:60px 40px;text-align:center">
@@ -2135,7 +2142,7 @@ class Component extends DCLogic {
     if(u.email) return 'anatom_data_'+(u.email||'').toLowerCase();
     return null;
   }
-  loadLS(){ try{ const u=this.state.user||this.loadUser(); if(!u) return {}; const id=u.tgId?('tg'+u.tgId):(u.email?u.email.toLowerCase():null); if(!id) return {}; return JSON.parse(localStorage.getItem('anatom_data_'+id)||'{}'); }catch(e){ return {}; } }
+  loadLS(){ try{ const u=this.state.user||this.loadUser(); if(!u) return {}; const id=u.id?('id'+u.id):(u.tgId?('tg'+u.tgId):(u.email?u.email.toLowerCase():null)); if(!id) return {}; return JSON.parse(localStorage.getItem('anatom_data_'+id)||'{}'); }catch(e){ return {}; } }
 persist(){
     try{
       var k=this.dataKey(); if(!k) return;
@@ -2222,6 +2229,10 @@ persist(){
     var rewarded=Object.assign({}, L.rewarded||{}, C.rewarded||{});
     var localSession=L.activeSession||null, cloudSession=C.activeSession||null;
     var activeSession=(Number(cloudSession&&cloudSession.updatedAt)||0)>(Number(localSession&&localSession.updatedAt)||0)?cloudSession:localSession;
+    var localDayTs=L.dayKey?Date.parse(L.dayKey):NaN, cloudDayTs=C.dayKey?Date.parse(C.dayKey):NaN, dayKey, dayDone;
+    if(!isNaN(localDayTs) && (isNaN(cloudDayTs) || localDayTs>cloudDayTs)){ dayKey=L.dayKey; dayDone=L.dayDone||0; }
+    else if(!isNaN(cloudDayTs) && (isNaN(localDayTs) || cloudDayTs>localDayTs)){ dayKey=C.dayKey; dayDone=C.dayDone||0; }
+    else { dayKey=L.dayKey||C.dayKey; dayDone=Math.max(L.dayDone||0, C.dayDone||0); }
     return {
       progress: progress,
       mistakes: mist.slice(-60),
@@ -2235,8 +2246,8 @@ persist(){
       examDone: !!(L.examDone||C.examDone),
       termLang: C.termLang||L.termLang||'ru',
       reminders: (typeof C.reminders==='boolean'?C.reminders:(typeof L.reminders==='boolean'?L.reminders:true)),
-      dayDone: Math.max(L.dayDone||0, C.dayDone||0),
-      dayKey: C.dayKey||L.dayKey,
+      dayDone: dayDone,
+      dayKey: dayKey,
       dayGoal: C.dayGoal||L.dayGoal||20,
       lastTopic: C.lastTopic||L.lastTopic||null,
       lastActive: this.activityDay(Math.max(this.activityTimestamp(L.lastActive),this.activityTimestamp(C.lastActive)))
@@ -2286,11 +2297,11 @@ async sendBroadcast(){
       }
       await db.postAnnouncement(text, u.id);
       try{
-        await fetch(this.API_BASE+'/api/broadcast',{
+        await this.request(this.API_BASE+'/api/broadcast',{
           method:'POST',
           headers:Object.assign({'Content-Type':'application/json'}, this.authHeaders()),
           body:JSON.stringify({message:text})
-        });
+        },10000);
       }catch(e){}
       this.setState({broadcastText:''});
       this.ping('Рассылка опубликована ✓');
@@ -2832,6 +2843,7 @@ async logout(){
     // onboarding
     R.goLogin=()=>this.setState({screen:'login',authTab:'signup',authErr:'',authEmailErr:'',authPassErr:''});
     R.goSignin=()=>this.setState({screen:'login',authTab:'signin',authErr:'',authEmailErr:'',authPassErr:''});
+    R.backToSplash=()=>this.setState({screen:'splash',authErr:'',authEmailErr:'',authPassErr:''});
     R.authTab=s.authTab;
     R.loginRef=(el)=>{ this._loginPanel=el; };
     R.tabSignup=()=>{ if(document.activeElement) document.activeElement.blur(); this.setState({authTab:'signup',authErr:'',authEmailErr:'',authPassErr:''},()=>{ if(this._loginPanel) this._loginPanel.scrollTop=0; }); };
@@ -2972,8 +2984,10 @@ async logout(){
         R.moduleComplete=false; R.moduleNextClass=''; R.moduleNextKicker=(pr.studied||(pr.attempts||0)>0)?'Продолжить маршрут':'Следующая тема'; R.moduleNextTitle=nextTopic.name;
         R.moduleNextAction=()=>this.setState({subKey:local>=0?s.subKey:null,topicIdx:local>=0?local:global,screen:'topic',tab:'mat',depth:'deep',lastTopic:{moduleId:s.moduleId,topicIdx:global}},()=>this.persist());
       } else { R.moduleComplete=true; R.moduleNextClass='is-complete'; R.moduleNextKicker='Раздел завершён'; R.moduleNextTitle='Выбрать следующий раздел'; R.moduleNextAction=()=>this.setState({screen:'home',subKey:null}); } }
+    const datasetsLoaded = Object.keys(s.datasets||{}).length>0;
     R.moduleReady = mod.ready && tops.length>0;
-    R.moduleEmpty = !mod.ready;
+    R.moduleLoading = mod.ready && tops.length===0 && !datasetsLoaded;
+    R.moduleEmpty = !mod.ready || (tops.length===0 && datasetsLoaded);
     // subsections (Neurology → ЦНС button, ПНС/органы чувств locked)
     const subs = this.SUBSECTIONS[s.moduleId] || null;
     R.hasSubs = !!subs;
