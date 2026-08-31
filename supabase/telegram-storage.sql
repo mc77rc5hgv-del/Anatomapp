@@ -36,3 +36,42 @@ create table if not exists public.user_state (
 
 alter table public.profiles enable row level security;
 alter table public.user_state enable row level security;
+
+-- RLS was enabled above with no policies defined, which denies all access
+-- by default to anything but the service role. The server-side api/*.js
+-- functions use the service role key and are unaffected, but the client
+-- (AnatomDB in index.html, used for direct email/password auth) reads and
+-- writes these tables with the user's own session and needs explicit
+-- policies -- without these, getProfile/saveState/leaderboard would
+-- silently return nothing rather than error.
+
+drop policy if exists "profiles_select_own" on public.profiles;
+create policy "profiles_select_own" on public.profiles
+  for select using (auth.uid() = id);
+
+-- The rating screen reads other users' name/xp/streak/course/faculty via
+-- the client. Authenticated-only, not anon, to avoid exposing profiles
+-- (including email) to unauthenticated requests.
+drop policy if exists "profiles_select_authenticated" on public.profiles;
+create policy "profiles_select_authenticated" on public.profiles
+  for select using (auth.role() = 'authenticated');
+
+drop policy if exists "profiles_insert_own" on public.profiles;
+create policy "profiles_insert_own" on public.profiles
+  for insert with check (auth.uid() = id);
+
+drop policy if exists "profiles_update_own" on public.profiles;
+create policy "profiles_update_own" on public.profiles
+  for update using (auth.uid() = id) with check (auth.uid() = id);
+
+drop policy if exists "user_state_select_own" on public.user_state;
+create policy "user_state_select_own" on public.user_state
+  for select using (auth.uid() = user_id);
+
+drop policy if exists "user_state_insert_own" on public.user_state;
+create policy "user_state_insert_own" on public.user_state
+  for insert with check (auth.uid() = user_id);
+
+drop policy if exists "user_state_update_own" on public.user_state;
+create policy "user_state_update_own" on public.user_state
+  for update using (auth.uid() = user_id) with check (auth.uid() = user_id);
