@@ -83,7 +83,7 @@
 </script>
 <script>
 (function () {
-  window.__ANATOM_BUILD = "20260831-4";
+  window.__ANATOM_BUILD = "20260901-1";
   window.__resources = Object.assign({}, window.__resources || {}, {
     "https://unpkg.com/react@18.3.1/umd/react.production.min.js": "/assets/vendor/react-18.3.1.production.min.js",
     "https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js": "/assets/vendor/react-dom-18.3.1.production.min.js"
@@ -104,7 +104,7 @@ iframe[src*="telegram.org"]{background:transparent!important;color-scheme:light!
     <div class="miniapp-boot__mark" aria-hidden="true">А</div>
     <div class="miniapp-boot__title">АНАТОМ</div>
     <div class="miniapp-boot__text">Подготавливаем учебное пространство…</div>
-    <div class="miniapp-boot__build">СБОРКА 20260831-4</div>
+    <div class="miniapp-boot__build">СБОРКА 20260901-1</div>
     <div class="miniapp-boot__bar" aria-hidden="true"></div>
     <button class="miniapp-boot__retry" type="button">Загрузить ещё раз</button>
   </div>
@@ -123,7 +123,7 @@ iframe[src*="telegram.org"]{background:transparent!important;color-scheme:light!
   var retry = boot.querySelector(".miniapp-boot__retry");
   if (retry) retry.addEventListener("click", function () {
     var url = new URL(location.href);
-    url.searchParams.set("v", "20260831-4");
+    url.searchParams.set("v", "20260901-1");
     url.searchParams.set("reload", String(Date.now()));
     location.replace(url.toString());
   });

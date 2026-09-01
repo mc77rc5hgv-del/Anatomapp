@@ -4,7 +4,7 @@ const REQUIRED_ENV = [
   "SUPABASE_SERVICE_ROLE_KEY",
   "SESSION_SECRET",
 ];
-const MINI_APP_VERSION = "20260831-5";
+const MINI_APP_VERSION = "20260901-1";
 
 function miniAppUrl() {
   const url = new URL(process.env.ANATOM_WEBAPP_URL || "https://anatomapp.vercel.app/");
