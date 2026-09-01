@@ -6,6 +6,20 @@
 <meta name="theme-color" content="#7b1d29">
 <style id="miniapp-boot-style">
   html,body{background:#7b1d29}
+  /* #app/#wrap ship inside <x-dc> with a fixed 392x812 "phone mockup" frame
+     style (design-canvas artboard preview sizing) that only gets corrected
+     to fill the real viewport by a responsive override living inside
+     <helmet>, which the custom dc-runtime only applies once React finishes
+     mounting and walks that node. If anything upstream (React load, boot(),
+     template compile, this app's own render) fails or is merely slow, the
+     mockup frame — or nothing at all — is what would show. These rules are
+     plain native CSS, active the instant <head> parses, completely
+     independent of that pipeline, so the real viewport is filled correctly
+     even in that failure window. !important beats the inline mockup style
+     it targets since that inline style carries no !important of its own. */
+  #wrap{padding:0!important;background:var(--bg,#f8f6f3)!important;display:block!important;min-height:100vh!important;min-height:100dvh!important}
+  #app{width:100vw!important;height:100vh!important;height:100dvh!important;min-height:100vh!important;min-height:100dvh!important;padding:0!important;border-radius:0!important;box-shadow:none!important;background:var(--bg,#f8f6f3)!important}
+  #app>.scr{border-radius:0!important;width:100%!important;height:100vh!important;height:100dvh!important}
   #__miniapp_boot{position:fixed;inset:0;z-index:2147483000;display:flex;align-items:center;justify-content:center;padding:28px;background:radial-gradient(100% 72% at 50% 0%,#c74c58 0%,#a72636 48%,#681923 100%);color:#fff;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;text-align:center}
   #__miniapp_boot[hidden]{display:none}
   .miniapp-boot__mark{width:72px;height:72px;margin:0 auto 22px;border-radius:23px;background:#fff;color:#a72636;display:grid;place-items:center;font-size:36px;font-weight:900;box-shadow:0 18px 42px -16px rgba(0,0,0,.55)}
