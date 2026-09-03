@@ -84,7 +84,7 @@
 </script>
 <script>
 (function () {
-  window.__ANATOM_BUILD = "20260903-2";
+  window.__ANATOM_BUILD = "20260903-3";
   window.__resources = Object.assign({}, window.__resources || {}, {
     "https://unpkg.com/react@18.3.1/umd/react.production.min.js": "/assets/vendor/react-18.3.1.production.min.js",
     "https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js": "/assets/vendor/react-dom-18.3.1.production.min.js"
@@ -105,7 +105,7 @@ iframe[src*="telegram.org"]{background:transparent!important;color-scheme:light!
     <div class="miniapp-boot__mark" aria-hidden="true">А</div>
     <div class="miniapp-boot__title">АНАТОМ</div>
     <div class="miniapp-boot__text">Подготавливаем учебное пространство…</div>
-    <div class="miniapp-boot__build">СБОРКА 20260903-2</div>
+    <div class="miniapp-boot__build">СБОРКА 20260903-3</div>
     <div class="miniapp-boot__bar" aria-hidden="true"></div>
     <button class="miniapp-boot__retry" type="button">Загрузить ещё раз</button>
   </div>
@@ -124,7 +124,7 @@ iframe[src*="telegram.org"]{background:transparent!important;color-scheme:light!
   var retry = boot.querySelector(".miniapp-boot__retry");
   if (retry) retry.addEventListener("click", function () {
     var url = new URL(location.href);
-    url.searchParams.set("v", "20260903-2");
+    url.searchParams.set("v", "20260903-3");
     url.searchParams.set("reload", String(Date.now()));
     location.replace(url.toString());
   });
@@ -551,9 +551,9 @@ iframe[src*="telegram.org"]{background:transparent!important;color-scheme:light!
   .game-learning-route__complete{padding:20px;text-align:center;background:radial-gradient(90% 120% at 100% 0%,var(--goldsoft),transparent 62%),var(--card)}
   .game-learning-route__complete-mark{width:52px;height:52px;margin:0 auto;border-radius:17px;display:flex;align-items:center;justify-content:center;background:var(--goldsoft);color:var(--gold);box-shadow:0 4px 0 color-mix(in srgb,var(--gold) 28%,var(--line))}
   .game-lesson{padding:14px 16px 4px}
-  .game-lesson-hero{position:relative;min-height:182px;overflow:hidden;border:2px solid var(--line);border-radius:24px;background:var(--card2);box-shadow:0 5px 0 var(--game-depth)}
-  .game-lesson-hero__image{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 42%;filter:saturate(.82) contrast(1.04)}
-  .game-lesson-hero__shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,12,13,.08) 10%,rgba(20,12,13,.82) 100%)}
+  .game-lesson-hero{position:relative;min-height:182px;overflow:hidden;border:2px solid var(--line);border-radius:24px;background:radial-gradient(120% 170% at 100% 0%,#8f3042 0%,transparent 54%),linear-gradient(135deg,#270810 0%,#5d1221 100%);box-shadow:0 5px 0 var(--game-depth)}
+  .game-lesson-hero__image{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;image-rendering:auto;filter:saturate(.96) contrast(1.04) brightness(1.06)}
+  .game-lesson-hero__shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,12,13,.02) 8%,rgba(20,12,13,.2) 58%,rgba(20,12,13,.72) 100%)}
   .game-lesson-hero__body{position:relative;z-index:1;min-height:182px;padding:18px;display:flex;flex-direction:column;justify-content:flex-end;color:#fff}
   .game-lesson-hero__eyebrow{font:900 9.5px Nunito;letter-spacing:.08em;text-transform:uppercase;opacity:.78}
   .game-lesson-hero__title{max-width:330px;margin:5px 0 0;color:#fff;font:900 22px/1.15 Nunito;text-wrap:balance;text-shadow:0 2px 8px rgba(0,0,0,.34)}
@@ -1157,7 +1157,7 @@ iframe[src*="telegram.org"]{background:transparent!important;color-scheme:light!
         <sc-if value="{{ showMat }}" hint-placeholder-val="{{ true }}">
           <main class="game-lesson">
             <section class="game-lesson-hero" aria-labelledby="lesson-title">
-              <img class="game-lesson-hero__image" src="{{ lessonImg }}" width="720" height="420" alt="" aria-hidden="true" decoding="async">
+              <sc-if value="{{ hasLessonImg }}" hint-placeholder-val="{{ true }}"><img class="game-lesson-hero__image" src="{{ lessonImg }}" width="1440" height="640" alt="" aria-hidden="true" decoding="async"></sc-if>
               <div class="game-lesson-hero__shade"></div>
               <div class="game-lesson-hero__body">
                 <div class="game-lesson-hero__eyebrow">Урок {{ curTopic.num }} · {{ curModule.title }}</div>
@@ -1931,6 +1931,15 @@ class Component extends DCLogic {
       resPct: 0, resXp: 0, resBaseXp: 0, resMissionXp: 0, resMissionBonuses: [], resRankUp: false, resRankTitle: '', resRankLevel: 1, toast: '', dbLeaders: null, dbUsers: null, profileSystemsExpanded: false
     };
   })();
+
+  HERO_IMAGES = {
+    m1:'assets/anatomy/hero-osteology.webp',
+    m2:'assets/anatomy/hero-syndesmology.webp',
+    m3:'assets/anatomy/hero-myology.webp',
+    m4:'assets/anatomy/hero-splanchnology.webp',
+    m5:'assets/anatomy/hero-angiology.webp',
+    m6:'assets/anatomy/hero-neurology.webp'
+  };
 
   MODULES = [
     { id:'m1', n:'01', title:'Остеология', tag:'МОДУЛЬ 1 · КОСТИ', icon:'🦴', img:'assets/media/inline-f6db12bdadc1adbb.webp', tile:'linear-gradient(150deg,#8a7f6f,#5f5648)', pct:6, ready:true },
@@ -3042,7 +3051,11 @@ async logout(){
     const wordCount=theoryText?theoryText.split(/\s+/).filter(Boolean).length:0;
     const readMinutes=Math.max(2,Math.ceil(wordCount/180));
     const headingCount=theory.filter(b=>b.t!=='ul'&&this.isHeading(b.x||'')).length;
-    R.lessonImg=(sec&&sec.img)||mod.img;
+    R.lessonImg=this.HERO_IMAGES[s.moduleId]||mod.img;
+    if(s.moduleId==='m4'&&topic&&topic.num>22) R.lessonImg='';
+    if(s.moduleId==='m4'&&topic&&topic.num>17&&topic.num<=22) R.lessonImg=this.HERO_IMAGES.m5;
+    if(s.moduleId==='m6'&&topic&&topic.num>=27) R.lessonImg='';
+    R.hasLessonImg=!!R.lessonImg;
     R.lessonReadLabel='≈ '+readMinutes+' мин чтения';
     R.lessonLevelLabel=surf?'Краткий разбор':'Углублённый разбор';
     R.lessonStats=[
