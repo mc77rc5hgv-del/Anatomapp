@@ -84,7 +84,7 @@
 </script>
 <script>
 (function () {
-  window.__ANATOM_BUILD = "20260903-5";
+  window.__ANATOM_BUILD = "20260903-6";
   window.__resources = Object.assign({}, window.__resources || {}, {
     "https://unpkg.com/react@18.3.1/umd/react.production.min.js": "/assets/vendor/react-18.3.1.production.min.js",
     "https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js": "/assets/vendor/react-dom-18.3.1.production.min.js"
@@ -105,7 +105,7 @@ iframe[src*="telegram.org"]{background:transparent!important;color-scheme:light!
     <div class="miniapp-boot__mark" aria-hidden="true">А</div>
     <div class="miniapp-boot__title">АНАТОМ</div>
     <div class="miniapp-boot__text">Подготавливаем учебное пространство…</div>
-    <div class="miniapp-boot__build">СБОРКА 20260903-5</div>
+    <div class="miniapp-boot__build">СБОРКА 20260903-6</div>
     <div class="miniapp-boot__bar" aria-hidden="true"></div>
     <button class="miniapp-boot__retry" type="button">Загрузить ещё раз</button>
   </div>
@@ -124,7 +124,7 @@ iframe[src*="telegram.org"]{background:transparent!important;color-scheme:light!
   var retry = boot.querySelector(".miniapp-boot__retry");
   if (retry) retry.addEventListener("click", function () {
     var url = new URL(location.href);
-    url.searchParams.set("v", "20260903-5");
+    url.searchParams.set("v", "20260903-6");
     url.searchParams.set("reload", String(Date.now()));
     location.replace(url.toString());
   });
@@ -141,7 +141,7 @@ iframe[src*="telegram.org"]{background:transparent!important;color-scheme:light!
   }, 10000);
 })();
 </script>
-<script src="/assets/vendor/dc-runtime.js?v=20260903-5"></script>
+<script src="/assets/vendor/dc-runtime.js?v=20260903-6"></script>
 <template id="__bundler_thumbnail" data-bg-color="#c02a30">
   <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
     <rect width="1200" height="800" fill="#c02a30"/>
@@ -1795,11 +1795,11 @@ window.AnatomDB = (function () {
 
   async function leaderboard(limit) {
     init();
-    // leaderboard_public is a view, not the raw profiles table: it only
-    // exposes safe columns (no email/username/handle/tg_id) and does the
-    // ranking/dedup server-side, so no other authenticated user's email
-    // ever reaches the client. See supabase/telegram-storage.sql.
-    var res = await withTimeout(sb.from("leaderboard_public")
+    // leaderboard is a separate table (not profiles) with no email/username/
+    // handle/tg_id columns at all, so no other user's contact info can ever
+    // reach the client here regardless of what we .select() -- explicit
+    // column list kept anyway so this stays true even if that changes.
+    var res = await withTimeout(sb.from("leaderboard")
       .select("id,name,xp,streak,course,faculty,last_active")
       .order("xp", { ascending: false })
       .limit(limit || 100), "Рейтинг").catch(function (e) { return { error: e }; });

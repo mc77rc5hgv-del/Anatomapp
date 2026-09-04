@@ -42,37 +42,20 @@ alter table public.user_state enable row level security;
 -- functions use the service role key and are unaffected, but the client
 -- (AnatomDB in index.html, used for direct email/password auth) reads and
 -- writes these tables with the user's own session and needs explicit
--- policies -- without these, getProfile/saveState/leaderboard would
+-- policies -- without these, getProfile/saveState/saveProfile would
 -- silently return nothing rather than error.
 
 drop policy if exists "profiles_select_own" on public.profiles;
 create policy "profiles_select_own" on public.profiles
   for select using (auth.uid() = id);
 
--- The rating screen reads other users' name/xp/streak/course/faculty via
--- the client (AnatomDB.leaderboard()/allUsers() in index.html). It must
--- NOT be able to read email/username/handle/tg_id for other users, so
--- this is deliberately not a blanket "authenticated can read all of
--- profiles" policy -- that would leak every user's email to every other
--- logged-in user. Instead, expose only the safe columns through a view,
--- pre-deduplicated/filtered the same way the client used to do it with
--- the raw email (matching legacy tg-placeholder accounts and the
--- user999 test account) so the client can drop that logic once it
--- queries this view instead of the table directly.
-create or replace view public.leaderboard_public
-with (security_invoker = false) as
-select distinct on (dedup_key)
-  id, name, xp, streak, course, faculty, last_active
-from (
-  select p.*,
-    coalesce(nullif(lower(trim(p.email)), ''), 'id:' || p.id::text) as dedup_key
-  from public.profiles p
-  where lower(coalesce(p.email, '')) !~ '^tg[0-9]+@(mail\.ru|yandex\.ru)$'
-    and lower(coalesce(p.email, '')) <> 'user999@anatomapp.ru'
-) ranked
-order by dedup_key, xp desc nulls last;
-
-grant select on public.leaderboard_public to authenticated;
+-- The rating screen deliberately does NOT read profiles for other users --
+-- profiles_select_own above is intentionally own-row-only, so it can't leak
+-- other users' emails. AnatomDB.leaderboard()/allUsers() in index.html
+-- instead reads the separate public.leaderboard table, which was created
+-- directly in Supabase (not by this file) and never had an email column to
+-- begin with -- see it in the dashboard's table editor if it needs
+-- changes; there's nothing to add here for it.
 
 drop policy if exists "profiles_insert_own" on public.profiles;
 create policy "profiles_insert_own" on public.profiles
